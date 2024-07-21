@@ -7,6 +7,7 @@ part 'generated/MBTIModel.g.dart';
 
 @freezed
 class MBTIModel with _$MBTIModel {
+  const MBTIModel._();
   const factory MBTIModel({
     required Extroversion extroversion,
     required Sensing sensing,
