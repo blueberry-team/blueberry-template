@@ -12,11 +12,10 @@ class NickNameTextWidget extends ConsumerWidget {
     return nickname.when(
       data: (name) => Text(
         name,
-        style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       loading: () => Text(''),
       error: (e, s) => const Text('Error'),
-    ),
+    );
   }
 }
