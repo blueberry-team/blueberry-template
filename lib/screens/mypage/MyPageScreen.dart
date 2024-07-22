@@ -39,7 +39,7 @@ class MyPageScreen extends ConsumerWidget {
             Row(
               children: [
                 profileImageStack(profileImage, ref, context),
-                Expanded(
+                const Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
