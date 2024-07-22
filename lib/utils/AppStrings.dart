@@ -1,17 +1,7 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
-  //ChatPage.dart
-  static const String lessonChatScreenTitle = '채팅';
-
-  //ShoppingPageSample.dart
-  static const String shoppingPageTitle = '쇼핑 페이지';
-  static const String shoppingPageTitle1 = '이 제품들을 찾고 있나요?';
-  static const String shoppingPageSubTitle1 = '항상 최고의 블루베리를 찾아드립니다.';
-  static const String shoppingPageTitle2 = '신상품';
-  static const String shoppingPageSubTitle2 = '최신 제품을 확인하세요.';
-
-  //DeleteMyPage.dart
+  //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
   static const String loginButtonText = '로그인';
   static const String logoutButtonText = '로그아웃';
@@ -21,6 +11,15 @@ class AppStrings {
   static const String okButtonText = '확인';
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
+  //ChatPage.dart
+  static const String lessonChatScreenTitle = '채팅';
+
+  //ShoppingPageSample.dart
+  static const String shoppingPageTitle = '쇼핑 페이지';
+  static const String shoppingPageTitle1 = '이 제품들을 찾고 있나요?';
+  static const String shoppingPageSubTitle1 = '항상 최고의 블루베리를 찾아드립니다.';
+  static const String shoppingPageTitle2 = '신상품';
+  static const String shoppingPageSubTitle2 = '최신 제품을 확인하세요.';
 
   //SignUpDialog.dart
   static const String signUpPageTitle = '회원가입';

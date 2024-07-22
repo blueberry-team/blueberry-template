@@ -14,7 +14,9 @@ import '../../providers/camera/FirebaseStoreServiceProvider.dart';
 import '../../providers/camera/fireStorageServiceProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
 import '../../providers/user/ProfileImageProvider.dart';
+import '../../utils/AppStrings.dart';
 import '../../widgets/CustomDividerWidget.dart';
+import '../../widgets/NickNameTextWidget.dart';
 import '../SettingScreen.dart';
 import 'camera/SettingsBottomSheet.dart';
 
@@ -25,187 +27,184 @@ class MyPageScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profileImage = ref.watch(profileImageStreamProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                profileImageStack(profileImage, ref, context),
-                const Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "userID or userNickName",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text("Google 로그인을 사용 중 입니다.")
-                    ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(AppStrings.myPageTitle),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NickNameTextWidget(),
+              Row(
+                children: [
+                  profileImageStack(profileImage, ref, context),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Text("Google 로그인을 사용 중 입니다.")],
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const FixSettingAccountManager(),
+                  ));
+                },
+                child: const ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text(
+                    "관리",
+                    style: TextStyle(fontSize: 20),
                   ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const FixSettingAccountManager(),
-                ));
-              },
-              child: const ListTile(
-                leading: Icon(Icons.person),
-                title: Text(
-                  "관리",
-                  style: TextStyle(fontSize: 20),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {},
-              child: const ListTile(
-                leading: Icon(Icons.card_membership),
-                title: Text(
-                  "결제 정보",
-                  style: TextStyle(fontSize: 20),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {},
+                child: const ListTile(
+                  leading: Icon(Icons.card_membership),
+                  title: Text(
+                    "결제 정보",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {},
-              child: const ListTile(
-                leading: Icon(Icons.alarm_add_outlined),
-                title: Text(
-                  "알림",
-                  style: TextStyle(fontSize: 20),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {},
+                child: const ListTile(
+                  leading: Icon(Icons.alarm_add_outlined),
+                  title: Text(
+                    "알림",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {},
-              child: const ListTile(
-                leading: Icon(Icons.lock),
-                title: Text(
-                  "개인 / 보안",
-                  style: TextStyle(fontSize: 20),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {},
+                child: const ListTile(
+                  leading: Icon(Icons.lock),
+                  title: Text(
+                    "개인 / 보안",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {},
-              child: const ListTile(
-                leading: Icon(Icons.monitor),
-                title: Text(
-                  "테마",
-                  style: TextStyle(fontSize: 20),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {},
+                child: const ListTile(
+                  leading: Icon(Icons.monitor),
+                  title: Text(
+                    "테마",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const FixSettingCameraMediaPage(),
-                ));
-              },
-              child: const ListTile(
-                leading: Icon(Icons.chat_bubble_outline),
-                title: Text(
-                  "채팅 / 미디어",
-                  style: TextStyle(fontSize: 20),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const FixSettingCameraMediaPage(),
+                  ));
+                },
+                child: const ListTile(
+                  leading: Icon(Icons.chat_bubble_outline),
+                  title: Text(
+                    "채팅 / 미디어",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomDividerWidget(),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const SettingScreen();
-                }));
-              },
-              child: const ListTile(
-                leading: Icon(Icons.notifications),
-                title: Text(
-                  "설정",
-                  style: TextStyle(fontSize: 20),
+              const SizedBox(
+                height: 30,
+              ),
+              const CustomDividerWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const SettingScreen();
+                  }));
+                },
+                child: const ListTile(
+                  leading: Icon(Icons.notifications),
+                  title: Text(
+                    "설정",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
-            ),
-            const CustomDividerWidget(),
+              const CustomDividerWidget(),
 
-            //Logout button
-            GestureDetector(
-              onTap: () {
-                ref.read(firebaseAuthServiceProvider).signOut();
-              },
-              child: const ListTile(
-                leading: Icon(Icons.logout),
-                title: Text(
-                  "로그아웃",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-
-            //Logout button
-            GestureDetector(
-              onTap: () async {
-                try {
-                  final re = await engine.deleteAccount();
-                  debugPrint(re.toString());
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('회원탈퇴가 완료되었습니다.'),
-                      ),
-                    );
-                  }
+              //Logout button
+              GestureDetector(
+                onTap: () {
                   ref.read(firebaseAuthServiceProvider).signOut();
-                } on FirebaseFunctionsException catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Error: ${e.code}/${e.message}'),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            'Error: $e'), // e.code: internal, e.message: INTERNAL
-                      ),
-                    );
-                  }
-                }
-              },
-              child: const Expanded(
-                  child: ListTile(
-                leading: Icon(Icons.person_off),
-                title: Text(
-                  "회원탈퇴",
-                  style: TextStyle(fontSize: 20),
+                },
+                child: const ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text(
+                    "로그아웃",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
-              )),
-            ),
-          ],
+              ),
+
+              //Logout button
+              GestureDetector(
+                onTap: () async {
+                  try {
+                    final re = await engine.deleteAccount();
+                    debugPrint(re.toString());
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('회원탈퇴가 완료되었습니다.'),
+                        ),
+                      );
+                    }
+                    ref.read(firebaseAuthServiceProvider).signOut();
+                  } on FirebaseFunctionsException catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Error: ${e.code}/${e.message}'),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Error: $e'), // e.code: internal, e.message: INTERNAL
+                        ),
+                      );
+                    }
+                  }
+                },
+                child: const Expanded(
+                    child: ListTile(
+                  leading: Icon(Icons.person_off),
+                  title: Text(
+                    "회원탈퇴",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -324,4 +323,3 @@ Widget _uploadProfileImageButtons(FirestoreService firestoreService,
     icon: const Icon(Icons.settings),
   );
 }
-
