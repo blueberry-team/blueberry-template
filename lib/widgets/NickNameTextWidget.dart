@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/MyPageNameProvider.dart';
+import '../utils/AppStrings.dart';
 
 class NickNameTextWidget extends ConsumerWidget {
   const NickNameTextWidget({super.key});
@@ -15,7 +16,7 @@ class NickNameTextWidget extends ConsumerWidget {
         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       loading: () => Text(''),
-      error: (e, s) => const Text('Error'),
+      error: (e, s) => const Text(AppStrings.nickNameTextWidgetError),
     );
   }
 }

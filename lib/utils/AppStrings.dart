@@ -1,6 +1,12 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  //NickNameTextWidget.dart
+  static const String nickNameTextWidgetdefaultNickName = '닉네임';
+  static const String nickNameTextWidgetError = '오류';
+
+
+
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
   static const String loginButtonText = '로그인';
