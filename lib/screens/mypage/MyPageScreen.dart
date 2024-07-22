@@ -38,14 +38,16 @@ class MyPageScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NickNameTextWidget(),
               Row(
                 children: [
                   profileImageStack(profileImage, ref, context),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Text("Google 로그인을 사용 중 입니다.")],
+                      children: [
+                        NickNameTextWidget(),
+                        Text("Google 로그인을 사용 중 입니다.")
+                      ],
                     ),
                   )
                 ],
