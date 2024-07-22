@@ -1,5 +1,6 @@
 import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
+import 'package:blueberry_flutter_template/screens/profileDetail/ProfileDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,7 @@ class TopScreen extends ConsumerWidget {
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),
+      const ProfileDetailScreen(),
     ];
 
     return Scaffold(
@@ -61,6 +63,10 @@ class TopScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'MyPage',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.supervised_user_circle_rounded),
+            label: 'ProfileDetail',
           ),
         ],
         currentIndex: selectedIndex,
