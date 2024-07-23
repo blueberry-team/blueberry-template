@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "321041611091",
+    "project_id": "blueberry-build-test-d443e",
+    "storage_bucket": "blueberry-build-test-d443e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321041611091:android:04b765ee4c2f7fe3c889a6",
+        "android_client_info": {
+          "package_name": "com.blueberry.template"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFnRYeB0198DGcxcwinWjty9GnkJa9G0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321041611091:android:426478f6d3c12adbc889a6",
+        "android_client_info": {
+          "package_name": "com.example.blueberry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFnRYeB0198DGcxcwinWjty9GnkJa9G0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
