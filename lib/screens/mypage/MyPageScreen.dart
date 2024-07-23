@@ -14,7 +14,9 @@ import '../../providers/camera/FirebaseStoreServiceProvider.dart';
 import '../../providers/camera/fireStorageServiceProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
 import '../../providers/user/ProfileImageProvider.dart';
+import '../../utils/AppStrings.dart';
 import '../../widgets/CustomDividerWidget.dart';
+import '../../widgets/NickNameTextWidget.dart';
 import '../SettingScreen.dart';
 import 'camera/SettingsBottomSheet.dart';
 
@@ -27,7 +29,7 @@ class MyPageScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Page'),
+        title: const Text(AppStrings.myPageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,11 +43,7 @@ class MyPageScreen extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "userID or userNickName",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                      NickNameTextWidget(),
                       Text("Google 로그인을 사용 중 입니다.")
                     ],
                   ),
@@ -324,4 +322,3 @@ Widget _uploadProfileImageButtons(FirestoreService firestoreService,
     icon: const Icon(Icons.settings),
   );
 }
-
