@@ -1,9 +1,5 @@
-// 휴대폰인증 provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// 휴대폰인증 provider
-final phoneNumberProvider = StateProvider<String>((ref) => '');
-final verificationCodeProvider = StateProvider<String>((ref) => '');
 final phoneVerificationProvider =
     NotifierProvider<PhoneVerificationNotifier, PhoneVerificationState>(() {
   return PhoneVerificationNotifier();
@@ -12,12 +8,20 @@ final phoneVerificationProvider =
 class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
   @override
   PhoneVerificationState build() {
-    return VerificationInitialize();
+    return _initializeState();
   }
 
-  Future<bool> sendPhoneNumber(String phoneNumber) async {
+  void initialize() {
+    state = _initializeState();
+  }
+
+  PhoneVerificationState _initializeState() {
+    return VerificationInitialized();
+  }
+
+  Future<bool> sendVerificationRequest(String phoneNumber) async {
     try {
-      final verificationId = await getVerificationId(phoneNumber);
+      final verificationId = await requestVerificationId(phoneNumber);
       state = VerificationCodeSent(verificationId);
       return true;
     } catch (e) {
@@ -26,11 +30,11 @@ class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
     }
   }
 
-  Future<bool> verifyCode(String code) async {
+  Future<bool> checkVerificationCode(String code) async {
     if (state is VerificationCodeSent) {
       final verificationId = (state as VerificationCodeSent).verificationId;
       try {
-        await verifyPhoneVerificationCode(verificationId, code);
+        await validateVerificationCode(verificationId, code);
         state = VerificationSuccess();
         return true;
       } catch (e) {
@@ -43,15 +47,9 @@ class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
   }
 }
 
-// 휴대폰인증 상태관리 클래스
 abstract class PhoneVerificationState {}
 
-class VerificationInitialize extends PhoneVerificationState {
-  final String phoneNumber;
-  final String verificationNumber;
-
-  VerificationInitialize({this.phoneNumber = '', this.verificationNumber = ''});
-}
+class VerificationInitialized extends PhoneVerificationState {}
 
 class VerificationCodeSent extends PhoneVerificationState {
   final String verificationId;
@@ -68,8 +66,8 @@ class VerificationError extends PhoneVerificationState {
 }
 
 // 휴대폰번호 전송 로직 (구현 필요)
-Future<String> getVerificationId(String phoneNumber) async {
-  // 에러테스트
+Future<String> requestVerificationId(String phoneNumber) async {
+
   if (phoneNumber.length == 11) {
     return 'verificationId';
   }
@@ -78,7 +76,7 @@ Future<String> getVerificationId(String phoneNumber) async {
 }
 
 // 인증번호 전송 로직 (구현 필요)
-Future<bool> verifyPhoneVerificationCode(
+Future<bool> validateVerificationCode(
     String verificationId, String code) async {
   if (verificationId == 'verificationId' && code == "123456") {
     return true;
