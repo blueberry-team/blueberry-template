@@ -1,4 +1,3 @@
-import 'package:blueberry_flutter_template/router/RouterProvider.dart';
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart'; // kIsWeb 상수 사용
@@ -6,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../utils/ResponsiveLayoutBuilder.dart';
-
 class SplashScreen extends ConsumerStatefulWidget {
+  static const String routeName = '/SplashScreen';
   const SplashScreen({super.key});
 
   @override
@@ -42,7 +40,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       await Future.delayed(const Duration(seconds: 3));
       // 초기화 완료 후 메인 화면으로 전환
       if (mounted) {
-        context.go('/home'); // GoRouter를 사용한 라우팅
+        GoRouter.of(context).go(TopScreen.routeName);
       }
     } catch (e) {
       // 초기화 중 발생한 오류 처리

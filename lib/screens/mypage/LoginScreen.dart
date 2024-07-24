@@ -1,5 +1,7 @@
+import 'package:blueberry_flutter_template/screens/mypage/SignUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../providers/camera/PageProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
@@ -7,8 +9,8 @@ import '../../providers/user/UserInfoProvider.dart';
 import '../../services/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
 import '../../widgets/SquareTitleWidget.dart';
+import '../TopScreen.dart';
 import 'MyPageScreen.dart';
-import 'SignUpScreen.dart';
 import 'camera/ProfileCameraPage.dart';
 import 'camera/ProfileGalleryPage.dart';
 
@@ -153,10 +155,7 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
                 child: const Text(AppStrings.loginButtonText),
               ),
               TextButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                ),
+                onPressed: () => context.go(SignUpScreen.routeName),
                 child: const Text(
                   AppStrings.signUpButtonText,
                   style: TextStyle(color: Colors.blue),

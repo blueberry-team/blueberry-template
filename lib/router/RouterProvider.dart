@@ -1,10 +1,11 @@
+import 'package:blueberry_flutter_template/screens/SettingScreen.dart';
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
-import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/SplashScreen.dart';
+import '../screens/mypage/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -17,9 +18,20 @@ final routerProvider = Provider<GoRouter>((ref) {
                 kIsWeb ? const TopScreen() : const SplashScreen(),
               )),
       GoRoute(
-        path: '/home',
-        builder: (context, state) => const TopScreen(),
+        path: '/TopScreen',
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const TopScreen()),
       ),
+      GoRoute(
+        path: '/SignUpScreen',
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const SignUpScreen()),
+      ),
+      GoRoute(
+        path: '/SettingsScreen',
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const SettingScreen()),
+      )
     ],
   );
 });

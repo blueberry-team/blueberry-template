@@ -29,6 +29,7 @@ final phoneNumberProvider = StateProvider<String>((ref) => '');
 final verificationNumberProvider = StateProvider<String>((ref) => '');
 
 class SignUpScreen extends StatefulWidget {
+  static const String routeName = '/SignUpScreen';
   const SignUpScreen({super.key});
 
 
