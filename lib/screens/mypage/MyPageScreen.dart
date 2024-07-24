@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:blueberry_flutter_template/screens/mypage/camera/setting_inside_account_manager.dart';
 import 'package:blueberry_flutter_template/screens/mypage/camera/setting_inside_camera_media.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../providers/camera/FirebaseStoreServiceProvider.dart';
 import '../../providers/camera/fireStorageServiceProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
@@ -196,14 +194,13 @@ class MyPageScreen extends ConsumerWidget {
                   }
                 }
               },
-              child: const Expanded(
-                  child: ListTile(
+                  child: const ListTile(
                 leading: Icon(Icons.person_off),
                 title: Text(
                   "회원탈퇴",
                   style: TextStyle(fontSize: 20),
                 ),
-              )),
+              ),
             ),
           ],
         ),

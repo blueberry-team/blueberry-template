@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:blueberry_flutter_template/providers/SignUpDataProviders.dart';
+import 'package:blueberry_flutter_template/providers/user/FirebaseAuthServiceProvider.dart';
+import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,8 +21,6 @@ class ConfirmationPage extends ConsumerWidget {
   final VoidCallback onNext;
 
   const ConfirmationPage({super.key, required this.onNext});
-
-  get firebaseAuthServiceProvider => null;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,8 +58,9 @@ class ConfirmationPage extends ConsumerWidget {
           const SizedBox(height: 20),
           isLoading.when(
             data: (value) => ElevatedButton(
-              onPressed:
-                  signUp(email.state, password.state, name.state, context, ref),
+              onPressed: () async {
+                await upDateUserDB(email.state, name.state, context, ref);
+              },
               child: const Text('가입하기'),
             ),
             loading: () => const CircularProgressIndicator(),
@@ -69,35 +71,25 @@ class ConfirmationPage extends ConsumerWidget {
     );
   }
 
-  signUp(email, password, name, context, ref) async {
+  Future<void> upDateUserDB(email, name, BuildContext context, WidgetRef ref) async {
     try {
-      // 사용자 계정 생성
-      var userCredential = await ref
-          .read(firebaseAuthServiceProvider)
-          .signUpWithEmailPassword(email, password);
+      var currentUser = await ref.read(firebaseAuthServiceProvider).getCurrentUser()!;
 
-      // 새로운 UserDTO 인스턴스 생성
       UserModel newUser = UserModel(
-          userId: userCredential!.uid,
-          email: email,
+          userId: currentUser.uid,
           name: name,
-          // 초기 이름 값, 필요에 따라 수정
-          age: 0,
-          // 초기 나이 값, 필요에 따라 수정
+          email: email,
+          age: 1,
           profileImageUrl: '',
-          // 초기 프로필 사진 URL, 필요에 따라 수정
-          createdAt: DateTime.now() // 계정 생성 날짜
-          );
+          createdAt: DateTime.now());
 
-      // Firestore에 사용자 정보 저장
       await ref.read(firebaseStoreServiceProvider).createUser(newUser);
 
-      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text(AppStrings.signUpSuccessMessage)),
       );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
     } catch (e) {
-      // 회원가입 실패 시, 에러 메시지 출력
       print('회원가입 실패: $e');
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('회원가입 실패: $e'),
