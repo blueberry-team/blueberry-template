@@ -155,7 +155,7 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
                 child: const Text(AppStrings.loginButtonText),
               ),
               TextButton(
-                onPressed: () => context.go(SignUpScreen.routeName),
+                onPressed: () => context.goNamed(SignUpScreen.name),
                 child: const Text(
                   AppStrings.signUpButtonText,
                   style: TextStyle(color: Colors.blue),

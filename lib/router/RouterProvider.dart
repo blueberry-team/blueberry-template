@@ -19,16 +19,19 @@ final routerProvider = Provider<GoRouter>((ref) {
               )),
       GoRoute(
         path: '/TopScreen',
+        name: TopScreen.name,
         builder: (context, state) =>
             ResponsiveLayoutBuilder(context, const TopScreen()),
       ),
       GoRoute(
         path: '/SignUpScreen',
+        name : SignUpScreen.name,
         builder: (context, state) =>
             ResponsiveLayoutBuilder(context, const SignUpScreen()),
       ),
       GoRoute(
         path: '/SettingsScreen',
+        name : SettingScreen.name,
         builder: (context, state) =>
             ResponsiveLayoutBuilder(context, const SettingScreen()),
       )
