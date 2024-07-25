@@ -72,6 +72,4 @@ class ConfirmationPage extends ConsumerWidget {
       ),
     );
   }
-
-
 }

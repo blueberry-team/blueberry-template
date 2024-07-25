@@ -38,9 +38,7 @@
   
     Which Android application id (or package name) do you want to use for this configuration, e.g. 'com.example.app'
     
-    package name
-    Android : com.blueberry.template
-    ios : com.example.blueberryTemplate
+    package name : com.blueberry.template
     ```
 4. google-services.json, GoogleService-Info.plist 파일을 프로젝트에 추가해주세요. 
 - `파이어베이스 콘솔 접속 > 프로젝트 설정 > 프로젝트 설정 > 아래로 스크롤 > 내 앱` 에서 다운로드 가능합니다.

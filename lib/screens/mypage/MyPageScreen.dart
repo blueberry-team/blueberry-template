@@ -7,12 +7,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../providers/camera/FirebaseStoreServiceProvider.dart';
 import '../../providers/camera/fireStorageServiceProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
 import '../../providers/user/ProfileImageProvider.dart';
+import '../../utils/AppStrings.dart';
 import '../../widgets/CustomDividerWidget.dart';
+import '../../widgets/NickNameTextWidget.dart';
 import '../SettingScreen.dart';
 import 'camera/SettingsBottomSheet.dart';
 
@@ -25,7 +28,7 @@ class MyPageScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Page'),
+        title: const Text(AppStrings.myPageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,11 +42,7 @@ class MyPageScreen extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "userID or userNickName",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                      NickNameTextWidget(),
                       Text("Google 로그인을 사용 중 입니다.")
                     ],
                   ),
@@ -133,9 +132,7 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const SettingScreen();
-                }));
+                context.goNamed(SettingScreen.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.notifications),
@@ -321,4 +318,3 @@ Widget _uploadProfileImageButtons(FirestoreService firestoreService,
     icon: const Icon(Icons.settings),
   );
 }
-

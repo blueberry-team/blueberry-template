@@ -15,8 +15,8 @@ final PageController _pageController = PageController();
 
 
 class SignUpScreen extends StatefulWidget {
+  static const String name = 'SignUpScreen';
   const SignUpScreen({super.key});
-
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
