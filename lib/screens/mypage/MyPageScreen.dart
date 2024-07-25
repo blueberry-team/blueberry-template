@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../providers/camera/FirebaseStoreServiceProvider.dart';
@@ -135,9 +136,7 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const SettingScreen();
-                }));
+                context.goNamed(SettingScreen.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.notifications),
@@ -324,4 +323,3 @@ Widget _uploadProfileImageButtons(FirestoreService firestoreService,
     icon: const Icon(Icons.settings),
   );
 }
-
