@@ -17,6 +17,7 @@ class FirebaseService {
       throw Exception('Failed to add message');
     }
   }
+
   Future<void> upDateUserDB(String email, String name) async {
     try {
       var user = FirebaseAuth.instance.currentUser;
@@ -32,6 +33,7 @@ class FirebaseService {
         age: 1,
         profileImageUrl: '',
         createdAt: DateTime.now(),
+        userClass: 'user',
       );
 
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());
