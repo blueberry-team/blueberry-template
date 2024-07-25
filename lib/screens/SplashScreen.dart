@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = '/SplashScreen';
+
   const SplashScreen({super.key});
 
   @override
@@ -40,7 +41,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       await Future.delayed(const Duration(seconds: 3));
       // 초기화 완료 후 메인 화면으로 전환
       if (mounted) {
-        GoRouter.of(context).go(TopScreen.name);
+        context.goNamed(TopScreen.name);
       }
     } catch (e) {
       // 초기화 중 발생한 오류 처리
