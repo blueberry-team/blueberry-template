@@ -47,28 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAbMUdrQDyptmQ2hH-GoGpZ0XdtSTcW6o4',
-    appId: '1:321041611091:web:d93fa660c5e7cb22c889a6',
-    messagingSenderId: '321041611091',
-    projectId: 'blueberry-build-test-d443e',
-    authDomain: 'blueberry-build-test-d443e.firebaseapp.com',
-    storageBucket: 'blueberry-build-test-d443e.appspot.com',
+    apiKey: 'AIzaSyAVzMOPoTeNZPv0VRdZsILerFFECDFSzq4',
+    appId: '1:274880747730:web:56a18b0089fbb3d29eb50b',
+    messagingSenderId: '274880747730',
+    projectId: 'blueberrytemplate-2024-summer',
+    authDomain: 'blueberrytemplate-2024-summer.firebaseapp.com',
+    storageBucket: 'blueberrytemplate-2024-summer.appspot.com',
+    measurementId: 'G-MSJGFSH464',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAFnRYeB0198DGcxcwinWjty9GnkJa9G0A',
-    appId: '1:321041611091:android:04b765ee4c2f7fe3c889a6',
-    messagingSenderId: '321041611091',
-    projectId: 'blueberry-build-test-d443e',
-    storageBucket: 'blueberry-build-test-d443e.appspot.com',
+    apiKey: 'AIzaSyBJWO7fIJQBndQIgN-VWyllEjqh6t6lBh4',
+    appId: '1:274880747730:android:95c3a117fc470aa19eb50b',
+    messagingSenderId: '274880747730',
+    projectId: 'blueberrytemplate-2024-summer',
+    storageBucket: 'blueberrytemplate-2024-summer.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyACi_1hiY8-W4afnAwvLYaumCTSRSVLOzg',
-    appId: '1:321041611091:ios:3e1a3d958e829496c889a6',
-    messagingSenderId: '321041611091',
-    projectId: 'blueberry-build-test-d443e',
-    storageBucket: 'blueberry-build-test-d443e.appspot.com',
+    apiKey: 'AIzaSyBAypAgggU745jI4yaJB9Hz_980JjD6T4o',
+    appId: '1:274880747730:ios:11f0fb88a7ce46e79eb50b',
+    messagingSenderId: '274880747730',
+    projectId: 'blueberrytemplate-2024-summer',
+    storageBucket: 'blueberrytemplate-2024-summer.appspot.com',
+    iosClientId: '274880747730-k5h3ijrilmvhj7bvmskgui0ocvr9n4i0.apps.googleusercontent.com',
     iosBundleId: 'com.example.blueberry',
   );
 }
