@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 
-/// TermsOfServicePage.dart
-///
-/// Terms of Service Page
-/// - 쇼핑몰 개인정보처리방침 페이지
-///
-/// @jwson-automation
-
-class TermsOfServicePage extends StatefulWidget {
+class TermsOfServiceWidget extends StatefulWidget {
   final VoidCallback onNext;
 
-  const TermsOfServicePage({super.key, required this.onNext});
+  const TermsOfServiceWidget({super.key, required this.onNext});
 
   @override
-  State<TermsOfServicePage> createState() => _TermsOfServicePageState();
+  State<TermsOfServiceWidget> createState() => _TermsOfServicePageState();
 }
 
-class _TermsOfServicePageState extends State<TermsOfServicePage> {
+class _TermsOfServicePageState extends State<TermsOfServiceWidget> {
   final ScrollController _scrollController = ScrollController();
   bool isBottom = false;
 
@@ -53,10 +46,10 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
             isBottom
                 ? widget.onNext()
                 : _scrollController.animateTo(
-                    _scrollController.position.maxScrollExtent,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
+              _scrollController.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
           },
           child: const Icon(Icons.check),
         )));

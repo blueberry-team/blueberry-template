@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 
-/// PrivacyPolicyPage.dart
-///
-/// Privacy Policy Page
-/// - 개인정보 처리방침 페이지
-///
-/// @jwson-automation
-
-class PrivacyPolicyPage extends StatefulWidget {
+class PrivacyPolicyWidget extends StatefulWidget {
   final VoidCallback onNext;
 
-  const PrivacyPolicyPage({super.key, required this.onNext});
+  const PrivacyPolicyWidget({super.key, required this.onNext});
 
   @override
-  State<PrivacyPolicyPage> createState() => _PrivacyPolicyPageState();
+  State<PrivacyPolicyWidget> createState() => _PrivacyPolicyPageState();
 }
 
-class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
+class _PrivacyPolicyPageState extends State<PrivacyPolicyWidget> {
   final ScrollController _scrollController = ScrollController();
   bool isBottom = false;
 
