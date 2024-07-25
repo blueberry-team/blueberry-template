@@ -4,8 +4,6 @@ part 'generated/UserModel.freezed.dart';
 
 part 'generated/UserModel.g.dart';
 
-// TODO :  User Class 추가
-
 @freezed
 class UserModel with _$UserModel {
   const factory UserModel({
@@ -14,9 +12,9 @@ class UserModel with _$UserModel {
     required String name,
     required String email,
     required int age,
-    required String profileImageUrl,
     required DateTime createdAt,
-    required String fcmToken,
+    String? profileImageUrl,
+    String? fcmToken,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

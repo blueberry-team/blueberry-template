@@ -86,7 +86,7 @@ class ConfirmationPage extends ConsumerWidget {
           // 초기 나이 값, 필요에 따라 수정
           profileImageUrl: '',
           // 초기 프로필 사진 URL, 필요에 따라 수정
-          createdAt: DateTime.now() // 계정 생성 날짜
+          createdAt: DateTime.now(), userClass: 'user' // 계정 생성 날짜
           );
 
       // Firestore에 사용자 정보 저장
