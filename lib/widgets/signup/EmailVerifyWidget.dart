@@ -32,7 +32,6 @@ class EmailVerifyWidget extends ConsumerWidget {
                 } catch(e) {
                   print(e);
                 }
-
               },
               child: Text(AppStrings.click_emailVerification)
           )

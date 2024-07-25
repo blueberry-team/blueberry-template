@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:blueberry_flutter_template/providers/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/providers/user/FirebaseAuthServiceProvider.dart';
 import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
+import 'package:blueberry_flutter_template/services/FirebaseService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,7 @@ class ConfirmationPage extends ConsumerWidget {
     final nickname = ref.read(nicknameProvider.notifier);
     final password = ref.read(passwordProvider.notifier);
     final isLoading = ref.watch(signUpProvider);
+    final firebaseService = FirebaseService();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -59,7 +61,7 @@ class ConfirmationPage extends ConsumerWidget {
           isLoading.when(
             data: (value) => ElevatedButton(
               onPressed: () async {
-                await upDateUserDB(email.state, name.state, context, ref);
+                await firebaseService.upDateUserDB(email.state, name.state);
               },
               child: const Text('가입하기'),
             ),
@@ -71,29 +73,5 @@ class ConfirmationPage extends ConsumerWidget {
     );
   }
 
-  Future<void> upDateUserDB(email, name, BuildContext context, WidgetRef ref) async {
-    try {
-      var currentUser = await ref.read(firebaseAuthServiceProvider).getCurrentUser()!;
 
-      UserModel newUser = UserModel(
-          userId: currentUser.uid,
-          name: name,
-          email: email,
-          age: 1,
-          profileImageUrl: '',
-          createdAt: DateTime.now());
-
-      await ref.read(firebaseStoreServiceProvider).createUser(newUser);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppStrings.signUpSuccessMessage)),
-      );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
-    } catch (e) {
-      print('회원가입 실패: $e');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('회원가입 실패: $e'),
-      ));
-    }
-  }
 }
