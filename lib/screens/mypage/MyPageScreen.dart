@@ -20,6 +20,7 @@ import '../SettingScreen.dart';
 import 'camera/SettingsBottomSheet.dart';
 
 class MyPageScreen extends ConsumerWidget {
+  static const String name = 'MyPageScreen';
   const MyPageScreen({super.key});
 
   @override
