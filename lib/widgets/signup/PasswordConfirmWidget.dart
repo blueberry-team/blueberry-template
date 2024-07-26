@@ -26,6 +26,7 @@ class PasswordConfirmWidget extends ConsumerWidget {
           children: [
             TextFormField(
               onChanged: (value) => passwordConfirm.state = value,
+              obscureText: true,
               decoration: const InputDecoration(labelText: '비밀번호 확인'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
