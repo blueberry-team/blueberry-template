@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:blueberry_flutter_template/providers/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/providers/user/FirebaseAuthServiceProvider.dart';
+import 'package:blueberry_flutter_template/screens/TopScreen.dart';
 import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../model/UserModel.dart';
 import '../../../providers/camera/FirebaseStoreServiceProvider.dart';
@@ -28,6 +30,7 @@ class ConfirmationPage extends ConsumerWidget {
     final email = ref.read(emailProvider.notifier);
     final name = ref.read(nameProvider.notifier);
     final nickname = ref.read(nicknameProvider.notifier);
+    final password = ref.read(passwordProvider.notifier);
     final isLoading = ref.watch(signUpProvider);
     final firebaseService = FirebaseService();
 
@@ -41,6 +44,8 @@ class ConfirmationPage extends ConsumerWidget {
           Text('이름: ${name.state}'),
           const SizedBox(height: 20),
           Text('닉네임: ${nickname.state}'),
+          const SizedBox(height: 20),
+          Text('비밀번호: ${password.state}'),
           const SizedBox(height: 20),
           Row(
             children: [
@@ -58,7 +63,11 @@ class ConfirmationPage extends ConsumerWidget {
           isLoading.when(
             data: (value) => ElevatedButton(
               onPressed: () async {
-                  await firebaseService.upDateUserDB(email.state, name.state);
+                await firebaseService.upDateUserDB(email.state, name.state).then(
+                        (value) {
+                      context.goNamed(TopScreen.name);
+                    }
+                );
               },
               child: const Text('가입하기'),
             ),
