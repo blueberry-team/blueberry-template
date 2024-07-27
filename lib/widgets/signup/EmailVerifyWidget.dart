@@ -14,8 +14,8 @@ class EmailVerifyWidget extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(AppStrings.send_emailVerification),
-          Text(AppStrings.check_emailVerification),
+          const Text(AppStrings.send_emailVerification),
+          const Text(AppStrings.check_emailVerification),
           ElevatedButton(
               onPressed: () async {
                 try{
@@ -33,7 +33,7 @@ class EmailVerifyWidget extends ConsumerWidget {
                   print(e);
                 }
               },
-              child: Text(AppStrings.click_emailVerification)
+              child: const Text(AppStrings.click_emailVerification)
           )
         ],
       ),

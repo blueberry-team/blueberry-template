@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 List<RegExp> forbiddenPatterns = [
   RegExp(r'[시싀씨슈쉬쒸쉽쓉샤쌰스쓰]([0-9]*)[바빠발빨벌뻘불뿔뱌뺘볼뽈블쁠뷸쁄뵬뾸뱔뺠밸뺄벨뼬볠뼬]'),

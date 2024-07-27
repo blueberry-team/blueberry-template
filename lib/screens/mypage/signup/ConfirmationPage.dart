@@ -27,10 +27,9 @@ class ConfirmationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = ref.read(emailProvider.notifier);
-    final name = ref.read(nameProvider.notifier);
-    final nickname = ref.read(nicknameProvider.notifier);
-    final password = ref.read(passwordProvider.notifier);
+    final email = ref.watch(emailProvider);
+    final name = ref.watch(nameProvider);
+    final nickname = ref.watch(nicknameProvider);
     final isLoading = ref.watch(signUpProvider);
     final firebaseService = FirebaseService();
 
@@ -39,13 +38,11 @@ class ConfirmationPage extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('이메일: ${email.state}'),
+          Text('이메일: ${email}'),
           const SizedBox(height: 20),
-          Text('이름: ${name.state}'),
+          Text('이름: ${name}'),
           const SizedBox(height: 20),
-          Text('닉네임: ${nickname.state}'),
-          const SizedBox(height: 20),
-          Text('비밀번호: ${password.state}'),
+          Text('닉네임: ${nickname}'),
           const SizedBox(height: 20),
           Row(
             children: [
@@ -63,11 +60,11 @@ class ConfirmationPage extends ConsumerWidget {
           isLoading.when(
             data: (value) => ElevatedButton(
               onPressed: () async {
-                await firebaseService.upDateUserDB(email.state, name.state).then(
-                        (value) {
-                      context.goNamed(TopScreen.name);
-                    }
-                );
+                await firebaseService.upDateUserDB(email, name);
+                if (context.mounted) {
+                  context.goNamed(TopScreen.name);
+                }
+
               },
               child: const Text('가입하기'),
             ),

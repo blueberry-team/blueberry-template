@@ -20,7 +20,7 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final email = ref.read(emailProvider.notifier);
+    final email = ref.watch(emailProvider.notifier);
     final emailDuplicate = ref.watch(emailDuplicateProvider.notifier);
     final formKey = GlobalKey<FormState>();
     final RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');

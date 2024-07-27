@@ -12,8 +12,8 @@ class PasswordConfirmWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = ref.read(emailProvider);
-    final password = ref.read(passwordProvider);
+    final email = ref.watch(emailProvider);
+    final password = ref.watch(passwordProvider);
     final passwordConfirm = ref.watch(passwordConfirmProvider.notifier);
     final formKey = GlobalKey<FormState>();
 

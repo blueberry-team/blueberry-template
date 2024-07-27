@@ -16,7 +16,6 @@ class NickNameInputWidget extends ConsumerWidget {
     final nickname = ref.watch(nicknameProvider.notifier);
     final formKey = GlobalKey<FormState>();
     final RegExp nickNameRegExp = RegExp(r'^[가-힣a-zA-Z0-9]{2,}$');
-    final List<RegExp> forbiddenNickName = forbiddenPatterns;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -33,7 +32,7 @@ class NickNameInputWidget extends ConsumerWidget {
                   return AppStrings.errorMessage_emptyNickName;
                 } else if (!nickNameRegExp.hasMatch(value)) {
                   return AppStrings.errorMessage_wrongNickName;
-                } for(var patterns in forbiddenNickName) {
+                } for(var patterns in forbiddenPatterns) {
                   if(patterns.hasMatch(value)) {
                     return AppStrings.errorMessage_forbiddenNickName;
                   }
