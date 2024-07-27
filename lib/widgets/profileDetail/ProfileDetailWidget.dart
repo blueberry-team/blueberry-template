@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/ProfileDetailProvider.dart';
+import '../../utils/AppStringEnglish.dart';
 
-class ProfileDetailWidget extends StatelessWidget {
+class ProfileDetailWidget extends ConsumerWidget {
   const ProfileDetailWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final photoUrlList = ref.watch(profileImageUrlsProvider);
+
     return Scaffold(
       body: Center(
         child: GestureDetector(
-          onTap: (){},
+          onTap: (){
+            //ref.read(profileDetailProvider.notifier).updateIndex();
+          },
           child: Container(
             width: 300,
             height: 400,
@@ -16,15 +23,20 @@ class ProfileDetailWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.black),
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  radius: 80,
-                  backgroundImage: AssetImage('assets/logo/logo_1.png'),
+                photoUrlList.when(
+                  data: (photoUrlList) {
+                    return Center(
+                      child: Image.network(photoUrlList[1], height: 300),
+                    );
+                  },
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error: (error, stackTrace) => Center(child: Text('${AppStringEnglish.errorTitle}: $error')),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Profile Photo',
                   style: TextStyle(fontSize: 24),
                 ),
