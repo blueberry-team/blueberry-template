@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/screens/chat/ChatRoomScreen.dart';
 import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/screens/profileDetail/ProfileDetailScreen.dart';
@@ -27,7 +28,8 @@ class TopScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       FriendsListScreen(),
-      const ChatScreen(),
+      const ChatRoomScreen(),
+      // const ChatScreen(),
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),

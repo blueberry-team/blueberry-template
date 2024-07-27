@@ -17,9 +17,10 @@ class AppStrings {
   static const String okButtonText = '확인';
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
+
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
-
+  static const String chatRoomScreenTitle = '채팅방 목록';
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = '쇼핑 페이지';
   static const String shoppingPageTitle1 = '이 제품들을 찾고 있나요?';
