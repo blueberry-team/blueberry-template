@@ -64,7 +64,6 @@ class ConfirmationPage extends ConsumerWidget {
                 if (context.mounted) {
                   context.goNamed(TopScreen.name);
                 }
-
               },
               child: const Text('가입하기'),
             ),
