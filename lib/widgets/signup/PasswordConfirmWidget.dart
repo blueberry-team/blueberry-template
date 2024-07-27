@@ -12,8 +12,8 @@ class PasswordConfirmWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = ref.read(emailProvider);
-    final password = ref.read(passwordProvider);
+    final email = ref.watch(emailProvider);
+    final password = ref.watch(passwordProvider);
     final passwordConfirm = ref.watch(passwordConfirmProvider.notifier);
     final formKey = GlobalKey<FormState>();
 
@@ -26,6 +26,7 @@ class PasswordConfirmWidget extends ConsumerWidget {
           children: [
             TextFormField(
               onChanged: (value) => passwordConfirm.state = value,
+              obscureText: true,
               decoration: const InputDecoration(labelText: '비밀번호 확인'),
               validator: (value) {
                 if (value == null || value.isEmpty) {

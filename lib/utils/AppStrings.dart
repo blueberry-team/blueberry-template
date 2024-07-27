@@ -74,6 +74,11 @@ class AppStrings {
   static const String errorMessage_regexpPassword = '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
   static const String errorMessage_checkPassword = '비밀번호를 확인 해주세요.';
   static const String errorMessage_duplicatedPassword = '비밀번호가 일치하지 않습니다.';
+  static const String errorMessage_emptyName = '이름을 입력해주세요.';
+  static const String errorMessage_worngName = '한글 4자 이상의 이름을 입력해주세요.';
+  static const String errorMessage_emptyNickName = '닉네임을 입력해주세요.';
+  static const String errorMessage_wrongNickName = '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
+  static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
 
 
   // Company Info
