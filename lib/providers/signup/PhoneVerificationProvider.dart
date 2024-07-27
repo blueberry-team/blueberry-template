@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'PhoneNumberProvider.dart';
+import 'VerificationCodeProvider.dart';
 
 final phoneVerificationProvider =
     NotifierProvider<PhoneVerificationNotifier, PhoneVerificationState>(() {
@@ -8,79 +14,116 @@ final phoneVerificationProvider =
 class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
   @override
   PhoneVerificationState build() {
-    return _initializeState();
+    return Initial();
   }
 
-  void initialize() {
-    state = _initializeState();
+  void reset() {
+    state = Initial();
   }
 
-  PhoneVerificationState _initializeState() {
-    return VerificationInitialized();
-  }
+  Future<void> sendPhoneNumber(Completer<void> completer) async {
+    final phoneNumber = ref.read(phoneNumberProvider);
 
-  Future<bool> sendVerificationRequest(String phoneNumber) async {
     try {
-      final verificationId = await requestVerificationId(phoneNumber);
-      state = VerificationCodeSent(verificationId);
-      return true;
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        timeout: const Duration(seconds: 120),
+        phoneNumber: '+82 $phoneNumber',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          final auth = FirebaseAuth.instance;
+          final authCredential = await auth.signInWithCredential(credential);
+
+          if (authCredential.user != null) {
+            auth.currentUser!.delete();
+            auth.signOut();
+            state = Verified();
+            completer.complete();
+          }
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          state = Failed(message: e.toString());
+          completer.completeError(e.toString());
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          state = CodeSent(verificationId, resendToken: resendToken);
+          completer.complete();
+          startCodeInputTimeout();
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          if (!completer.isCompleted) {
+            state = TimeOut(verificationId: verificationId);
+            completer.completeError('Timeout');
+          }
+        },
+      );
     } catch (e) {
-      state = VerificationError(e.toString());
-      return false;
+      state = Failed(message: e.toString());
+      completer.completeError(e.toString());
     }
   }
 
-  Future<bool> checkVerificationCode(String code) async {
-    if (state is VerificationCodeSent) {
-      final verificationId = (state as VerificationCodeSent).verificationId;
-      try {
-        await validateVerificationCode(verificationId, code);
-        state = VerificationSuccess();
-        return true;
-      } catch (e) {
-        print(e);
-        return false;
+  void startCodeInputTimeout() {
+    Future.delayed(const Duration(seconds: 120), () {
+      if (state is CodeSent) {
+        state = TimeOut(verificationId: '');
       }
-    } else {
-      return false;
+    });
+  }
+
+  Future<void> verifyCode(Completer<void> completer) async {
+    final verificationCode = ref.read(verificationCodeProvider);
+    final verificationId = state.verificationId;
+
+    if (state is CodeSent || state is Failed) {
+      final credential = PhoneAuthProvider.credential(
+        verificationId: verificationId!,
+        smsCode: verificationCode,
+      );
+
+      try {
+        final auth = FirebaseAuth.instance;
+        final authResult = await auth.signInWithCredential(credential);
+        if (authResult.user != null) {
+          auth.currentUser!.delete();
+          auth.signOut();
+          state = Verified();
+          completer.complete();
+        } else {
+          state = Failed(
+              message: 'invalid-credential', verificationId: verificationId);
+          completer.completeError('invalid-credential');
+        }
+      } catch (e) {
+        state = Failed(message: e.toString(), verificationId: verificationId);
+        completer.completeError(e.toString());
+      }
     }
   }
 }
 
-abstract class PhoneVerificationState {}
+abstract class PhoneVerificationState {
+  final String? verificationId;
 
-class VerificationInitialized extends PhoneVerificationState {}
-
-class VerificationCodeSent extends PhoneVerificationState {
-  final String verificationId;
-
-  VerificationCodeSent(this.verificationId);
+  PhoneVerificationState({this.verificationId});
 }
 
-class VerificationSuccess extends PhoneVerificationState {}
+class Initial extends PhoneVerificationState {}
 
-class VerificationError extends PhoneVerificationState {
-  final String message;
+class CodeSent extends PhoneVerificationState {
+  final int? resendToken;
 
-  VerificationError(this.message);
+  CodeSent(String verificationId, {this.resendToken})
+      : super(verificationId: verificationId);
 }
 
-// 휴대폰번호 전송 로직 (구현 필요)
-Future<String> requestVerificationId(String phoneNumber) async {
-
-  if (phoneNumber.length == 11) {
-    return 'verificationId';
-  }
-
-  throw Exception("Invalid phone number");
+class TimeOut extends PhoneVerificationState {
+  TimeOut({String? verificationId}) : super(verificationId: verificationId);
 }
 
-// 인증번호 전송 로직 (구현 필요)
-Future<bool> validateVerificationCode(
-    String verificationId, String code) async {
-  if (verificationId == 'verificationId' && code == "123456") {
-    return true;
-  }
+class Verified extends PhoneVerificationState {}
 
-  throw Exception("Invalid verification code");
+class Failed extends PhoneVerificationState {
+  final String? message;
+
+  Failed({this.message, String? verificationId})
+      : super(verificationId: verificationId);
 }

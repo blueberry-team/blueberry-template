@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import '../../../widgets/signup/PhoneNumberInputWidget.dart';
 import '../../../widgets/signup/VerificationCodeInputWidget.dart';
 
-// A 스크린 ( 휴대폰 입력 )
-class PhoneNumberInputPage extends StatefulWidget {
+// 1. 전화번호 입력
+class PhoneNumberInputPage extends StatelessWidget {
   final VoidCallback onNext;
 
   const PhoneNumberInputPage({
@@ -14,26 +14,23 @@ class PhoneNumberInputPage extends StatefulWidget {
   });
 
   @override
-  _PhoneNumberInputPageState createState() => _PhoneNumberInputPageState();
-}
-
-class _PhoneNumberInputPageState extends State<PhoneNumberInputPage> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: PhoneNumberInputWidget(onNext: widget.onNext),
+      child: PhoneNumberInputWidget(onNext: onNext),
     );
   }
 }
 
-// B 스크린 ( 휴대폰 인증번호 입력 )
+// 2. 인증번호 입력
 class VerificationCodeInputPage extends StatefulWidget {
   final VoidCallback onNext;
+  final VoidCallback onPrev;
 
   const VerificationCodeInputPage({
     super.key,
     required this.onNext,
+    required this.onPrev,
   });
 
   @override
@@ -65,12 +62,13 @@ class _VerificationCodeInputPageState extends State<VerificationCodeInputPage> {
       child: VerificationCodeInputWidget(
         focusNode: _focusNode,
         onNext: widget.onNext,
+        onPrev: widget.onPrev,
       ),
     );
   }
 }
 
-// C 스크린 ( 휴대폰  인증 완료 후 보여줄 화면 )
+// 3. 인증 완료
 class PhoneVerificationDonePage extends StatelessWidget {
   final VoidCallback onNext;
 
@@ -86,7 +84,7 @@ class PhoneVerificationDonePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('휴대폰 인증 완료'),
+          const Text('인증 완료'),
           const SizedBox(
             height: 20,
           ),

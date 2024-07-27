@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 final PageController _pageController = PageController();
 
-// 휴대폰 인증 위젯 테스트
 class PhoneVerificationScreen extends StatelessWidget {
   const PhoneVerificationScreen({super.key});
 
@@ -25,12 +24,13 @@ class PhoneVerificationScreen extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             ),
-          ),
-          PhoneVerificationDonePage(
-            onNext: () => _pageController.nextPage(
+            onPrev: () => _pageController.previousPage(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             ),
+          ),
+          PhoneVerificationDonePage(
+            onNext: () {},
           ),
         ],
       ),

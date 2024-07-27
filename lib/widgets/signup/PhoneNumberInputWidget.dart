@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,36 +8,51 @@ import '../../providers/signup/PhoneNumberProvider.dart';
 import '../../providers/signup/PhoneVerificationProvider.dart';
 import '../../utils/AppStrings.dart';
 
-class PhoneNumberInputWidget extends ConsumerWidget {
+class PhoneNumberInputWidget extends ConsumerStatefulWidget {
   final VoidCallback onNext;
-  final TextEditingController _controller = TextEditingController(text: '');
 
   PhoneNumberInputWidget({super.key, required this.onNext});
 
+  @override
+  _PhoneNumberInputWidgetState createState() => _PhoneNumberInputWidgetState();
+}
+
+class _PhoneNumberInputWidgetState
+    extends ConsumerState<PhoneNumberInputWidget> {
+  final TextEditingController _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.text = ref.read(phoneNumberProvider);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final phoneNumber = ref.watch(phoneNumberProvider.notifier);
-    final phoneVerification = ref.watch(phoneVerificationProvider.notifier);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(AppStrings.inputPhoneNumber),
+        const SizedBox(height: 20),
         TextField(
           controller: _controller,
           autofocus: true,
           decoration: const InputDecoration(
-            labelText: '휴대폰 번호',
+            labelText: '전화번호',
             border: OutlineInputBorder(
               borderSide: BorderSide(),
             ),
           ),
           maxLength: 11,
           buildCounter: (context,
-              {required currentLength,
-                required isFocused,
-                required maxLength}) =>
-          null,
+                  {required currentLength,
+                  required isFocused,
+                  required maxLength}) =>
+              null,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           keyboardType: TextInputType.number,
           onChanged: (value) => phoneNumber.state = value,
@@ -44,50 +61,29 @@ class PhoneNumberInputWidget extends ConsumerWidget {
         ElevatedButton(
           onPressed: () async {
             if (phoneNumber.state.isEmpty) {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    content:
-                    const Text(AppStrings.errorMessage_emptyPhoneNumber),
-                    actions: [
-                      TextButton(
-                        child: const Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              _showMessageDialog(
+                  context, AppStrings.errorMessage_emptyPhoneNumber);
               return;
             }
 
-            final result = await phoneVerification
-                .sendVerificationRequest(phoneNumber.state);
+            final completer = Completer<void>();
 
-            // 전화번호 입력 성공/실패 처리
-            if (result) {
-              onNext();
-            } else {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    content:
-                    const Text(AppStrings.errorMessage_invalidPhoneNumber),
-                    actions: [
-                      TextButton(
-                        child: const Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+            ref
+                .read(phoneVerificationProvider.notifier)
+                .sendPhoneNumber(completer);
+
+            try {
+              await completer.future;
+
+              final state = ref.read(phoneVerificationProvider);
+              if (state is CodeSent) {
+                widget.onNext();
+              } else if (state is Verified) {
+                widget.onNext();
+              }
+            } catch (e) {
+              _showMessageDialog(
+                  context, AppStrings.errorMessage_invalidPhoneNumber);
             }
           },
           child: const Text('다음'),
@@ -95,4 +91,23 @@ class PhoneNumberInputWidget extends ConsumerWidget {
       ],
     );
   }
+}
+
+void _showMessageDialog(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: Text(message),
+        actions: [
+          TextButton(
+            child: const Text('확인'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
