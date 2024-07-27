@@ -28,7 +28,6 @@ class PasswordInputWidget extends ConsumerWidget {
             TextFormField(
               onChanged: (value) => password.state = value,
               decoration: const InputDecoration(labelText: '비밀번호 입력'),
-              obscureText: true,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.errorMessage_emptyPassword;
