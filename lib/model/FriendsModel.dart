@@ -6,8 +6,10 @@ part 'generated/FriendsModel.g.dart';
 @freezed
 class FriendsModel with _$FriendsModel {
   const factory FriendsModel({
-    required int userId,
-    required int friendId,
+    required String userId,
+    required String friendId,
+    required String name,
+    required String profilePicture,
     required String status,
     required DateTime createdAt,
   }) = _FriendsModel;

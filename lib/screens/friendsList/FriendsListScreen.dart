@@ -1,47 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../model/FriendsModel.dart';
+import '../../providers/FriendsListProvider.dart';
 
-class FriendsListScreen extends StatelessWidget {
-  FriendsListScreen({super.key});
 
-  final List<Friend> friends = [
-    Friend(
-      image: "https://images.unsplash.com/photo-1571566882372-1598d88abd90?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "CameraDog",
-      lastConnect: "3 days ago",
-      status: "Sometimes I wanna be...",
-      likes: 32,
-    ),
-    Friend(
-      image: "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "Piggy Pig",
-      lastConnect: "3 months ago",
-      status: "Stop Eating Me...",
-      likes: 3,
-    ),
-    Friend(
-      image: "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "Big Boss Hamster",
-      lastConnect: "3 days ago",
-      status: "Today work out is done...",
-      likes: 120,
-    ),
-  ];
+class FriendsListScreen extends ConsumerWidget {
+  const FriendsListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final friendsAsyncValue = ref.watch(friendsListProvider);
+
     return Scaffold(
-      body: ListView.builder(
-        itemCount: friends.length,
-        itemBuilder: (context, index) {
-          return FriendTile(friend: friends[index]);
+      body: friendsAsyncValue.when(
+        data: (friends) {
+          return ListView.builder(
+            itemCount: friends.length,
+            itemBuilder: (context, index) {
+              return FriendTile(friend: friends[index]);
+            },
+          );
         },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Error: $error')),
       ),
     );
   }
 }
 
 class FriendTile extends StatelessWidget {
-  final Friend friend;
+  final FriendsModel friend;
 
   const FriendTile({super.key, required this.friend});
 
@@ -62,25 +50,30 @@ class FriendTile extends StatelessWidget {
             ListTile(
               leading: CircleAvatar(
                 radius: 30,
-                backgroundImage: NetworkImage(friend.image),
+                backgroundImage: friend.profilePicture.startsWith('http')
+                    ? NetworkImage(friend.profilePicture)
+                    : AssetImage(friend.profilePicture) as ImageProvider,
+                onBackgroundImageError: (_, __) {
+                  // 기본 이미지로 설정
+                },
               ),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(friend.lastConnect),
+                  Text(friend.createdAt.toString()),
                   const SizedBox(height: 5),
                   Text(friend.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text(friend.status),
+                  Text(friend.status ?? ''),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, left: 16.0), // left padding added
+            const Padding(
+              padding: EdgeInsets.only(bottom: 8.0, left: 16.0), // left padding added
               child: Row(
                 children: [
-                  const Icon(Icons.favorite, color: Colors.red),
-                  const SizedBox(width: 5),
-                  Text(friend.likes.toString()),
+                  Icon(Icons.favorite, color: Colors.red),
+                  SizedBox(width: 5),
+                  Text('17'), // 임시 데이터
                 ],
               ),
             ),
@@ -89,20 +82,4 @@ class FriendTile extends StatelessWidget {
       ),
     );
   }
-}
-
-class Friend {
-  final String image;
-  final String name;
-  final String lastConnect;
-  final String status;
-  final int likes;
-
-  Friend({
-    required this.image,
-    required this.name,
-    required this.lastConnect,
-    required this.status,
-    required this.likes,
-  });
 }

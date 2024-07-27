@@ -91,6 +91,7 @@ flutter:
     - assets/700x150/
     - assets/logo/
     - assets/login_page_images/
+    - assets/default_images/default_profile.png
 
 # Run Commands to generate splash screen
 # 1) flutter clean
