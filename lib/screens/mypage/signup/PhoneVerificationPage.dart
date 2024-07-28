@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import '../../../widgets/signup/PhoneNumberInputWidget.dart';
 import '../../../widgets/signup/VerificationCodeInputWidget.dart';
 
-// 1. 전화번호 입력
 class PhoneNumberInputPage extends StatelessWidget {
   final VoidCallback onNext;
 
@@ -22,7 +21,6 @@ class PhoneNumberInputPage extends StatelessWidget {
   }
 }
 
-// 2. 인증번호 입력
 class VerificationCodeInputPage extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onPrev;
@@ -68,7 +66,6 @@ class _VerificationCodeInputPageState extends State<VerificationCodeInputPage> {
   }
 }
 
-// 3. 인증 완료
 class PhoneVerificationDonePage extends StatelessWidget {
   final VoidCallback onNext;
 
