@@ -17,8 +17,13 @@ class AppStrings {
   static const String okButtonText = '확인';
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
+
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
+  static const String chatRoomScreenTitle = '채팅방 목록';
+
+  //MatchScreen.dart
+  static const String matchScreenTitle = '매칭';
 
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = '쇼핑 페이지';
@@ -65,9 +70,20 @@ class AppStrings {
       '비밀번호는 최소 8자 이상이어야 하며, 하나 이상의 문자와 숫자가 포함되어야 합니다.';
   static const String errorMessage_emptyEmail = '이메일 주소를 입력하세요.';
   static const String errorMessage_invalidEmail = '유효한 이메일 주소를 입력하세요.';
+  static const String errorMessage_checkEmail = '이메일 주소를 확인해주세요.';
   static const String errorMessage_emailAlreadyInUse = '이미 다른 계정에서 사용 중인 이메일 주소입니다.';
   static const String errorMessage_weakPassword = '비밀번호가 너무 약합니다.';
   static const String errorMessage_userNotFound = '이 식별자에 해당하는 사용자 기록이 없습니다. 사용자가 삭제되었을 수 있습니다.';
+  static const String errorMessage_wrongPassword = '비밀번호가 잘못 되었습니다. 다시 시도 해 주세요.';
+  static const String errorMessage_regexpPassword = '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
+  static const String errorMessage_checkPassword = '비밀번호를 확인 해주세요.';
+  static const String errorMessage_duplicatedPassword = '비밀번호가 일치하지 않습니다.';
+  static const String errorMessage_emptyName = '이름을 입력해주세요.';
+  static const String errorMessage_worngName = '한글 4자 이상의 이름을 입력해주세요.';
+  static const String errorMessage_emptyNickName = '닉네임을 입력해주세요.';
+  static const String errorMessage_wrongNickName = '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
+  static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
+
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';
@@ -84,5 +100,14 @@ class AppStrings {
   static const String errorMessage_invalidPhoneNumber = '전화번호를 확인해주세요.';
   static const String errorMessage_emptyVerificationCode = '인증번호를 입력해주세요.';
   static const String errorMessage_invalidVerificationCode = '인증번호를 확인해주세요.';
+
+  //Email Verification
+  static const String send_emailVerification = '이메일 인증 메일을 보냈습니다. 확인해주세요.';
+  static const String check_emailVerification = '이메일 인증을 확인해주세요.';
+  static const String click_emailVerification = '인증을 완료 하셨다면 버튼을 눌러주세요';
+
+  //Success Handling
+  static const String successMessage_emailValidation = '사용 가능한 이메일입니다';
+
 
 }
