@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../model/DogProfileModel.dart';
+import '../../utils/AppColors.dart';
+import '../../utils/AppTextStyle.dart';
 
-class SwiperCardWidget extends StatelessWidget {
+/// SwipeCardWidget - 프로필 카드를 스와이프할 수 있는 위젯
+
+class SwipeCardWidget extends StatelessWidget {
   final DogProfileModel dogProfiles;
 
-  const SwiperCardWidget(
+  const SwipeCardWidget(
     this.dogProfiles, {
     super.key,
   });
@@ -34,12 +38,11 @@ class SwiperCardWidget extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [Colors.black.withOpacity(0.8), Colors.transparent],
+              colors: [richBlack.withOpacity(0.8), richBlack.withOpacity(0)],
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: height * 0.03, horizontal: width * 0.05),
+            padding: EdgeInsets.symmetric(vertical: height * 0.03, horizontal: width * 0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,26 +51,19 @@ class SwiperCardWidget extends StatelessWidget {
                   children: [
                     Text(
                       dogProfiles.name,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: white24BoldTextStyle,
                     ),
                     SizedBox(width: width * 0.02),
                     Text(
                       '${dogProfiles.gender} • ${dogProfiles.breed} • ${dogProfiles.location}',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Colors.white70,
-                          ),
+                      style: white16TextStyle,
                     ),
                   ],
                 ),
                 SizedBox(height: height * 0.005),
                 Text(
                   dogProfiles.bio,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white70,
-                      ),
+                  style: white16TextStyle,
                 ),
               ],
             ),
