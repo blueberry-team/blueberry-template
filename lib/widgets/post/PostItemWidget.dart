@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 class PostItem extends StatelessWidget {
   final String title;
-  final DateTime uploadTime;
+  final String uploadTime;
   final String content;
   final String imageUrl;
 
@@ -35,7 +35,7 @@ class PostItem extends StatelessWidget {
             const SizedBox(height: 5),
             // 업로드 시간 정보
             Text(
-              DateFormat('yyyy년 MM월 dd일 HH시 mm분').format(uploadTime),
+              uploadTime,
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 12,
