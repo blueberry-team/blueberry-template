@@ -18,6 +18,7 @@ import 'friendsList/FriendsListScreen.dart';
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
 class TopScreen extends ConsumerWidget {
+  static const String name = '/TopScreen';
   const TopScreen({super.key});
 
   @override
