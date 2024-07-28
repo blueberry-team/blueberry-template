@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'PhoneNumberProvider.dart';
-import 'VerificationCodeProvider.dart';
-
 final phoneVerificationProvider =
     NotifierProvider<PhoneVerificationNotifier, PhoneVerificationState>(() {
   return PhoneVerificationNotifier();
@@ -21,9 +18,8 @@ class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
     state = Initial();
   }
 
-  Future<void> sendPhoneNumber(Completer<void> completer) async {
-    final phoneNumber = ref.read(phoneNumberProvider);
-
+  Future<void> sendPhoneNumber(
+      String phoneNumber, Completer<void> completer) async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         timeout: const Duration(seconds: 120),
@@ -69,8 +65,8 @@ class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
     });
   }
 
-  Future<void> verifyCode(Completer<void> completer) async {
-    final verificationCode = ref.read(verificationCodeProvider);
+  Future<void> verifyCode(
+      String verificationCode, Completer<void> completer) async {
     final verificationId = state.verificationId;
 
     if (state is CodeSent || state is Failed) {

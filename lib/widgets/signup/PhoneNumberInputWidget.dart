@@ -70,7 +70,7 @@ class _PhoneNumberInputWidgetState
 
             ref
                 .read(phoneVerificationProvider.notifier)
-                .sendPhoneNumber(completer);
+                .sendPhoneNumber(phoneNumber.state, completer);
 
             try {
               await completer.future;

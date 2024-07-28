@@ -75,7 +75,7 @@ class VerificationCodeInputWidget extends ConsumerWidget {
 
                   ref
                       .read(phoneVerificationProvider.notifier)
-                      .verifyCode(completer);
+                      .verifyCode(verificationCode.state, completer);
 
                   try {
                     await completer.future;
