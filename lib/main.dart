@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/router/RouterProvider.dart';
+import 'package:blueberry_flutter_template/services/notification/firebase_cloud_messaging_manager.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,11 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await FirebaseCloudMessagingManager.initialize();
+
+  FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
+    debugPrint('FCM Token: $token');
+  });
+
   runApp(const MyApp());
 }
 
