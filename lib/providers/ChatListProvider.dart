@@ -7,3 +7,10 @@ final chatListProvider = StreamProvider<List<String>>((ref) {
     return snapshot.docs.map((doc) => doc['message'] as String).toList();
   });
 });
+
+final chatRoomListProvider = StreamProvider<List<String>>((ref) {
+  final firestore = FirebaseFirestore.instance;
+  return firestore.collection('chatRoomList').snapshots().map((snapshot) {
+    return snapshot.docs.map((doc) => doc['roomName'] as String).toList();
+  });
+});
