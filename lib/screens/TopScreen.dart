@@ -26,10 +26,9 @@ class TopScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
-    final List<Widget> pages = [
-      FriendsListScreen(),
+    final List<Widget> pages = 
+      const FriendsListScreen(),
       const ChatRoomScreen(),
-      // const ChatScreen(),
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),

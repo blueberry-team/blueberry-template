@@ -76,3 +76,6 @@ lib/firebase_options.dart
 
 # vscode
 .vscode/launch.json
+
+# secret key
+sign_in_key.dart
