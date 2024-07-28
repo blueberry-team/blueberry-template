@@ -8,35 +8,29 @@ import '../../providers/signup/PhoneNumberProvider.dart';
 import '../../providers/signup/PhoneVerificationProvider.dart';
 import '../../utils/AppStrings.dart';
 
-class PhoneNumberInputWidget extends ConsumerStatefulWidget {
+class PhoneNumberInputWidget extends ConsumerWidget {
   final VoidCallback onNext;
+  final VoidCallback onDone;
 
-  PhoneNumberInputWidget({super.key, required this.onNext});
-
-  @override
-  _PhoneNumberInputWidgetState createState() => _PhoneNumberInputWidgetState();
-}
-
-class _PhoneNumberInputWidgetState
-    extends ConsumerState<PhoneNumberInputWidget> {
-  final TextEditingController _controller = TextEditingController();
+  PhoneNumberInputWidget({
+    super.key,
+    required this.onNext,
+    required this.onDone,
+  });
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController _controller = TextEditingController();
+    final phoneNumber = ref.watch(phoneNumberProvider.notifier);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.text = ref.read(phoneNumberProvider);
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final phoneNumber = ref.watch(phoneNumberProvider.notifier);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppStrings.inputPhoneNumber),
+        const Text(AppStrings.inputPhoneNumber),
         const SizedBox(height: 20),
         TextField(
           controller: _controller,
@@ -77,9 +71,9 @@ class _PhoneNumberInputWidgetState
 
               final state = ref.read(phoneVerificationProvider);
               if (state is CodeSent) {
-                widget.onNext();
+                onNext();
               } else if (state is Verified) {
-                widget.onNext();
+                onDone();
               }
             } catch (e) {
               _showMessageDialog(

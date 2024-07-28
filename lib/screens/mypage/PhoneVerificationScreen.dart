@@ -18,6 +18,11 @@ class PhoneVerificationScreen extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             ),
+            onDone: () => _pageController.animateToPage(
+              2,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            ),
           ),
           VerificationCodeInputPage(
             onNext: () => _pageController.nextPage(

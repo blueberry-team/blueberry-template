@@ -6,17 +6,20 @@ import '../../../widgets/signup/VerificationCodeInputWidget.dart';
 
 class PhoneNumberInputPage extends StatelessWidget {
   final VoidCallback onNext;
+  final VoidCallback onDone;
+
 
   const PhoneNumberInputPage({
     super.key,
     required this.onNext,
+    required this.onDone,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: PhoneNumberInputWidget(onNext: onNext),
+      child: PhoneNumberInputWidget(onNext: onNext, onDone: onDone),
     );
   }
 }

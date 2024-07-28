@@ -31,7 +31,7 @@ class VerificationCodeInputWidget extends ConsumerWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppStrings.inputVerificationCode),
+        const Text(AppStrings.inputVerificationCode),
         const SizedBox(
           height: 20,
         ),
