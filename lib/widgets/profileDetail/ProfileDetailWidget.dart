@@ -13,9 +13,7 @@ class ProfileDetailWidget extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: GestureDetector(
-          onTap: (){
-            //ref.read(profileDetailProvider.notifier).updateIndex();
-          },
+          onTap: (){},
           child: Container(
             width: 300,
             height: 400,
