@@ -26,7 +26,7 @@ class TopScreen extends ConsumerWidget {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
     final List<Widget> pages = [
-      FriendsListScreen(),
+      const FriendsListScreen(),
       const ChatScreen(),
       const MatchScreen(),
       const MBTIScreen(),
