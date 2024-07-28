@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/screens/chat/ChatRoomScreen.dart';
 import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/screens/profileDetail/ProfileDetailScreen.dart';
@@ -18,15 +19,17 @@ import 'friendsList/FriendsListScreen.dart';
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
 class TopScreen extends ConsumerWidget {
+  static const String name = '/TopScreen';
   const TopScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
-    final List<Widget> pages = [
-      FriendsListScreen(),
-      const ChatScreen(),
+    final List<Widget> pages =
+    [
+      const FriendsListScreen(),
+      const ChatRoomScreen(),
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),

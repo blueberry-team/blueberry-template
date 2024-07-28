@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/utils/AppTextStyle.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/DogProfileModel.dart';
@@ -30,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     dogProfile.name,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: black16BoldTextStyle,
                   ),
                   const SizedBox(height: 8),
                   Text('성별: ${dogProfile.gender}'),
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Text(
                     '소개',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: black16BoldTextStyle,
                   ),
                   Text(dogProfile.bio),
                 ],

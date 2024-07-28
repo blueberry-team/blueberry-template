@@ -4,6 +4,14 @@ import 'AppDialogStyle.dart';
 import 'AppTextStyle.dart';
 
 final ThemeData lightTheme = ThemeData(
+  listTileTheme: const ListTileThemeData(
+    tileColor: white,
+    textColor: black,
+    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+    horizontalTitleGap: 0,
+    minVerticalPadding: 0,
+    dense: true,
+  ),
   colorScheme: ColorScheme.fromSeed(
     seedColor: white,
     primary: black,
@@ -17,14 +25,21 @@ final ThemeData lightTheme = ThemeData(
     titleTextStyle: black16BoldTextStyle,
   ),
   textTheme: const TextTheme(
-    bodyLarge: black16TextStyle,
-    bodyMedium: black12TextStyle,
     bodySmall: black12TextStyle,
-    labelMedium: black16TextStyle,
+    bodyMedium: black12TextStyle,
+    bodyLarge: black16TextStyle,
     labelSmall: grey13TextStyle,
-    titleLarge: black16TextStyle,
-    titleMedium: black12BoldTextStyle,
+    labelMedium: black16TextStyle,
+    labelLarge: black16TextStyle,
     titleSmall: black12BoldTextStyle,
+    titleMedium: black12BoldTextStyle,
+    titleLarge: black16TextStyle,
+    displaySmall: grey13TextStyle,
+    displayMedium: black16TextStyle,
+    displayLarge: black16TextStyle,
+    headlineSmall: black12BoldTextStyle,
+    headlineMedium: black12BoldTextStyle,
+    headlineLarge: black16TextStyle,
   ),
   extensions: const <ThemeExtension<dynamic>>{
     DialogStyle(),
@@ -34,10 +49,18 @@ final ThemeData lightTheme = ThemeData(
 );
 
 final ThemeData darkTheme = ThemeData(
+  listTileTheme: const ListTileThemeData(
+    tileColor: black,
+    textColor: white,
+    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+    horizontalTitleGap: 0,
+    minVerticalPadding: 0,
+    dense: true,
+  ),
   colorScheme: ColorScheme.fromSeed(
-    seedColor: black,
-    primary: Colors.black,
-    secondary: greySecondary,
+    seedColor: white,
+    primary: black,
+    secondary: greySecondary
   ),
   appBarTheme: const AppBarTheme(
     color: black,
@@ -47,14 +70,21 @@ final ThemeData darkTheme = ThemeData(
     titleTextStyle: white16BoldTextStyle,
   ),
   textTheme: const TextTheme(
-    bodyLarge: white16TextStyle,
-    bodyMedium: white12TextStyle,
     bodySmall: white12TextStyle,
-    labelMedium: white16TextStyle,
+    bodyMedium: white12TextStyle,
+    bodyLarge: white16TextStyle,
     labelSmall: grey13TextStyle,
-    titleLarge: white16TextStyle,
-    titleMedium: white12BoldTextStyle,
+    labelMedium: white16TextStyle,
+    labelLarge: white16TextStyle,
     titleSmall: white12BoldTextStyle,
+    titleMedium: white12BoldTextStyle,
+    titleLarge: white16TextStyle,
+    displaySmall: grey13TextStyle,
+    displayMedium: white16TextStyle,
+    displayLarge: white16TextStyle,
+    headlineSmall: white12BoldTextStyle,
+    headlineMedium: white12BoldTextStyle,
+    headlineLarge: white16TextStyle,
   ),
   extensions: const <ThemeExtension<dynamic>>{
     DialogStyle(),

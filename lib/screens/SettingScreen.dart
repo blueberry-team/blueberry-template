@@ -5,6 +5,7 @@ import '../providers/NotificationProvider.dart';
 import '../providers/ThemeProvider.dart';
 
 class SettingScreen extends ConsumerWidget {
+  static const String name = 'SettingsScreen';
   const SettingScreen({super.key});
 
   @override

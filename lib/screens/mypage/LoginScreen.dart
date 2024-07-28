@@ -1,5 +1,7 @@
+import 'package:blueberry_flutter_template/screens/mypage/SignUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../providers/camera/PageProvider.dart';
 import '../../providers/user/FirebaseAuthServiceProvider.dart';
@@ -8,7 +10,6 @@ import '../../services/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
 import '../../widgets/SquareTitleWidget.dart';
 import 'MyPageScreen.dart';
-import 'SignUpScreen.dart';
 import 'camera/ProfileCameraPage.dart';
 import 'camera/ProfileGalleryPage.dart';
 
@@ -23,6 +24,8 @@ import 'camera/ProfileGalleryPage.dart';
 final wantEditAgeProvider = StateProvider<bool>((ref) => false);
 final wantEditNameProvider = StateProvider<bool>((ref) => false);
 
+///# 로그인 화면
+///* 이메일, 소셜(구글,애플,깃허브) 로그인 기능 제공
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
@@ -153,10 +156,7 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
                 child: const Text(AppStrings.loginButtonText),
               ),
               TextButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                ),
+                onPressed: () => context.goNamed(SignUpScreen.name),
                 child: const Text(
                   AppStrings.signUpButtonText,
                   style: TextStyle(color: Colors.blue),
@@ -179,21 +179,21 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
             children: [
               //Google button
               SquareTileWidget(
-                  onTap: () => AuthService().signInWithGoogle(),
+                  onTap: () => SocialAuthService().signInWithGoogle(),
                   imagePath: 'assets/login_page_images/google.png'),
               const SizedBox(
                 width: 10,
               ),
               //Apple button
               SquareTileWidget(
-                  onTap: () => AuthService().signInWithApple(),
+                  onTap: () => SocialAuthService().signInWithApple(),
                   imagePath: 'assets/login_page_images/apple.png'),
               const SizedBox(
                 width: 10,
               ),
               //github button
               SquareTileWidget(
-                  onTap: () => AuthService().signInWithGithub(),
+                  onTap: () => SocialAuthService().signInWithGithub(),
                   imagePath: 'assets/login_page_images/github.png'),
             ],
           ),

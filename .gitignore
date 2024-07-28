@@ -71,8 +71,8 @@ lib/firebase_options.dart
 # freezed generated files
 /lib/model/generated/
 
-# flutter gen generated files
-/lib/gen/
-
 # vscode
 .vscode/launch.json
+
+# secret key
+sign_in_key.dart
