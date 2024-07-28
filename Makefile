@@ -1,8 +1,19 @@
 ROOT := $(shell git rev-parse --show-toplevel)
 
-FLUTTER := $(shell which flutter)
+# Use 'where' instead of 'which' for Windows compatibility
+FLUTTER := $(shell where flutter 2>nul)
 
+# Define the init target
+init:
+	@echo "Initializing Flutter project..."
+	@flutter pub get
 
+# Define the fluttergen target
+fluttergen:
+	@echo "🔧 Running fluttergen..."
+	@fluttergen
+
+# Define the buildRunner target
 buildRunner:
-	@echo "❄️freezed build runner start"
-	@${FLUTTER} pub run build_runner build --delete-conflicting-outputs
+	@echo "❄️ Running build runner..."
+	@flutter pub run build_runner build --delete-conflicting-outputs
