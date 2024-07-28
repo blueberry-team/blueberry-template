@@ -20,6 +20,9 @@ class AppStrings {
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
 
+  //MatchScreen.dart
+  static const String matchScreenTitle = '매칭';
+
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = '쇼핑 페이지';
   static const String shoppingPageTitle1 = '이 제품들을 찾고 있나요?';
