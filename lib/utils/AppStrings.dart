@@ -46,6 +46,7 @@ class AppStrings {
   static const String pleaseCheckMBTI = 'MBTI를 검사해주세요';
   static const String reCheckMBTI = '재검사하기';
   static const String checkMBTI = '검사하기';
+  static const String shareMBTI = '공유하기';
   static const String stronglyAgree = '매우 그렇다';
   static const String agree= '그렇다';
   static const String neutral= '보통이다';

@@ -2,6 +2,7 @@ import 'package:blueberry_flutter_template/providers/MBTIProvider.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/utils/AppStringEnglish.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
+import 'package:blueberry_flutter_template/widgets/mbti/MBTIShareDialogWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +33,8 @@ class MBTIHomeWidget extends ConsumerWidget {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stackTrace) => Center(child: Text('${AppStringEnglish.errorTitle}: $error')),
+            error: (error, stackTrace) =>
+                Center(child: Text('${AppStringEnglish.errorTitle}: $error')),
           ),
           TextButton(
               onPressed: () => {
@@ -46,7 +48,19 @@ class MBTIHomeWidget extends ConsumerWidget {
               child: Text(
                   style: const TextStyle(fontSize: 24),
                   // mbti가 없으면 검사하기, 있으면 재검사하기
-                  mbti != MBTIType.NULL ? AppStrings.reCheckMBTI : AppStrings.checkMBTI))
+                  mbti != MBTIType.NULL
+                      ? AppStrings.reCheckMBTI
+                      : AppStrings.checkMBTI)),
+          if (mbti == MBTIType.NULL)
+            TextButton(
+                onPressed: () => {
+                      showDialog(
+                          context: context, builder: (BuildContext context) {
+                            return MBTIShareDialogWidget();
+                      })
+                    },
+                child: const Text(
+                    style: TextStyle(fontSize: 24), AppStrings.shareMBTI))
         ],
       ),
     );
@@ -54,7 +68,23 @@ class MBTIHomeWidget extends ConsumerWidget {
 }
 
 enum MBTIType {
-  INFP, INFJ, INTP, INTJ, ISFP, ISFJ, ISTP, ISTJ, ENFP, ENFJ, ENTP, ENTJ, ESFP, ESFJ, ESTP, ESTJ, NULL
+  INFP,
+  INFJ,
+  INTP,
+  INTJ,
+  ISFP,
+  ISFJ,
+  ISTP,
+  ISTJ,
+  ENFP,
+  ENFJ,
+  ENTP,
+  ENTJ,
+  ESFP,
+  ESFJ,
+  ESTP,
+  ESTJ,
+  NULL
 }
 
 enum Extroversion { E, I }
