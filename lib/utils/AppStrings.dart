@@ -59,6 +59,9 @@ class AppStrings {
   static const String uploadEventButtonLabel = '이벤트 업로드';
   static const String makeChatButtonLabel = '임시 채팅 만들기';
 
+  //RankViewWidget.dart
+  static const String rankViewTitle = '오늘의 순위';
+
   //Error Handling
   static const String errorMessage_emptyPassword = '비밀번호를 입력하세요.';
   static const String errorMessage_invalidPassword =
