@@ -17,7 +17,14 @@ class RankViewWidget extends ConsumerWidget {
       appBar: AppBar(
         title: const Text(AppStrings.rankViewTitle),
       ),
-      body: _buildBody(userAsyncValue),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.invalidate(userProvider); // 강제로 프로바이더를 무효화하여 데이터 불러옴
+          // ignore: unused_result
+          await ref.refresh(userProvider.future);
+        },
+        child: _buildBody(userAsyncValue),
+      ),
     );
   }
 
