@@ -5,15 +5,15 @@ import 'package:blueberry_flutter_template/widgets/MiniAvatarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FixSettingAccountManagerWidget extends ConsumerStatefulWidget {
-  static const String name = 'FixSettingAccountManagerWidget';
-  const FixSettingAccountManagerWidget({super.key});
+class SettingAccountManagerWidget extends ConsumerStatefulWidget {
+  static const String name = 'SettingAccountManagerWidget';
+  const SettingAccountManagerWidget({super.key});
 
   @override
-  ConsumerState<FixSettingAccountManagerWidget> createState() => _FixSettingAccountManagerState();
+  ConsumerState<SettingAccountManagerWidget> createState() => _SettingAccountManagerWidget();
 }
 
-class _FixSettingAccountManagerState extends ConsumerState<FixSettingAccountManagerWidget> {
+class _SettingAccountManagerWidget extends ConsumerState<SettingAccountManagerWidget> {
   bool showNumber = false;
   final InAppPurchaseService _purchaseService = InAppPurchaseService();
 

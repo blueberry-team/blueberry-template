@@ -44,10 +44,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             ResponsiveLayoutBuilder(context, const MyPageScreen()),
       ),
       GoRoute(
-        path: '/FixSettingAccountManagerWidget',
-        name: FixSettingAccountManagerWidget.name,  // 여기를 수정
+        path: '/SettingAccountManagerWidget',
+        name: SettingAccountManagerWidget.name,  // 여기를 수정
         builder: (context, state) =>
-            ResponsiveLayoutBuilder(context, const FixSettingAccountManagerWidget()),
+            ResponsiveLayoutBuilder(context, const SettingAccountManagerWidget()),
       ),
     ],
   );

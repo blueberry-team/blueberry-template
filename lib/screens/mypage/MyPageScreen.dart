@@ -56,7 +56,7 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                context.goNamed(FixSettingAccountManagerWidget.name);
+                context.goNamed(SettingAccountManagerWidget.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.person),
