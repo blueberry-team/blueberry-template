@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:blueberry_flutter_template/screens/mypage/camera/setting_inside_account_manager.dart';
+import 'package:blueberry_flutter_template/screens/mypage/camera/SettingInsideAccountManager.dart';
 import 'package:blueberry_flutter_template/screens/mypage/camera/setting_inside_camera_media.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:easy_engine/easy_engine.dart';

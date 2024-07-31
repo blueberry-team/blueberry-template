@@ -31,6 +31,7 @@ class FirebaseService {
         name: name,
         email: email,
         age: 1,
+        isMemberShip: false,
         profileImageUrl: '',
         createdAt: DateTime.now(),
         userClass: 'user',
@@ -40,6 +41,22 @@ class FirebaseService {
     } catch (e) {
       print('Error updating user: $e');
       throw Exception('Failed to update user');
+    }
+  }
+  Future<void> updateUserMemberShip() async {
+    try {
+      var user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        throw Exception('No current user found');
+      }
+
+      await _firestore.collection('users').doc(user.uid).update({
+        'isMemberShip': true,
+      });
+    } catch (e) {
+      print('Error updating user membership: $e');
+      throw Exception('Failed to update user membership');
     }
   }
 }
