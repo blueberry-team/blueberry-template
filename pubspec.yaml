@@ -74,6 +74,10 @@ dependencies:
   # Router
   go_router: ^14.2.1
 
+  # Crashlytics & Debugger
+  firebase_crashlytics: ^4.0.4
+  talker_flutter: ^4.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

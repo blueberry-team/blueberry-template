@@ -1,24 +1,31 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
+import 'package:blueberry_flutter_template/providers/TalkerProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ProviderContainer container = ProviderContainer();
 
   // ChatScreen.dart
   Future<void> addChatMessage(String message) async {
+    final talker = container.read(talkerProvider);
+
     try {
       await _firestore.collection('chats').add({
         'message': message,
         'timestamp': DateTime.now(),
       });
-    } catch (e) {
-      print('Error adding message: $e');
+      talker.info('Message added: $message');
+    } catch (e, stack) {
+      talker.error('Error adding message', e, stack); // 오류 기록
       throw Exception('Failed to add message');
     }
   }
 
-  Future<void> upDateUserDB(String email, String name) async {
+  Future<void> updateUserDB(String email, String name) async {
+    final talker = container.read(talkerProvider);
     try {
       var user = FirebaseAuth.instance.currentUser;
 
@@ -37,8 +44,9 @@ class FirebaseService {
       );
 
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());
-    } catch (e) {
-      print('Error updating user: $e');
+      talker.info('User updated: $newUser');
+    } catch (e, stack) {
+      talker.error('Error updating user', e, stack);
       throw Exception('Failed to update user');
     }
   }

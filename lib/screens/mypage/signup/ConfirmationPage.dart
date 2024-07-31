@@ -60,7 +60,7 @@ class ConfirmationPage extends ConsumerWidget {
           isLoading.when(
             data: (value) => ElevatedButton(
               onPressed: () async {
-                await firebaseService.upDateUserDB(email, name);
+                await firebaseService.updateUserDB(email, name);
                 if (context.mounted) {
                   context.goNamed(TopScreen.name);
                 }

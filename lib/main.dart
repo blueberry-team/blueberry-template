@@ -2,13 +2,14 @@ import 'package:blueberry_flutter_template/router/RouterProvider.dart';
 import 'package:blueberry_flutter_template/services/notification/firebase_cloud_messaging_manager.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'firebase_options.dart';
 import 'providers/ThemeProvider.dart';
 import 'utils/AppTheme.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +22,13 @@ Future<void> main() async {
     debugPrint('FCM Token: $token');
   });
 
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    )
-  );
+  // Crashlytics 설정
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

@@ -4,13 +4,17 @@ import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
+import '../providers/TalkerProvider.dart';
 import '../screens/SplashScreen.dart';
 import '../screens/mypage/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
+  final talker = ref.watch(talkerProvider);
   return GoRouter(
+    observers: [TalkerRouteObserver(talker)],
     routes: [
       GoRoute(
           path: '/',
