@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:blueberry_flutter_template/screens/mypage/camera/SettingInsideAccountManager.dart';
+import 'package:blueberry_flutter_template/screens/mypage/camera/SettingInsideAccountManagerWidget.dart';
 import 'package:blueberry_flutter_template/screens/mypage/camera/setting_inside_camera_media.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:easy_engine/easy_engine.dart';
@@ -56,9 +56,7 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const FixSettingAccountManager(),
-                ));
+                context.goNamed(FixSettingAccountManagerWidget.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.person),

@@ -7,15 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'dart:io';
 
-
-
-
-
 class InAppPurchaseService {
   static const String _kIosProductId = 'com.gaeting.example.userLevel';
   static const String _kAndroidProductId = 'your_android_product_id';
 
-  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
+  final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
 
   final firebaseService = FirebaseService();
@@ -26,7 +22,7 @@ class InAppPurchaseService {
 
   void initStoreInfo() {
     final Stream<List<PurchaseDetails>> purchaseUpdated =
-        _inAppPurchase.purchaseStream;
+        inAppPurchase.purchaseStream;
     subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
@@ -44,7 +40,7 @@ class InAppPurchaseService {
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
 
     try {
-      final bool success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      final bool success = await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       if (!success) {
         throw Exception('Purchase failed');
       }
@@ -56,7 +52,7 @@ class InAppPurchaseService {
 
   Future<ProductDetails> _getProductDetails(String productId) async {
     final ProductDetailsResponse response =
-    await _inAppPurchase.queryProductDetails({productId});
+    await inAppPurchase.queryProductDetails({productId});
 
     if (response.notFoundIDs.isNotEmpty) {
       throw Exception('Product not found');
@@ -76,7 +72,7 @@ class InAppPurchaseService {
       }
 
       if (purchaseDetails.pendingCompletePurchase) {
-        await _inAppPurchase.completePurchase(purchaseDetails);
+        await inAppPurchase.completePurchase(purchaseDetails);
       }
     }
   }
