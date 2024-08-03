@@ -41,7 +41,7 @@ dependencies:
 
   # Service
   dart_openai: ^5.1.0
-  bootpay: ^4.9.7
+  bootpay: ^4.9.91
 
   # Social Login
   sign_in_with_apple: ^6.1.1
