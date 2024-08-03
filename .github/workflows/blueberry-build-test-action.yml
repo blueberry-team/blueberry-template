@@ -45,7 +45,7 @@ jobs:
       - name: Install Reviewdog (using action)
         uses: reviewdog/action-setup@v1
         with:
-          reviewdog_version: 2.18.0
+          reviewdog_version: v1.3.0
 
       - name: Add Reviewdog to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
