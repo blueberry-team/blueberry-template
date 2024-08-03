@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/model/UserDataModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,18 +35,18 @@ final userDataLoadProvider = FutureProvider<UserModel>((ref) async {
   throw Exception('User not found');
 });
 
-final getUserDataProvider = FutureProvider<Map<String, String>>((ref) async {
+
+final getUserDataProvider = FutureProvider<UserDataModel>((ref) async {
   final userId = await ref.watch(userIdProvider.future);
   if (userId == null) throw Exception('User not logged in');
-  final userDoc =
-  await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+  final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
   if (userDoc.exists) {
     final userData = userDoc.data()!;
-    return {
-      'name': userData['name'] as String? ?? 'Unknown',
-      'email': userData['email'] as String? ?? 'No email',
-    };
+    return UserDataModel.fromJson(userData);
   }
+
   throw Exception('User not found');
 });
 

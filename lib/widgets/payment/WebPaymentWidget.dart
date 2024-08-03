@@ -30,8 +30,8 @@ class _WebPaymentWidgetState extends ConsumerState<WebPaymentWidget> {
                   data: (userData)
                     => TextButton(
                         onPressed: () => PaymentService().requestPayment(
-                            userData['name'] ?? 'Unknown',
-                            userData['email'] ?? 'No email',
+                            userData.name,
+                            userData.email,
                             PredefinedItems.premiumMembership
                         ),
                         child: const Text('통합결제 테스트', style: TextStyle(fontSize: 16.0))
