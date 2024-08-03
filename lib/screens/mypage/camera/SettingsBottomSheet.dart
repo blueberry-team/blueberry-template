@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,22 +20,23 @@ class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
     PermissionStatus storageStatus = await Permission.storage.request();
 
     if (photoStatus.isGranted || storageStatus.isGranted) {
-      print("앨범 접근 권한이 허용되었습니다.");
+      talker.info("앨범 접근 권한이 허용되었습니다.");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('앨범 접근 권한이 허용되었습니다.')),
       );
       return true;
     } else if (photoStatus.isDenied || storageStatus.isDenied) {
-      print("앨범 접근 권한이 거부되었습니다.");
+      talker.info("앨범 접근 권한이 거부되었습니다.");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('앨범 접근 권한이 거부되었습니다.')),
       );
       return false;
     } else if (photoStatus.isPermanentlyDenied ||
         storageStatus.isPermanentlyDenied) {
-      print("앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.");
+      talker.info("앨범 접근 권한이 영구적으로 거부되었습니다.");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.')),
+        const SnackBar(
+            content: Text('앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.')),
       );
       // 사용자가 권한을 영구적으로 거부한 경우 설정 페이지로 이동
       await openAppSettings();

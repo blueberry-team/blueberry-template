@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,7 +69,8 @@ class UserNotifier extends StateNotifier<UserModel> {
           .doc(userId)
           .update(updateData);
     } catch (e) {
-      print('Failed to update user data: $e');
+      talker.error('Error updating user', e);
+      throw Exception('Failed to update user');
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart'; // kIsWeb 상수 사용
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       }
     } catch (e) {
       // 초기화 중 발생한 오류 처리
-      print('초기화 오류: $e');
+      talker.error('초기화 오류: $e');
       // 필요 시 오류 화면으로 이동하거나 재시도 로직 추가 가능
     }
   }

@@ -1,9 +1,10 @@
 import 'package:blueberry_flutter_template/providers/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/providers/user/FirebaseAuthServiceProvider.dart';
-import 'package:blueberry_flutter_template/screens/mypage/SignUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../utils/AppStrings.dart';
+import '../../utils/Talker.dart';
 
 class PasswordConfirmWidget extends ConsumerWidget {
   final VoidCallback onNext;
@@ -41,11 +42,13 @@ class PasswordConfirmWidget extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await ref.watch(firebaseAuthServiceProvider).signUpWithEmailPassword(email, passwordConfirm.state);
+                  await ref
+                      .watch(firebaseAuthServiceProvider)
+                      .signUpWithEmailPassword(email, passwordConfirm.state);
                   // 오류 뱉어내는거 하나 만들어야함 ex ) ID or Password 형식에 문제가 있다라고 쏴야할듯 ?
                   onNext();
-                } catch(e) {
-                  print('failed signUp $e');
+                } catch (e) {
+                  talker.error('Error: $e');
                 }
               },
               child: const Text('Next'),

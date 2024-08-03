@@ -1,13 +1,14 @@
 import 'dart:io';
 
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../providers/camera/camera_provider.dart';
 import '../../../providers/camera/PageProvider.dart';
+import '../../../providers/camera/camera_provider.dart';
 import 'CameraShadow.dart';
 import 'MyPageProfileImagePreview.dart';
 
@@ -66,10 +67,10 @@ class _TakePhotoState extends ConsumerState<ProfileCameraPage> {
                     onPressed: () async {
                       try {
                         await ref.read(cameraProvider.notifier).toggleCamera();
-                        print("turn Camera");
+                        talker.info('Camera toggled');
                       } catch (error) {
-                        print("Error toggling camera: $error");
-                        print("A");
+                        talker.error('Error toggling camera', error);
+                        throw Exception('Failed to toggle camera');
                       }
                     },
                     icon: const Icon(Icons.change_circle),
@@ -176,7 +177,7 @@ class _TakePhotoState extends ConsumerState<ProfileCameraPage> {
             MaterialPageRoute(builder: (_) => SharePostScreen(imageFile)));
       }
     } catch (e) {
-      print('Error: $e');
+      talker.error('Error taking photo', e);
     }
   }
 }

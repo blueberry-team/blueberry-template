@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/Talker.dart';
+
 final emailDuplicateProvider = StateNotifierProvider<EmailDuplicateNotifier, EmailDuplicateState>((ref) {
   return EmailDuplicateNotifier();
 });
@@ -32,7 +34,7 @@ class EmailDuplicateNotifier extends StateNotifier<EmailDuplicateState> {
         return false;
       }
     } catch(e){
-      print('$e');
+      talker.error('Error: $e');
       state = EmailDuplicateState(email: email, isDuplication: false);
       return false;
     }

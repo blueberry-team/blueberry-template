@@ -1,4 +1,5 @@
 // 휴대폰인증 provider
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 휴대폰인증 provider
@@ -34,10 +35,12 @@ class PhoneVerificationNotifier extends Notifier<PhoneVerificationState> {
         state = VerificationSuccess();
         return true;
       } catch (e) {
-        print(e);
+        talker.error(e.toString());
+        state = VerificationError(e.toString());
         return false;
       }
     } else {
+      state = VerificationError("Invalid state");
       return false;
     }
   }

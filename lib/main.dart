@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:blueberry_flutter_template/router/RouterProvider.dart';
 import 'package:blueberry_flutter_template/services/notification/firebase_cloud_messaging_manager.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -25,7 +26,7 @@ Future<void> main() async {
     );
 
     FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
-      debugPrint('FCM Token: $token');
+      talker.info('FCM Token: $token');
     });
 
     // Crashlytics 설정

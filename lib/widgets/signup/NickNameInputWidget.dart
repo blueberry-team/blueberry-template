@@ -2,9 +2,9 @@ import 'package:blueberry_flutter_template/providers/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/providers/user/FirebaseAuthServiceProvider.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/utils/ForbiddenPatterns.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 class NickNameInputWidget extends ConsumerWidget {
   final VoidCallback onNext;
@@ -32,8 +32,9 @@ class NickNameInputWidget extends ConsumerWidget {
                   return AppStrings.errorMessage_emptyNickName;
                 } else if (!nickNameRegExp.hasMatch(value)) {
                   return AppStrings.errorMessage_wrongNickName;
-                } for(var patterns in forbiddenPatterns) {
-                  if(patterns.hasMatch(value)) {
+                }
+                for (var patterns in forbiddenPatterns) {
+                  if (patterns.hasMatch(value)) {
                     return AppStrings.errorMessage_forbiddenNickName;
                   }
                 }
@@ -45,14 +46,14 @@ class NickNameInputWidget extends ConsumerWidget {
               onPressed: () {
                 try {
                   if (formKey.currentState!.validate()) {
-                    final user = ref.watch(firebaseAuthServiceProvider).getCurrentUser();
+                    final user =
+                        ref.watch(firebaseAuthServiceProvider).getCurrentUser();
                     user?.sendEmailVerification();
                     onNext();
-                    print('okay');
+                    talker.info('Email verification sent');
                   }
-
                 } catch (e) {
-                  print(e);
+                  talker.error('Error: $e');
                 }
               },
               child: const Text('Next'),

@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../utils/Talker.dart';
+
 /// FirebaseStorageService.dart
 ///
 /// Firebase Storage Service
@@ -65,11 +67,11 @@ class FirebaseStorageService {
       final ref = _storage.ref().child(fullPath);
       await ref.putData(webImageFile);
       final url = await ref.getDownloadURL();
-      print('Image uploaded successfully : $url');
+      talker.info('Image uploaded successfully : $url');
       return url;
     } catch (e) {
       // Handle error
-      print('Failed to upload image: $e');
+      talker.error('Failed to upload image', e);
       throw Exception('Failed to upload image');
     }
   }
@@ -109,11 +111,11 @@ class FirebaseStorageService {
       final ref = _storage.ref().child(fullPath);
       await ref.putFile(appImageFile);
       final url = await ref.getDownloadURL();
-      print('Image uploaded successfully_firebase_storage_service : $url');
+      talker.info('Image uploaded successfully : $url');
       return url;
     } catch (e) {
       // Handle error
-      print('Failed to upload image: $e');
+      talker.error('Failed to upload image', e);
       throw Exception('Failed to upload image');
     }
   }

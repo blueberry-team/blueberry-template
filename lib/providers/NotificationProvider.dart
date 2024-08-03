@@ -1,10 +1,10 @@
 import 'package:blueberry_flutter_template/utils/FlutterSecureStorage.dart';
 import 'package:blueberry_flutter_template/utils/StorageKeys.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../services/notification/firebase_cloud_messaging_manager.dart';
+import '../utils/Talker.dart';
 
 final notificationProvider =
     StateNotifierProvider<NotificationNotifier, bool>((ref) {
@@ -25,7 +25,7 @@ class NotificationNotifier extends StateNotifier<bool> {
     if (status.isGranted == false) return;
 
     _storage.readString(StorageKeys.fcmToken).then((value) {
-      debugPrint('Saved fcmToken: $value');
+      talker.info('Saved fcmToken: $value');
       state = value != null && value.isNotEmpty;
     });
   }
@@ -46,9 +46,7 @@ class NotificationNotifier extends StateNotifier<bool> {
 
       if ((await Permission.notification.status).isGranted) {
         final token = await FirebaseCloudMessagingManager.getToken();
-
-        debugPrint('fcmToken: $token');
-
+        talker.info('fcmToken: $token');
         _storage.write(StorageKeys.fcmToken, token);
         state = true;
       }

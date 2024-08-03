@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../providers/camera/FirebaseStoreServiceProvider.dart';
-import '../../../providers/camera/fireStorageServiceProvider.dart';
 import '../../../providers/camera/PageProvider.dart';
+import '../../../providers/camera/fireStorageServiceProvider.dart';
 import '../../../providers/user/ProfileImageProvider.dart';
 import '../../../providers/user/UserInfoProvider.dart';
+import '../../../utils/Talker.dart';
 
 class SharePostScreen extends ConsumerWidget {
   final File imageFile;
@@ -52,7 +53,8 @@ class SharePostScreen extends ConsumerWidget {
                     pageNotifier.moveToPage(0);
                   });
                 } catch (e) {
-                  print(e);
+                  talker.error('Error uploading image', e);
+                  throw Exception('Failed to upload image');
                 }
               },
               child: const Text('이미지 저장 하기'),
