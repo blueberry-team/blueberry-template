@@ -42,10 +42,11 @@ jobs:
       - name: Run linter
         run: flutter analyze > analysis_result.txt || true
 
-      - name: Install Reviewdog
-        run: |
-          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/main/install.sh | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install Reviewdog (using action)
+        uses: reviewdog/action-setup@v2
+
+      - name: Add Reviewdog to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Run reviewdog
         run: |
