@@ -17,6 +17,8 @@ import 'utils/AppTheme.dart';
 Future<void> main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    // 날짜 형식 초기화
     await initializeDateFormatting('en_US', null);
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
