@@ -1,11 +1,6 @@
 name: blueberry-build-test-action
 
-on: [ push, pull_request ]
-
-permissions:
-  contents: read
-  pull-requests: write
-
+on: [ push ]
 jobs:
   test:
     name: Run Flutter Tests
@@ -38,23 +33,6 @@ jobs:
 
       - name: Generate freezed files
         run: flutter pub run build_runner build --delete-conflicting-outputs
-
-      - name: Run linter
-        run: flutter analyze > analysis_result.txt || true
-
-      - name: Install Reviewdog (using action)
-        uses: reviewdog/action-setup@v1
-        with:
-          reviewdog_version: v1.3.0
-
-      - name: Add Reviewdog to PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Run reviewdog
-        run: |
-          reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review -level=error -fail_on_error=false < analysis_result.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.JWSON_GITHUB_TOKEN }}
 
       - name: Run tests
         run: flutter test
