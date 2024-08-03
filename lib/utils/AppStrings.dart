@@ -96,6 +96,10 @@ class AppStrings {
   static const String companyInfoAbout = '회사 소개';
 
   // Phone Verification
+  static const String inputPhoneNumber = '전화번호를 입력해주세요';
+  static const String inputVerificationCode = '인증번호를 입력해주세요';
+  static const String errorMessage_timeOut = '입력시간을 초과하였습니다';
+  static const String errorMessage_commonError = '처리 중 오류가 발생했습니다.';
   static const String errorMessage_emptyPhoneNumber = '전화번호를 입력해주세요.';
   static const String errorMessage_invalidPhoneNumber = '전화번호를 확인해주세요.';
   static const String errorMessage_emptyVerificationCode = '인증번호를 입력해주세요.';
