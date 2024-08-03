@@ -38,13 +38,13 @@ jobs:
       - name: Run linter
         run: flutter analyze > analysis_result.txt || true
 
-      - name: Reviewdog
-        uses: reviewdog/action-reviewdog@v1
-        with:
-          reporter: github-pr-review
-          filter_mode: added
-          level: error
-          reviewdog_flags: "-f analysis_result.txt -f=checkstyle"
+      - name: Install Reviewdog
+        run: |
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/main/install.sh | sh
+
+      - name: Run reviewdog
+        run: |
+          reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review -level=error -fail_on_error=false < analysis_result.txt
         env:
           GITHUB_TOKEN: ${{ secrets.JWSON_GITHUB_TOKEN }}
 
