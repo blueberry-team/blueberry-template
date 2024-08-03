@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:blueberry_flutter_template/model/UserModel.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
-import 'package:blueberry_flutter_template/services/cache/CacheConfig.dart';
 import 'package:blueberry_flutter_template/services/cache/CacheService.dart';
 
 final userProvider = FutureProvider<List<UserModel>>((ref) async {

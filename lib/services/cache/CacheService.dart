@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
-import 'package:blueberry_flutter_template/services/cache/CacheConfig.dart';
 
 final class CacheService {
   final CacheManager _cacheManager;
@@ -87,4 +86,31 @@ final class CacheService {
     final bytes = await fileInfo.file.readAsBytes();
     return utf8.decode(bytes);
   }
+}
+
+/// 캐시 설정을 위한 클래스
+///
+/// [cacheKey] : 캐시에서 파일을 찾기 위한 키
+/// [maxAge] : 파일의 최대 저장 기간, 이 기간이 지나면 파일 무효화
+/// [expiryTime] : 파일의 만료 시간, 이 시간이 지나면 파일 무효화
+/// [fileExtension] : 파일의 확장자, 기본값은 '.json'
+final class CacheConfig {
+  final String cacheKey;
+  final Duration? maxAge;
+  final DateTime? expiryTime;
+  final String fileExtension;
+
+  /// 생성자
+  ///
+  /// [cacheKey] : 캐시 키 (필수)
+  /// [maxAge] : 최대 저장 기간 (선택)
+  /// [expiryTime] : 만료 시간 (선택)
+  /// [fileExtension] : 파일 확장자 (선택, 기본값은 '.json')
+  CacheConfig({
+    required this.cacheKey,
+    this.maxAge,
+    this.expiryTime,
+    this.fileExtension = '.json',
+  }) : assert(maxAge != null || expiryTime != null,
+            'maxAge 혹은 expiryTime 둘 중 하나는 반드시 정의');
 }
