@@ -1,6 +1,6 @@
 name: lint-check-reviewdog
 
-on: [ push, pull_request ]
+on: [ pull_request ]
 
 permissions:
   contents: read
@@ -35,6 +35,12 @@ jobs:
 
       - name: Run reviewdog
         run: |
-          flutter analyze | reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review
+          flutter analyze | reviewdog -f="diff" \
+            -name="black" \
+            -f.diff.strip=0 \
+            -reporter="github-pr-review" \
+            -filter-mode="file" \
+            -fail-on-error="true" \
+            -level="warning"|
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
