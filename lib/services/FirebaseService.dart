@@ -31,15 +31,33 @@ class FirebaseService {
         name: name,
         email: email,
         age: 1,
+        isMemberShip: false,
         profileImageUrl: '',
         createdAt: DateTime.now(),
         userClass: 'user',
       );
-
+      // 멤버쉽 모델은 추후에 인앱 결제시 유저가 구독하고 있거나 유저 상태에 대한 변경을 주기 위해 추가했음
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());
     } catch (e) {
       print('Error updating user: $e');
       throw Exception('Failed to update user');
+    }
+  }
+  Future<void> updateUserMemberShip() async {
+    // 인앱 멤버쉽 결제시 호출해서 업데이트 함
+    try {
+      var user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        throw Exception('No current user found');
+      }
+
+      await _firestore.collection('users').doc(user.uid).update({
+        'isMemberShip': true,
+      });
+    } catch (e) {
+      print('Error updating user membership: $e');
+      throw Exception('Failed to update user membership');
     }
   }
 }

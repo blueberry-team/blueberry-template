@@ -46,6 +46,7 @@ final userInfoNotifierProvider =
           email: '',
           age: 123,
           profileImageUrl: '',
+          isMemberShip: false,
           createdAt: DateTime.now(),
           userClass: 'user')));
 });
