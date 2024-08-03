@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:blueberry_flutter_template/router/RouterProvider.dart';
 import 'package:blueberry_flutter_template/services/notification/firebase_cloud_messaging_manager.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
@@ -13,25 +15,29 @@ import 'providers/ThemeProvider.dart';
 import 'utils/AppTheme.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('en_US', null);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await initializeDateFormatting('en_US', null);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
-    debugPrint('FCM Token: $token');
+    FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
+      debugPrint('FCM Token: $token');
+    });
+
+    // Crashlytics 설정
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    if (!kIsWeb) {
+      FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    }
+
+    runApp(const ProviderScope(
+      child: MyApp(),
+    ));
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
-
-  // Crashlytics 설정
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  if (!kIsWeb) {
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  }
-
-  runApp(const ProviderScope(
-    child: MyApp(),
-  ));
 }
 
 class MyApp extends StatelessWidget {
