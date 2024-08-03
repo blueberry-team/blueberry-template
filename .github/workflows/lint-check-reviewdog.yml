@@ -22,21 +22,16 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run linter
-        run: flutter analyze > analysis_result.txt || true
-
-      - name: Post lint results as comment
-        uses: actions/github-script@v6
+      - name: Install Reviewdog (using action)
+        uses: reviewdog/action-setup@v1
         with:
-          script: |
-            const fs = require('fs');
-            const core = require('@actions/core');
-            
-            const analysisResults = fs.readFileSync('analysis_result.txt', 'utf8');
-            const issues = analysisResults.split('\n').filter(line => line.trim() !== '');
-            
-            if (issues.length > 0) {
-              const commentBody = `**Lint issues:**\n${issues.join('\n')}`;
-              core.info(commentBody);
-              core.comment(commentBody);
-            }
+          reviewdog_version: latest
+
+      - name: Add Reviewdog to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          flutter analyze | reviewdog -f=flutter -name=flutter-analyze -reporter=github-check -level=warning
