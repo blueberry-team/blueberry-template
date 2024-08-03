@@ -1,9 +1,6 @@
 name: lint-check-reviewdog
 
-on: [ push ]
-
-env :
-  REVIEWDOG_REPORTER: ${{ github.event_name == 'pull_request' && 'github-pr-review' || 'github-check' }
+on: [ push, pull_request ]
 
 permissions:
   contents: read
