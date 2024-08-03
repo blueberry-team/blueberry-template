@@ -1,6 +1,6 @@
 name: blueberry-build-test-action
 
-on: [ push ]
+on: [ push, pull_request ]
 
 jobs:
   test:
@@ -34,6 +34,17 @@ jobs:
 
       - name: Generate freezed files
         run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run linter
+        run: flutter analyze > analysis_result.txt || true
+
+      - name: Run reviewdog
+        uses: reviewdog/action-flutter@v1
+        with:
+          level: error
+          reporter: github-pr-review
+          fail_on_error: true
+          reviewdog_flags: "-f analysis_result.txt"
 
       - name: Run tests
         run: flutter test
