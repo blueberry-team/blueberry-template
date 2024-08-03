@@ -51,6 +51,7 @@ dependencies:
   app_links: ^6.1.3
   photo_manager: ^3.2.0
   image_picker: ^1.1.0
+  flutter_cache_manager: ^3.3.3
 
   # Profile Upload
   camera: ^0.11.0+1
