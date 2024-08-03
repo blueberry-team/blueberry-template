@@ -1,6 +1,7 @@
 name: blueberry-build-test-action
 
 on: [ push ]
+
 jobs:
   test:
     name: Run Flutter Tests
