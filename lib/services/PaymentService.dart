@@ -11,9 +11,9 @@ import 'package:bootpay/model/user.dart' as BootpayUser;
 class PaymentService {
 
   Future<void> requestPayment(String username, String userEmail, SaleItemModel item ) async {
-        String webApplicationId = '66908403c14ed1261c36720a';
-        String androidApplicationId = '안드로이드 API 결제 키를 입력하세요';
-        String iosApplicationId = 'IOS API 결제 키를 입력하세요';
+        String webApplicationId = 'put your JS API key here';
+        String androidApplicationId = 'put your Android API key here';
+        String iosApplicationId = 'put your iOS API key here';
 
         Payload payload = Payload();
         payload.androidApplicationId = androidApplicationId;
