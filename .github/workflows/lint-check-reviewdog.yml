@@ -1,0 +1,45 @@
+name: lint-check-reviewdog
+
+on: [ push ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  test:
+    name: Run Flutter Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: 'Set Flutter Version Latest'
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run linter
+        run: flutter analyze > analysis_result.txt || true
+
+      - name: Install Reviewdog (using action)
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: v1.3.0
+
+      - name: Add Reviewdog to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run reviewdog
+        run: |
+          reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review -level=error -fail_on_error=false < analysis_result.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.JWSON_GITHUB_TOKEN }}
+
+      - name: Run tests
+        run: flutter test
+        env:
+          CI: true
