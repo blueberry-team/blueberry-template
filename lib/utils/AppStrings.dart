@@ -109,5 +109,13 @@ class AppStrings {
   //Success Handling
   static const String successMessage_emailValidation = '사용 가능한 이메일입니다';
 
+  //InAppPurchase
+  static const String successMessage_purchase = '결제가 완료 되었습니다.';
+  static const String successMessage_membership = '멤버십 가입이 완료 되었습니다.';
+  static const String errorMessage_purchase = '결제에 실패 했습니다. 다시 시도 해 주세요.';
+  static const String isUserMembership = '프리미엄 멤버쉽을 사용 중 입니다';
+  static const String notUserMembership = '프리미엄 멤버쉽을 사용 중이 아닙니다';
+  static const String getMembership = '프리미엄 회원 가입하기';
+
 
 }
