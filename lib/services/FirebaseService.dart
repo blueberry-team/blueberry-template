@@ -1,5 +1,5 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
-import 'package:blueberry_flutter_template/providers/TalkerProvider.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,8 +10,6 @@ class FirebaseService {
 
   // ChatScreen.dart
   Future<void> addChatMessage(String message) async {
-    final talker = container.read(talkerProvider);
-
     try {
       await _firestore.collection('chats').add({
         'message': message,
@@ -25,7 +23,6 @@ class FirebaseService {
   }
 
   Future<void> updateUserDB(String email, String name) async {
-    final talker = container.read(talkerProvider);
     try {
       var user = FirebaseAuth.instance.currentUser;
 
