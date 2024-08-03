@@ -30,12 +30,9 @@ jobs:
         with:
           reviewdog_version: latest
 
-      - name: Add Reviewdog to PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-
       - name: Run reviewdog
         run: |
-          reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review -level=error < analysis_result.txt
+          flutter analyze | $HOME/project/bin/reviewdog -efm="%m • %f:%l:%c •%r" -reporter=github-pr-review
         env:
           GITHUB_TOKEN: ${{ secrets.JWSON_GITHUB_TOKEN }}
 
