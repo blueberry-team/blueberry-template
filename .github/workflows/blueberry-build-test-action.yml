@@ -43,7 +43,9 @@ jobs:
         run: flutter analyze > analysis_result.txt || true
 
       - name: Install Reviewdog (using action)
-        uses: reviewdog/action-setup@v2
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: lates
 
       - name: Add Reviewdog to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
