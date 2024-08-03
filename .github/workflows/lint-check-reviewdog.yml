@@ -37,7 +37,7 @@ jobs:
         run: |
           reviewdog -f=checkstyle -name="Flutter Analyze" -reporter=github-pr-review -level=error < analysis_result.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.JWSON_GITHUB_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
         run: flutter test
