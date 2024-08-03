@@ -34,4 +34,4 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          flutter analyze | reviewdog -name=flutter-analyze -reporter=github-check -level=warning
+          flutter analyze | reviewdog -list -name=flutter-analyze -reporter=github-check -level=warning
