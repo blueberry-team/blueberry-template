@@ -83,11 +83,17 @@ const TextStyle blue16TextStyle = TextStyle(
 );
 
 // ---------------white---------------- //
-const TextStyle white12BoldTextStyle = TextStyle(
+const TextStyle white24TextStyle = TextStyle(
+  fontWeight: FontWeight.normal,
+  fontStyle: FontStyle.normal,
+  color: white,
+  fontSize: 24,
+);
+const TextStyle white24BoldTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
   color: white,
-  fontSize: 12,
+  fontSize: 24,
 );
 
 const TextStyle white16TextStyle = TextStyle(
@@ -105,6 +111,13 @@ const TextStyle white16BoldTextStyle = TextStyle(
 
 const TextStyle white12TextStyle = TextStyle(
   fontWeight: FontWeight.normal,
+  fontStyle: FontStyle.normal,
+  color: white,
+  fontSize: 12,
+);
+
+const TextStyle white12BoldTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
   color: white,
   fontSize: 12,

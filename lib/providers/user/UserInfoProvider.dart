@@ -46,7 +46,9 @@ final userInfoNotifierProvider =
           email: '',
           age: 123,
           profileImageUrl: '',
-          createdAt: DateTime.now())));
+          isMemberShip: false,
+          createdAt: DateTime.now(),
+          userClass: 'user')));
 });
 
 // 유저 정보 업데이트를 위한 노티파이어

@@ -3,14 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart'; // kIsWeb 상수 사용
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../utils/ResponsiveLayoutBuilder.dart';
-
-/// 작성일: 2024-07-01
-/// 작성자: 오물개
-/// 내용: 앱 초기화와 필수 자원 로딩을 관리하는 스플래쉬 스크린 구현
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
+  static const String routeName = '/SplashScreen';
+
   const SplashScreen({super.key});
 
   @override
@@ -43,13 +40,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       // 스플레쉬 스크린 확인을 위한 3초 지연
       await Future.delayed(const Duration(seconds: 3));
       // 초기화 완료 후 메인 화면으로 전환
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) => ResponsiveLayoutBuilder(
-                  context,
-                  const TopScreen(),
-                )),
-      );
+      if (mounted) {
+        context.goNamed(TopScreen.name);
+      }
     } catch (e) {
       // 초기화 중 발생한 오류 처리
       print('초기화 오류: $e');

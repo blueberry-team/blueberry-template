@@ -72,16 +72,22 @@ dependencies:
   easy_engine: ^0.0.4
   cloud_functions: ^5.0.2
 
-  # Lints
-  flutter_lints: ^3.0.0
-  flutter_gen: ^5.6.0
-  
-  build_runner: ^2.4.11
-  json_serializable: ^6.8.0
+  # Router
+  go_router: ^14.2.1
+
+  # In App Purchase
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # Generate
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.11
+
+  # Lint
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
