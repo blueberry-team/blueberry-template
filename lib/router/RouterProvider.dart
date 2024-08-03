@@ -2,6 +2,7 @@ import 'package:blueberry_flutter_template/screens/SettingScreen.dart';
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
 import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
+import 'package:blueberry_flutter_template/screens/mypage/camera/SettingInsideAccountManagerWidget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -44,6 +45,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: MyPageScreen.name,
         builder: (context, state) =>
             ResponsiveLayoutBuilder(context, const MyPageScreen()),
+      ),
+      GoRoute(
+        path: '/SettingAccountManagerWidget',
+        name: SettingAccountManagerWidget.name,  // 여기를 수정
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const SettingAccountManagerWidget()),
       ),
     ],
   );

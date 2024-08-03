@@ -51,6 +51,7 @@ dependencies:
   app_links: ^6.1.3
   photo_manager: ^3.2.0
   image_picker: ^1.1.0
+  flutter_cache_manager: ^3.3.3
 
   # Profile Upload
   camera: ^0.11.0+1
@@ -77,6 +78,9 @@ dependencies:
   # Crashlytics & Debugger
   firebase_crashlytics: ^4.0.4
   talker_flutter: ^4.4.0
+
+  # In App Purchase
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:
