@@ -75,12 +75,15 @@ Future<List<UserModel>> _fetchUsersFromFirestore() async {
       if (doc.exists) {
         final data = doc.data()!;
         return UserModel(
+          userClass: data['userClass'] as String,
           userId: doc.id,
           name: data['name'] as String,
           email: data['email'] as String,
           age: data['age'] as int,
-          profileImageUrl: data['profilePicture'] as String,
+          isMemberShip: data['isMemberShip'] as bool,
+          profileImageUrl: data['profilePicture'] as String?,
           createdAt: DateTime.parse(data['createdAt'] as String),
+          fcmToken: data['fcmToken'] as String?,
         );
       } else {
         throw Exception('User not found');
