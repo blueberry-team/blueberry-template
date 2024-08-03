@@ -19,6 +19,14 @@ jobs:
         with:
           flutter-version: '3.22.0'
 
+      - name: Update Dart SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_2.20.0-1_amd64.deb
+          sudo apt install ./dart_2.20.0-1_amd64.deb
+          dart --version
+
       - name: Install dependencies
         run: flutter pub get
 
