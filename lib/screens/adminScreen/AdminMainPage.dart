@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'UserListInAdminPage.dart';
+import 'package:go_router/go_router.dart';
 
 class AdminMainPage extends StatelessWidget {
+  static const String name = 'AdminMainPage';
   const AdminMainPage({super.key});
 
   @override
@@ -20,11 +21,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const UserListInAdminPage()),
-              );
+              context.push('/UserListInAdminPage');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -47,7 +44,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              print('Test: move to the AdminItemList');
+              context.push('/ItemListInAdminPage'); // ItemList페이지 구현 필요
             },
             child: Container(
               decoration: BoxDecoration(
@@ -70,7 +67,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              print('Test: move to the AdminEventList');
+              context.push('/EventListInAdminPage'); // EventList페이지 구현 필요
             },
             child: Container(
               decoration: BoxDecoration(

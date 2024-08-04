@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
 class UserDetailPageInAdmin extends StatelessWidget {
+  static const String name = 'UserDetailPageInAdmin';
   const UserDetailPageInAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = [
+      'Name',
+      'Nickname',
+      'Phone',
+      'Email',
+      'Description',
+      'Profile Photo'
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -17,24 +27,13 @@ class UserDetailPageInAdmin extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Name'),
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Nickname'),
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Phone'),
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Email'),
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Description'),
-                    const SizedBox(height: 20),
-                    _buildUserInformationContainer('Profile Photo'),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                itemCount: userDetails.length,
+                itemBuilder: (context, index) {
+                  return _buildUserInformationContainer(userDetails[index]);
+                },
+                separatorBuilder: (context, index) => const SizedBox(height: 20),
               ),
             ),
             Padding(

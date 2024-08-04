@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'UserDetailPageInAdmin.dart';
+import 'package:go_router/go_router.dart';
 
 class UserListInAdminPage extends StatelessWidget {
+  static const String name = 'UserListInAdminPage';
   const UserListInAdminPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> usernames = [
+      'Username_1',
+      'Username_2',
+      'Username_3',
+      'Username_4',
+      'Username_5',
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -23,7 +32,7 @@ class UserListInAdminPage extends StatelessWidget {
                 size: 40,
               ),
               onPressed: () {
-                print('Test: move to the UserSearchPage');
+                context.push('/UserSearchPage'); //검색화면 구현 필요
               },
             ),
           ],
@@ -33,33 +42,20 @@ class UserListInAdminPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildUserContainer('Username_1'),
-                    const SizedBox(height: 20),
-                    _buildUserContainer('Username_2'),
-                    const SizedBox(height: 20),
-                    _buildUserContainer('Username_3'),
-                    const SizedBox(height: 20),
-                    _buildUserContainer('Username_4'),
-                    const SizedBox(height: 20),
-                    _buildUserContainer('Username_5'),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                itemCount: usernames.length,
+                itemBuilder: (context, index) {
+                  return _buildUserContainer(context, usernames[index]);
+                },
+                separatorBuilder: (context, index) => const SizedBox(height: 20),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(45.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const UserDetailPageInAdmin()),
-                  );
+                  context.push('/UserDetailPageInAdmin');
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -87,10 +83,10 @@ class UserListInAdminPage extends StatelessWidget {
     );
   }
 
-  Widget _buildUserContainer(String username) {
+  Widget _buildUserContainer(BuildContext context, String username) {
     return InkWell(
       onTap: () {
-        print('Test: move to the UserDetailPageInAdmin');
+        context.push('/UserDetailPageInAdmin');
       },
       child: Container(
         decoration: BoxDecoration(
@@ -118,7 +114,7 @@ class UserListInAdminPage extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.edit, color: Colors.white),
                   onPressed: () {
-                    print('Test: move to the UserDetailPageInAdmin');
+                    context.push('/UserDetailPageInAdmin');
                   },
                 ),
                 IconButton(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AdminLoadingScreen extends StatelessWidget {
-  const AdminLoadingScreen({super.key});
+class AdminLoadingPage extends StatelessWidget {
+  static const String name = 'AdminLoadingPage';
+  const AdminLoadingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
