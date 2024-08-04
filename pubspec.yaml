@@ -52,6 +52,11 @@ dependencies:
   photo_manager: ^3.2.0
   image_picker: ^1.1.0
   flutter_cache_manager: ^3.3.3
+  dart_jsonwebtoken: ^2.14.0
+  package_info_plus: ^8.0.0
+
+  # REST API Client
+  dio: ^5.5.0+1
 
   # Profile Upload
   camera: ^0.11.0+1
@@ -74,9 +79,11 @@ dependencies:
 
   # Router
   go_router: ^14.2.1
+  crypto: ^3.0.3
 
   # In App Purchase
   in_app_purchase: ^3.2.0
+
 
 dev_dependencies:
   flutter_test:
