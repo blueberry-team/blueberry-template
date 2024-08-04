@@ -3,6 +3,7 @@ import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ChatRoomWidget extends ConsumerWidget {
@@ -30,7 +31,11 @@ Widget _buildRoomListView(List<String> data) {
             color: const Color(0xff910c1b),
             child: const Padding(
               padding: EdgeInsets.only(right: 16.0),
-              child: Icon(CupertinoIcons.delete_simple, color: Colors.white, size: 16,),
+              child: Icon(
+                CupertinoIcons.delete_simple,
+                color: Colors.white,
+                size: 16,
+              ),
             ),
           ),
           onDismissed: (direction) {
@@ -38,13 +43,10 @@ Widget _buildRoomListView(List<String> data) {
           },
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ChatScreen(),
-              ),
-            ),
+            onTap: () => context.goNamed(ChatScreen.routeName),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start, // 이 부분을 추가
                 children: [
@@ -57,14 +59,19 @@ Widget _buildRoomListView(List<String> data) {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(data[index], style: TextStyle(color: Colors.black, fontSize: 15)),
+                            Text(data[index],
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 15)),
                             Text(
-                                DateFormat('a h:mm', 'ko_KR').format(DateTime.now()),
-                                style: TextStyle(color: Colors.grey, fontSize: 10)
-                            ),
+                                DateFormat('a h:mm', 'ko_KR')
+                                    .format(DateTime.now()),
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 10)),
                           ],
                         ),
-                        Text('recentMesssage', style: TextStyle(color: Colors.grey, fontSize: 12), overflow: TextOverflow.ellipsis),
+                        Text('recentMesssage',
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                            overflow: TextOverflow.ellipsis),
                       ],
                     ),
                   ),
@@ -81,15 +88,15 @@ Widget _buildProfileImage(String? path) {
     borderRadius: BorderRadius.circular(10),
     child: path != null && path.isNotEmpty
         ? Image.asset(
-      path,
-      fit: BoxFit.cover,
-      width: 45,
-      height: 45,
-    )
+            path,
+            fit: BoxFit.cover,
+            width: 45,
+            height: 45,
+          )
         : Container(
-      width: 45,
-      height: 45,
-      color: Colors.grey,
-    ),
+            width: 45,
+            height: 45,
+            color: Colors.grey,
+          ),
   );
 }
