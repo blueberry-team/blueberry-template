@@ -51,13 +51,13 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: 'settingaccount',
-            name: SettingAccountManagerWidget.name, // 여기를 수정
+            name: SettingAccountManagerWidget.name,
             builder: (context, state) => ResponsiveLayoutBuilder(
                 context, const SettingAccountManagerWidget()),
           ),
           GoRoute(
             path: 'webpayment',
-            name: WebPaymentWidget.name, // 여기를 수정
+            name: WebPaymentWidget.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const WebPaymentWidget()),
           ),
