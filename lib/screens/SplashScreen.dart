@@ -1,12 +1,11 @@
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart'; // kIsWeb 상수 사용
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
-  static const String routeName = '/SplashScreen';
+  static const String routeName = 'SplashScreen';
 
   const SplashScreen({super.key});
 
@@ -23,9 +22,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     // 웹이 아닌 경우에만 초기화 함수 호출
-    if (!kIsWeb) {
-      _initializeApp();
-    }
+    _initializeApp();
   }
 
   /// 앱 초기화를 단계별로 수행하는 함수
@@ -85,20 +82,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 웹인 경우 바로 홈 화면으로 이동
-    if (kIsWeb) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const TopScreen()),
-        );
-      });
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     // 모바일인 경우 스플래쉬 스크린 표시
     return Scaffold(
       backgroundColor: Colors.white, // 배경색 설정

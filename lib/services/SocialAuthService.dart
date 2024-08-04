@@ -51,6 +51,7 @@ class SocialAuthService {
         'email': FirebaseAuth.instance.currentUser!.email,
         'name': FirebaseAuth.instance.currentUser!.displayName,
         'age': 0,
+        'isMemberShip': false,
         'createdAt': DateTime.timestamp(),
         'profilePicture': "",
       });
@@ -85,6 +86,7 @@ class SocialAuthService {
         'email': FirebaseAuth.instance.currentUser!.email,
         'name': FirebaseAuth.instance.currentUser!.displayName,
         'age': 0,
+        'isMemberShip': false,
         'createdAt': DateTime.timestamp(),
         'profilePicture': "",
       });

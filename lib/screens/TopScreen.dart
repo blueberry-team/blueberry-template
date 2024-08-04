@@ -1,13 +1,12 @@
 import 'package:blueberry_flutter_template/screens/chat/ChatRoomScreen.dart';
-import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/screens/profileDetail/ProfileDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'friendsList/FriendsListScreen.dart';
 import 'match/MatchScreen.dart';
 import 'mypage/LoginScreen.dart';
-import 'friendsList/FriendsListScreen.dart';
 
 /// TopScreen.dart
 ///
@@ -20,16 +19,16 @@ final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
 class TopScreen extends ConsumerWidget {
   static const String name = '/TopScreen';
+
   const TopScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
-    final List<Widget> pages =
-    [
-      const FriendsListScreen(),
+    final List<Widget> pages = [
       const ChatRoomScreen(),
+      const FriendsListScreen(),
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),
@@ -48,12 +47,12 @@ class TopScreen extends ConsumerWidget {
         backgroundColor: Colors.blueGrey[100],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Friends',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.chat),
             label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Friends',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
@@ -74,7 +73,7 @@ class TopScreen extends ConsumerWidget {
         ],
         currentIndex: selectedIndex,
         onTap: (index) =>
-        ref.read(selectedIndexProvider.notifier).state = index,
+            ref.read(selectedIndexProvider.notifier).state = index,
       ),
     );
   }

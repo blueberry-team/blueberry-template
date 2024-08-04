@@ -27,7 +27,7 @@ endif
 
 # Define the buildRunner target
 buildRunner:
-	@echo "❄️ Running build runner..."
+	@echo "Freezed Running build runner..."
 ifeq ($(DETECTED_OS), Windows)
 	@flutter pub run build_runner build --delete-conflicting-outputs
 else

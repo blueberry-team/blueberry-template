@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'UserListInAdminPage.dart';
+
 class AdminMainPage extends StatelessWidget {
   static const String name = 'AdminMainPage';
+
   const AdminMainPage({super.key});
 
   @override
@@ -21,7 +24,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.push('/UserListInAdminPage');
+              context.pushNamed(UserListInAdminPage.name);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -44,7 +47,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.push('/ItemListInAdminPage'); // ItemList페이지 구현 필요
+              //TODO: ItemListPage 구현 필요
             },
             child: Container(
               decoration: BoxDecoration(
@@ -67,7 +70,7 @@ class AdminMainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.push('/EventListInAdminPage'); // EventList페이지 구현 필요
+              //TODO: EventListPage 구현 필요
             },
             child: Container(
               decoration: BoxDecoration(

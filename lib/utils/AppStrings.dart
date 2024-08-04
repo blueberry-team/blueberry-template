@@ -64,6 +64,13 @@ class AppStrings {
   static const String uploadEventButtonLabel = '이벤트 업로드';
   static const String makeChatButtonLabel = '임시 채팅 만들기';
 
+  //RankViewWidget.dart
+  static const String rankViewTitle = '오늘의 순위';
+
+  //CacheService.dart
+  static const String commonCacheKey = 'commonCacheKey';
+  static const String userCacheKey = 'userCacheData';
+
   //Error Handling
   static const String errorMessage_emptyPassword = '비밀번호를 입력하세요.';
   static const String errorMessage_invalidPassword =
@@ -96,6 +103,10 @@ class AppStrings {
   static const String companyInfoAbout = '회사 소개';
 
   // Phone Verification
+  static const String inputPhoneNumber = '전화번호를 입력해주세요';
+  static const String inputVerificationCode = '인증번호를 입력해주세요';
+  static const String errorMessage_timeOut = '입력시간을 초과하였습니다';
+  static const String errorMessage_commonError = '처리 중 오류가 발생했습니다.';
   static const String errorMessage_emptyPhoneNumber = '전화번호를 입력해주세요.';
   static const String errorMessage_invalidPhoneNumber = '전화번호를 확인해주세요.';
   static const String errorMessage_emptyVerificationCode = '인증번호를 입력해주세요.';
@@ -108,6 +119,14 @@ class AppStrings {
 
   //Success Handling
   static const String successMessage_emailValidation = '사용 가능한 이메일입니다';
+
+  //InAppPurchase
+  static const String successMessage_purchase = '결제가 완료 되었습니다.';
+  static const String successMessage_membership = '멤버십 가입이 완료 되었습니다.';
+  static const String errorMessage_purchase = '결제에 실패 했습니다. 다시 시도 해 주세요.';
+  static const String isUserMembership = '프리미엄 멤버쉽을 사용 중 입니다';
+  static const String notUserMembership = '프리미엄 멤버쉽을 사용 중이 아닙니다';
+  static const String getMembership = '프리미엄 회원 가입하기';
 
 
 }

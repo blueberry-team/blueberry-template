@@ -1,8 +1,10 @@
+import 'package:blueberry_flutter_template/screens/adminScreen/UserDetailPageInAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class UserListInAdminPage extends StatelessWidget {
   static const String name = 'UserListInAdminPage';
+
   const UserListInAdminPage({super.key});
 
   @override
@@ -32,7 +34,7 @@ class UserListInAdminPage extends StatelessWidget {
                 size: 40,
               ),
               onPressed: () {
-                context.push('/UserSearchPage'); //검색화면 구현 필요
+                //TODO: UserSearchScreen 구현 필요
               },
             ),
           ],
@@ -48,14 +50,15 @@ class UserListInAdminPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return _buildUserContainer(context, usernames[index]);
                 },
-                separatorBuilder: (context, index) => const SizedBox(height: 20),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 20),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(45.0),
               child: InkWell(
                 onTap: () {
-                  context.push('/UserDetailPageInAdmin');
+                  context.pushNamed(UserDetailPageInAdmin.name);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -86,7 +89,7 @@ class UserListInAdminPage extends StatelessWidget {
   Widget _buildUserContainer(BuildContext context, String username) {
     return InkWell(
       onTap: () {
-        context.push('/UserDetailPageInAdmin');
+        context.pushNamed(UserDetailPageInAdmin.name);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -114,7 +117,7 @@ class UserListInAdminPage extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.edit, color: Colors.white),
                   onPressed: () {
-                    context.push('/UserDetailPageInAdmin');
+                    context.pushNamed(UserDetailPageInAdmin.name);
                   },
                 ),
                 IconButton(

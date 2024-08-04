@@ -1,9 +1,8 @@
-import 'package:blueberry_flutter_template/screens/mypage/signup/PhoneInputPage.dart';
+import 'package:blueberry_flutter_template/screens/mypage/signup/PhoneVerificationPage.dart';
 import 'package:flutter/material.dart';
 
 final PageController _pageController = PageController();
 
-// 휴대폰 인증 위젯 테스트
 class PhoneVerificationScreen extends StatelessWidget {
   const PhoneVerificationScreen({super.key});
 
@@ -14,23 +13,29 @@ class PhoneVerificationScreen extends StatelessWidget {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          PhoneInputPage(
+          PhoneNumberInputPage(
             onNext: () => _pageController.nextPage(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             ),
+            onDone: () => _pageController.animateToPage(
+              2,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            ),
           ),
-          PhoneVerificationNumberInputPage(
+          VerificationCodeInputPage(
             onNext: () => _pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            ),
+            onPrev: () => _pageController.previousPage(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             ),
           ),
           PhoneVerificationDonePage(
-            onNext: () => _pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            ),
+            onNext: () {},
           ),
         ],
       ),
