@@ -17,5 +17,6 @@ class AnimalModel with _$AnimalModel {
     String? bio,
   }) = _AnimalModel;
 
-  factory AnimalModel.fromJson(Map<String, dynamic> json) => _$AnimalModelFromJson(json);
+  factory AnimalModel.fromJson(Map<String, dynamic> json) =>
+      _$AnimalModelFromJson(json);
 }

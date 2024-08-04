@@ -64,5 +64,4 @@ const Color brightGreen = Color(0xFF4CAF50); // 밝은 녹색
 
 class AppColors {
   // RGB 색상
-
 }

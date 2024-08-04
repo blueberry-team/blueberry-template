@@ -8,7 +8,7 @@ class ProfileDetailWidget extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: GestureDetector(
-          onTap: (){},
+          onTap: () {},
           child: Container(
             width: 300,
             height: 400,

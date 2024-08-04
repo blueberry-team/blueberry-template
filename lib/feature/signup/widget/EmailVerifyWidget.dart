@@ -17,23 +17,24 @@ class EmailVerifyWidget extends ConsumerWidget {
           const Text(AppStrings.check_emailVerification),
           ElevatedButton(
               onPressed: () async {
-                try{
-                  final verifierUser = ref.watch(firebaseAuthServiceProvider).getCurrentUser();
+                try {
+                  final verifierUser =
+                      ref.watch(firebaseAuthServiceProvider).getCurrentUser();
                   if (verifierUser != null) {
                     await verifierUser.reload();
-                    final reloadedUser = ref.watch(firebaseAuthServiceProvider).getCurrentUser();
+                    final reloadedUser =
+                        ref.watch(firebaseAuthServiceProvider).getCurrentUser();
                     if (reloadedUser?.emailVerified == true) {
                       onNext();
                     } else {
                       await reloadedUser?.sendEmailVerification();
                     }
                   }
-                } catch(e) {
+                } catch (e) {
                   print(e);
                 }
               },
-              child: const Text(AppStrings.click_emailVerification)
-          )
+              child: const Text(AppStrings.click_emailVerification))
         ],
       ),
     );

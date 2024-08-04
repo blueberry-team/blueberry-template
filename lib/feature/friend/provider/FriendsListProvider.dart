@@ -28,7 +28,6 @@ Future<String> fetchFriendImageUrl(String imageName) async {
 }
 
 final friendImageProvider =
-  FutureProvider.family<String, String>((ref, imageName) async {
+    FutureProvider.family<String, String>((ref, imageName) async {
   return await fetchFriendImageUrl(imageName);
 });
-

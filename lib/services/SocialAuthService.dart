@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
 class SocialAuthService {
   get context => null;
 
@@ -106,7 +107,7 @@ class SocialAuthService {
   Future<bool> appleWithDrawl() async {
     String keyID = '';
     String teamID = '';
-    String pkgName ='';
+    String pkgName = '';
     await PackageInfo.fromPlatform().then((value) {
       pkgName = value.packageName;
     });
@@ -116,7 +117,7 @@ class SocialAuthService {
     int iat = DateTime.now().toUtc().millisecondsSinceEpoch ~/
         Duration.millisecondsPerSecond;
     int exp = DateTime.now()
-            .add(const Duration(seconds: 15776999))//30일
+            .add(const Duration(seconds: 15776999)) //30일
             .toUtc()
             .millisecondsSinceEpoch ~/
         Duration.millisecondsPerSecond;

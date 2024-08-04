@@ -21,11 +21,9 @@ Future<void> main() async {
     debugPrint('FCM Token: $token');
   });
 
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    )
-  );
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

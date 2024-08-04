@@ -25,7 +25,8 @@ class MatchProfileListWidget extends ConsumerWidget {
   }
 }
 
-Widget _buildCardView(BuildContext context, WidgetRef ref, List<DogProfileModel> data) {
+Widget _buildCardView(
+    BuildContext context, WidgetRef ref, List<DogProfileModel> data) {
   final cardSwiperController = CardSwiperController();
   final cards = data.map(SwipeCardWidget.new).toList();
 
@@ -39,20 +40,33 @@ Widget _buildCardView(BuildContext context, WidgetRef ref, List<DogProfileModel>
             if (direction == CardSwiperDirection.right) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ProfileScreen(dogProfile: data[previousIndex]),
+                  builder: (context) =>
+                      ProfileScreen(dogProfile: data[previousIndex]),
                 ),
               );
             }
             return true;
           },
-          cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage,) => cards[index],
+          cardBuilder: (
+            context,
+            index,
+            horizontalThresholdPercentage,
+            verticalThresholdPercentage,
+          ) =>
+              cards[index],
         ),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SwipeButtonWidget(onPressed: () => cardSwiperController.swipe(CardSwiperDirection.left), icon: Icons.close),
-          SwipeButtonWidget(onPressed: () => cardSwiperController.swipe(CardSwiperDirection.right), icon: Icons.check),
+          SwipeButtonWidget(
+              onPressed: () =>
+                  cardSwiperController.swipe(CardSwiperDirection.left),
+              icon: Icons.close),
+          SwipeButtonWidget(
+              onPressed: () =>
+                  cardSwiperController.swipe(CardSwiperDirection.right),
+              icon: Icons.check),
         ],
       ),
     ],

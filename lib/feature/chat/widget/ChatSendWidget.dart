@@ -25,16 +25,16 @@ class ChatSendWidget extends StatelessWidget {
               controller: _controller,
               decoration: const InputDecoration(
                   hintText: 'Enter message', border: OutlineInputBorder()),
-              onSubmitted: (value) async { // 엔터키가 눌러졌을때 하는 행동
-                value.isEmpty
-                    ? null
-                    : sendChatMessage(value);
+              onSubmitted: (value) async {
+                // 엔터키가 눌러졌을때 하는 행동
+                value.isEmpty ? null : sendChatMessage(value);
               },
             ),
           ),
           IconButton(
             icon: const Icon(Icons.send),
-            onPressed: () async { // 눌러졌을때 행동
+            onPressed: () async {
+              // 눌러졌을때 행동
               _controller.text.isEmpty
                   ? null
                   : sendChatMessage(_controller.text);

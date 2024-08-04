@@ -19,7 +19,7 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
 
   int _currentPage = 0;
 
-  final int _pageSize= 50;
+  final int _pageSize = 50;
 
   @override
   void initState() {
@@ -53,7 +53,7 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
         content: const Text("앨범 접근 권한을 허용 해주세요"),
         action: SnackBarAction(
           label: 'OK',
-          onPressed: (){
+          onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             PhotoManager.openSetting();
           },
@@ -63,11 +63,9 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
   }
 
   void _navigateToSharePostScreen(File imageFile) {
-    Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => SharePostScreen(imageFile),
-        )
-    );
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => SharePostScreen(imageFile),
+    ));
   }
 
   @override
@@ -91,7 +89,8 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
           child: FutureBuilder<Uint8List?>(
             future: _imageList[index].thumbnailData,
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data != null) {
                 return Image.memory(
                   snapshot.data!,
                   fit: BoxFit.cover,
@@ -103,6 +102,5 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
         );
       },
     );
-
   }
 }

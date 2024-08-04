@@ -40,10 +40,12 @@ class PasswordConfirmWidget extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await ref.watch(firebaseAuthServiceProvider).signUpWithEmailPassword(email, passwordConfirm.state);
+                  await ref
+                      .watch(firebaseAuthServiceProvider)
+                      .signUpWithEmailPassword(email, passwordConfirm.state);
                   // 오류 뱉어내는거 하나 만들어야함 ex ) ID or Password 형식에 문제가 있다라고 쏴야할듯 ?
                   onNext();
-                } catch(e) {
+                } catch (e) {
                   print('failed signUp $e');
                 }
               },

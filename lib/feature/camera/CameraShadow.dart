@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CameraShadow extends CustomPainter {
   final double radius;
 
@@ -14,7 +13,8 @@ class CameraShadow extends CustomPainter {
 
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
     final circlePath = Path()
-      ..addOval(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius))
+      ..addOval(Rect.fromCircle(
+          center: Offset(size.width / 2, size.height / 2), radius: radius))
       ..addRect(rect)
       ..fillType = PathFillType.evenOdd;
 

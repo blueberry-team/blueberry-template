@@ -34,7 +34,8 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
             TextFormField(
               controller: _emailController,
               onChanged: (value) => email.state = value,
-              decoration: const InputDecoration(labelText: AppStrings.emailInputLabel),
+              decoration:
+                  const InputDecoration(labelText: AppStrings.emailInputLabel),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.errorMessage_emptyEmail;
@@ -45,11 +46,8 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
               },
             ),
             const SizedBox(height: 20),
-
             _duplicationBtn(emailDuplicate, context, formKey),
-
             const SizedBox(height: 20),
-
             _nextBtn(formKey, context)
           ],
         ),
@@ -57,7 +55,8 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
     );
   }
 
-  ElevatedButton _duplicationBtn(EmailDuplicateNotifier emailDuplicate, BuildContext context, GlobalKey<FormState> formKey) {
+  ElevatedButton _duplicationBtn(EmailDuplicateNotifier emailDuplicate,
+      BuildContext context, GlobalKey<FormState> formKey) {
     return ElevatedButton(
       onPressed: () async {
         if (formKey.currentState?.validate() ?? false) {
@@ -65,11 +64,13 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
           bool isDuplicate = await emailDuplicate.isDuplication(email);
           if (isDuplicate) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text(AppStrings.errorMessage_emailAlreadyInUse)),
+              const SnackBar(
+                  content: Text(AppStrings.errorMessage_emailAlreadyInUse)),
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text(AppStrings.successMessage_emailValidation)),
+              const SnackBar(
+                  content: Text(AppStrings.successMessage_emailValidation)),
             );
           }
         } else {
@@ -83,17 +84,16 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
   }
 
   ElevatedButton _nextBtn(GlobalKey<FormState> formKey, BuildContext context) {
-    return ElevatedButton(onPressed: (){
-      if (formKey.currentState?.validate() ?? false) {
-        widget.onNext();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppStrings.errorMessage_checkEmail)),
-        );
-      }
-    }, child: const Text('NEXT'));
+    return ElevatedButton(
+        onPressed: () {
+          if (formKey.currentState?.validate() ?? false) {
+            widget.onNext();
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text(AppStrings.errorMessage_checkEmail)),
+            );
+          }
+        },
+        child: const Text('NEXT'));
   }
 }
-
-
-

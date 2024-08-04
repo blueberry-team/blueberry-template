@@ -1,4 +1,3 @@
-
 import 'package:blueberry_flutter_template/utils/oss_licenses.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -33,7 +33,8 @@ class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
         storageStatus.isPermanentlyDenied) {
       print("앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.')),
+        const SnackBar(
+            content: Text('앨범 접근 권한이 영구적으로 거부되었습니다. 설정에서 권한을 허용해주세요.')),
       );
       // 사용자가 권한을 영구적으로 거부한 경우 설정 페이지로 이동
       await openAppSettings();

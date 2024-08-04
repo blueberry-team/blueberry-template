@@ -3,10 +3,7 @@ import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-
 class NameInputWidget extends ConsumerWidget {
-
   const NameInputWidget({super.key});
 
   @override
