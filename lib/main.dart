@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'firebase_options.dart';
-import 'providers/ThemeProvider.dart';
+import 'core/provider/ThemeProvider.dart';
 import 'utils/AppTheme.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

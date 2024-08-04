@@ -25,6 +25,24 @@ else
 	@$(FLUTTER) pub get
 endif
 
+# Define the analyze target
+analyze:
+	@echo "Analyzing Flutter project..."
+ifeq ($(DETECTED_OS), Windows)
+	@flutter analyze
+else
+	@$(FLUTTER) analyze
+endif
+
+# Define the apply target
+apply:
+	@echo "Applying dart fixes..."
+ifeq ($(DETECTED_OS), Windows)
+	@dart fix --apply
+else
+	@dart fix --apply
+endif
+
 # Define the buildRunner target
 buildRunner:
 	@echo "Freezed Running build runner..."
@@ -33,3 +51,4 @@ ifeq ($(DETECTED_OS), Windows)
 else
 	@$(FLUTTER) pub run build_runner build --delete-conflicting-outputs
 endif
+
