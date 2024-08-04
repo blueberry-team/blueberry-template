@@ -39,7 +39,7 @@ class MBTIHomeWidget extends ConsumerWidget {
           TextButton(
               onPressed: () => {
                     ref.read(mbtiProvider.notifier).initScore(),
-                    context.goNamed(MBTITestScreen.routeName),
+                    context.goNamed(MBTITestScreen.name),
                   },
               child: Text(
                   style: const TextStyle(fontSize: 24),

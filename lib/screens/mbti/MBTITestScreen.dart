@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../widgets/mbti/MBTITestWidget.dart';
 
 class MBTITestScreen extends StatelessWidget {
-  static const String routeName = 'MBTITestScreen';
+  static const String name = 'MBTITestScreen';
 
   const MBTITestScreen({super.key});
 

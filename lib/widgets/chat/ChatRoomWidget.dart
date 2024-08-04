@@ -43,7 +43,7 @@ Widget _buildRoomListView(List<String> data) {
           },
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => context.goNamed(ChatScreen.routeName),
+            onTap: () => context.goNamed(ChatScreen.name),
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),

@@ -1,5 +1,9 @@
 import 'package:blueberry_flutter_template/screens/SettingScreen.dart';
 import 'package:blueberry_flutter_template/screens/TopScreen.dart';
+import 'package:blueberry_flutter_template/screens/adminScreen/AdminLoadingPage.dart';
+import 'package:blueberry_flutter_template/screens/adminScreen/AdminMainPage.dart';
+import 'package:blueberry_flutter_template/screens/adminScreen/UserDetailPageInAdmin.dart';
+import 'package:blueberry_flutter_template/screens/adminScreen/UserListInAdminPage.dart';
 import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
@@ -63,15 +67,39 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: 'chat',
-            name: ChatScreen.routeName,
+            name: ChatScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const ChatScreen()),
           ),
           GoRoute(
             path: 'mbti',
-            name: MBTITestScreen.routeName,
+            name: MBTITestScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const MBTITestScreen()),
+          ),
+          GoRoute(
+            path: 'adminloading',
+            name: AdminLoadingPage.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const AdminLoadingPage()),
+          ),
+          GoRoute(
+            path: 'adminmain',
+            name: AdminMainPage.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const AdminMainPage()),
+          ),
+          GoRoute(
+            path: 'userlistinadmin',
+            name: UserListInAdminPage.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const UserListInAdminPage()),
+          ),
+          GoRoute(
+            path: 'userdetailinadmin',
+            name: UserDetailPageInAdmin.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const UserDetailPageInAdmin()),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/screens/adminScreen/UserListInAdminPage.dart';
 import 'package:blueberry_flutter_template/screens/chat/ChatRoomScreen.dart';
 import 'package:blueberry_flutter_template/screens/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/screens/profileDetail/ProfileDetailScreen.dart';
@@ -33,6 +34,7 @@ class TopScreen extends ConsumerWidget {
       const MBTIScreen(),
       const LoginScreen(),
       const ProfileDetailScreen(),
+      const UserListInAdminPage(),
     ];
 
     return Scaffold(
@@ -69,6 +71,10 @@ class TopScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.supervised_user_circle_rounded),
             label: 'ProfileDetail',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            label: 'Admin',
           ),
         ],
         currentIndex: selectedIndex,
