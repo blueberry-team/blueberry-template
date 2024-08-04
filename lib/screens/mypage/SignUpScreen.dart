@@ -7,15 +7,15 @@ import 'package:blueberry_flutter_template/widgets/signup/PasswordInputWidget.da
 import 'package:blueberry_flutter_template/widgets/signup/PrivacyPolicyWidget.dart';
 import 'package:blueberry_flutter_template/widgets/signup/TermsOfServiceWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'signup/ConfirmationPage.dart';
+import 'package:go_router/go_router.dart';
 
+import 'signup/ConfirmationPage.dart';
 
 final PageController _pageController = PageController();
 
-
 class SignUpScreen extends StatefulWidget {
   static const String name = 'SignUpScreen';
+
   const SignUpScreen({super.key});
 
   @override
@@ -26,6 +26,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: Colors.black,
+            onPressed: () => context.pop()),
+        title: const Text('회원가입'),
+      ),
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
@@ -81,9 +88,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 }
 
-
 class EmailInputPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const EmailInputPage({super.key, required this.onNext});
 
   @override
@@ -94,6 +101,7 @@ class EmailInputPage extends StatelessWidget {
 
 class PasswordInputPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const PasswordInputPage({super.key, required this.onNext});
 
   @override
@@ -104,6 +112,7 @@ class PasswordInputPage extends StatelessWidget {
 
 class PasswordConfirmPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const PasswordConfirmPage({super.key, required this.onNext});
 
   @override
@@ -114,6 +123,7 @@ class PasswordConfirmPage extends StatelessWidget {
 
 class NameNickNameInputPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const NameNickNameInputPage({super.key, required this.onNext});
 
   @override
@@ -132,6 +142,7 @@ class NameNickNameInputPage extends StatelessWidget {
 
 class EmailVerifyPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const EmailVerifyPage({super.key, required this.onNext});
 
   @override
@@ -142,6 +153,7 @@ class EmailVerifyPage extends StatelessWidget {
 
 class TermsOfServicePage extends StatelessWidget {
   final VoidCallback onNext;
+
   const TermsOfServicePage({super.key, required this.onNext});
 
   @override
@@ -152,6 +164,7 @@ class TermsOfServicePage extends StatelessWidget {
 
 class PrivacyPolicyPage extends StatelessWidget {
   final VoidCallback onNext;
+
   const PrivacyPolicyPage({super.key, required this.onNext});
 
   @override

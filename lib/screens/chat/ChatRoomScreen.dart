@@ -2,6 +2,8 @@ import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/widgets/chat/ChatRoomWidget.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/FirebaseService.dart';
+
 class ChatRoomScreen extends StatelessWidget {
   const ChatRoomScreen({super.key});
 
@@ -9,9 +11,20 @@ class ChatRoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.chatRoomScreenTitle)),
-      body: Center(
+      body: const Center(
         child: ChatRoomWidget(),
       ),
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
+}
+
+FloatingActionButton _buildFloatingActionButton(BuildContext context) {
+  return FloatingActionButton(
+    onPressed: () {
+      FirebaseService().createChatRoom("test room");
+    },
+    backgroundColor: Colors.blue,
+    child: const Icon(Icons.add),
+  );
 }

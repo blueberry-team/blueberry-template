@@ -43,6 +43,7 @@ class FirebaseService {
       throw Exception('Failed to update user');
     }
   }
+
   Future<void> updateUserMemberShip() async {
     // 인앱 멤버쉽 결제시 호출해서 업데이트 함
     try {
@@ -58,6 +59,19 @@ class FirebaseService {
     } catch (e) {
       print('Error updating user membership: $e');
       throw Exception('Failed to update user membership');
+    }
+  }
+
+  // 채팅방 생성 함수
+  Future<void> createChatRoom(String roomName) async {
+    try {
+      await _firestore.collection('chatRoomList').add({
+        'roomName': roomName,
+        'timestamp': DateTime.now(),
+      });
+    } catch (e) {
+      print('Error creating chat room: $e');
+      throw Exception('Failed to create chat room');
     }
   }
 }

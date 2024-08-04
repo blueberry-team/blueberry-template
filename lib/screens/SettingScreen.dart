@@ -1,11 +1,14 @@
 import 'package:blueberry_flutter_template/screens/OssLicensesScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
 import '../providers/NotificationProvider.dart';
 import '../providers/ThemeProvider.dart';
 
 class SettingScreen extends ConsumerWidget {
   static const String name = 'SettingsScreen';
+
   const SettingScreen({super.key});
 
   @override
@@ -15,6 +18,8 @@ class SettingScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => context.pop(), icon: const Icon(Icons.arrow_back)),
         title: const Text('Setting'),
       ),
       body: Center(

@@ -5,6 +5,7 @@ import '../../widgets/chat/ChatListWidget.dart';
 import '../../widgets/chat/ChatSendWidget.dart';
 
 class ChatScreen extends StatelessWidget {
+  static const String routeName = 'ChatScreen';
   const ChatScreen({super.key});
 
   @override
