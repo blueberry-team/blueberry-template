@@ -40,47 +40,50 @@ class UserListInAdminPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                itemCount: usernames.length,
-                itemBuilder: (context, index) {
-                  return _buildUserContainer(context, usernames[index]);
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  itemCount: usernames.length,
+                  itemBuilder: (context, index) {
+                    return _buildUserContainer(context, usernames[index]);
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 20),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(45.0),
-              child: InkWell(
-                onTap: () {
-                  context.pushNamed(UserDetailPageInAdmin.name);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue,
-                  ),
-                  width: 350,
-                  height: 50,
-                  child: const Center(
-                    child: Text(
-                      'Add User',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
+              Padding(
+                padding: const EdgeInsets.all(45.0),
+                child: InkWell(
+                  onTap: () {
+                    context.pushNamed(UserDetailPageInAdmin.name);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                    ),
+                    width: 350,
+                    height: 50,
+                    child: const Center(
+                      child: Text(
+                        'Add User',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

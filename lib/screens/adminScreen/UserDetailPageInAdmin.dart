@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserDetailPageInAdmin extends StatelessWidget {
   static const String name = 'UserDetailPageInAdmin';
+
   const UserDetailPageInAdmin({super.key});
 
   @override
@@ -33,7 +34,8 @@ class UserDetailPageInAdmin extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return _buildUserInformationContainer(userDetails[index]);
                 },
-                separatorBuilder: (context, index) => const SizedBox(height: 20),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 20),
               ),
             ),
             Padding(
