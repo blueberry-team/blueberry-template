@@ -14,7 +14,7 @@ else
 endif
 
 # Define the default target to call all necessary targets
-all: init analyze apply buildRunner
+all: init analyze apply format buildRunner
 
 # Define the init target
 init:
@@ -37,6 +37,15 @@ endif
 # Define the apply target
 apply:
 	@echo "Applying dart fixes..."
+ifeq ($(DETECTED_OS), Windows)
+	@dart fix --apply
+else
+	@dart fix --apply
+endif
+
+# Define the apply target
+format:
+	@echo "format dart fixes..."
 ifeq ($(DETECTED_OS), Windows)
 	@dart format .
 else
