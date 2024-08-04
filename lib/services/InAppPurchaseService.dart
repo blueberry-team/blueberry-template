@@ -1,11 +1,8 @@
 import 'dart:async';
-
-import 'package:blueberry_flutter_template/providers/user/UserMemberShipProvider.dart';
-import 'package:blueberry_flutter_template/services/FirebaseService.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'dart:io';
+
+import 'package:blueberry_flutter_template/services/FirebaseService.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class InAppPurchaseService {
   static const String _kIosProductId = 'com.gaeting.example.userLevel';
@@ -33,14 +30,16 @@ class InAppPurchaseService {
   }
 
   Future<void> buyMembership() async {
-    final String productId = Platform.isIOS ? _kIosProductId : _kAndroidProductId;
+    final String productId =
+        Platform.isIOS ? _kIosProductId : _kAndroidProductId;
 
     final ProductDetails product = await _getProductDetails(productId);
 
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
 
     try {
-      final bool success = await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      final bool success =
+          await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       if (!success) {
         throw Exception('Purchase failed');
       }
@@ -52,7 +51,7 @@ class InAppPurchaseService {
 
   Future<ProductDetails> _getProductDetails(String productId) async {
     final ProductDetailsResponse response =
-    await inAppPurchase.queryProductDetails({productId});
+        await inAppPurchase.queryProductDetails({productId});
 
     if (response.notFoundIDs.isNotEmpty) {
       throw Exception('Product not found');
@@ -61,7 +60,8 @@ class InAppPurchaseService {
     return response.productDetails.first;
   }
 
-  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
+  void _listenToPurchaseUpdated(
+      List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.purchased) {
         // 구매 완료
@@ -84,6 +84,7 @@ class InAppPurchaseService {
       await firebaseService.updateUserMemberShip();
     }
   }
+
   void dispose() {
     subscription.cancel();
     // 기타 필요한 정리 작업

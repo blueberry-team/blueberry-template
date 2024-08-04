@@ -41,7 +41,7 @@ class PaymentService {
           Bootpay().requestPayment(
             payload: payload,
             showCloseButton: false,
-            closeButton: Icon(Icons.close, size: 35.0, color: Colors.black54),
+            closeButton: const Icon(Icons.close, size: 35.0, color: Colors.black54),
             onDone: (String data) async {
               print('결제 완료: $data');
               try {

@@ -2795,7 +2795,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
 /// flutter_native_splash 2.4.0
 const _flutter_native_splash = Package(
     name: 'flutter_native_splash',
-    description: "Customize Flutter's default white native splash screen with background color and splash image. Supports dark mode, full screen, and more.",
+    description: "Customize Flutter's default white native splash view with background color and splash image. Supports dark mode, full view, and more.",
     repository: 'https://github.com/jonbhanson/flutter_native_splash',
     authors: [],
     version: '2.4.0',

@@ -1,20 +1,20 @@
-import 'package:blueberry_flutter_template/screens/SettingScreen.dart';
-import 'package:blueberry_flutter_template/screens/TopScreen.dart';
-import 'package:blueberry_flutter_template/screens/adminScreen/AdminLoadingPage.dart';
-import 'package:blueberry_flutter_template/screens/adminScreen/AdminMainPage.dart';
-import 'package:blueberry_flutter_template/screens/adminScreen/UserDetailPageInAdmin.dart';
-import 'package:blueberry_flutter_template/screens/adminScreen/UserListInAdminPage.dart';
-import 'package:blueberry_flutter_template/screens/chat/ChatScreen.dart';
-import 'package:blueberry_flutter_template/screens/mbti/MBTITestScreen.dart';
-import 'package:blueberry_flutter_template/screens/mypage/MyPageScreen.dart';
-import 'package:blueberry_flutter_template/screens/mypage/camera/SettingInsideAccountManagerWidget.dart';
-import 'package:blueberry_flutter_template/widgets/payment/WebPaymentWidget.dart';
+import 'package:blueberry_flutter_template/feature/admin/AdminLoadingPage.dart';
+import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
+import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
+import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
+import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
+import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
+import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
+import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../screens/SplashScreen.dart';
-import '../screens/mypage/SignUpScreen.dart';
+import '../core/SplashScreen.dart';
+import '../core/TopScreen.dart';
+import '../feature/camera/SettingInsideAccountManagerWidget.dart';
+import '../feature/mypage/MyPageScreen.dart';
+import '../feature/signup/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -85,21 +85,21 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: 'adminmain',
-            name: AdminMainPage.name,
+            name: AdminScreen.name,
             builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const AdminMainPage()),
+                ResponsiveLayoutBuilder(context, const AdminScreen()),
           ),
           GoRoute(
             path: 'userlistinadmin',
-            name: UserListInAdminPage.name,
+            name: AdminUserListPage.name,
             builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const UserListInAdminPage()),
+                ResponsiveLayoutBuilder(context, const AdminUserListPage()),
           ),
           GoRoute(
             path: 'userdetailinadmin',
-            name: UserDetailPageInAdmin.name,
+            name: AdminUserDetailPage.name,
             builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const UserDetailPageInAdmin()),
+                ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
           ),
         ],
       ),

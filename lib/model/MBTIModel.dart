@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../widgets/mbti/MBTIHomeWidget.dart';
+import '../feature/mbti/widget/MBTIHomeWidget.dart';
 
 part 'generated/MBTIModel.freezed.dart';
 part 'generated/MBTIModel.g.dart';
