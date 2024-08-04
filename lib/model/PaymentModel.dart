@@ -13,5 +13,6 @@ class PaymentModel with _$PaymentModel {
     required DateTime createdAt,
   }) = _PaymentModel;
 
-  factory PaymentModel.fromJson(Map<String, dynamic> json) => _$PaymentModelFromJson(json);
+  factory PaymentModel.fromJson(Map<String, dynamic> json) =>
+      _$PaymentModelFromJson(json);
 }

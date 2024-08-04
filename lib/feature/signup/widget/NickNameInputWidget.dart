@@ -5,7 +5,6 @@ import 'package:blueberry_flutter_template/utils/ForbiddenPatterns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class NickNameInputWidget extends ConsumerWidget {
   final VoidCallback onNext;
 
@@ -32,8 +31,9 @@ class NickNameInputWidget extends ConsumerWidget {
                   return AppStrings.errorMessage_emptyNickName;
                 } else if (!nickNameRegExp.hasMatch(value)) {
                   return AppStrings.errorMessage_wrongNickName;
-                } for(var patterns in forbiddenPatterns) {
-                  if(patterns.hasMatch(value)) {
+                }
+                for (var patterns in forbiddenPatterns) {
+                  if (patterns.hasMatch(value)) {
                     return AppStrings.errorMessage_forbiddenNickName;
                   }
                 }
@@ -45,12 +45,12 @@ class NickNameInputWidget extends ConsumerWidget {
               onPressed: () {
                 try {
                   if (formKey.currentState!.validate()) {
-                    final user = ref.watch(firebaseAuthServiceProvider).getCurrentUser();
+                    final user =
+                        ref.watch(firebaseAuthServiceProvider).getCurrentUser();
                     user?.sendEmailVerification();
                     onNext();
                     print('okay');
                   }
-
                 } catch (e) {
                   print(e);
                 }

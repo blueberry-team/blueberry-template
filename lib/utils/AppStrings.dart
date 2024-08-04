@@ -5,8 +5,6 @@ class AppStrings {
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
 
-
-
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
   static const String loginButtonText = '로그인';
@@ -47,8 +45,8 @@ class AppStrings {
   static const String reCheckMBTI = '재검사하기';
   static const String checkMBTI = '검사하기';
   static const String stronglyAgree = '매우 그렇다';
-  static const String agree= '그렇다';
-  static const String neutral= '보통이다';
+  static const String agree = '그렇다';
+  static const String neutral = '보통이다';
   static const String disagree = '아니다';
   static const String stronglyDisagree = '전혀 아니다';
 
@@ -78,19 +76,23 @@ class AppStrings {
   static const String errorMessage_emptyEmail = '이메일 주소를 입력하세요.';
   static const String errorMessage_invalidEmail = '유효한 이메일 주소를 입력하세요.';
   static const String errorMessage_checkEmail = '이메일 주소를 확인해주세요.';
-  static const String errorMessage_emailAlreadyInUse = '이미 다른 계정에서 사용 중인 이메일 주소입니다.';
+  static const String errorMessage_emailAlreadyInUse =
+      '이미 다른 계정에서 사용 중인 이메일 주소입니다.';
   static const String errorMessage_weakPassword = '비밀번호가 너무 약합니다.';
-  static const String errorMessage_userNotFound = '이 식별자에 해당하는 사용자 기록이 없습니다. 사용자가 삭제되었을 수 있습니다.';
-  static const String errorMessage_wrongPassword = '비밀번호가 잘못 되었습니다. 다시 시도 해 주세요.';
-  static const String errorMessage_regexpPassword = '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
+  static const String errorMessage_userNotFound =
+      '이 식별자에 해당하는 사용자 기록이 없습니다. 사용자가 삭제되었을 수 있습니다.';
+  static const String errorMessage_wrongPassword =
+      '비밀번호가 잘못 되었습니다. 다시 시도 해 주세요.';
+  static const String errorMessage_regexpPassword =
+      '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
   static const String errorMessage_checkPassword = '비밀번호를 확인 해주세요.';
   static const String errorMessage_duplicatedPassword = '비밀번호가 일치하지 않습니다.';
   static const String errorMessage_emptyName = '이름을 입력해주세요.';
   static const String errorMessage_worngName = '한글 4자 이상의 이름을 입력해주세요.';
   static const String errorMessage_emptyNickName = '닉네임을 입력해주세요.';
-  static const String errorMessage_wrongNickName = '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
+  static const String errorMessage_wrongNickName =
+      '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
   static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
-
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';
@@ -127,6 +129,4 @@ class AppStrings {
   static const String isUserMembership = '프리미엄 멤버쉽을 사용 중 입니다';
   static const String notUserMembership = '프리미엄 멤버쉽을 사용 중이 아닙니다';
   static const String getMembership = '프리미엄 회원 가입하기';
-
-
 }

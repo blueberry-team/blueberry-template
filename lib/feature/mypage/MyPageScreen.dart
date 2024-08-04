@@ -191,7 +191,7 @@ class MyPageScreen extends ConsumerWidget {
                   }
                 }
               },
-                  child: const ListTile(
+              child: const ListTile(
                 leading: Icon(Icons.person_off),
                 title: Text(
                   "회원탈퇴",

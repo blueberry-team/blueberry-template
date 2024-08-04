@@ -26,10 +26,9 @@ class PredefinedItems {
         return premiumMembership;
       case 2:
         return basicMembership;
-    // 더 많은 케이스...
+      // 더 많은 케이스...
       default:
         throw Exception("Unknown item id: $id");
     }
   }
-
 }

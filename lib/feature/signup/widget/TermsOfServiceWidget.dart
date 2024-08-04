@@ -46,10 +46,10 @@ class _TermsOfServicePageState extends State<TermsOfServiceWidget> {
             isBottom
                 ? widget.onNext()
                 : _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
+                    _scrollController.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
           },
           child: const Icon(Icons.check),
         )));

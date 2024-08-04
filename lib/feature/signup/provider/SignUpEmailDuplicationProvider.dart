@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final emailDuplicateProvider = StateNotifierProvider<EmailDuplicateNotifier, EmailDuplicateState>((ref) {
+final emailDuplicateProvider =
+    StateNotifierProvider<EmailDuplicateNotifier, EmailDuplicateState>((ref) {
   return EmailDuplicateNotifier();
 });
 
@@ -19,7 +20,8 @@ class EmailDuplicateNotifier extends StateNotifier<EmailDuplicateState> {
 
   Future<bool> isDuplication(String email) async {
     try {
-      QuerySnapshot querySnapshot = await _firestore.collection('users')
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('users')
           .where('email', isEqualTo: email)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
@@ -31,11 +33,10 @@ class EmailDuplicateNotifier extends StateNotifier<EmailDuplicateState> {
         state = EmailDuplicateState(email: email, isDuplication: false);
         return false;
       }
-    } catch(e){
+    } catch (e) {
       print('$e');
       state = EmailDuplicateState(email: email, isDuplication: false);
       return false;
     }
   }
-
 }

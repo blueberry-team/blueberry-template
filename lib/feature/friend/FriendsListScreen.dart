@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 import 'widget/FriendsListWidget.dart';
 
-
-class FriendsListScreen extends StatelessWidget{
+class FriendsListScreen extends StatelessWidget {
   const FriendsListScreen({super.key});
 
   @override

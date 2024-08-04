@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final profileDetailProvider = StateNotifierProvider<ProfileDetailNotifier, int>((ref) {
+final profileDetailProvider =
+    StateNotifierProvider<ProfileDetailNotifier, int>((ref) {
   return ProfileDetailNotifier(0);
 });
 

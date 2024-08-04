@@ -13,15 +13,14 @@ class MiniAvatar extends ConsumerWidget {
     return Center(
       child: profileImage.when(
           data: (imageUrl) => CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage(imageUrl),
-          ),
+                radius: 30,
+                backgroundImage: NetworkImage(imageUrl),
+              ),
           loading: () => const CircularProgressIndicator(),
           error: (e, s) => CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.grey.shade300,
-          )
-      ),
+                radius: 30,
+                backgroundColor: Colors.grey.shade300,
+              )),
     );
   }
 }

@@ -31,9 +31,7 @@ class FirebaseAuthService {
   Future<User?> signUpWithEmailPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+          email: email, password: password);
       return result.user;
     } catch (e) {
       throw Exception('회원가입 실패: $e');
@@ -44,9 +42,7 @@ class FirebaseAuthService {
   Future<User?> signInWithEmailPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+          email: email, password: password);
       return result.user;
     } catch (e) {
       throw Exception('로그인 실패: $e');

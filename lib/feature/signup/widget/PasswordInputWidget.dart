@@ -3,7 +3,6 @@ import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class PasswordInputWidget extends ConsumerWidget {
   final VoidCallback onNext;
 
@@ -12,9 +11,9 @@ class PasswordInputWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final password = ref.watch(passwordProvider.notifier);
-    final RegExp passwordRegExp = RegExp(r'^(?=.*[!@#\$&*~])(?=.*[!@#\$&*~]).{8,}$');
+    final RegExp passwordRegExp =
+        RegExp(r'^(?=.*[!@#\$&*~])(?=.*[!@#\$&*~]).{8,}$');
     final formKey = GlobalKey<FormState>();
-
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -37,12 +36,13 @@ class PasswordInputWidget extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 if (formKey.currentState?.validate() ?? false) {
                   onNext();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text(AppStrings.errorMessage_checkPassword)),
+                    const SnackBar(
+                        content: Text(AppStrings.errorMessage_checkPassword)),
                   );
                 }
               },

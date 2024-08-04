@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'generated/SaleItemModel.freezed.dart';
 part 'generated/SaleItemModel.g.dart';
 
-
 @freezed
 class SaleItemModel with _$SaleItemModel {
   const factory SaleItemModel({
@@ -15,6 +14,6 @@ class SaleItemModel with _$SaleItemModel {
     required String imageUrl,
   }) = _SaleItem;
 
-  factory SaleItemModel.fromJson(Map<String, dynamic> json) => _$SaleItemModelFromJson(json);
+  factory SaleItemModel.fromJson(Map<String, dynamic> json) =>
+      _$SaleItemModelFromJson(json);
 }
-

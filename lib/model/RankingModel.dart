@@ -12,5 +12,6 @@ class RankingModel with _$RankingModel {
     required DateTime updatedAt,
   }) = _RankingModel;
 
-  factory RankingModel.fromJson(Map<String, dynamic> json) => _$RankingModelFromJson(json);
+  factory RankingModel.fromJson(Map<String, dynamic> json) =>
+      _$RankingModelFromJson(json);
 }

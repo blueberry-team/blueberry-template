@@ -13,6 +13,8 @@ final passwordProvider = StateProvider.autoDispose<String>((ref) => '');
 final passwordConfirmProvider = StateProvider.autoDispose<String>((ref) => '');
 
 // 휴대폰 번호 인증 ( 구매할 때 휴대폰 인증 ) ( 따로 만들기 )
-final residentRegistrationNumberProvider = StateProvider.autoDispose<String>((ref) => '');
+final residentRegistrationNumberProvider =
+    StateProvider.autoDispose<String>((ref) => '');
 final phoneNumberProvider = StateProvider.autoDispose<String>((ref) => '');
-final verificationNumberProvider = StateProvider.autoDispose<String>((ref) => '');
+final verificationNumberProvider =
+    StateProvider.autoDispose<String>((ref) => '');

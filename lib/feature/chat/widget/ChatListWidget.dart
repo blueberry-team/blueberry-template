@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider/ChatListProvider.dart';
 
-
 class ChatListWidget extends ConsumerWidget {
   const ChatListWidget({super.key});
 

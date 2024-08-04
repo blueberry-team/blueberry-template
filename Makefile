@@ -14,7 +14,7 @@ else
 endif
 
 # Define the default target to call all necessary targets
-all: init buildRunner
+all: init analyze apply format buildRunner
 
 # Define the init target
 init:
@@ -29,9 +29,9 @@ endif
 analyze:
 	@echo "Analyzing Flutter project..."
 ifeq ($(DETECTED_OS), Windows)
-	@flutter analyze
+	-@flutter analyze
 else
-	@$(FLUTTER) analyze
+	-@$(FLUTTER) analyze
 endif
 
 # Define the apply target
@@ -41,6 +41,15 @@ ifeq ($(DETECTED_OS), Windows)
 	@dart fix --apply
 else
 	@dart fix --apply
+endif
+
+# Define the apply target
+format:
+	@echo "format dart fixes..."
+ifeq ($(DETECTED_OS), Windows)
+	@dart format .
+else
+	@dart format .
 endif
 
 # Define the buildRunner target
