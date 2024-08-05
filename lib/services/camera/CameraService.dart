@@ -4,7 +4,7 @@ class CameraService {
   CameraController? controller;
   List<CameraDescription> cameras = [];
   bool _readyTakePhoto = false;
-  bool _changeCamera = false;
+  final bool _changeCamera = false;
 
   bool get readyTakePhoto => _readyTakePhoto;
   bool get changeCamera => _changeCamera;
@@ -22,11 +22,11 @@ class CameraService {
     CameraDescription newCamera;
     if (lensDirection == CameraLensDirection.back) {
       newCamera = cameras.firstWhere(
-            (camera) => camera.lensDirection == CameraLensDirection.front,
+        (camera) => camera.lensDirection == CameraLensDirection.front,
       );
     } else {
       newCamera = cameras.firstWhere(
-            (camera) => camera.lensDirection == CameraLensDirection.back,
+        (camera) => camera.lensDirection == CameraLensDirection.back,
       );
     }
 

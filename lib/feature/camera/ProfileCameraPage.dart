@@ -6,7 +6,6 @@ import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -88,7 +87,7 @@ class _ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
             child: Center(
               child: GestureDetector(
                 onTap: () {
-                     _attemptTakePhoto(context);
+                  _attemptTakePhoto(context);
                 },
                 onTapDown: (_) => setState(() => _isPressed = true),
                 onTapUp: (_) => setState(() => _isPressed = false),
@@ -146,13 +145,13 @@ class _ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
     );
   }
 
-  void _attemptTakePhoto( BuildContext context) async {
+  void _attemptTakePhoto(BuildContext context) async {
     // file에 접근할꺼임 사진을 촬영하고 저장하기 위해서
     final String timeInMilli = DateTime.now().millisecondsSinceEpoch.toString();
     // 이미지를 저장할때 시간을 기준으로 이미지명을 만들기 위해서 사용함
     try {
       final path =
-      join((await getTemporaryDirectory()).path, '$timeInMilli.png');
+          join((await getTemporaryDirectory()).path, '$timeInMilli.png');
 
       final XFile file = await cameraService.controller!.takePicture();
 
@@ -169,4 +168,3 @@ class _ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
     }
   }
 }
-

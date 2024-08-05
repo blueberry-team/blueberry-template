@@ -7,13 +7,11 @@ import '../../core/widget/SquareTitleWidget.dart';
 import '../../services/FirebaseAuthServiceProvider.dart';
 import '../../services/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
-import '../camera/ProfileCameraPage.dart';
 import '../camera/ProfileGalleryPage.dart';
 import '../camera/provider/PageProvider.dart';
 import '../mypage/MyPageScreen.dart';
 import '../signup/SignUpScreen.dart';
 import 'provider/UserInfoProvider.dart';
-
 
 /// DeleteMyPage.dart
 ///

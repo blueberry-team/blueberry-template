@@ -112,9 +112,7 @@ class MyPageScreen extends ConsumerWidget {
             ),
             const CustomDividerWidget(),
             GestureDetector(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: const ListTile(
                 leading: Icon(Icons.chat_bubble_outline),
                 title: Text(
