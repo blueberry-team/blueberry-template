@@ -4,30 +4,42 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../../model/FriendModel.dart';
 
+
+// 친구 목록을 제공하는 Provider
 final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
   return firestore.collection('friends').snapshots().map((snapshot) {
-    return snapshot.docs.map((doc) {
-      final data = doc.data();
-      return FriendModel(
-        userId: data['userId'] as String,
-        friendId: data['friendId'] as String,
-        name: data['name'] as String,
-        imageUrl: data['imageUrl'] as String,
-        status: data['status'] as String,
-        likes: data['likes'] as int,
-        lastConnect: (data['lastConnect'] as Timestamp).toDate(),
-      );
-    }).toList();
+    return snapshot.docs.map((doc) => FriendModel.fromDocument(doc)).toList();
   });
 });
 
+// friendImageURL을 가져오는 함수
 Future<String> fetchFriendImageUrl(String imageName) async {
-  final ref = FirebaseStorage.instance.ref('friends-mypage/$imageName.webp');
-  return await ref.getDownloadURL();
+  try {
+    final ref = FirebaseStorage.instance.ref('friends-profile/$imageName.jpeg');
+    final imageUrl = await ref.getDownloadURL();
+    return imageUrl;
+  } catch (e) {
+    print('Error fetching image URL: $e');
+    return '';
+  }
 }
 
-final friendImageProvider =
-    FutureProvider.family<String, String>((ref, imageName) async {
+// 이미지 URL을 제공하는 Provider
+final imageProvider = FutureProvider.family<String, String>((ref, imageName) async {
   return await fetchFriendImageUrl(imageName);
 });
+
+//마지막 접속 시간을 일,시,분 별로 포멧팅해서 제공 해주는 함수
+String timeAgo(DateTime dateTime) {
+  final duration = DateTime.now().difference(dateTime);
+  if (duration.inDays > 1) {
+    return '${duration.inDays} days ago';
+  } else if (duration.inHours > 1) {
+    return '${duration.inHours} hours ago';
+  } else if (duration.inMinutes > 1) {
+    return '${duration.inMinutes} minutes ago';
+  } else {
+    return 'Just now';
+  }
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../provider/FriendsListProvider.dart';
+import 'FriendBottomSheet.dart';
 import 'FriendListItemWidget.dart';
 
 class FriendsListWidget extends ConsumerWidget {
@@ -15,7 +17,35 @@ class FriendsListWidget extends ConsumerWidget {
         return ListView.builder(
           itemCount: friends.length,
           itemBuilder: (context, index) {
-            return FriendListItemWidget(friend: friends[index]);
+            final friend = friends[index];
+            final imageUrl = ref.watch(imageProvider(friend.imageName));
+            return imageUrl.when(
+              data: (imageUrl) {
+                return FriendListItemWidget(
+                  friend: friend,
+                  imageUrl: imageUrl,
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(25.0),
+                        ),
+                      ),
+                      builder: (context) => FriendBottomSheet(
+                        friend: friend,
+                        imageUrl: imageUrl,
+                      ),
+                    );
+                  },
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) {
+                print('Error loading image: $error');
+              },
+            );
           },
         );
       },
