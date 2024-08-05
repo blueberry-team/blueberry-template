@@ -32,7 +32,6 @@ class TopScreen extends ConsumerWidget {
       const ChatRoomScreen(),
       const FriendsListScreen(),
       const MatchScreen(),
-      const MBTIScreen(),
       const LoginScreen(),
       const ProfileDetailScreen(),
       const RankingScreen(),
@@ -61,10 +60,6 @@ class TopScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
             label: 'match',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_search),
-            label: 'mbti',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
