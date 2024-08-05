@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/feature/chat/ChatRoomScreen.dart';
-import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
 import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';

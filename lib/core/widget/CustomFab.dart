@@ -5,7 +5,8 @@ class CustomFab extends StatefulWidget {
   final Color mainColor;
   final IconData mainIcon;
 
-  CustomFab({
+  const CustomFab({
+    super.key,
     required this.fabButtons,
     this.mainColor = Colors.blue,
     this.mainIcon = Icons.add,
