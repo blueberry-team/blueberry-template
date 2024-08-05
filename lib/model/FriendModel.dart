@@ -21,6 +21,7 @@ class FriendModel with _$FriendModel {
   // DocumentSnapshot에서 FriendModel 객체로 변환하는 팩토리 메서드
   factory FriendModel.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    print('프렌드 모델: $data'); // 로깅 추가
     return FriendModel(
       userId: data['userId'] as String,
       friendId: data['friendId'] as String,

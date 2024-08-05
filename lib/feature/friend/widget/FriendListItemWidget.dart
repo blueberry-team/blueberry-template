@@ -9,12 +9,7 @@ class FriendListItemWidget extends StatelessWidget {
   final String imageUrl;
   final VoidCallback onTap;
 
-  const FriendListItemWidget({
-    super.key,
-    required this.friend,
-    required this.imageUrl,
-    required this.onTap,
-  });
+  const FriendListItemWidget({super.key, required this.friend, required this.imageUrl, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

@@ -21,6 +21,7 @@ class FriendsListWidget extends ConsumerWidget {
             final imageUrl = ref.watch(imageProvider(friend.imageName));
             return imageUrl.when(
               data: (imageUrl) {
+                print('프렌즈리스트위젯 ${friend.name}: $imageUrl'); // 로깅 추가
                 return FriendListItemWidget(
                   friend: friend,
                   imageUrl: imageUrl,

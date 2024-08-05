@@ -13,6 +13,8 @@ class FriendBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('바텀시트 ${friend.name} image url: $imageUrl'); // 로깅 추가
+
     return Container(
       height: 280,
       decoration: BoxDecoration(

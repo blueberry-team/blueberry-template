@@ -18,6 +18,7 @@ Future<String> fetchFriendImageUrl(String imageName) async {
   try {
     final ref = FirebaseStorage.instance.ref('friends-profile/$imageName.jpeg');
     final imageUrl = await ref.getDownloadURL();
+    print('프로바이더 패치 함수: $imageUrl'); // 로깅 추가
     return imageUrl;
   } catch (e) {
     print('Error fetching image URL: $e');
