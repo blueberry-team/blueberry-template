@@ -15,10 +15,10 @@ class ProfileCameraPage extends ConsumerStatefulWidget {
   const ProfileCameraPage({super.key});
 
   @override
-  ProfileCameraPageState createState() => ProfileCameraPageState();
+  ConsumerState<ProfileCameraPage> createState() => _ProfileCameraPageState();
 }
 
-class ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
+class _ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
   final CameraService cameraService = CameraService();
   bool _isPressed = false;
   Size size = Size.zero;
@@ -168,7 +168,5 @@ class ProfileCameraPageState extends ConsumerState<ProfileCameraPage> {
       print('Error: $e');
     }
   }
-
-
 }
 
