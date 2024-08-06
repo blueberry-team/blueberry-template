@@ -15,15 +15,9 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
 
 // friendImageURL을 가져오는 함수
 Future<String> fetchFriendImageUrl(String imageName) async {
-  try {
-    final ref = FirebaseStorage.instance.ref('friends-profile/$imageName.jpeg');
+    final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
     final imageUrl = await ref.getDownloadURL();
-    print('프로바이더 패치 함수: $imageUrl'); // 로깅 추가
     return imageUrl;
-  } catch (e) {
-    print('Error fetching image URL: $e');
-    return '';
-  }
 }
 
 // 이미지 URL을 제공하는 Provider

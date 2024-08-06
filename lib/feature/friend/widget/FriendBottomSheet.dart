@@ -13,7 +13,6 @@ class FriendBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('바텀시트 ${friend.name} image url: $imageUrl'); // 로깅 추가
 
     return Container(
       height: 280,
@@ -70,7 +69,7 @@ class FriendBottomSheet extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  GoRouter.of(context).push('/chat'); // 채팅 페이지로 이동(현재 임의 경로)
+                  GoRouter.of(context).push('/chat');
                 },
                 child: const Text('채팅'),
               ),
@@ -83,7 +82,7 @@ class FriendBottomSheet extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  GoRouter.of(context).push('/detail'); // 디테일 페이지로 이동(현재 임의 경로)
+                  GoRouter.of(context).push('/userdetail'); //현재 임의 경로 사용중 수정 필요
                 },
                 child: const Text('프로필'),
               ),
