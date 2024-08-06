@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'AppTextStyle.dart';
 
-
-
 class DialogStyle extends ThemeExtension<DialogStyle> {
   const DialogStyle({
     this.title = black16BoldTextStyle,
@@ -33,9 +31,9 @@ class DialogStyle extends ThemeExtension<DialogStyle> {
 
   @override
   ThemeExtension<DialogStyle> lerp(
-      ThemeExtension<DialogStyle>? other,
-      double t,
-      ) {
+    ThemeExtension<DialogStyle>? other,
+    double t,
+  ) {
     if (other is! DialogStyle) {
       return this;
     }

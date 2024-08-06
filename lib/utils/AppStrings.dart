@@ -5,8 +5,6 @@ class AppStrings {
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
 
-
-
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
   static const String loginButtonText = '로그인';
@@ -48,8 +46,8 @@ class AppStrings {
   static const String checkMBTI = '검사하기';
   static const String shareMBTI = '공유하기';
   static const String stronglyAgree = '매우 그렇다';
-  static const String agree= '그렇다';
-  static const String neutral= '보통이다';
+  static const String agree = '그렇다';
+  static const String neutral = '보통이다';
   static const String disagree = '아니다';
   static const String stronglyDisagree = '전혀 아니다';
 
@@ -65,6 +63,13 @@ class AppStrings {
   static const String uploadEventButtonLabel = '이벤트 업로드';
   static const String makeChatButtonLabel = '임시 채팅 만들기';
 
+  //RankViewWidget.dart
+  static const String rankViewTitle = '오늘의 순위';
+
+  //CacheService.dart
+  static const String commonCacheKey = 'commonCacheKey';
+  static const String userCacheKey = 'userCacheData';
+
   //Error Handling
   static const String errorMessage_emptyPassword = '비밀번호를 입력하세요.';
   static const String errorMessage_invalidPassword =
@@ -72,19 +77,23 @@ class AppStrings {
   static const String errorMessage_emptyEmail = '이메일 주소를 입력하세요.';
   static const String errorMessage_invalidEmail = '유효한 이메일 주소를 입력하세요.';
   static const String errorMessage_checkEmail = '이메일 주소를 확인해주세요.';
-  static const String errorMessage_emailAlreadyInUse = '이미 다른 계정에서 사용 중인 이메일 주소입니다.';
+  static const String errorMessage_emailAlreadyInUse =
+      '이미 다른 계정에서 사용 중인 이메일 주소입니다.';
   static const String errorMessage_weakPassword = '비밀번호가 너무 약합니다.';
-  static const String errorMessage_userNotFound = '이 식별자에 해당하는 사용자 기록이 없습니다. 사용자가 삭제되었을 수 있습니다.';
-  static const String errorMessage_wrongPassword = '비밀번호가 잘못 되었습니다. 다시 시도 해 주세요.';
-  static const String errorMessage_regexpPassword = '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
+  static const String errorMessage_userNotFound =
+      '이 식별자에 해당하는 사용자 기록이 없습니다. 사용자가 삭제되었을 수 있습니다.';
+  static const String errorMessage_wrongPassword =
+      '비밀번호가 잘못 되었습니다. 다시 시도 해 주세요.';
+  static const String errorMessage_regexpPassword =
+      '비밀번호는 최소 8자 이상이어야 하며, 두개 이상의 문자와 숫자가 포함되어야 합니다.';
   static const String errorMessage_checkPassword = '비밀번호를 확인 해주세요.';
   static const String errorMessage_duplicatedPassword = '비밀번호가 일치하지 않습니다.';
   static const String errorMessage_emptyName = '이름을 입력해주세요.';
   static const String errorMessage_worngName = '한글 4자 이상의 이름을 입력해주세요.';
   static const String errorMessage_emptyNickName = '닉네임을 입력해주세요.';
-  static const String errorMessage_wrongNickName = '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
+  static const String errorMessage_wrongNickName =
+      '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
   static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
-
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';
@@ -97,6 +106,10 @@ class AppStrings {
   static const String companyInfoAbout = '회사 소개';
 
   // Phone Verification
+  static const String inputPhoneNumber = '전화번호를 입력해주세요';
+  static const String inputVerificationCode = '인증번호를 입력해주세요';
+  static const String errorMessage_timeOut = '입력시간을 초과하였습니다';
+  static const String errorMessage_commonError = '처리 중 오류가 발생했습니다.';
   static const String errorMessage_emptyPhoneNumber = '전화번호를 입력해주세요.';
   static const String errorMessage_invalidPhoneNumber = '전화번호를 확인해주세요.';
   static const String errorMessage_emptyVerificationCode = '인증번호를 입력해주세요.';
@@ -110,5 +123,14 @@ class AppStrings {
   //Success Handling
   static const String successMessage_emailValidation = '사용 가능한 이메일입니다';
 
+  //InAppPurchase
+  static const String successMessage_purchase = '결제가 완료 되었습니다.';
+  static const String successMessage_membership = '멤버십 가입이 완료 되었습니다.';
+  static const String errorMessage_purchase = '결제에 실패 했습니다. 다시 시도 해 주세요.';
+  static const String isUserMembership = '프리미엄 멤버쉽을 사용 중 입니다';
+  static const String notUserMembership = '프리미엄 멤버쉽을 사용 중이 아닙니다';
+  static const String getMembership = '프리미엄 회원 가입하기';
 
+  //Appbar Logo
+  static const String appbar_Text_Logo = 'Petting';
 }

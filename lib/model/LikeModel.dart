@@ -12,5 +12,6 @@ class LikeModel with _$LikeModel {
     required DateTime createdAt,
   }) = _LikeModel;
 
-  factory LikeModel.fromJson(Map<String, dynamic> json) => _$LikeModelFromJson(json);
+  factory LikeModel.fromJson(Map<String, dynamic> json) =>
+      _$LikeModelFromJson(json);
 }

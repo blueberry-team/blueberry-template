@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'firebase_options.dart';
-import 'providers/ThemeProvider.dart';
+import 'core/provider/ThemeProvider.dart';
 import 'utils/AppTheme.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -21,7 +21,9 @@ Future<void> main() async {
     debugPrint('FCM Token: $token');
   });
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,22 +31,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: Consumer(
-        builder: (context, ref, child) {
-          final themeMode = ref.watch(themeNotifierProvider); // 테마 모드 상태 관리 객체
-          final router = ref.watch(routerProvider); // 라우터 객체
+    return Consumer(
+      builder: (context, ref, child) {
+        final themeMode = ref.watch(themeNotifierProvider); // 테마 모드 상태 관리 객체
+        final router = ref.watch(routerProvider); // 라우터 객체
 
-          return MaterialApp.router(
-            routerConfig: router,
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appTitle,
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: themeMode,
-          );
-        },
-      ),
+        return MaterialApp.router(
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.appTitle,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+        );
+      },
     );
   }
 }

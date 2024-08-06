@@ -13,5 +13,6 @@ class ChatModel with _$ChatModel {
     required DateTime timestamp,
   }) = _ChatModel;
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) => _$ChatModelFromJson(json);
+  factory ChatModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatModelFromJson(json);
 }

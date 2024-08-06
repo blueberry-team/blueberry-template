@@ -44,7 +44,7 @@ dependencies:
 
   # Service
   dart_openai: ^5.1.0
-  bootpay: ^4.9.7
+  bootpay: ^4.9.91
 
   # Social Login
   sign_in_with_apple: ^6.1.1
@@ -54,6 +54,12 @@ dependencies:
   app_links: ^6.1.3
   photo_manager: ^3.2.0
   image_picker: ^1.1.0
+  flutter_cache_manager: ^3.3.3
+  dart_jsonwebtoken: ^2.14.0
+  package_info_plus: ^8.0.0
+
+  # REST API Client
+  dio: ^5.5.0+1
 
   # Profile Upload
   camera: ^0.11.0+1
@@ -79,6 +85,11 @@ dependencies:
 
   # Router
   go_router: ^14.2.1
+  crypto: ^3.0.3
+
+  # In App Purchase
+  in_app_purchase: ^3.2.0
+
 
 dev_dependencies:
   flutter_test:
@@ -101,7 +112,7 @@ flutter:
     - assets/logo/
     - assets/login_page_images/
 
-# Run Commands to generate splash screen
+# Run Commands to generate splash view
 # 1) flutter clean
 # 2) flutter pub get
 # 3) flutter pub run flutter_native_splash:create

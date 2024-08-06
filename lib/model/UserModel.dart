@@ -12,6 +12,7 @@ class UserModel with _$UserModel {
     required String name,
     required String email,
     required int age,
+    required bool isMemberShip,
     required DateTime createdAt,
     String? profileImageUrl,
     String? fcmToken,
