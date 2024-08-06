@@ -1,6 +1,6 @@
 import 'package:blueberry_flutter_template/feature/chat/ChatRoomScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
-import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
+import 'package:blueberry_flutter_template/feature/profile/UserSelectProfileScreen.dart';
 import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,7 +34,7 @@ class TopScreen extends ConsumerWidget {
       const MatchScreen(),
       const MBTIScreen(),
       const LoginScreen(),
-      const ProfileDetailScreen(),
+      const UserSelectProfileScreen(),
       const RankingScreen(),
       const AdminUserListPage(),
     ];
