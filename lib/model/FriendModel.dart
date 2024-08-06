@@ -17,18 +17,4 @@ class FriendModel with _$FriendModel {
   }) = _FriendModel;
 
   factory FriendModel.fromJson(Map<String, dynamic> json) => _$FriendModelFromJson(json);
-
-  // DocumentSnapshot에서 FriendModel 객체로 변환하는 팩토리 메서드
-  factory FriendModel.fromDocument(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return FriendModel(
-      userId: data['userId'] as String,
-      friendId: data['friendId'] as String,
-      name: data['name'] as String,
-      status: data['status'] as String,
-      imageName: data['imageName'] as String,
-      likes: data['likes'] as int,
-      lastConnect: (data['lastConnect'] as Timestamp).toDate(),
-    );
-  }
 }

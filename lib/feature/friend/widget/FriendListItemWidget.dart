@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/FriendModel.dart';
+import '../../../utils/Formatter.dart';
 import '../provider/FriendsListProvider.dart';
 
 class FriendListItemWidget extends StatelessWidget {
