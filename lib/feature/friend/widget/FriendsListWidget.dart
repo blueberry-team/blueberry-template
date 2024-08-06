@@ -14,39 +14,46 @@ class FriendsListWidget extends ConsumerWidget {
 
     return friendList.when(
       data: (friends) {
-        return ListView.builder(
-          itemCount: friends.length,
-          itemBuilder: (context, index) {
-            final friend = friends[index];
-            final imageUrl = ref.watch(imageProvider(friend.imageName));
-            return imageUrl.when(
-              data: (imageUrl) {
-                return FriendListItemWidget(
-                  friend: friend,
-                  imageUrl: imageUrl,
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(25.0),
-                        ),
-                      ),
-                      builder: (context) => FriendBottomSheet(
-                        friend: friend,
-                        imageUrl: imageUrl,
-                      ),
-                    );
-                  },
-                );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) {
-                print('Error loading image: $error');
-              },
-            );
+        return RefreshIndicator(
+          onRefresh: () async {
+            ref.refresh(friendsListProvider);
           },
+          child: ListView.builder(
+            itemCount: friends.length,
+            itemBuilder: (context, index) {
+              final friend = friends[index];
+              final imageUrl = ref.watch(imageProvider(friend.imageName));
+              return imageUrl.when(
+                data: (imageUrl) {
+                  return FriendListItemWidget(
+                    friend: friend,
+                    imageUrl: imageUrl,
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25.0),
+                          ),
+                        ),
+                        builder: (context) => FriendBottomSheet(
+                          friend: friend,
+                          imageUrl: imageUrl,
+                        ),
+                      );
+                    },
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stack) {
+                  return const ListTile(
+                    title: Text('Error loading image'),
+                  );
+                },
+              );
+            },
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
