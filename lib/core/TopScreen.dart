@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
-import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
