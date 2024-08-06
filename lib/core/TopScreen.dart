@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/feature/chat/ChatRoomScreen.dart';
+import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
 import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
 import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class TopScreen extends ConsumerWidget {
       const ProfileDetailScreen(),
       const RankingScreen(),
       const AdminUserListPage(),
+      const PostScreen()
     ];
 
     return Scaffold(
@@ -75,6 +77,10 @@ class TopScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.admin_panel_settings),
             label: 'Admin',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.podcasts),
+            label: 'Post',
           ),
         ],
         currentIndex: selectedIndex,
