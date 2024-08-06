@@ -1,12 +1,9 @@
-import 'package:blueberry_flutter_template/feature/chat/ChatRoomScreen.dart';
 import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
-import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
 import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../feature/admin/AdminUserListPage.dart';
-import '../feature/friend/FriendsListScreen.dart';
 import '../feature/login/LoginScreen.dart';
 import '../feature/match/MatchScreen.dart';
 
@@ -29,14 +26,10 @@ class TopScreen extends ConsumerWidget {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
     final List<Widget> pages = [
-      const ChatRoomScreen(),
-      const FriendsListScreen(),
+      const PostScreen(),
       const MatchScreen(),
       const LoginScreen(),
-      const ProfileDetailScreen(),
-      const RankingScreen(),
-      const AdminUserListPage(),
-      const PostScreen()
+      const AdminUserListPage()
     ];
 
     return Scaffold(
@@ -51,12 +44,8 @@ class TopScreen extends ConsumerWidget {
         backgroundColor: Colors.blueGrey[100],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Friends',
+            icon: Icon(Icons.podcasts),
+            label: 'Post',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
@@ -67,20 +56,8 @@ class TopScreen extends ConsumerWidget {
             label: 'MyPage',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle_rounded),
-            label: 'ProfileDetail',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_events),
-            label: 'Rank',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.admin_panel_settings),
             label: 'Admin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.podcasts),
-            label: 'Post',
           ),
         ],
         currentIndex: selectedIndex,
