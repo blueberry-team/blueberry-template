@@ -7,8 +7,8 @@ class VoiceOutputWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _list = ref.watch(voiceOutputProvider);
-    return _list.when(
+    final list = ref.watch(voiceOutputProvider);
+    return list.when(
       data: (data) {
         return _buildListView(data);
       },
@@ -26,9 +26,9 @@ class VoiceOutputWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: data
             .map((text) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: VoiceOutputRow(text: text),
-        ))
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: VoiceOutputRow(text: text),
+                ))
             .toList(),
       ),
     );
@@ -38,7 +38,7 @@ class VoiceOutputWidget extends ConsumerWidget {
 class VoiceOutputRow extends StatelessWidget {
   final String text;
 
-  const VoiceOutputRow({required this.text});
+  const VoiceOutputRow({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

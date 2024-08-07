@@ -16,7 +16,7 @@ class ReportUserButton extends StatelessWidget {
   }
 
   void _showReportDialog(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
 
     showDialog(
       context: context,
@@ -24,8 +24,9 @@ class ReportUserButton extends StatelessWidget {
         return AlertDialog(
           title: const Text("Report User"),
           content: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(hintText: "Enter your report reason"),
+            controller: controller,
+            decoration:
+                const InputDecoration(hintText: "Enter your report reason"),
           ),
           actions: [
             TextButton(
@@ -36,7 +37,7 @@ class ReportUserButton extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                _reportUser(_controller.text);
+                _reportUser(controller.text);
                 Navigator.of(context).pop();
               },
               child: const Text("Report"),
