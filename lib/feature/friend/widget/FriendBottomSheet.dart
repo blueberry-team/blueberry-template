@@ -135,7 +135,7 @@ class FriendBottomSheet extends StatelessWidget {
                 _reportUser(_controller.text);
                 Navigator.of(context).pop();
               },
-              child: Text("Report"),
+              child: const Text("Report"),
             ),
           ],
         );
