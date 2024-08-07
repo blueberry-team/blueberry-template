@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../model/FriendModel.dart';
 
@@ -8,8 +10,7 @@ class FriendBottomSheet extends StatelessWidget {
   final FriendModel friend;
   final String imageUrl;
 
-  const FriendBottomSheet(
-      {super.key, required this.friend, required this.imageUrl});
+  const FriendBottomSheet({super.key, required this.friend, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class FriendBottomSheet extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
+                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -78,21 +79,79 @@ class FriendBottomSheet extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
+                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  GoRouter.of(context).push('/userdetail'); //현재 임의 경로 사용중 수정 필요
+                  GoRouter.of(context).push('/userdetail'); // 현재 임의 경로 사용 중 수정 필요
                 },
                 child: const Text('프로필'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _showReportDialog(context);
+                },
+                child: const Text('신고하기'),
               ),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void _showReportDialog(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Report User"),
+          content: TextField(
+            controller: _controller,
+            decoration: const InputDecoration(hintText: "Enter your report reason"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                _reportUser(_controller.text);
+                Navigator.of(context).pop();
+              },
+              child: Text("Report"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _reportUser(String reason) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      await FirebaseFirestore.instance.collection('reports').add({
+        'reportedUserId': friend.userId,
+        'reporterUserId': currentUser.uid,
+        'reason': reason,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    }
   }
 }
