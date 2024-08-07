@@ -4,16 +4,15 @@ import 'package:go_router/go_router.dart';
 
 import '../../../model/FriendModel.dart';
 
-
 class FriendBottomSheet extends StatelessWidget {
   final FriendModel friend;
   final String imageUrl;
 
-  const FriendBottomSheet({super.key, required this.friend, required this.imageUrl});
+  const FriendBottomSheet(
+      {super.key, required this.friend, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 280,
       decoration: BoxDecoration(
@@ -47,7 +46,9 @@ class FriendBottomSheet extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(friend.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      Text(friend.name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
                       const SizedBox(height: 8),
                       Text(friend.status, style: const TextStyle(fontSize: 16)),
                     ],
@@ -62,7 +63,8 @@ class FriendBottomSheet extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -75,7 +77,8 @@ class FriendBottomSheet extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 54, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

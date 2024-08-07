@@ -12,7 +12,8 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       final data = doc.data();
       return FriendModel.fromJson({
         ...data,
-        'lastConnect': (data['lastConnect'] as Timestamp).toDate().toIso8601String(),
+        'lastConnect':
+            (data['lastConnect'] as Timestamp).toDate().toIso8601String(),
       });
     }).toList();
   });
@@ -20,13 +21,13 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
 
 // friendImageURL을 가져오는 함수
 Future<String> fetchFriendImageUrl(String imageName) async {
-    final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
-    final imageUrl = await ref.getDownloadURL();
-    return imageUrl;
+  final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
+  final imageUrl = await ref.getDownloadURL();
+  return imageUrl;
 }
 
 // 이미지 URL을 제공하는 Provider
-final imageProvider = FutureProvider.family<String, String>((ref, imageName) async {
+final imageProvider =
+    FutureProvider.family<String, String>((ref, imageName) async {
   return await fetchFriendImageUrl(imageName);
 });
-

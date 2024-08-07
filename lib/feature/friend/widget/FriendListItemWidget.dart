@@ -9,7 +9,11 @@ class FriendListItemWidget extends StatelessWidget {
   final String imageUrl;
   final VoidCallback onTap;
 
-  const FriendListItemWidget({super.key, required this.friend, required this.imageUrl, required this.onTap});
+  const FriendListItemWidget(
+      {super.key,
+      required this.friend,
+      required this.imageUrl,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,8 @@ class FriendListItemWidget extends StatelessWidget {
                   children: [
                     Text(lastConnect),
                     const SizedBox(height: 5),
-                    Text(friend.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(friend.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                     Text(friend.status),
                   ],
                 ),

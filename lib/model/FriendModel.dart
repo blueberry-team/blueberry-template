@@ -15,5 +15,6 @@ class FriendModel with _$FriendModel {
     required DateTime lastConnect,
   }) = _FriendModel;
 
-  factory FriendModel.fromJson(Map<String, dynamic> json) => _$FriendModelFromJson(json);
+  factory FriendModel.fromJson(Map<String, dynamic> json) =>
+      _$FriendModelFromJson(json);
 }
