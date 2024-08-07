@@ -4,30 +4,29 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../../model/FriendModel.dart';
 
+// 친구 목록을 제공하는 Provider
 final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
   return firestore.collection('friends').snapshots().map((snapshot) {
     return snapshot.docs.map((doc) {
       final data = doc.data();
-      return FriendModel(
-        userId: data['userId'] as String,
-        friendId: data['friendId'] as String,
-        name: data['name'] as String,
-        imageUrl: data['imageUrl'] as String,
-        status: data['status'] as String,
-        likes: data['likes'] as int,
-        lastConnect: (data['lastConnect'] as Timestamp).toDate(),
-      );
+      return FriendModel.fromJson({
+        ...data,
+        'lastConnect':
+            (data['lastConnect'] as Timestamp).toDate().toIso8601String(),
+      });
     }).toList();
   });
 });
 
-Future<String> fetchFriendImageUrl(String imageName) async {
-  final ref = FirebaseStorage.instance.ref('friends-mypage/$imageName.webp');
-  return await ref.getDownloadURL();
-}
+// // 친구목록 이미지 URL을 제공하는 Provider
+// final friendsListImageProvider = FutureProvider.family<String, String>((ref, imageName) async {
+//   final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
+//   return await ref.getDownloadURL();
+// });
 
-final friendImageProvider =
-    FutureProvider.family<String, String>((ref, imageName) async {
-  return await fetchFriendImageUrl(imageName);
+/// 이미지 URL을 제공하는 공용 Provider
+final imageProvider = FutureProvider.family<String, String>((ref, imagePath) async {
+  final ref = FirebaseStorage.instance.ref(imagePath);
+  return await ref.getDownloadURL();
 });

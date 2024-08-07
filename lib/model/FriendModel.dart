@@ -10,7 +10,7 @@ class FriendModel with _$FriendModel {
     required String friendId,
     required String name,
     required String status,
-    required String imageUrl,
+    required String imageName,
     required int likes,
     required DateTime lastConnect,
   }) = _FriendModel;
