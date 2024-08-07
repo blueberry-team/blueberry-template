@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../model/FriendModel.dart';
 import '../../../utils/Formatter.dart';
-import '../provider/FriendsListProvider.dart';
 
 class FriendListItemWidget extends StatelessWidget {
   final FriendModel friend;
