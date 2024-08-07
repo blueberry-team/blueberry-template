@@ -129,4 +129,7 @@ class AppStrings {
   static const String isUserMembership = '프리미엄 멤버쉽을 사용 중 입니다';
   static const String notUserMembership = '프리미엄 멤버쉽을 사용 중이 아닙니다';
   static const String getMembership = '프리미엄 회원 가입하기';
+
+  //Appbar Logo
+  static const String appbar_Text_Logo = 'Petting';
 }
