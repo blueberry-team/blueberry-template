@@ -3,15 +3,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../model/UserReportModel.dart';
 
-final reportProvider = StateNotifierProvider<ReportNotifier, List<UserReportModel>>((ref) {
-  return ReportNotifier();
+// 사용자 신고 목록을 제공하는 StateNotifierProvider
+final userReportProvider =
+    StateNotifierProvider<UserReportNotifier, List<UserReportModel>>((ref) {
+  return UserReportNotifier();
 });
 
-class ReportNotifier extends StateNotifier<List<UserReportModel>> {
-  ReportNotifier() : super([]);
+class UserReportNotifier extends StateNotifier<List<UserReportModel>> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  UserReportNotifier() : super([]);
 
   Future<void> addReport(UserReportModel report) async {
-    await FirebaseFirestore.instance.collection('reports').add(report.toJson());  //임의 컬렉션 변경 필요
+    await _firestore.collection('userReports').add(report.toJson());
     state = [...state, report];
   }
 }

@@ -12,5 +12,6 @@ class UserReportModel with _$UserReportModel {
     required DateTime timestamp,
   }) = _UserReportModel;
 
-  factory UserReportModel.fromJson(Map<String, dynamic> json) => _$UserReportModelFromJson(json);
+  factory UserReportModel.fromJson(Map<String, dynamic> json) =>
+      _$UserReportModelFromJson(json);
 }

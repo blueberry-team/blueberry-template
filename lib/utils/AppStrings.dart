@@ -1,6 +1,19 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  //ReportModalSheet.dart
+  static const String reportReasonSpamAccount = '광고용 계정';
+  static const String reportReasonFakeAccount = '가짜로 의심되는 계정';
+  static const String reportReasonInappropriateNamePhoto = '이름&사진이 부적절';
+  static const String reportConfirmationMessage = '%s님을 신고하시겠습니까?';
+  static const String reportSuccessMessage = '신고가 접수되었습니다.';
+  static const String reportErrorMessage = '신고 접수 중 오류가 발생했습니다.';
+
+  //FriendBottomSheet.dart
+  static const String chatButton = '채팅';
+  static const String profileButton = '프로필';
+  static const String reportButton = '신고하기';
+
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
