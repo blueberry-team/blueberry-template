@@ -32,28 +32,34 @@ class SocialAuthService {
   }
 
   ///Apple Sign In
-  void signInWithApple() async {
-    final rawNonce = generateNonce();
-    final nonce = sha256ofString(rawNonce);
+  Future<void> signInWithApple() async {
+    try {
+      final rawNonce = generateNonce();
+      final nonce = sha256ofString(rawNonce);
 
-    late final AuthorizationCredentialAppleID appleIdCredential;
-    await SignInWithApple.getAppleIDCredential(scopes: [
-      AppleIDAuthorizationScopes.email,
-      AppleIDAuthorizationScopes.fullName,
-    ], nonce: nonce)
-        .then((value) {
-      appleIdCredential = value;
-    }).onError((error, stackTrace) {
-      if (error is PlatformException) return;
-    });
+      final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
 
-    final credential = OAuthProvider('apple.com').credential(
-      idToken: appleIdCredential.identityToken,
-      accessToken: appleIdCredential.authorizationCode,
-      rawNonce: rawNonce,
-    );
-    var result = await FirebaseAuth.instance.signInWithCredential(credential);
-    getAuthenticateWithFirebase(result);
+      final credential = OAuthProvider('apple.com').credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode,
+        rawNonce: rawNonce,
+      );
+
+      final result = await FirebaseAuth.instance.signInWithCredential(credential);
+      getAuthenticateWithFirebase(result);
+    } on SignInWithAppleAuthorizationException catch (e) {
+      // Apple 로그인 관련 오류 처리
+      print('Apple 로그인 오류: ${e.message}');
+    } catch (e) {
+      // 기타 오류 처리
+      print('로그인 중 오류 발생: $e');
+    }
   }
 
   String generateNonce([int length = 32]) {
