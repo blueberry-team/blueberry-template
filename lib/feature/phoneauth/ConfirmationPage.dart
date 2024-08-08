@@ -64,11 +64,6 @@ class ConfirmationPage extends ConsumerWidget {
                 if (context.mounted) {
                   context.goNamed(TopScreen.name);
                 }
-                ref.watch(emailProvider.notifier).dispose();
-                ref.watch(passwordConfirmProvider.notifier).dispose();
-                // 여기서 dispose처리 하는 이유는 > 중간에 서버랑 통신하면 자꾸 email이 죽어버림
-                // password는 두페이지 지나면 죽어버림 그래서 autodispose를 끄고 여기서 수동으로 처리 했음
-                // 옵져버로 로그 다 보면서 수정했음
               },
               child: const Text('가입하기'),
             ),

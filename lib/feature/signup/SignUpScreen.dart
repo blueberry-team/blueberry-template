@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/EmailDuplicateWidget.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/EmailVerifyWidget.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/NameInputWidget.dart';
@@ -8,24 +9,27 @@ import 'package:blueberry_flutter_template/feature/signup/widget/PrivacyPolicyWi
 import 'package:blueberry_flutter_template/feature/signup/widget/TermsOfServiceWidget.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../phoneauth/ConfirmationPage.dart';
 
 final PageController _pageController = PageController();
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   static const String name = 'SignUpScreen';
 
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    ref.watch(emailProvider);
+    ref.watch(passwordConfirmProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
