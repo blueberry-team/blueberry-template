@@ -37,6 +37,8 @@ class AppStrings {
   static const String cancelButtonText = '취소';
   static const String signUpSuccessMessage = '회원가입 성공!';
   static const String signUpFailedMessage = '회원가입 실패. 다시 시도해 주세요.';
+  static const String verifyCode = '인증번호';
+  static const String checkVerifyCode = '인증하기';
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
@@ -93,6 +95,8 @@ class AppStrings {
   static const String errorMessage_wrongNickName =
       '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
   static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
+  static const String errorMessage_emptyVerifyCode = '인증번호를 입력 해 주세요';
+  static const String errorMessage_wrongVerifyCode = '인증번호를 확인 해 주세요, 5자리의 숫자로 구성되어 있습니다';
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';

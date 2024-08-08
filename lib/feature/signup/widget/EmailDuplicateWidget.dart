@@ -1,24 +1,21 @@
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpEmailDuplicationProvider.dart';
+import 'package:blueberry_flutter_template/services/verifications/EmailVerificationService.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EmailDuplicateWidget extends ConsumerStatefulWidget {
+class EmailDuplicateWidget extends ConsumerWidget {
   final VoidCallback onNext;
-
-  const EmailDuplicateWidget({super.key, required this.onNext});
-
-  @override
-  _EmailDuplicateWidgetState createState() => _EmailDuplicateWidgetState();
-}
-
-class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
   final TextEditingController _emailController = TextEditingController();
-  bool isEmailAvailable = false;
+  final EmailVerificationService emailVerificationService =
+      EmailVerificationService();
+  final bool isEmailAvailable = false;
+
+  EmailDuplicateWidget({super.key, required this.onNext});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final email = ref.watch(emailProvider.notifier);
     final emailDuplicate = ref.watch(emailDuplicateProvider.notifier);
     final formKey = GlobalKey<FormState>();
@@ -45,6 +42,7 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
                 return null;
               },
             ),
+            const Text("이메일 인증을 위한 사용중인 이메일을 입력해주세요."),
             const SizedBox(height: 20),
             _duplicationBtn(emailDuplicate, context, formKey),
             const SizedBox(height: 20),
@@ -79,15 +77,17 @@ class _EmailDuplicateWidgetState extends ConsumerState<EmailDuplicateWidget> {
           );
         }
       },
-      child: const Text('중복 확인'),
+      child: const Text('중복 확인1'),
     );
   }
 
   ElevatedButton _nextBtn(GlobalKey<FormState> formKey, BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (formKey.currentState?.validate() ?? false) {
-            widget.onNext();
+            await emailVerificationService
+                .sendVerificationEmail(_emailController.text);
+            onNext();
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text(AppStrings.errorMessage_checkEmail)),
