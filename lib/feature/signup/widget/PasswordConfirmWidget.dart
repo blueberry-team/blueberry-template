@@ -24,7 +24,8 @@ class PasswordConfirmWidget extends ConsumerWidget {
             TextFormField(
               onChanged: (value) => passwordConfirm.state = value,
               obscureText: true,
-              decoration: const InputDecoration(labelText: AppStrings.passwordInputLabel),
+              decoration: const InputDecoration(
+                  labelText: AppStrings.passwordInputLabel),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.errorMessage_emptyPassword;

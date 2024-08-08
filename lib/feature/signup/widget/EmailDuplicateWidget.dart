@@ -77,7 +77,7 @@ class EmailDuplicateWidget extends ConsumerWidget {
           );
         }
       },
-      child: const Text('중복 확인1'),
+      child: const Text(AppStrings.checkDuplicateEmail),
     );
   }
 

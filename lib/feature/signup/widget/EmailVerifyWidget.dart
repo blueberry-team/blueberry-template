@@ -28,7 +28,8 @@ class EmailVerifyWidget extends ConsumerWidget {
             key: formKey,
             child: TextFormField(
               controller: _codeController,
-              decoration: const InputDecoration(labelText: AppStrings.verifyCode),
+              decoration:
+                  const InputDecoration(labelText: AppStrings.verifyCode),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.errorMessage_emptyVerifyCode;
