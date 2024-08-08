@@ -16,13 +16,12 @@ class FriendsListWidget extends ConsumerWidget {
       data: (friends) {
         return RefreshIndicator(
           onRefresh: () async {
-            ref.refresh(friendsListProvider);
+            await ref.refresh(friendsListProvider.future);
           },
           child: ListView.builder(
             itemCount: friends.length,
             itemBuilder: (context, index) {
               final friend = friends[index];
-              // final imageUrl = ref.watch(imageProvider(friend.imageName));
               final friendListImageUrl = ref
                   .watch(imageProvider('friends-profile/${friend.imageName}'));
 
