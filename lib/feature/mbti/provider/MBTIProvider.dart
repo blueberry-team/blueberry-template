@@ -5,8 +5,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widget/MBTIHomeWidget.dart';
 
-final mbtiProvider = StateNotifierProvider<MBTINotifier, MBTIType>((ref) {
+final mbtiProvider =
+    StateNotifierProvider<MBTINotifier, MBTIType>((ref) {
   return MBTINotifier(MBTIType.NULL);
+});
+
+final mbtiQuestionProvider =
+    StreamProvider.autoDispose<List<MBTIQuestionModel>>((ref) {
+  final firestore = FirebaseFirestore.instance;
+  return firestore.collection('mbtiQuestions').snapshots().map((snapshot) {
+    return snapshot.docs
+        .map((doc) => MBTIQuestionModel(
+              question: doc['Question'] as String,
+              type: doc['Type'] as String,
+              imageUrl: doc['ImageUrl'] as String,
+            ))
+        .toList();
+  });
+});
+
+Future<String> fetchMBTIImageUrl(String imageName) async {
+  final ref = FirebaseStorage.instance.ref('mbti-question/$imageName.webp');
+  return await ref.getDownloadURL();
+}
+
+final mbtiImageProvider =
+    FutureProvider.autoDispose.family<String, String>((ref, imageName) async {
+  return await fetchMBTIImageUrl(imageName);
 });
 
 class MBTINotifier extends StateNotifier<MBTIType> {
@@ -18,7 +43,7 @@ class MBTINotifier extends StateNotifier<MBTIType> {
     _mbtiScore = [0, 0, 0, 0];
   }
 
-  void setMBTI() {
+  MBTIType setMBTI() {
     int type = 0;
     if (_mbtiScore[0] >= 0) type += 8;
     if (_mbtiScore[1] >= 0) type += 4;
@@ -26,6 +51,7 @@ class MBTINotifier extends StateNotifier<MBTIType> {
     if (_mbtiScore[3] >= 0) type += 1;
 
     state = MBTIType.values[type];
+    return state;
   }
 
   void updateScore(String type, int addition) {
@@ -56,27 +82,19 @@ class MBTINotifier extends StateNotifier<MBTIType> {
         break;
     }
   }
+
+  Future<void> updateMBTI(
+      {required String userId, required MBTIType mbtiResult}) async {
+    try {
+      final updateData = <String, dynamic>{};
+      updateData['mbti'] = mbtiResult.name;
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update(updateData);
+    } catch (e) {
+      print('Failed to update user data: $e');
+    }
+  }
 }
-
-final mbtiQuestionProvider = StreamProvider<List<MBTIQuestionModel>>((ref) {
-  final firestore = FirebaseFirestore.instance;
-  return firestore.collection('mbtiQuestions').snapshots().map((snapshot) {
-    return snapshot.docs
-        .map((doc) => MBTIQuestionModel(
-              question: doc['Question'] as String,
-              type: doc['Type'] as String,
-              imageUrl: doc['ImageUrl'] as String,
-            ))
-        .toList();
-  });
-});
-
-Future<String> fetchMBTIImageUrl(String imageName) async {
-  final ref = FirebaseStorage.instance.ref('mbti-question/$imageName.webp');
-  return await ref.getDownloadURL();
-}
-
-final mbtiImageProvider =
-    FutureProvider.family<String, String>((ref, imageName) async {
-  return await fetchMBTIImageUrl(imageName);
-});

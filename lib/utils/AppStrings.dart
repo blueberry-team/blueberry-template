@@ -40,10 +40,14 @@ class AppStrings {
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
-  static const String yourMBTIIs = '당신의 MBTI는';
+  static const String titleMBTITest = 'MBTI Test';
+  static const String yourMBTI = '의 MBTI는';
+  static const String petMBTI = '반려동물의 MBTI는';
   static const String pleaseCheckMBTI = 'MBTI를 검사해주세요';
+  static const String pleaseLogin = '로그인하시면 MBTI를 등록할 수 있어요';
   static const String reCheckMBTI = '재검사하기';
   static const String checkMBTI = '검사하기';
+  static const String setMBTI = '등록하기';
   static const String shareMBTI = '공유하기';
   static const String stronglyAgree = '매우 그렇다';
   static const String agree = '그렇다';

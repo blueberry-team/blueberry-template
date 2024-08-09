@@ -83,6 +83,7 @@ Future<List<UserModel>> _fetchUsersFromFirestore() async {
           isMemberShip: data['isMemberShip'] as bool,
           profileImageUrl: data['profilePicture'] as String?,
           createdAt: DateTime.parse(data['createdAt'] as String),
+          mbti: data['mbti'] as String,
           fcmToken: data['fcmToken'] as String?,
         );
       } else {

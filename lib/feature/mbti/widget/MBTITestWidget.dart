@@ -1,5 +1,7 @@
-import 'package:blueberry_flutter_template/model/MBTIQuestionModel.dart';
 import 'package:blueberry_flutter_template/feature/mbti/provider/MBTIProvider.dart';
+import 'package:blueberry_flutter_template/feature/mbti/widget/MBTIHomeWidget.dart';
+import 'package:blueberry_flutter_template/feature/mbti/widget/MBTIResultWidget.dart';
+import 'package:blueberry_flutter_template/model/MBTIQuestionModel.dart';
 import 'package:blueberry_flutter_template/utils/AppStringEnglish.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +22,8 @@ class MBTITestWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mbtiList = ref.watch(mbtiQuestionProvider);
-    return mbtiList.when(
+    final mbtiQuestionList = ref.watch(mbtiQuestionProvider);
+    return mbtiQuestionList.when(
         data: (data) => Column(
               children: [
                 Expanded(child: _buildPageView(pageController, data)),
@@ -74,14 +76,21 @@ Widget _buildListView(PageController pageController, WidgetRef ref,
             if (pageController.page != pageController.page?.ceilToDouble()) {
               return;
             }
-            ref.read(mbtiProvider.notifier).updateScore(
+            ref.watch(mbtiProvider.notifier).updateScore(
                 data[pageController.page!.toInt()].type, 2 - index);
+            // 마지막 페이지 일시 결과 호출
             if (pageController.page == data.length - 1) {
-              ref.read(mbtiProvider.notifier).setMBTI();
+              MBTIType result = ref.watch(mbtiProvider.notifier).setMBTI();
               Navigator.pop(context);
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return MBTIResultWidget(mbtiResult: result);
+                  });
             } else {
               pageController.nextPage(
-                duration: const Duration(microseconds: 1000000),
+                duration: const Duration(seconds: 1),
                 curve: Curves.decelerate,
               );
             }

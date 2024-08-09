@@ -60,6 +60,7 @@ final userInfoNotifierProvider =
           name: '익명',
           email: '',
           age: 123,
+          mbti: 'NULL',
           profileImageUrl: '',
           isMemberShip: false,
           createdAt: DateTime.now(),
@@ -71,13 +72,14 @@ class UserNotifier extends StateNotifier<UserModel> {
   UserNotifier(super.state);
 
   Future<void> updateUser(
-      {String? name, int? age, String? profilePicture}) async {
+      {String? name, int? age, String? profilePicture, String? mbti}) async {
     try {
       final userId = state.userId;
       final updateData = <String, dynamic>{};
       if (name != null) updateData['name'] = name;
       if (age != null) updateData['age'] = age;
       if (profilePicture != null) updateData['profilePicture'] = profilePicture;
+      if (mbti != null) updateData['mbti'] = mbti;
 
       await FirebaseFirestore.instance
           .collection('users')

@@ -1,8 +1,5 @@
-import 'package:blueberry_flutter_template/providers/MBTIProvider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 
 class MBTIShareDialogWidget extends ConsumerWidget {
@@ -10,11 +7,13 @@ class MBTIShareDialogWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mbti = ref.watch(mbtiProvider);
 
     return Dialog(
       child: Container(
-          width: MediaQuery.of(context).size.width * 0.3,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.3,
           height: 200,
           alignment: Alignment.center,
           child: Column(
@@ -24,15 +23,15 @@ class MBTIShareDialogWidget extends ConsumerWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                     shareOnKakao();
+                      shareOnKakao();
                     },
-                    child: Text('KakaoTalk'),
+                    child: const Text('KakaoTalk'),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Link'),
+                    child: const Text('Link'),
                   )
                 ],
               ),
@@ -40,7 +39,7 @@ class MBTIShareDialogWidget extends ConsumerWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('close'),
+                child: const Text('close'),
               ),
             ],
           )),
@@ -48,31 +47,34 @@ class MBTIShareDialogWidget extends ConsumerWidget {
   }
 
   Future<void> shareOnKakao() async {
-    bool isKakaoTalkSharingAvailable = await ShareClient.instance.isKakaoTalkSharingAvailable();
-    final kakaoShareTemplateId = kakaoShareTemplate;
+    // bool isKakaoTalkSharingAvailable = await ShareClient.instance
+    //     .isKakaoTalkSharingAvailable();
+    // final kakaoShareTemplateId = kakaoShareTemplate;
 
-    if (isKakaoTalkSharingAvailable) {
-      // 카카오톡 공유
-      try {
-        Uri uri =
-        await ShareClient.instance.shareCustom(templateId: kakaoShareTemplateId);
-        await ShareClient.instance.launchKakaoTalk(uri);
-        print('카카오톡 공유 완료');
-      } catch (error) {
-        print('카카오톡 공유 실패 $error');
-      }
-    } else {
-      try {
-        Uri shareUrl = await WebSharerClient.instance.makeCustomUrl(
-            templateId: kakaoShareTemplateId, templateArgs: {'key1': 'value1'});
-        await launchBrowserTab(shareUrl, popupOpen: true);
-      } catch (error) {
-        print('카카오톡 공유 실패 $error');
-      }
-    } else {
-      // 카카오톡 미설치 웹으로 공유
-
-    }
+    // if (isKakaoTalkSharingAvailable) {
+    //   // 카카오톡 공유
+    //   try {
+    //     Uri uri =
+    //     await ShareClient.instance.shareCustom(
+    //         templateId: kakaoShareTemplateId);
+    //     await ShareClient.instance.launchKakaoTalk(uri);
+    //     print('카카오톡 공유 완료');
+    //   } catch (error) {
+    //     print('카카오톡 공유 실패 $error');
+    //   }
+    // } else {
+    //   try {
+    //     Uri shareUrl = await WebSharerClient.instance.makeCustomUrl(
+    //         templateId: kakaoShareTemplateId, templateArgs: {'key1': 'value1'});
+    //     await launchBrowserTab(shareUrl, popupOpen: true);
+    //   } catch (error) {
+    //     print('카카오톡 공유 실패 $error');
+    //   }
+    // }
+    // else {
+    // 카카오톡 미설치 웹으로 공유
+    //
+    // }
   }
 }
 
