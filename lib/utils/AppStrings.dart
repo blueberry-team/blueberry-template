@@ -132,4 +132,6 @@ class AppStrings {
 
   //Appbar Logo
   static const String appbar_Text_Logo = 'Petting';
+  static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
 }

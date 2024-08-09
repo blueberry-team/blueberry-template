@@ -9,7 +9,6 @@ class CalendarBodyWidget extends StatefulWidget {
 
 class _CalendarBodyWidgetState extends State<CalendarBodyWidget> {
   List<DateTime> dateTime = [];
-  final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   //TODO: 해당 로직 provider로 분리 예정
   void setDate(int month, int year) {
@@ -33,7 +32,7 @@ class _CalendarBodyWidgetState extends State<CalendarBodyWidget> {
         Row(
           children: List.generate(
             DateTime.daysPerWeek,
-            (idx) => _dateItem(date[idx]),
+            (idx) => _dateItem(AppStrings.date[idx]),
           ),
         ),
         Wrap(
