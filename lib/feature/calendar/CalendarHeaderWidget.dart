@@ -53,21 +53,24 @@ class CalendarHeaderWidget extends StatelessWidget {
       color: color,
       //fontFamily: 'Urbanist',
     );
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Row(children: [
-        Text(
-          '$date',
-          style: textStyle,
-        ),
-        SizedBox(
-          width: 8.w,
-        ),
-        SvgPicture.asset(
-          "assets/icon/ic_down_arrow.svg",
-          height: 20.w,
-        ),
-      ]),
+    return GestureDetector(
+      onTap: changeDate,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(children: [
+          Text(
+            '$date',
+            style: textStyle,
+          ),
+          SizedBox(
+            width: 8.w,
+          ),
+          SvgPicture.asset(
+            "assets/icon/ic_down_arrow.svg",
+            height: 20.w,
+          ),
+        ]),
+      ),
     );
   }
 }

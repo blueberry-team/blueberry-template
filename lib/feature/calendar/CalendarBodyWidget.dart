@@ -36,11 +36,15 @@ class _CalendarBodyWidgetState extends State<CalendarBodyWidget> {
             (idx) => _dateItem(date[idx]),
           ),
         ),
-        ...List.generate(
-          //TODO: 1일의 요일에 따른 배치 변경
-          dateTime.length,
-          (idx) => _dateItem(dateTime[idx].day.toString()),
-        ),
+        Wrap(
+          children: [
+            ...List.generate(
+              //TODO: 1일의 요일에 따른 배치 변경
+              dateTime.length,
+              (idx) => _dateItem(dateTime[idx].day.toString()),
+            ),
+          ],
+        )
       ],
     );
   }
