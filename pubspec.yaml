@@ -38,6 +38,8 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_rating_bar: ^4.0.1
   pinput: ^4.0.0
+  flutter_svg: ^2.0.10+1
+  flutter_screenutil: ^5.9.3
 
   # Service
   dart_openai: ^5.1.0
