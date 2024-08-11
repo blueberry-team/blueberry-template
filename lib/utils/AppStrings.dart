@@ -47,7 +47,6 @@ class AppStrings {
   static const String checkDuplicateEmail = '중복확인';
   static const String requiredYourEmail = '이메일 인증을 위해 사용 중인 이메일을 입력해주세요.';
 
-
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
   static const String yourMBTIIs = '당신의 MBTI는';

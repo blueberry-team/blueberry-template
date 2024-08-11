@@ -2,10 +2,8 @@ import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataPro
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpEmailDuplicationProvider.dart';
 import 'package:blueberry_flutter_template/services/verifications/EmailVerificationService.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:talker/talker.dart';
 
 class EmailDuplicateWidget extends ConsumerWidget {
   final VoidCallback onNext;

@@ -22,7 +22,8 @@ class EmailVerificationService {
         talker.error('예상치 못한 응답 구조');
       }
     } on FirebaseFunctionsException catch (e) {
-      talker.error('Firebase Functions Exception: ${e.code} - ${e.message}, ${e.details}');
+      talker.error(
+          'Firebase Functions Exception: ${e.code} - ${e.message}, ${e.details}');
       rethrow;
     } catch (e) {
       talker.error('Unexpected error: $e');
