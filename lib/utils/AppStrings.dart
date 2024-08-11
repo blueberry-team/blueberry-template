@@ -29,6 +29,11 @@ class AppStrings {
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
 
+  //Take Photo
+  static const String takeProfilePhoto = 'Take a profile photo';
+  static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
   static const String chatRoomScreenTitle = '채팅방 목록';

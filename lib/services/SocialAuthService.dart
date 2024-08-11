@@ -11,6 +11,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../utils/Talker.dart';
+
 class SocialAuthService {
   get context => null;
 
@@ -32,28 +34,35 @@ class SocialAuthService {
   }
 
   ///Apple Sign In
-  void signInWithApple() async {
-    final rawNonce = generateNonce();
-    final nonce = sha256ofString(rawNonce);
+  Future<void> signInWithApple() async {
+    try {
+      final rawNonce = generateNonce();
+      final nonce = sha256ofString(rawNonce);
 
-    late final AuthorizationCredentialAppleID appleIdCredential;
-    await SignInWithApple.getAppleIDCredential(scopes: [
-      AppleIDAuthorizationScopes.email,
-      AppleIDAuthorizationScopes.fullName,
-    ], nonce: nonce)
-        .then((value) {
-      appleIdCredential = value;
-    }).onError((error, stackTrace) {
-      if (error is PlatformException) return;
-    });
+      final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
 
-    final credential = OAuthProvider('apple.com').credential(
-      idToken: appleIdCredential.identityToken,
-      accessToken: appleIdCredential.authorizationCode,
-      rawNonce: rawNonce,
-    );
-    var result = await FirebaseAuth.instance.signInWithCredential(credential);
-    getAuthenticateWithFirebase(result);
+      final credential = OAuthProvider('apple.com').credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode,
+        rawNonce: rawNonce,
+      );
+
+      final result =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      getAuthenticateWithFirebase(result);
+    } on SignInWithAppleAuthorizationException catch (e) {
+      // Apple 로그인 관련 오류 처리
+      talker.error('Apple 로그인 오류: ${e.code}');
+    } catch (e) {
+      talker.error('Apple 로그인 중 오류 발생: $e');
+      throw Exception('Apple 로그인 중 오류 발생: $e');
+    }
   }
 
   String generateNonce([int length = 32]) {
