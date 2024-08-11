@@ -40,6 +40,10 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   pinput: ^4.0.0
 
+  # Calender
+  flutter_svg: ^2.0.10+1
+  flutter_screenutil: ^5.9.3
+
   # Service
   dart_openai: ^5.1.0
   bootpay: ^4.9.91
@@ -115,6 +119,7 @@ flutter:
     - assets/300x420/
     - assets/700x150/
     - assets/logo/
+    - assets/icon/
     - assets/login_page_images/
 
 # Run Commands to generate splash view
