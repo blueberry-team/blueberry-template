@@ -14,14 +14,14 @@ import '../utils/AppStringEnglish.dart';
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
 final List<String> routes = [
-  AppStringEnglish.chatScreenPath,
-  AppStringEnglish.friendsScreenPath,
-  AppStringEnglish.matchScreenPath,
-  AppStringEnglish.mbtiScreenPath,
-  AppStringEnglish.myPageScreenPath,
-  AppStringEnglish.profileDetailScreenPath,
-  AppStringEnglish.rankingScreenPath,
-  AppStringEnglish.postScreenPath,
+  '/chat',
+  '/friends',
+  '/match',
+  '/mbti',
+  '/mypage',
+  '/profiledetail',
+  '/rank',
+  '/post',
 ];
 
 class TopScreen extends ConsumerWidget {
@@ -77,9 +77,9 @@ class TopScreen extends ConsumerWidget {
           ),
         ],
         currentIndex: selectedIndex,
-          onTap: (index) {
-        ref.read(selectedIndexProvider.notifier).state = index;
-        context.go(routes[index]);
+        onTap: (index) {
+          ref.read(selectedIndexProvider.notifier).state = index;
+          context.go(routes[index]);
         },
       ),
     );
