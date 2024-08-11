@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/services/FirebaseAuthServiceProvider.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -67,7 +68,7 @@ class ConfirmationPage extends ConsumerWidget {
                   context.goNamed(TopScreen.name);
                 }
               },
-              child: const Text('가입하기'),
+              child: const Text(AppStrings.signUpButtonText),
             ),
             loading: () => const CircularProgressIndicator(),
             error: (error, stackTrace) => Text('Error: $error'),
