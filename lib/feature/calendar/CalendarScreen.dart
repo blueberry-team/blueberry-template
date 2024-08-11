@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../gen/assets.gen.dart';
 import '../../utils/AppStrings.dart';
 
 part 'CalendarHeaderWidget.dart';

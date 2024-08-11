@@ -21,7 +21,7 @@ class CalendarHeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            'assets/icon/ic_left_arrow.svg',
+            Assets.icon.icLeftArrow,
           ),
           //TODO: 하드코딩 변경
           Expanded(
@@ -36,9 +36,7 @@ class CalendarHeaderWidget extends StatelessWidget {
               ),
             ]),
           ),
-          SvgPicture.asset(
-            'assets/icon/ic_right_arrow.svg',
-          ),
+          SvgPicture.asset(Assets.icon.icRightArrow),
         ],
       ),
     );
@@ -66,7 +64,7 @@ class CalendarHeaderWidget extends StatelessWidget {
             width: 8.w,
           ),
           SvgPicture.asset(
-            "assets/icon/ic_down_arrow.svg",
+            Assets.icon.icDownArrow,
             height: 20.w,
           ),
         ]),
