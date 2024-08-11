@@ -18,6 +18,7 @@ import 'utils/Talker.dart';
 Future<void> main() async {
   runZonedGuarded(() async {
     // 날짜 형식 초기화
+    WidgetsFlutterBinding.ensureInitialized();
     await initializeDateFormatting('en_US', null);
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
