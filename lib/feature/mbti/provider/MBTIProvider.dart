@@ -53,6 +53,16 @@ final mbtiImageProvider =
   return await fetchMBTIImageUrl(imageName);
 });
 
+Future<String> fetchMBTITestImageUrl(String imageName) async {
+  final ref = FirebaseStorage.instance.ref('mbti-question/$imageName.webp');
+  return await ref.getDownloadURL();
+}
+
+final mbtiTestImageProvider =
+    FutureProvider.autoDispose.family<String, String>((ref, imageName) async {
+  return await fetchMBTITestImageUrl(imageName);
+});
+
 class MBTINotifier extends StateNotifier<MBTIType> {
   MBTINotifier(super.state);
 

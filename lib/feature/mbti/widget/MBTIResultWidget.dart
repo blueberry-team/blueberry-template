@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/AppStrings.dart';
+import '../../../utils/AppTextStyle.dart';
 import '../../../utils/DialogHelpers.dart';
 
 class MBTIResultWidget extends ConsumerWidget {
@@ -20,14 +21,15 @@ class MBTIResultWidget extends ConsumerWidget {
 
     return mbtiImage.when(
         data: (imageUrl) {
-          return _buildWidget(context, ref, mbtiResult, imageUrl);
+          return _buildMBTIResultWidgetView(context, ref, mbtiResult, imageUrl);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text('Error: $error')));
+        error: (error, stackTrace) =>
+            Center(child: Text(style: black12BoldTextStyle, 'Error: $error')));
   }
 }
 
-Widget _buildWidget(
+Widget _buildMBTIResultWidgetView(
     BuildContext context, WidgetRef ref, MBTIType mbtiResult, String imageUrl) {
   final userId = FirebaseAuth.instance.currentUser?.uid;
   final userState = ref.read(mbtiTestProvider.notifier);
@@ -49,10 +51,12 @@ Widget _buildWidget(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('${AppStrings.petMBTI} ${mbtiResult.name}'),
+              Text(
+                  style: black16BoldTextStyle,
+                  '${AppStrings.petMBTI} ${mbtiResult.name}'),
               imageUrl.isNotEmpty
                   ? Image.network(imageUrl, height: 300)
-                  : const Text(AppStrings.errorTitle),
+                  : const Text(style: black12TextStyle, AppStrings.errorTitle),
               if (userId != null)
                 TextButton(
                     onPressed: () => {
@@ -64,12 +68,14 @@ Widget _buildWidget(
                               .catchError((error) => showErrorDialog(
                                   context, AppStrings.setErrorMBTI)),
                         },
-                    child: const Text(AppStrings.setMBTI))
+                    child:
+                        const Text(style: black16TextStyle, AppStrings.setMBTI))
               else
-                const Text(AppStrings.pleaseLogin),
+                const Text(style: black16TextStyle, AppStrings.pleaseLogin),
               TextButton(
                   onPressed: () => {context.pop()},
-                  child: const Text(AppStrings.okButtonText)),
+                  child: const Text(
+                      style: black16TextStyle, AppStrings.okButtonText)),
             ],
           )));
 }

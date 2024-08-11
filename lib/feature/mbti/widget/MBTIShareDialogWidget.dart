@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 
+import '../../../utils/AppTextStyle.dart';
+
 class MBTIShareDialogWidget extends ConsumerWidget {
   const MBTIShareDialogWidget({super.key});
 
@@ -23,13 +25,13 @@ class MBTIShareDialogWidget extends ConsumerWidget {
                     onPressed: () {
                       shareOnKakao();
                     },
-                    child: const Text('KakaoTalk'),
+                    child: const Text(style: black16BoldTextStyle, 'KakaoTalk'),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Link'),
+                    child: const Text(style: black16BoldTextStyle, 'Link'),
                   )
                 ],
               ),
@@ -37,7 +39,7 @@ class MBTIShareDialogWidget extends ConsumerWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('close'),
+                child: const Text(style: black16BoldTextStyle, 'close'),
               ),
             ],
           )),

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/AppColors.dart';
+import '../../../utils/AppTextStyle.dart';
 import 'MBTIShareDialogWidget.dart';
 
 class MBTIHomeWidget extends ConsumerWidget {
@@ -23,20 +24,21 @@ class MBTIHomeWidget extends ConsumerWidget {
 
         return imageState.when(
           data: (imageUrl) {
-            return _buildMBTIWidgetView(context, ref, userName, mbti, imageUrl);
+            return _buildMBTIHomeWidgetView(context, ref, userName, mbti, imageUrl);
           },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) => Center(child: Text('Error: $error')),
+          error: (error, stackTrace) =>
+              Center(child: Text(style: black16TextStyle, 'Error: $error')),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) =>
-          _buildMBTIWidgetView(context, ref, '', MBTIType.NULL, ''),
+          _buildMBTIHomeWidgetView(context, ref, '', MBTIType.NULL, ''),
     );
   }
 }
 
-Widget _buildMBTIWidgetView(BuildContext context, WidgetRef ref,
+Widget _buildMBTIHomeWidgetView(BuildContext context, WidgetRef ref,
     String userName, MBTIType mbti, String imageUrl) {
   return Container(
     padding: const EdgeInsets.all(8.0),
@@ -60,7 +62,7 @@ Widget _buildMBTIWidgetView(BuildContext context, WidgetRef ref,
       children: [
         Text(
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 24),
+            style: black24TextStyle,
             // mbti가 있으면 mbti 보여주기, 없으면 '검사해주세요'
             mbti != MBTIType.NULL
                 ? '$userName${AppStrings.yourMBTI} ${mbti.name}'
@@ -76,7 +78,7 @@ Widget _buildMBTIWidgetView(BuildContext context, WidgetRef ref,
                   context.goNamed(MBTITestScreen.name),
                 },
             child: Text(
-                style: const TextStyle(fontSize: 24),
+                style: black24TextStyle,
                 // mbti가 없으면 검사하기, 있으면 재검사하기
                 mbti != MBTIType.NULL
                     ? AppStrings.reCheckMBTI
@@ -91,8 +93,7 @@ Widget _buildMBTIWidgetView(BuildContext context, WidgetRef ref,
                           return const MBTIShareDialogWidget();
                         })
                   },
-              child: const Text(
-                  style: TextStyle(fontSize: 24), AppStrings.shareMBTI))
+              child: const Text(style: black24TextStyle, AppStrings.shareMBTI))
       ],
     ),
   );
