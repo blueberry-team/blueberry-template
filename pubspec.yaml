@@ -73,7 +73,7 @@ dependencies:
   photo_manager_image_provider: ^2.1.1
 
   # Share
-  share_plus: ^10.0.0
+  share_plus: ^10.0.1
 
   # Match
   flutter_card_swiper: ^7.0.1
@@ -101,9 +101,9 @@ dependencies:
   custom_lint: ^0.6.4
 
   # Logger
-  talker: ^4.1.5
+  talker: ^4.4.0
   firebase_crashlytics: ^4.0.4
-  talker_flutter: ^4.1.5
+  talker_flutter: ^4.4.0
 
   # map
   google_maps_flutter: ^2.9.0
