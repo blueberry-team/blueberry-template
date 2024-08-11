@@ -14,7 +14,11 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
+import '../feature/chat/ChatRoomScreen.dart';
+import '../feature/friend/FriendsListScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
+import '../feature/profile/ProfileDetailScreen.dart';
+import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 import '../utils/Talker.dart';
@@ -104,6 +108,30 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
           ),
+          GoRoute(
+            path: 'chatroom',
+            name: ChatRoomScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const ChatRoomScreen()),
+          ),
+          GoRoute(
+            path: 'friends',
+            name: FriendsListScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const FriendsListScreen()),
+          ),
+          GoRoute(
+            path: 'ranking',
+            name: RankingScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const RankingScreen()),
+          ),
+          GoRoute(
+            path: 'profiledetail',
+            name: ProfileDetailScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const ProfileDetailScreen()),
+          )
         ],
       ),
     ],
