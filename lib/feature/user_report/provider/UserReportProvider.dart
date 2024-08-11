@@ -10,12 +10,12 @@ final userReportProvider =
 });
 
 class UserReportNotifier extends StateNotifier<List<UserReportModel>> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   UserReportNotifier() : super([]);
 
   Future<void> addReport(UserReportModel report) async {
-    await _firestore.collection('userReports').add(report.toJson());
+    await firestore.collection('userReports').add(report.toJson());
     state = [...state, report];
   }
 }

@@ -16,7 +16,7 @@ class FriendsListWidget extends ConsumerWidget {
       data: (friends) {
         return RefreshIndicator(
           onRefresh: () async {
-            await ref.refresh(friendsListProvider.future);
+            ref.invalidate(friendsListProvider);
           },
           child: ListView.builder(
             itemCount: friends.length,
@@ -49,9 +49,7 @@ class FriendsListWidget extends ConsumerWidget {
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (error, stack) {
-                  return const ListTile(
-                    title: Text('Error loading image'),
-                  );
+                  return const Center(child: Text('Error loading image'));
                 },
               );
             },

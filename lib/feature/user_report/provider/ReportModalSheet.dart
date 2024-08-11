@@ -28,18 +28,18 @@ class ReportModalSheet extends ConsumerWidget {
           ElevatedButton(
             child: const Text(AppStrings.reportReasonSpamAccount),
             onPressed: () =>
-                _report(context, ref, AppStrings.reportReasonSpamAccount),
+                reportUser(context, ref, AppStrings.reportReasonSpamAccount),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
             child: const Text(AppStrings.reportReasonFakeAccount),
             onPressed: () =>
-                _report(context, ref, AppStrings.reportReasonFakeAccount),
+                reportUser(context, ref, AppStrings.reportReasonFakeAccount),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
             child: const Text(AppStrings.reportReasonInappropriateNamePhoto),
-            onPressed: () => _report(
+            onPressed: () => reportUser(
                 context, ref, AppStrings.reportReasonInappropriateNamePhoto),
           ),
         ],
@@ -47,7 +47,7 @@ class ReportModalSheet extends ConsumerWidget {
     );
   }
 
-  void _report(BuildContext context, WidgetRef ref, String reason) async {
+  void reportUser(BuildContext context, WidgetRef ref, String reason) async {
     final report = UserReportModel(
       reportedUserId: friend.userId,
       reporterUserId: 'currentUserId', // 현재 로그인한 사용자의 ID로 대체
@@ -59,14 +59,14 @@ class ReportModalSheet extends ConsumerWidget {
       await ref.read(userReportProvider.notifier).addReport(report);
       if (!context.mounted) return;
       Navigator.of(context).pop();
-      _showSnackBar(context, AppStrings.reportSuccessMessage);
+      showSnackBar(context, AppStrings.reportSuccessMessage);
     } catch (e) {
       if (!context.mounted) return;
-      _showSnackBar(context, AppStrings.reportErrorMessage);
+      showSnackBar(context, AppStrings.reportErrorMessage);
     }
   }
 
-  void _showSnackBar(BuildContext context, String message) {
+  void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
