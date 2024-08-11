@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:blueberry_flutter_template/feature/camera/provider/PageProvider.dart';
 import 'package:blueberry_flutter_template/feature/camera/provider/fireStorageServiceProvider.dart';
 import 'package:blueberry_flutter_template/feature/mypage/MyPageScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,10 +39,8 @@ class SharePostScreen extends ConsumerWidget {
               onPressed: () async {
                 try {
                   final imageUrl = await storage.uploadImageFromApp(
-                      imageFile,
-                      ImageType.profileimage,
-                      fixedFileName: userId
-                  );
+                      imageFile, ImageType.profileimage,
+                      fixedFileName: userId);
 
                   // 프로필 이미지 생성
                   fireStorage.createProfileIamge(userId, imageUrl);

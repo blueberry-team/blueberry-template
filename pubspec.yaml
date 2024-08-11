@@ -29,7 +29,7 @@ dependencies:
   firebase_auth: ^5.1.1
   firebase_core: ^3.1.1
   firebase_storage: ^12.1.0
-  firebase_analytics: ^11.1.0
+  firebase_analytics: ^11.2.1
   cloud_firestore: ^5.0.2
   firebase_database: ^11.0.4
 
@@ -87,9 +87,13 @@ dependencies:
 
 
   # Lint
-  riverpod_lint: ^2.3.12
   flutter_lints: ^3.0.0
   custom_lint: ^0.6.4
+
+  # Logger
+  talker: ^4.4.0
+  firebase_crashlytics: ^4.0.4
+  talker_flutter: ^4.4.0
 
 dev_dependencies:
   flutter_test:

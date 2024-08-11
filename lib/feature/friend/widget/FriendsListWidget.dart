@@ -23,7 +23,8 @@ class FriendsListWidget extends ConsumerWidget {
             itemBuilder: (context, index) {
               final friend = friends[index];
               // final imageUrl = ref.watch(imageProvider(friend.imageName));
-              final friendListImageUrl = ref.watch(imageProvider('friends-profile/${friend.imageName}'));
+              final friendListImageUrl = ref
+                  .watch(imageProvider('friends-profile/${friend.imageName}'));
 
               return friendListImageUrl.when(
                 data: (imageUrl) {

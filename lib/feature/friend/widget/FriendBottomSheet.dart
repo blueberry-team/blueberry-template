@@ -10,7 +10,8 @@ class FriendBottomSheet extends StatelessWidget {
   final FriendModel friend;
   final String imageUrl;
 
-  const FriendBottomSheet({super.key, required this.friend, required this.imageUrl});
+  const FriendBottomSheet(
+      {super.key, required this.friend, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class FriendBottomSheet extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -79,21 +80,22 @@ class FriendBottomSheet extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  GoRouter.of(context).push('/userdetail'); // 현재 임의 경로 사용 중 수정 필요
+                  GoRouter.of(context)
+                      .push('/userdetail'); // 현재 임의 경로 사용 중 수정 필요
                 },
                 child: const Text('프로필'),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -112,7 +114,7 @@ class FriendBottomSheet extends StatelessWidget {
   }
 
   void _showReportDialog(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
 
     showDialog(
       context: context,
@@ -120,8 +122,9 @@ class FriendBottomSheet extends StatelessWidget {
         return AlertDialog(
           title: const Text("Report User"),
           content: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(hintText: "Enter your report reason"),
+            controller: controller,
+            decoration:
+                const InputDecoration(hintText: "Enter your report reason"),
           ),
           actions: [
             TextButton(
@@ -132,10 +135,10 @@ class FriendBottomSheet extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                _reportUser(_controller.text);
+                _reportUser(controller.text);
                 Navigator.of(context).pop();
               },
-              child: Text("Report"),
+              child: const Text("Report"),
             ),
           ],
         );
