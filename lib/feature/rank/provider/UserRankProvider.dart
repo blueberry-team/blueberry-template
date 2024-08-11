@@ -85,6 +85,7 @@ Future<List<UserModel>> _fetchUsersFromFirestore() async {
           createdAt: DateTime.parse(data['createdAt'] as String),
           mbti: data['mbti'] as String,
           fcmToken: data['fcmToken'] as String?,
+          likeGivens: data["likeGivens"] as List<String>,
         );
       } else {
         throw Exception('User not found');

@@ -15,6 +15,7 @@ class UserModel with _$UserModel {
     required bool isMemberShip,
     required String mbti,
     required DateTime createdAt,
+    required List<String> likeGivens,
     String? profileImageUrl,
     String? fcmToken,
   }) = _UserModel;

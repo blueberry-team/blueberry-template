@@ -65,7 +65,8 @@ final userInfoNotifierProvider =
           profileImageUrl: '',
           isMemberShip: false,
           createdAt: DateTime.now(),
-          userClass: 'user')));
+          userClass: 'user',
+          likeGivens: [""])));
 });
 
 // 유저 정보 업데이트를 위한 노티파이어

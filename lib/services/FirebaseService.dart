@@ -49,6 +49,7 @@ class FirebaseService {
         createdAt: DateTime.now(),
         mbti: 'NULL',
         userClass: 'user',
+        likeGivens: [""],
       );
       // 멤버쉽 모델은 추후에 인앱 결제시 유저가 구독하고 있거나 유저 상태에 대한 변경을 주기 위해 추가했음
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());
