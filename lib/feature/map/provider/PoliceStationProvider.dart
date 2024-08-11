@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blueberry_flutter_template/model/GoogleMapPlace.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -7,23 +8,6 @@ import 'package:http/http.dart' as http;
 const String apiKey = '';
 // Android : AndroidManifest.xml 에 API Key와 권한 추가 필요
 // iOS : AppDelegate.swift, Info.plist 에 API Key와 권한 추가 필요
-
-class Place {
-  final String name;
-  final LatLng location;
-  final String? phoneNumber;
-
-  Place({required this.name, required this.location, this.phoneNumber});
-
-  factory Place.fromJson(Map<String, dynamic> json, String? phoneNumber) {
-    final location = json['geometry']['location'];
-    return Place(
-      name: json['name'],
-      location: LatLng(location['lat'], location['lng']),
-      phoneNumber: phoneNumber,
-    );
-  }
-}
 
 Future<String?> _getPlacePhoneNumber(String placeId, String apiKey) async {
 

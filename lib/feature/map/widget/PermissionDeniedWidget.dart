@@ -1,4 +1,4 @@
-import 'package:blueberry_flutter_template/providers/policeMap/PermissionProvider.dart';
+import 'package:blueberry_flutter_template/feature/map/provider/PermissionProvider.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
