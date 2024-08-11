@@ -85,6 +85,11 @@ dependencies:
   in_app_purchase: ^3.2.0
 
 
+  # Lint
+  riverpod_lint: ^2.3.12
+  flutter_lints: ^3.0.0
+  custom_lint: ^0.6.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -92,9 +97,6 @@ dev_dependencies:
   # Generate
   json_serializable: ^6.8.0
   build_runner: ^2.4.11
-
-  # Lint
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
