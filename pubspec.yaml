@@ -33,6 +33,9 @@ dependencies:
   cloud_firestore: ^5.0.2
   firebase_database: ^11.0.4
 
+  # Kakao
+  kakao_flutter_sdk_share: ^1.9.5
+
   # UI
   cupertino_icons: ^1.0.6
   carousel_slider: ^4.2.1
@@ -68,6 +71,9 @@ dependencies:
   webview_flutter: ^4.8.0
   transparent_image: ^2.0.1
   photo_manager_image_provider: ^2.1.1
+
+  # Share
+  share_plus: ^10.0.0
 
   # Match
   flutter_card_swiper: ^7.0.1
@@ -143,7 +149,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/logo/logo_5.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+  min_sdk_android: 23 # android min sdk min:16, default 21
   web:
     generate: true
     image_path: "assets/logo/logo_5.png"
