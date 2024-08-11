@@ -95,6 +95,10 @@ dependencies:
   firebase_crashlytics: ^4.0.4
   talker_flutter: ^4.4.0
 
+  # map
+  google_maps_flutter: ^2.9.0
+  geolocator: ^12.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
