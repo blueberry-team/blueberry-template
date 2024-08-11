@@ -84,6 +84,7 @@ Future<List<UserModel>> _fetchUsersFromFirestore() async {
           profileImageUrl: data['profilePicture'] as String?,
           createdAt: DateTime.parse(data['createdAt'] as String),
           fcmToken: data['fcmToken'] as String?,
+          likeGivens: data["likeGivens"] as List<String>,
         );
       } else {
         throw Exception('User not found');
