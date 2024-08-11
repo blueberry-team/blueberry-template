@@ -17,7 +17,6 @@ import '../../utils/AppStrings.dart';
 import '../camera/SettingInsideAccountManagerWidget.dart';
 import '../camera/SettingsBottomSheet.dart';
 import '../camera/provider/fireStorageServiceProvider.dart';
-import '../camera/setting_inside_camera_media.dart';
 import '../setting/SettingScreen.dart';
 
 class MyPageScreen extends ConsumerWidget {
@@ -113,11 +112,7 @@ class MyPageScreen extends ConsumerWidget {
             ),
             const CustomDividerWidget(),
             GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const FixSettingCameraMediaPage(),
-                ));
-              },
+              onTap: () {},
               child: const ListTile(
                 leading: Icon(Icons.chat_bubble_outline),
                 title: Text(

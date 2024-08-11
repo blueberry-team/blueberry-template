@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:blueberry_flutter_template/feature/camera/provider/PageProvider.dart';
 import 'package:blueberry_flutter_template/feature/camera/provider/fireStorageServiceProvider.dart';
+import 'package:blueberry_flutter_template/feature/mypage/MyPageScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../services/FirebaseStoreServiceProvider.dart';
 
@@ -18,7 +19,6 @@ class SharePostScreen extends ConsumerWidget {
     final storage = ref.read(fireStorageServiceProvider);
     final fireStorage = ref.read(firebaseStoreServiceProvider);
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    final pageNotifier = ref.watch(pageProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,15 +38,15 @@ class SharePostScreen extends ConsumerWidget {
             TextButton(
               onPressed: () async {
                 try {
-                  var imageUrl = '';
+                  final imageUrl = await storage.uploadImageFromApp(
+                      imageFile, ImageType.profileimage,
+                      fixedFileName: userId);
 
-                  imageFile.readAsBytes().then((value) async {
-                    imageUrl = await storage.uploadImageFromApp(
-                        File(imageFile.path), ImageType.profileimage,
-                        fixedFileName: userId);
-                    fireStorage.createProfileIamge(userId, imageUrl);
-                    pageNotifier.moveToPage(0);
-                  });
+                  // 프로필 이미지 생성
+                  fireStorage.createProfileIamge(userId, imageUrl);
+
+                  // 페이지 이동
+                  context.goNamed(MyPageScreen.name);
                 } catch (e) {
                   print(e);
                 }
