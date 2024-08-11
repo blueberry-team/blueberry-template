@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/services/FirebaseAuthServiceProvider.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -61,6 +62,7 @@ class ConfirmationPage extends ConsumerWidget {
                     .signUpWithEmailPassword(email, passwordConfirm);
                 // 오류 뱉어내는거 하나 만들어야함 ex ) ID or Password 형식에 문제가 있다라고 쏴야할듯 ?
                 await firebaseService.upDateUserDB(email, name);
+                FirebaseAnalytics.instance.logSignUp(signUpMethod: 'email');
                 if (context.mounted) {
                   context.goNamed(TopScreen.name);
                 }

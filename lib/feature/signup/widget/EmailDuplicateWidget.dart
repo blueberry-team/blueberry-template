@@ -2,8 +2,10 @@ import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataPro
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpEmailDuplicationProvider.dart';
 import 'package:blueberry_flutter_template/services/verifications/EmailVerificationService.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:talker/talker.dart';
 
 class EmailDuplicateWidget extends ConsumerWidget {
   final VoidCallback onNext;
@@ -42,7 +44,7 @@ class EmailDuplicateWidget extends ConsumerWidget {
                 return null;
               },
             ),
-            const Text("이메일 인증을 위한 사용중인 이메일을 입력해주세요."),
+            const Text(AppStrings.requiredYourEmail),
             const SizedBox(height: 20),
             _duplicationBtn(emailDuplicate, context, formKey),
             const SizedBox(height: 20),
