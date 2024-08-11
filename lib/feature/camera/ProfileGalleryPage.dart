@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import 'MyPageProfileImagePreview.dart';
-import 'provider/image_quility_provider.dart';
 
 class ProfileGalleryPage extends ConsumerStatefulWidget {
   const ProfileGalleryPage({super.key});
@@ -70,7 +69,6 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final imageSet = ref.watch(imageQualityProvider);
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
