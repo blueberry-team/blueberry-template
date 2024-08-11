@@ -12,11 +12,10 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class FirebaseCloudMessagingManager {
-
   static Future<void> initialize({
     Function(String)? onTokenRefresh,
   }) async {
-    if(kIsWeb) return;
+    if (kIsWeb) return;
 
     await FirebaseMessaging.instance.requestPermission(
       alert: true,

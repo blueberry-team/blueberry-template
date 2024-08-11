@@ -14,5 +14,6 @@ class DogProfileModel with _$DogProfileModel {
     required String location,
   }) = _DogProfileModel;
 
-  factory DogProfileModel.fromJson(Map<String, dynamic> json) => _$DogProfileModelFromJson(json);
+  factory DogProfileModel.fromJson(Map<String, dynamic> json) =>
+      _$DogProfileModelFromJson(json);
 }

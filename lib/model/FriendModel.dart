@@ -10,10 +10,11 @@ class FriendModel with _$FriendModel {
     required String friendId,
     required String name,
     required String status,
-    required String imageUrl,
+    required String imageName,
     required int likes,
     required DateTime lastConnect,
   }) = _FriendModel;
 
-  factory FriendModel.fromJson(Map<String, dynamic> json) => _$FriendModelFromJson(json);
+  factory FriendModel.fromJson(Map<String, dynamic> json) =>
+      _$FriendModelFromJson(json);
 }

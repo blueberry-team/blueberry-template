@@ -68,6 +68,11 @@ Storage > 시작하기 > 테스트 모드에서 시작
 WEB IMAGE RENDERING (https://docs.flutter.dev/development/platform-integration/web/renderers)
 - `flutter run -d chrome --web-renderer html`
 
+로그인 기능(구글,애플,깃허브)를 이용하기 위해서 각 서비스의 키 설정이 필요합니다.
+- 자세한 설명은 깃허브 위키를 참고해주세요.
+- ![깃허브 위키](https://github.com/blueberry-team/blueberry_template/wiki/%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-Native,-Console-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95)
+
+
 ## 템플릿 기반 서비스 오픈 계획
 
 ![image](https://github.com/jwson-automation/blueberry_template/assets/108061510/e451dfde-9141-42a5-805c-a0062a9c11e2)
