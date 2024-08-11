@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../provider/FriendsListProvider.dart';
+import 'FriendBottomSheet.dart';
 import 'FriendListItemWidget.dart';
 
 class FriendsListWidget extends ConsumerWidget {
@@ -12,11 +14,46 @@ class FriendsListWidget extends ConsumerWidget {
 
     return friendList.when(
       data: (friends) {
-        return ListView.builder(
-          itemCount: friends.length,
-          itemBuilder: (context, index) {
-            return FriendListItemWidget(friend: friends[index]);
+        return RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(friendsListProvider);
           },
+          child: ListView.builder(
+            itemCount: friends.length,
+            itemBuilder: (context, index) {
+              final friend = friends[index];
+              final friendListImageUrl = ref
+                  .watch(imageProvider('friends-profile/${friend.imageName}'));
+
+              return friendListImageUrl.when(
+                data: (imageUrl) {
+                  return FriendListItemWidget(
+                    friend: friend,
+                    imageUrl: imageUrl,
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25.0),
+                          ),
+                        ),
+                        builder: (context) => FriendBottomSheet(
+                          friend: friend,
+                          imageUrl: imageUrl,
+                        ),
+                      );
+                    },
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stack) {
+                  return const Center(child: Text('Error loading image'));
+                },
+              );
+            },
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),

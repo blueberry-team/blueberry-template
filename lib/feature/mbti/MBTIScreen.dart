@@ -10,11 +10,7 @@ class MBTIScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.titleMBTI)),
       body: const Center(
-        child: Column(
-          children: [
-            Expanded(child: MBTIHomeWidget()),
-          ],
-        ),
+        child: Expanded(child: MBTIHomeWidget()),
       ),
     );
   }
