@@ -7,7 +7,15 @@ import '../../../model/FriendModel.dart';
 // 친구 목록을 제공하는 Provider
 final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
-  return firestore.collection('friends').snapshots().map((snapshot) {
+
+  const userId = '4D22soWrX1aoGcuQ0GpAtNYDiYN2'; // 임시 유저 UUID
+
+  return firestore
+      .collection('users')
+      .doc(userId)
+      .collection('friends')
+      .snapshots()
+      .map((snapshot) {
     return snapshot.docs.map((doc) {
       final data = doc.data();
       return FriendModel.fromJson({
