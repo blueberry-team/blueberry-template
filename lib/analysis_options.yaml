@@ -31,3 +31,7 @@ unnecessary_new: true  # 불필요한 new 사용 피함
 use_full_hex_values_for_flutter_colors: true  # Flutter 색상에 전체 16진수 값 사용
 unused_field: true  # 사용되지 않는 필드 피함
 unused_local_variable: true  # 사용되지 않는 지역 변수 피함
+
+analyzer:
+  plugins:
+    - custom_lint

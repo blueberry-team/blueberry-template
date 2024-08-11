@@ -16,6 +16,11 @@ class AppStrings {
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
 
+  //Take Photo
+  static const String takeProfilePhoto = 'Take a profile photo';
+  static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
   static const String chatRoomScreenTitle = '채팅방 목록';
@@ -37,6 +42,10 @@ class AppStrings {
   static const String cancelButtonText = '취소';
   static const String signUpSuccessMessage = '회원가입 성공!';
   static const String signUpFailedMessage = '회원가입 실패. 다시 시도해 주세요.';
+  static const String verifyCode = '인증번호';
+  static const String checkVerifyCode = '인증하기';
+  static const String checkDuplicateEmail = '중복확인';
+  static const String requiredYourEmail = '이메일 인증을 위해 사용 중인 이메일을 입력해주세요.';
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
@@ -93,6 +102,9 @@ class AppStrings {
   static const String errorMessage_wrongNickName =
       '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
   static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
+  static const String errorMessage_emptyVerifyCode = '인증번호를 입력 해 주세요';
+  static const String errorMessage_wrongVerifyCode =
+      '인증번호를 확인 해 주세요, 5자리의 숫자로 구성되어 있습니다';
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';
@@ -134,4 +146,11 @@ class AppStrings {
   static const String appbar_Text_Logo = 'Petting';
   static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+  static const String errorMessage_locationPermissionForeverDenied = '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
+  static const String errorMessage_locationPermissionDisabled = '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
+  static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
+  static const String errorMessage_sendFailed = '문자 발송 실패';
+  static const String button_openConfigMenu = '설정 열기';
+  static const String button_sendMessage = '112 문자보내기';
+  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
 }

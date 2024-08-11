@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/feature/camera/ProfileCameraPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import '../../core/widget/SquareTitleWidget.dart';
 import '../../services/FirebaseAuthServiceProvider.dart';
 import '../../services/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
-import '../camera/ProfileCameraPage.dart';
 import '../camera/ProfileGalleryPage.dart';
 import '../camera/provider/PageProvider.dart';
 import '../mypage/MyPageScreen.dart';
