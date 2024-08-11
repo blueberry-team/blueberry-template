@@ -53,7 +53,7 @@ class GoogleMapWidget extends ConsumerWidget {
       circles: {
         Circle(
           center: locationState,
-          circleId: CircleId('myLocation'),
+          circleId: const CircleId('myLocation'),
           strokeColor: Colors.blue,
           radius: 1000,
           strokeWidth: 2,
@@ -92,8 +92,7 @@ class GoogleMapWidget extends ConsumerWidget {
             onTap: () {
               ref.read(selectedPlaceProvider.notifier).state = station;
             },
-            icon:
-            BitmapDescriptor.defaultMarkerWithHue(
+            icon: BitmapDescriptor.defaultMarkerWithHue(
               station == selectedPlace
                   ? BitmapDescriptor.hueAzure
                   : BitmapDescriptor.hueRed,

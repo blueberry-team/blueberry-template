@@ -1,23 +1,24 @@
 import 'package:blueberry_flutter_template/feature/post/provider/PostProvider.dart';
-import 'package:blueberry_flutter_template/feature/post/widget/PostItemWidget.dart';
+import 'package:blueberry_flutter_template/feature/post/widget/PostListViewItemWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostWidget extends ConsumerWidget {
-  const PostWidget({super.key});
+class PostListViewWidget extends ConsumerWidget {
+  const PostListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postsState = ref.watch(postProvider);
+    final postList = ref.watch(postListInfoProvider);
 
     return SafeArea(
-      child: postsState.when(
+      child: postList.when(
         data: (posts) => ListView.builder(
+          shrinkWrap: true,
           padding: const EdgeInsets.all(8.0),
           itemCount: posts.length,
           itemBuilder: (context, index) {
             final post = posts[index];
-            return PostItem(
+            return PostListViewItemWidget(
               title: post.title,
               uploadTime: post.uploadTime,
               content: post.content,

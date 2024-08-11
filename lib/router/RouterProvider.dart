@@ -3,7 +3,6 @@ import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
-import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:flutter/foundation.dart';
@@ -16,7 +15,9 @@ import '../core/TopScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
 import '../feature/chat/ChatRoomScreen.dart';
 import '../feature/friend/FriendsListScreen.dart';
+import '../feature/mbti/MBTIScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
+import '../feature/post/PostingScreen.dart';
 import '../feature/profile/ProfileDetailScreen.dart';
 import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
@@ -55,6 +56,12 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ResponsiveLayoutBuilder(context, const SettingScreen()),
           ),
           GoRoute(
+            path: 'posting',
+            name: PostingScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const PostingScreen()),
+          ),
+          GoRoute(
             path: 'mypage',
             name: MyPageScreen.name,
             builder: (context, state) =>
@@ -80,9 +87,9 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: 'mbti',
-            name: MBTITestScreen.name,
+            name: MBTIScreen.name,
             builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const MBTITestScreen()),
+                ResponsiveLayoutBuilder(context, const MBTIScreen()),
           ),
           GoRoute(
             path: 'adminloading',

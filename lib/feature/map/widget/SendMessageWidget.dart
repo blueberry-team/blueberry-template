@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class SendMessage extends StatelessWidget {
   final LatLng locationState;
 
-  SendMessage({
+  const SendMessage({
     super.key,
     required this.locationState,
   });

@@ -10,8 +10,6 @@ const String apiKey = '';
 // iOS : AppDelegate.swift, Info.plist 에 API Key와 권한 추가 필요
 
 Future<String?> _getPlacePhoneNumber(String placeId, String apiKey) async {
-
-
   final url = 'https://maps.googleapis.com/maps/api/place/details/json'
       '?place_id=$placeId'
       '&fields=formatted_phone_number'

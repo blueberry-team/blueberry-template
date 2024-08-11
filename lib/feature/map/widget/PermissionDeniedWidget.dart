@@ -9,8 +9,8 @@ class PermissionDeniedWidget extends StatelessWidget {
 
   const PermissionDeniedWidget({
     required this.permissionStatus,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,11 @@ class PermissionDeniedWidget extends StatelessWidget {
             Text(message),
             if (showSettingsButton)
               ElevatedButton(
-                onPressed: onOpenSettings ?? () async {
-                  await openAppSettings();
-                },
-                child: Text(AppStrings.button_openConfigMenu),
+                onPressed: onOpenSettings ??
+                    () async {
+                      await openAppSettings();
+                    },
+                child: const Text(AppStrings.button_openConfigMenu),
               ),
           ],
         ),

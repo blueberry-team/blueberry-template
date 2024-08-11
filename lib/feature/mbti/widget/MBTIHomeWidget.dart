@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/provider/MBTIProvider.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
@@ -76,7 +77,7 @@ Widget _buildMBTIHomeWidgetView(BuildContext context, WidgetRef ref,
         TextButton(
             onPressed: () => {
                   ref.read(mbtiTestProvider.notifier).initScore(),
-                  context.goNamed(MBTITestScreen.name),
+                  context.goNamed(MBTIScreen.name),
                 },
             child: Text(
                 style: black24TextStyle,

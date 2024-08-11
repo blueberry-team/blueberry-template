@@ -1,7 +1,6 @@
+import 'package:blueberry_flutter_template/feature/phoneauth/provider/PhoneNumberInputWidget.dart';
+import 'package:blueberry_flutter_template/feature/phoneauth/provider/VerificationCodeInputWidget.dart';
 import 'package:flutter/material.dart';
-
-import '../signup/widget/PhoneNumberInputWidget.dart';
-import '../signup/widget/VerificationCodeInputWidget.dart';
 
 class PhoneNumberInputPage extends StatelessWidget {
   final VoidCallback onNext;
