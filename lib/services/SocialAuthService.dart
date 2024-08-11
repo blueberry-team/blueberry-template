@@ -11,6 +11,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../utils/Talker.dart';
+
 class SocialAuthService {
   get context => null;
 
@@ -51,14 +53,15 @@ class SocialAuthService {
         rawNonce: rawNonce,
       );
 
-      final result = await FirebaseAuth.instance.signInWithCredential(credential);
+      final result =
+          await FirebaseAuth.instance.signInWithCredential(credential);
       getAuthenticateWithFirebase(result);
     } on SignInWithAppleAuthorizationException catch (e) {
       // Apple 로그인 관련 오류 처리
-      print('Apple 로그인 오류: ${e.message}');
+      talker.error('Apple 로그인 오류: ${e.code}');
     } catch (e) {
-      // 기타 오류 처리
-      print('로그인 중 오류 발생: $e');
+      talker.error('Apple 로그인 중 오류 발생: $e');
+      throw Exception('Apple 로그인 중 오류 발생: $e');
     }
   }
 
