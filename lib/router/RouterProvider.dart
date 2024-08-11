@@ -24,8 +24,7 @@ import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation:
-        kIsWeb ? '/' :'/splash',
+    initialLocation: kIsWeb ? '/' : '/splash',
     routes: [
       GoRoute(
         path: '/splash',
@@ -114,8 +113,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/admin',
         name: AdminScreen.name,
-        builder: (context, state) => ResponsiveLayoutBuilder(
-            context, const AdminScreen()),
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const AdminScreen()),
         routes: [
           GoRoute(
             path: 'userlist',
