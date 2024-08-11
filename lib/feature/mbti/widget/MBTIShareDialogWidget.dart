@@ -7,19 +7,17 @@ class MBTIShareDialogWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Dialog(
       child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * 0.3,
+          width: MediaQuery.of(context).size.width * 0.3,
           height: 200,
           alignment: Alignment.center,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -83,18 +81,15 @@ final FeedTemplate kakaoShareTemplate = FeedTemplate(
   content: Content(
     title: '펫팅 MBTI 공유하기!',
     description: '#펫 #반려동물 #MBTI #동물 #강아지 #고양이 #소개팅',
-    imageUrl: Uri.parse(
-        'https://DefaultImage.png'),
+    imageUrl: Uri.parse('https://DefaultImage.png'),
     link: Link(
         webUrl: Uri.parse('https://DEFAULT_URL'),
         mobileWebUrl: Uri.parse('https://DEFAULT_MOBILE_URL')),
   ),
   itemContent: ItemContent(
     profileText: 'PETTING',
-    profileImageUrl: Uri.parse(
-        'https://PETTING_IMAGE2.png'),
-    titleImageUrl: Uri.parse(
-        'https://PETTING_IMAGE3.png'),
+    profileImageUrl: Uri.parse('https://PETTING_IMAGE2.png'),
+    titleImageUrl: Uri.parse('https://PETTING_IMAGE3.png'),
     titleImageText: 'Pet cake',
     titleImageCategory: 'petCake',
     items: [

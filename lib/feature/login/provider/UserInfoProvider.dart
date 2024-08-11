@@ -2,6 +2,7 @@ import 'package:blueberry_flutter_template/model/UserDataModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../model/UserModel.dart';
 
 /// UserInfoProvider.dart

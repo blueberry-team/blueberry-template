@@ -76,11 +76,11 @@ Widget _buildListView(PageController pageController, WidgetRef ref,
             if (pageController.page != pageController.page?.ceilToDouble()) {
               return;
             }
-            ref.watch(mbtiProvider.notifier).updateScore(
+            ref.watch(mbtiTestProvider.notifier).updateScore(
                 data[pageController.page!.toInt()].type, 2 - index);
             // 마지막 페이지 일시 결과 호출
             if (pageController.page == data.length - 1) {
-              MBTIType result = ref.watch(mbtiProvider.notifier).setMBTI();
+              MBTIType result = ref.watch(mbtiTestProvider.notifier).setMBTI();
               Navigator.pop(context);
               showDialog(
                   context: context,

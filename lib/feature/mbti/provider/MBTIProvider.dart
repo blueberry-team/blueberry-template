@@ -3,10 +3,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../model/UserDataModel.dart';
+import '../../login/provider/UserInfoProvider.dart';
 import '../widget/MBTIHomeWidget.dart';
 
-final mbtiProvider =
-    StateNotifierProvider<MBTINotifier, MBTIType>((ref) {
+// 스트림으로 firebase에서 데이터를 가져오는 공급자
+final mbtiProvider = StreamProvider<UserDataModel>((ref) async* {
+  final userId = await ref.watch(userIdProvider.future);
+  if (userId == null) throw Exception('User not logged in');
+
+  yield* FirebaseFirestore.instance
+      .collection('users')
+      .doc(userId)
+      .snapshots()
+      .map((snapshot) {
+    if (snapshot.exists) {
+      return UserDataModel.fromJson(snapshot.data()!);
+    } else {
+      throw Exception('User not found');
+    }
+  });
+});
+
+final mbtiTestProvider = StateNotifierProvider<MBTINotifier, MBTIType>((ref) {
   return MBTINotifier(MBTIType.NULL);
 });
 
@@ -25,7 +44,7 @@ final mbtiQuestionProvider =
 });
 
 Future<String> fetchMBTIImageUrl(String imageName) async {
-  final ref = FirebaseStorage.instance.ref('mbti-question/$imageName.webp');
+  final ref = FirebaseStorage.instance.ref('mbti-image/$imageName.webp');
   return await ref.getDownloadURL();
 }
 

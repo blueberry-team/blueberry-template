@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/AppStrings.dart';
+import '../../../utils/DialogHelpers.dart';
 
 class MBTIResultWidget extends ConsumerWidget {
   final MBTIType mbtiResult;
@@ -29,11 +30,21 @@ class MBTIResultWidget extends ConsumerWidget {
 Widget _buildWidget(
     BuildContext context, WidgetRef ref, MBTIType mbtiResult, String imageUrl) {
   final userId = FirebaseAuth.instance.currentUser?.uid;
-  final userState = ref.read(mbtiProvider.notifier);
+  final userState = ref.read(mbtiTestProvider.notifier);
 
   return Center(
       child: Container(
-          color: softLime,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                    color: coolGray,
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3))
+              ],
+              color: (MBTIType.toColor(mbtiResult)),
+              borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,11 +56,17 @@ Widget _buildWidget(
               if (userId != null)
                 TextButton(
                     onPressed: () => {
-                          userState.updateMBTI(
-                              userId: userId, mbtiResult: mbtiResult),
-                          context.pop()
+                          userState
+                              .updateMBTI(
+                                  userId: userId, mbtiResult: mbtiResult)
+                              .whenComplete(() => showSuccessDialog(
+                                  context, AppStrings.setCompleteMBTI))
+                              .catchError((error) => showErrorDialog(
+                                  context, AppStrings.setErrorMBTI)),
                         },
-                    child: const Text(AppStrings.setMBTI)),
+                    child: const Text(AppStrings.setMBTI))
+              else
+                const Text(AppStrings.pleaseLogin),
               TextButton(
                   onPressed: () => {context.pop()},
                   child: const Text(AppStrings.okButtonText)),
