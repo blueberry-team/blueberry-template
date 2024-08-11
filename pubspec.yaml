@@ -94,6 +94,7 @@ dependencies:
   # Logger
   talker: ^4.4.0
   firebase_crashlytics: ^4.0.4
+  talker_flutter: ^4.4.0
 
 dev_dependencies:
   flutter_test:
