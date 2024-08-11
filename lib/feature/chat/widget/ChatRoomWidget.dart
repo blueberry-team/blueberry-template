@@ -1,9 +1,9 @@
 import 'package:blueberry_flutter_template/feature/chat/provider/ChatListProvider.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
+import 'package:blueberry_flutter_template/model/ChatListItemModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ChatRoomWidget extends ConsumerWidget {
@@ -11,15 +11,15 @@ class ChatRoomWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(chatRoomListProvider);
+    final list = ref.watch(loadRoomListProvider);
     return list.when(
-        data: (data) => _buildRoomListView(data),
+        data: (data) => _buildRoomListView(data, ref),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) => Center(child: Text('Error: $error')));
   }
 }
 
-Widget _buildRoomListView(List<String> data) {
+Widget _buildRoomListView(List<ChatListItemModel> data, WidgetRef ref) {
   return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, index) {
@@ -43,7 +43,14 @@ Widget _buildRoomListView(List<String> data) {
           },
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => context.goNamed(ChatScreen.name),
+            onTap: () {
+              ref.read(roomIdProvider.notifier).state = data[index].roomId;
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ChatScreen(),
+                ),
+              );
+            },
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
@@ -59,18 +66,19 @@ Widget _buildRoomListView(List<String> data) {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(data[index],
+                            Text(data[index].otherUserId,
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 15)),
                             Text(
                                 DateFormat('a h:mm', 'ko_KR')
-                                    .format(DateTime.now()),
+                                    .format(data[index].lastMessageTime),
                                 style: const TextStyle(
                                     color: Colors.grey, fontSize: 10)),
                           ],
                         ),
-                        const Text('recentMesssage',
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                        Text(data[index].lastMessage,
+                            style: const TextStyle(
+                                color: Colors.grey, fontSize: 12),
                             overflow: TextOverflow.ellipsis),
                       ],
                     ),
