@@ -1,6 +1,36 @@
 class AppStringEnglish {
   static const String appTitle = 'Community App';
 
+  //RouterProvider.dart, TopScreen.dart
+  static const String splashScreenPath = '/splash';
+  static const String rootPath = '/';
+  static const String chatScreenPath = '/chat';
+  static const String friendsScreenPath = '/friends';
+  static const String matchScreenPath = '/match';
+  static const String mbtiScreenPath = '/mbti';
+  static const String myPageScreenPath = '/mypage';
+  static const String profileDetailScreenPath = '/profiledetail';
+  static const String rankingScreenPath = '/rank';
+  static const String postScreenPath = '/post';
+  static const String signUpScreenPath = '/signup';
+  static const String settingScreenPath = '/setting';
+  static const String settingAccountScreenPath = '/settingaccount';
+  static const String webPaymentScreenPath = '/webpayment';
+  static const String adminMainScreenPath = '/adminmain';
+  static const String adminUserListScreenPath = '/userlistin';
+  static const String adminUserDetailScreenPath = '/userdetail';
+  static const String adminLoadingScreenPath = '/loading';
+
+  //TopScreen.dart
+  static const String chatScreenLabel = 'Chat';
+  static const String friendsScreenLabel = 'Friends';
+  static const String matchScreenLabel = 'Match';
+  static const String mbtiScreenLabel = 'MBTI';
+  static const String myPageScreenLabel = 'My Page';
+  static const String profileDetailScreenLabel = 'Profile';
+  static const String rankingScreenLabel = 'Rank';
+  static const String postScreenLabel = 'Post';
+
   //ChatPage.dart
   static const String chatPageTitle = 'Chat Page';
   static const String chatHint = 'Type your message here...';

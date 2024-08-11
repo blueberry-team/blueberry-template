@@ -4,6 +4,7 @@ import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
 import 'core/provider/ThemeProvider.dart';
@@ -20,6 +21,8 @@ Future<void> main() async {
   FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
     debugPrint('FCM Token: $token');
   });
+
+  setPathUrlStrategy(); // Hash URL(#)을 제거하고 Path URL을 사용하도록 설정
 
   runApp(const ProviderScope(
     child: MyApp(),

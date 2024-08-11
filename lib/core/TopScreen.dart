@@ -1,15 +1,8 @@
-import 'package:blueberry_flutter_template/feature/chat/ChatRoomScreen.dart';
-import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
-import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
-import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
-import 'package:blueberry_flutter_template/feature/rank/RankScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../feature/admin/AdminUserListPage.dart';
-import '../feature/friend/FriendsListScreen.dart';
-import '../feature/login/LoginScreen.dart';
-import '../feature/match/MatchScreen.dart';
+import '../utils/AppStringEnglish.dart';
 
 /// TopScreen.dart
 ///
@@ -20,31 +13,29 @@ import '../feature/match/MatchScreen.dart';
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
-class TopScreen extends ConsumerWidget {
-  static const String name = '/TopScreen';
+final List<String> routes = [
+  AppStringEnglish.chatScreenPath,
+  AppStringEnglish.friendsScreenPath,
+  AppStringEnglish.matchScreenPath,
+  AppStringEnglish.mbtiScreenPath,
+  AppStringEnglish.myPageScreenPath,
+  AppStringEnglish.profileDetailScreenPath,
+  AppStringEnglish.rankingScreenPath,
+  AppStringEnglish.postScreenPath,
+];
 
-  const TopScreen({super.key});
+class TopScreen extends ConsumerWidget {
+  static const String name = 'TopScreen';
+  final Widget child;
+
+  const TopScreen({super.key, required this.child});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
-    final List<Widget> pages = [
-      const ChatRoomScreen(),
-      const FriendsListScreen(),
-      const MatchScreen(),
-      const MBTIScreen(),
-      const LoginScreen(),
-      const ProfileDetailScreen(),
-      const RankingScreen(),
-      const AdminUserListPage(),
-      const PostScreen()
-    ];
-
     return Scaffold(
-      body: Center(
-        child: pages[selectedIndex],
-      ),
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedIconTheme: const IconThemeData(color: Colors.black),
@@ -54,44 +45,42 @@ class TopScreen extends ConsumerWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label: 'Chat',
+            label: AppStringEnglish.chatScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Friends',
+            label: AppStringEnglish.friendsScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
-            label: 'match',
+            label: AppStringEnglish.matchScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_search),
-            label: 'mbti',
+            label: AppStringEnglish.mbtiScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'MyPage',
+            label: AppStringEnglish.myPageScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.supervised_user_circle_rounded),
-            label: 'ProfileDetail',
+            label: AppStringEnglish.profileDetailScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.emoji_events),
-            label: 'Rank',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.admin_panel_settings),
-            label: 'Admin',
+            label: AppStringEnglish.rankingScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.podcasts),
-            label: 'Post',
+            label: AppStringEnglish.postScreenLabel,
           ),
         ],
         currentIndex: selectedIndex,
-        onTap: (index) =>
-            ref.read(selectedIndexProvider.notifier).state = index,
+          onTap: (index) {
+        ref.read(selectedIndexProvider.notifier).state = index;
+        context.go(routes[index]);
+        },
       ),
     );
   }

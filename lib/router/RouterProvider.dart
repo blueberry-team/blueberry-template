@@ -13,96 +13,131 @@ import 'package:go_router/go_router.dart';
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
+import '../feature/friend/FriendsListScreen.dart';
+import '../feature/match/MatchScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
+import '../feature/post/PostScreen.dart';
+import '../feature/profile/ProfileDetailScreen.dart';
+import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
+import '../utils/AppStringEnglish.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
+
   return GoRouter(
-    initialLocation: kIsWeb ? '/' : '/splash',
+    initialLocation: kIsWeb ? AppStringEnglish.rootPath : AppStringEnglish.splashScreenPath,
     routes: [
       GoRoute(
-        path: '/splash',
+        path: AppStringEnglish.splashScreenPath,
         name: SplashScreen.routeName,
         builder: (context, state) => ResponsiveLayoutBuilder(
           context,
           const SplashScreen(),
         ),
       ),
-      GoRoute(
-        path: '/',
-        name: TopScreen.name,
-        builder: (context, state) =>
-            ResponsiveLayoutBuilder(context, const TopScreen()),
+      ShellRoute(
+        builder: (context, state, child) {
+          return TopScreen(child: child);
+        },
         routes: [
           GoRoute(
-            path: 'signup',
-            name: SignUpScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const SignUpScreen()),
+            path: AppStringEnglish.rootPath,
+            name: TopScreen.name,
+            builder: (context, state) => const ChatScreen(),  // 초기 화면 설정
           ),
           GoRoute(
-            path: 'setting',
-            name: SettingScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const SettingScreen()),
-          ),
-          GoRoute(
-            path: 'mypage',
-            name: MyPageScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const MyPageScreen()),
-          ),
-          GoRoute(
-            path: 'settingaccount',
-            name: SettingAccountManagerWidget.name,
-            builder: (context, state) => ResponsiveLayoutBuilder(
-                context, const SettingAccountManagerWidget()),
-          ),
-          GoRoute(
-            path: 'webpayment',
-            name: WebPaymentWidget.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const WebPaymentWidget()),
-          ),
-          GoRoute(
-            path: 'chat',
+            path: AppStringEnglish.chatScreenPath,
             name: ChatScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const ChatScreen()),
+            builder: (context, state) => const ChatScreen(),
           ),
           GoRoute(
-            path: 'mbti',
+            path: AppStringEnglish.friendsScreenPath,
+            name: FriendsListScreen.name,
+            builder: (context, state) => const FriendsListScreen(),
+          ),
+          GoRoute(
+            path: AppStringEnglish.matchScreenPath,
+            name: MatchScreen.name,
+            builder: (context, state) => const MatchScreen(),
+          ),
+          GoRoute(
+            path: AppStringEnglish.mbtiScreenPath,
             name: MBTITestScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const MBTITestScreen()),
+            builder: (context, state) => const MBTITestScreen(),
           ),
           GoRoute(
-            path: 'adminloading',
-            name: AdminLoadingPage.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const AdminLoadingPage()),
+            path: AppStringEnglish.myPageScreenPath,
+            name: MyPageScreen.name,
+            builder: (context, state) => const MyPageScreen(),
           ),
           GoRoute(
-            path: 'adminmain',
-            name: AdminScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const AdminScreen()),
+            path: AppStringEnglish.profileDetailScreenPath,
+            name: ProfileDetailScreen.name,
+            builder: (context, state) => const ProfileDetailScreen(),
           ),
           GoRoute(
-            path: 'userlistinadmin',
-            name: AdminUserListPage.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const AdminUserListPage()),
+            path: AppStringEnglish.rankingScreenPath,
+            name: RankingScreen.name,
+            builder: (context, state) => const RankingScreen(),
           ),
           GoRoute(
-            path: 'userdetailinadmin',
-            name: AdminUserDetailPage.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
+            path: AppStringEnglish.postScreenPath,
+            name:  PostScreen.name,
+            builder: (context, state) => const PostScreen(),
           ),
         ],
+      ),
+      // 바텀 네비게이션바가 필요 없는 루트
+      GoRoute(
+        path: AppStringEnglish.signUpScreenPath,
+        name: SignUpScreen.name,
+        builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: AppStringEnglish.settingScreenPath,
+        name: SettingScreen.name,
+        builder: (context, state) => const SettingScreen(),
+      ),
+      GoRoute(
+        path: AppStringEnglish.settingAccountScreenPath,
+        name: SettingAccountManagerWidget.name,
+        builder: (context, state) => ResponsiveLayoutBuilder(
+            context, const SettingAccountManagerWidget()),
+      ),
+      GoRoute(
+        path: AppStringEnglish.webPaymentScreenPath,
+        name: WebPaymentWidget.name,
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const WebPaymentWidget()),
+      ),
+      // Admin 관련 루트
+      GoRoute(
+        path: AppStringEnglish.adminMainScreenPath,
+        name: AdminScreen.name,
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const AdminScreen()),
+      ),
+      GoRoute(
+        path: AppStringEnglish.adminUserListScreenPath,
+        name: AdminUserListPage.name,
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const AdminUserListPage()),
+      ),
+      GoRoute(
+        path: AppStringEnglish.adminUserDetailScreenPath,
+        name: AdminUserDetailPage.name,
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
+      ),
+      GoRoute(
+        path: AppStringEnglish.adminLoadingScreenPath,
+        name: AdminLoadingPage.name,
+        builder: (context, state) =>
+            ResponsiveLayoutBuilder(context, const AdminLoadingPage()),
       ),
     ],
   );
 });
+
+

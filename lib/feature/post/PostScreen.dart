@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 
 class PostScreen extends StatelessWidget {
+  static const String name = 'PostScreen';
   const PostScreen({super.key});
 
   @override
