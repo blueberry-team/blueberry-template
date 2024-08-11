@@ -37,6 +37,7 @@ Future<void> main() async {
       child: MyApp(),
     ));
   }, (error, stackTrace) {
+    talker.error('Uncaught error: $error');
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
 }
