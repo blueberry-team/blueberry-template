@@ -29,8 +29,9 @@ dependencies:
   firebase_auth: ^5.1.1
   firebase_core: ^3.1.1
   firebase_storage: ^12.1.0
-  firebase_analytics: ^11.1.0
+  firebase_analytics: ^11.2.1
   cloud_firestore: ^5.0.2
+  firebase_database: ^11.0.4
 
   # UI
   cupertino_icons: ^1.0.6
@@ -85,6 +86,15 @@ dependencies:
   in_app_purchase: ^3.2.0
 
 
+  # Lint
+  flutter_lints: ^3.0.0
+  custom_lint: ^0.6.4
+
+  # Logger
+  talker: ^4.4.0
+  firebase_crashlytics: ^4.0.4
+  talker_flutter: ^4.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -92,9 +102,6 @@ dev_dependencies:
   # Generate
   json_serializable: ^6.8.0
   build_runner: ^2.4.11
-
-  # Lint
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
