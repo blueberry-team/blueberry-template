@@ -28,8 +28,10 @@ class MBTITestWidget extends ConsumerWidget {
     return mbtiQuestionList.when(
         data: (data) => Column(
               children: [
-                Expanded(child: _buildMBTITestPageWidgetView(pageController, data)),
-                _buildMBTITestWidgetView(pageController, ref, _buttonTexts, data),
+                Expanded(
+                    child: _buildMBTITestPageWidgetView(pageController, data)),
+                _buildMBTITestWidgetView(
+                    pageController, ref, _buttonTexts, data),
               ],
             ),
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -42,7 +44,6 @@ class MBTITestWidget extends ConsumerWidget {
 
 Widget _buildMBTITestPageWidgetView(
     PageController pageController, List<MBTIQuestionModel> questions) {
-
   return PageView.builder(
     controller: pageController,
     itemCount: questions.length,

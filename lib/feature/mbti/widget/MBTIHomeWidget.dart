@@ -24,7 +24,8 @@ class MBTIHomeWidget extends ConsumerWidget {
 
         return imageState.when(
           data: (imageUrl) {
-            return _buildMBTIHomeWidgetView(context, ref, userName, mbti, imageUrl);
+            return _buildMBTIHomeWidgetView(
+                context, ref, userName, mbti, imageUrl);
           },
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) =>
@@ -100,8 +101,23 @@ Widget _buildMBTIHomeWidgetView(BuildContext context, WidgetRef ref,
 }
 
 enum MBTIType {
-  INFP, INFJ, INTP, INTJ, ISFP, ISFJ, ISTP, ISTJ,
-  ENFP, ENFJ, ENTP, ENTJ, ESFP, ESFJ, ESTP, ESTJ, NULL;
+  INFP,
+  INFJ,
+  INTP,
+  INTJ,
+  ISFP,
+  ISFJ,
+  ISTP,
+  ISTJ,
+  ENFP,
+  ENFJ,
+  ENTP,
+  ENTJ,
+  ESFP,
+  ESFJ,
+  ESTP,
+  ESTJ,
+  NULL;
 
   static MBTIType fromString(String mbti) {
     return MBTIType.values.firstWhere(
