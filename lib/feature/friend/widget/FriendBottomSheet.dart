@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../model/FriendModel.dart';
+import '../../../utils/AppStrings.dart';
+import '../../user_report/provider/ReportModalSheet.dart';
+import 'BottomSheetButtonWidget.dart';
 
 class FriendBottomSheet extends StatelessWidget {
   final FriendModel friend;
@@ -16,7 +17,7 @@ class FriendBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      height: 260, // 바텀 시트 높이 수정 부분
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: const BorderRadius.vertical(
@@ -63,98 +64,40 @@ class FriendBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+              BottomSheetButtonWidget(
                 onPressed: () {
                   Navigator.of(context).pop();
                   GoRouter.of(context).push('/chat');
                 },
-                child: const Text('채팅'),
+                text: AppStrings.chatButton,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+              BottomSheetButtonWidget(
                 onPressed: () {
                   Navigator.of(context).pop();
                   GoRouter.of(context)
                       .push('/userdetail'); // 현재 임의 경로 사용 중 수정 필요
                 },
-                child: const Text('프로필'),
+                text: AppStrings.profileButton,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+              BottomSheetButtonWidget(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  _showReportDialog(context);
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(25.0)),
+                    ),
+                    builder: (context) => ReportModalSheet(friend: friend),
+                  );
                 },
-                child: const Text('신고하기'),
+                text: AppStrings.reportButton,
               ),
             ],
           ),
         ],
       ),
     );
-  }
-
-  void _showReportDialog(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Report User"),
-          content: TextField(
-            controller: controller,
-            decoration:
-                const InputDecoration(hintText: "Enter your report reason"),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () {
-                _reportUser(controller.text);
-                Navigator.of(context).pop();
-              },
-              child: const Text("Report"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> _reportUser(String reason) async {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      await FirebaseFirestore.instance.collection('reports').add({
-        'reportedUserId': friend.userId,
-        'reporterUserId': currentUser.uid,
-        'reason': reason,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
-    }
   }
 }
