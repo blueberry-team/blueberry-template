@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
-import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/provider/MBTIProvider.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';

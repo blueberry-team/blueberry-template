@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -45,7 +46,7 @@ class _PostingScreenState extends State<PostingScreen> {
                 decoration: const InputDecoration(labelText: '내용'),
                 onSaved: (value) => content = value,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null) {
                     return '내용을 입력해주세요';
                   }
                   return null;
@@ -77,7 +78,7 @@ class _PostingScreenState extends State<PostingScreen> {
                         uploadTime: uploadTime,
                       );
                       // 포스트 생성 후 처리
-                      print(post.toJson()); // 예시로 콘솔에 출력
+                      talker.info('포스트 생성: ${post.toJson()}');
                     }
                   },
                   child: const Text('포스트 생성'),

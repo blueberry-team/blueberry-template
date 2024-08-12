@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 //Google Map API key 등록 필요
-const String apiKey = '';
+const String apiKey = 'AIzaSyAfmTtOAC5_tHw4LYEbgYYq5XwxS1i0CjQ';
 // Android : AndroidManifest.xml 에 API Key와 권한 추가 필요
 // iOS : AppDelegate.swift, Info.plist 에 API Key와 권한 추가 필요
 

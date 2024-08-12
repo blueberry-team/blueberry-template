@@ -141,20 +141,20 @@ class _PostListViewItemWidgetState extends State<PostListViewItemWidget> {
             ),
             // 임시 댓글 표시
             if (showComment)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Divider(), // 구분선 추가
-                    const Text(
+                    Divider(), // 구분선 추가
+                    Text(
                       '정우님 항상 감사합니다',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),
