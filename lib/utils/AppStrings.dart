@@ -166,8 +166,10 @@ class AppStrings {
   static const String appbar_Text_Logo = 'Petting';
   static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-  static const String errorMessage_locationPermissionForeverDenied = '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
-  static const String errorMessage_locationPermissionDisabled = '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
+  static const String errorMessage_locationPermissionForeverDenied =
+      '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
+  static const String errorMessage_locationPermissionDisabled =
+      '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
   static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
   static const String errorMessage_sendFailed = '문자 발송 실패';
   static const String button_openConfigMenu = '설정 열기';

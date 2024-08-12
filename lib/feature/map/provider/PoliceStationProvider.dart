@@ -5,13 +5,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 //Google Map API key 등록 필요
-const String apiKey = '';
+const String apiKey = ''; //TODO: 'Google Map API Key 입력 필요
 // Android : AndroidManifest.xml 에 API Key와 권한 추가 필요
 // iOS : AppDelegate.swift, Info.plist 에 API Key와 권한 추가 필요
 
 Future<String?> _getPlacePhoneNumber(String placeId, String apiKey) async {
-
-
   final url = 'https://maps.googleapis.com/maps/api/place/details/json'
       '?place_id=$placeId'
       '&fields=formatted_phone_number'

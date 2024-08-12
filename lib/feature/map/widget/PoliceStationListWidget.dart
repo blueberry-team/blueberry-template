@@ -37,13 +37,13 @@ class PoliceStationListWidget extends ConsumerWidget {
               tileColor: isSelected ? Colors.blue.withOpacity(0.3) : null,
               title: Text(
                 '${index + 1}. ${policeStation.name}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(policeStation.phoneNumber ?? '-'),
               trailing: IconButton(
-                icon: Icon(Icons.phone),
+                icon: const Icon(Icons.phone),
                 onPressed: () {
                   final Uri phoneLaunchUri = Uri(
                     scheme: 'tel',

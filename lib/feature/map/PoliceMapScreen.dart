@@ -41,7 +41,7 @@ class _PoliceMapScreenState extends ConsumerState<PoliceMapScreen> {
     return Scaffold(
       body: () {
         if (permissionStatus == LocationPermissionStatus.initial) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (permissionStatus == LocationPermissionStatus.granted) {
           return SafeArea(
             child: Padding(
@@ -56,12 +56,13 @@ class _PoliceMapScreenState extends ConsumerState<PoliceMapScreen> {
                         locationState: locationState,
                         policeStationsAsyncValue: policeStationsAsyncValue,
                       ),
-                      loading: () => Center(child: CircularProgressIndicator()),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
                       error: (error, stack) =>
                           Center(child: Text('Error: $error')),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Expanded(
                     child: PoliceStationListWidget(
                       googleMapControllerCompleter:

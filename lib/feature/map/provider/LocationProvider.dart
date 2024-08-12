@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class LocationNotifier extends StateNotifier<LatLng> {
   StreamSubscription<Position>? _positionStreamSubscription;
 
-  LocationNotifier() : super(LatLng(37.5665, 126.9780)) {
+  LocationNotifier() : super(const LatLng(37.5665, 126.9780)) {
     _startLocationStream();
   }
 
@@ -16,7 +16,7 @@ class LocationNotifier extends StateNotifier<LatLng> {
     state = LatLng(position.latitude, position.longitude);
 
     _positionStreamSubscription = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
+      locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.high,
         distanceFilter: 10,
       ),
