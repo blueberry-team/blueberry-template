@@ -29,8 +29,12 @@ dependencies:
   firebase_auth: ^5.1.1
   firebase_core: ^3.1.1
   firebase_storage: ^12.1.0
-  firebase_analytics: ^11.1.0
+  firebase_analytics: ^11.2.1
   cloud_firestore: ^5.0.2
+  firebase_database: ^11.0.4
+
+  # Kakao
+  kakao_flutter_sdk_share: ^1.9.5
 
   # UI
   cupertino_icons: ^1.0.6
@@ -38,6 +42,10 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_rating_bar: ^4.0.1
   pinput: ^4.0.0
+
+  # Calender
+  flutter_svg: ^2.0.10+1
+  flutter_screenutil: ^5.9.3
 
   # Service
   dart_openai: ^5.1.0
@@ -64,6 +72,9 @@ dependencies:
   transparent_image: ^2.0.1
   photo_manager_image_provider: ^2.1.1
 
+  # Share
+  share_plus: ^9.0.0
+
   # Match
   flutter_card_swiper: ^7.0.1
 
@@ -86,6 +97,20 @@ dependencies:
   url_strategy: ^0.3.0
 
 
+  # Lint
+  flutter_lints: ^3.0.0
+  custom_lint: ^0.6.4
+
+  # Logger
+  talker: ^4.4.0
+  firebase_crashlytics: ^4.0.4
+  talker_flutter: ^4.4.0
+
+  # map
+  google_maps_flutter: ^2.9.0
+  geolocator: ^12.0.0
+  intl: ^0.19.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,9 +118,6 @@ dev_dependencies:
   # Generate
   json_serializable: ^6.8.0
   build_runner: ^2.4.11
-
-  # Lint
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
@@ -105,6 +127,7 @@ flutter:
     - assets/300x420/
     - assets/700x150/
     - assets/logo/
+    - assets/icon/
     - assets/login_page_images/
 
 # Run Commands to generate splash view
@@ -128,7 +151,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/logo/logo_5.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+  min_sdk_android: 23 # android min sdk min:16, default 21
   web:
     generate: true
     image_path: "assets/logo/logo_5.png"

@@ -14,14 +14,10 @@ import '../utils/AppStringEnglish.dart';
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
 final List<String> routes = [
-  '/chat',
-  '/friends',
-  '/match',
-  '/mbti',
-  '/mypage',
-  '/profiledetail',
-  '/rank',
   '/post',
+  '/match',
+  '/mypage',
+  '/admin',
 ];
 
 class TopScreen extends ConsumerWidget {
@@ -44,36 +40,20 @@ class TopScreen extends ConsumerWidget {
         backgroundColor: Colors.blueGrey[100],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: AppStringEnglish.chatScreenLabel,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: AppStringEnglish.friendsScreenLabel,
+            icon: Icon(Icons.podcasts),
+            label: AppStringEnglish.postScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
             label: AppStringEnglish.matchScreenLabel,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_search),
-            label: AppStringEnglish.mbtiScreenLabel,
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: AppStringEnglish.myPageScreenLabel,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle_rounded),
-            label: AppStringEnglish.profileDetailScreenLabel,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_events),
-            label: AppStringEnglish.rankingScreenLabel,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.podcasts),
-            label: AppStringEnglish.postScreenLabel,
+            icon: Icon(Icons.admin_panel_settings),
+            label: AppStringEnglish.adminScreenLabel,
           ),
         ],
         currentIndex: selectedIndex,

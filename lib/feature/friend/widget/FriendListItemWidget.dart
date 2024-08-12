@@ -37,9 +37,6 @@ class FriendListItemWidget extends StatelessWidget {
                 leading: CircleAvatar(
                   radius: 25,
                   backgroundImage: CachedNetworkImageProvider(imageUrl),
-                  onBackgroundImageError: (exception, stackTrace) {
-                    print('Error loading image: $exception');
-                  },
                 ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,

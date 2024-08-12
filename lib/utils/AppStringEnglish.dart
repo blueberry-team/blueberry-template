@@ -2,14 +2,10 @@ class AppStringEnglish {
   static const String appTitle = 'Community App';
 
   //TopScreen.dart
-  static const String chatScreenLabel = 'Chat';
-  static const String friendsScreenLabel = 'Friends';
-  static const String matchScreenLabel = 'Match';
-  static const String mbtiScreenLabel = 'MBTI';
-  static const String myPageScreenLabel = 'My Page';
-  static const String profileDetailScreenLabel = 'Profile';
-  static const String rankingScreenLabel = 'Rank';
   static const String postScreenLabel = 'Post';
+  static const String matchScreenLabel = 'Match';
+  static const String myPageScreenLabel = 'MyPage';
+  static const String adminScreenLabel = 'Admin';
 
   //ChatPage.dart
   static const String chatPageTitle = 'Chat Page';
@@ -18,8 +14,7 @@ class AppStringEnglish {
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = 'Shopping Page';
   static const String shoppingPageTitle1 = 'Looking for these products?';
-  static const String shoppingPageSubTitle1 =
-      'We always find the best blueberries for you.';
+  static const String shoppingPageSubTitle1 = 'We always find the best blueberries for you.';
   static const String shoppingPageTitle2 = 'New Arrivals';
   static const String shoppingPageSubTitle2 = 'Check out our latest products.';
 

@@ -42,7 +42,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/',
             name: TopScreen.name,
-            builder: (context, state) => const ChatScreen(), // 초기 화면 설정
+            builder: (context, state) => const PostScreen(), // 초기 화면 설정
           ),
           GoRoute(
             path: '/chat',

@@ -4,6 +4,7 @@ import 'widget/FriendsListWidget.dart';
 
 class FriendsListScreen extends StatelessWidget {
   static const String name = 'FriendsListScreen';
+
   const FriendsListScreen({super.key});
 
   @override
