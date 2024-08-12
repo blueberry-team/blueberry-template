@@ -64,6 +64,8 @@ final userInfoNotifierProvider =
           mbti: 'NULL',
           profileImageUrl: '',
           isMemberShip: false,
+          socialLogin: false,
+          socialCompany: '이메일 로그인을 사용 중 입니다.',
           createdAt: DateTime.now(),
           userClass: 'user',
           likeGivens: [""])));

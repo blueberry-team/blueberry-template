@@ -46,8 +46,10 @@ class FirebaseService {
         age: 1,
         isMemberShip: false,
         profileImageUrl: '',
-        createdAt: DateTime.now(),
         mbti: 'NULL',
+        socialLogin: false,
+        socialCompany: '이메일 로그인을 사용 중 입니다.',
+        createdAt: DateTime.timestamp(),
         userClass: 'user',
         likeGivens: [""],
       );
