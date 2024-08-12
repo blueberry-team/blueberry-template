@@ -7,6 +7,6 @@ final myPageNicknameProvider = StreamProvider<String>((ref) {
   final userId = FirebaseAuth.instance.currentUser!.uid;
 
   return firestore.collection('users').doc(userId).snapshots().map((snapshot) {
-    return snapshot['name'] as String;
+    return snapshot['nickName'] as String;
   });
 });
