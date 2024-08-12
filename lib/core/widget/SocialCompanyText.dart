@@ -2,7 +2,6 @@ import 'package:blueberry_flutter_template/feature/mypage/provider/MyPageSocialL
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../feature/mypage/provider/MyPageNameProvider.dart';
 import '../../utils/AppStrings.dart';
 
 class SocialCompanyTextWidget extends ConsumerWidget {
