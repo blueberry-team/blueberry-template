@@ -1,21 +1,34 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import '../model/ChatMessageModel.dart';
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // ChatScreen.dart
-  Future<void> addChatMessage(String message) async {
-    try {
-      await _firestore.collection('chats').add({
-        'message': message,
-        'timestamp': DateTime.now(),
-      });
-    } catch (e) {
-      print('Error adding message: $e');
-      throw Exception('Failed to add message');
+  Future<void> addChatMessage(String roomId, String message) async {
+    final messageRef = FirebaseDatabase.instance.ref("chats/$roomId/messages");
+    var user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      throw Exception('No current user found');
     }
+
+    final snapshot = await messageRef.get();
+    final int nextIndex = snapshot.children.length;
+
+    final newMessage = ChatMessageModel(
+      senderId: user.uid,
+      message: message,
+      timestamp: DateTime.now(),
+      isRead: false,
+    );
+
+    final json = newMessage.toJson();
+    json['timestamp'] = newMessage.timestamp.millisecondsSinceEpoch;
+    await messageRef.child(nextIndex.toString()).set(json);
   }
 
   Future<void> upDateUserDB(String email, String name) async {
@@ -34,7 +47,9 @@ class FirebaseService {
         isMemberShip: false,
         profileImageUrl: '',
         createdAt: DateTime.now(),
+        mbti: 'NULL',
         userClass: 'user',
+        likeGivens: [""],
       );
       // 멤버쉽 모델은 추후에 인앱 결제시 유저가 구독하고 있거나 유저 상태에 대한 변경을 주기 위해 추가했음
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());

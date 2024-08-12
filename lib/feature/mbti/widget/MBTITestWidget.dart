@@ -1,9 +1,13 @@
-import 'package:blueberry_flutter_template/model/MBTIQuestionModel.dart';
 import 'package:blueberry_flutter_template/feature/mbti/provider/MBTIProvider.dart';
+import 'package:blueberry_flutter_template/feature/mbti/widget/MBTIHomeWidget.dart';
+import 'package:blueberry_flutter_template/feature/mbti/widget/MBTIResultWidget.dart';
+import 'package:blueberry_flutter_template/model/MBTIQuestionModel.dart';
 import 'package:blueberry_flutter_template/utils/AppStringEnglish.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../utils/AppTextStyle.dart';
 
 class MBTITestWidget extends ConsumerWidget {
   final pageController = PageController();
@@ -20,21 +24,25 @@ class MBTITestWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mbtiList = ref.watch(mbtiQuestionProvider);
-    return mbtiList.when(
+    final mbtiQuestionList = ref.watch(mbtiQuestionProvider);
+    return mbtiQuestionList.when(
         data: (data) => Column(
               children: [
-                Expanded(child: _buildPageView(pageController, data)),
-                _buildListView(pageController, ref, _buttonTexts, data),
+                Expanded(
+                    child: _buildMBTITestPageWidgetView(pageController, data)),
+                _buildMBTITestWidgetView(
+                    pageController, ref, _buttonTexts, data),
               ],
             ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) =>
-            Center(child: Text('${AppStringEnglish.errorTitle}: $error')));
+        error: (error, stackTrace) => Center(
+            child: Text(
+                style: black12BoldTextStyle,
+                '${AppStringEnglish.errorTitle}: $error')));
   }
 }
 
-Widget _buildPageView(
+Widget _buildMBTITestPageWidgetView(
     PageController pageController, List<MBTIQuestionModel> questions) {
   return PageView.builder(
     controller: pageController,
@@ -45,7 +53,7 @@ Widget _buildPageView(
           children: [
             Text(
               questions[index].question,
-              style: const TextStyle(fontSize: 24),
+              style: black24BoldTextStyle,
               textAlign: TextAlign.center,
             ),
             Image.network(
@@ -61,7 +69,7 @@ Widget _buildPageView(
   );
 }
 
-Widget _buildListView(PageController pageController, WidgetRef ref,
+Widget _buildMBTITestWidgetView(PageController pageController, WidgetRef ref,
     List<String> buttonText, List<MBTIQuestionModel> data) {
   return ListView.builder(
     shrinkWrap: true,
@@ -74,19 +82,26 @@ Widget _buildListView(PageController pageController, WidgetRef ref,
             if (pageController.page != pageController.page?.ceilToDouble()) {
               return;
             }
-            ref.read(mbtiProvider.notifier).updateScore(
+            ref.watch(mbtiTestProvider.notifier).updateScore(
                 data[pageController.page!.toInt()].type, 2 - index);
+            // 마지막 페이지 일시 결과 호출
             if (pageController.page == data.length - 1) {
-              ref.read(mbtiProvider.notifier).setMBTI();
+              MBTIType result = ref.watch(mbtiTestProvider.notifier).setMBTI();
               Navigator.pop(context);
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return MBTIResultWidget(mbtiResult: result);
+                  });
             } else {
               pageController.nextPage(
-                duration: const Duration(microseconds: 1000000),
+                duration: const Duration(seconds: 1),
                 curve: Curves.decelerate,
               );
             }
           },
-          child: Text(style: const TextStyle(fontSize: 20), buttonText[index]),
+          child: Text(style: black24TextStyle, buttonText[index]),
         ),
       );
     },

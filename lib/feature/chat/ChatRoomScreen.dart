@@ -1,10 +1,11 @@
-import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/feature/chat/widget/ChatRoomWidget.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/FirebaseService.dart';
 
 class ChatRoomScreen extends StatelessWidget {
+  static const String name = 'ChatRoomScreen';
   const ChatRoomScreen({super.key});
 
   @override

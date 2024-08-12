@@ -5,14 +5,15 @@ part 'generated/DogProfileModel.g.dart';
 
 @freezed
 class DogProfileModel with _$DogProfileModel {
-  const factory DogProfileModel({
-    required String name,
-    required String gender,
-    required String breed,
-    required String bio,
-    required String imageUrl,
-    required String location,
-  }) = _DogProfileModel;
+  const factory DogProfileModel(
+      {required String name,
+      required String gender,
+      required String breed,
+      required String bio,
+      required String imageUrl,
+      required String location,
+      required String petID,
+      required String userID}) = _DogProfileModel;
 
   factory DogProfileModel.fromJson(Map<String, dynamic> json) =>
       _$DogProfileModelFromJson(json);

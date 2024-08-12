@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileDetailWidget extends StatelessWidget {
   const ProfileDetailWidget({super.key});
@@ -6,6 +7,17 @@ class ProfileDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile Detail'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: GestureDetector(
           onTap: () {},

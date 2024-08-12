@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
-import 'package:blueberry_flutter_template/services/FirebaseAuthServiceProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
@@ -11,7 +10,6 @@ class PasswordConfirmWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = ref.watch(emailProvider);
     final password = ref.watch(passwordProvider);
     final passwordConfirm = ref.watch(passwordConfirmProvider.notifier);
     final formKey = GlobalKey<FormState>();
@@ -26,7 +24,8 @@ class PasswordConfirmWidget extends ConsumerWidget {
             TextFormField(
               onChanged: (value) => passwordConfirm.state = value,
               obscureText: true,
-              decoration: const InputDecoration(labelText: '비밀번호 확인'),
+              decoration: const InputDecoration(
+                  labelText: AppStrings.passwordInputLabel),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.errorMessage_emptyPassword;
@@ -40,10 +39,6 @@ class PasswordConfirmWidget extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  await ref
-                      .watch(firebaseAuthServiceProvider)
-                      .signUpWithEmailPassword(email, passwordConfirm.state);
-                  // 오류 뱉어내는거 하나 만들어야함 ex ) ID or Password 형식에 문제가 있다라고 쏴야할듯 ?
                   onNext();
                 } catch (e) {
                   print('failed signUp $e');
