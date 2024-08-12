@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:blueberry_flutter_template/services/socialauth/RandomUserNickNameGenerator.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -31,7 +32,7 @@ class SocialAuthService {
       );
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(gCredential);
-      getAuthenticateWithFirebase(userCredential, 'google 로그인을 사용 중 입니다.');
+      getAuthenticateWithFirebase(userCredential, AppStrings.usingGoogleLogin);
     }
   }
 
@@ -57,7 +58,7 @@ class SocialAuthService {
 
       final result =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      getAuthenticateWithFirebase(result, 'apple 로그인을 사용 중 입니다.');
+      getAuthenticateWithFirebase(result, AppStrings.usingAppleLogin);
     } on SignInWithAppleAuthorizationException catch (e) {
       // Apple 로그인 관련 오류 처리
       talker.error('Apple 로그인 오류: ${e.code}');
@@ -86,7 +87,7 @@ class SocialAuthService {
     GithubAuthProvider githubAuthProvider = GithubAuthProvider();
     final userCredential =
         await FirebaseAuth.instance.signInWithProvider(githubAuthProvider);
-    getAuthenticateWithFirebase(userCredential, 'github 로그인을 사용 중 입니다.');
+    getAuthenticateWithFirebase(userCredential, AppStrings.usingGithubLogin);
   }
 
   ///* 인증정보를 바탕으로 firestore에 저장하는 함수
