@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/model/UserDataModel.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,7 +66,7 @@ final userInfoNotifierProvider =
           profileImageUrl: '',
           isMemberShip: false,
           socialLogin: false,
-          socialCompany: '이메일 로그인을 사용 중 입니다.',
+          socialCompany: AppStrings.usingEmailLogin,
           createdAt: DateTime.now(),
           userClass: 'user',
           likeGivens: [""])));
