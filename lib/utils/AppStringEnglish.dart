@@ -14,7 +14,8 @@ class AppStringEnglish {
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = 'Shopping Page';
   static const String shoppingPageTitle1 = 'Looking for these products?';
-  static const String shoppingPageSubTitle1 = 'We always find the best blueberries for you.';
+  static const String shoppingPageSubTitle1 =
+      'We always find the best blueberries for you.';
   static const String shoppingPageTitle2 = 'New Arrivals';
   static const String shoppingPageSubTitle2 = 'Check out our latest products.';
 
