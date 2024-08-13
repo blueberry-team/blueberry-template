@@ -15,6 +15,7 @@ import '../chat/ChatRoomScreen.dart';
 import 'PostingScreen.dart';
 
 class PostScreen extends StatelessWidget {
+  static const String name = 'PostScreen';
   const PostScreen({super.key});
 
   @override

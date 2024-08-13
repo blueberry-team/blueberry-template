@@ -1,10 +1,8 @@
-import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../feature/admin/AdminUserListPage.dart';
-import '../feature/login/LoginScreen.dart';
-import '../feature/match/MatchScreen.dart';
+import '../utils/AppStringEnglish.dart';
 
 /// TopScreen.dart
 ///
@@ -15,26 +13,25 @@ import '../feature/match/MatchScreen.dart';
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
-class TopScreen extends ConsumerWidget {
-  static const String name = '/TopScreen';
+final List<String> routes = [
+  '/post',
+  '/match',
+  '/mypage',
+  '/admin',
+];
 
-  const TopScreen({super.key});
+class TopScreen extends ConsumerWidget {
+  static const String name = 'TopScreen';
+  final Widget child;
+
+  const TopScreen({super.key, required this.child});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
-    final List<Widget> pages = [
-      const PostScreen(),
-      const MatchScreen(),
-      const LoginScreen(),
-      const AdminUserListPage()
-    ];
-
     return Scaffold(
-      body: Center(
-        child: pages[selectedIndex],
-      ),
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedIconTheme: const IconThemeData(color: Colors.black),
@@ -44,24 +41,26 @@ class TopScreen extends ConsumerWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.podcasts),
-            label: 'Post',
+            label: AppStringEnglish.postScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
-            label: 'match',
+            label: AppStringEnglish.matchScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'MyPage',
+            label: AppStringEnglish.myPageScreenLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.admin_panel_settings),
-            label: 'Admin',
+            label: AppStringEnglish.adminScreenLabel,
           ),
         ],
         currentIndex: selectedIndex,
-        onTap: (index) =>
-            ref.read(selectedIndexProvider.notifier).state = index,
+        onTap: (index) {
+          ref.read(selectedIndexProvider.notifier).state = index;
+          context.go(routes[index]);
+        },
       ),
     );
   }
