@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../utils/AppStrings.dart';
 import 'widget/MatchProfileListWidget.dart';
 
 ///  MatchScreen - 프로필 스와이프 매칭 화면
@@ -15,7 +14,7 @@ class MatchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(AppStrings.matchScreenTitle)),
+      appBar: AppBar(),
       body: const Padding(
         padding: EdgeInsets.only(bottom: 36.0),
         child: Center(
