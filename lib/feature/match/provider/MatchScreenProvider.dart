@@ -30,16 +30,41 @@ Future<void> addPetToFavorites(String userId, String petId) async {
         });
         talker.info("DB 업데이트 성공: $likedPets");
       } else {
-        talker.info("DB 업데이트 필요 없음: 이미 존재하는 petId");
+        talker.info("DB 업데이트 실패: 이미 존재하는 petId");
       }
     } else {
-      // 사용자가 존재하지 않는 경우 새 문서를 생성
-      await userDoc.set({
-        'likedPets': [petId],
-      });
-      talker.info("새 사용자 문서 생성 및 likedPets 업데이트 성공");
+      talker.info("DB 업데이트 실패: likedPets 필드가 없습니다.");
     }
   } catch (e) {
     talker.error('DB 업데이트 중 오류 발생');
+  }
+}
+
+Future<void> addPetToIgnored(String userId, String petId) async {
+  final firestore = FirebaseFirestore.instance;
+  final userDoc = firestore.collection('users_test').doc(userId);
+
+  try {
+    final snapshot = await userDoc.get();
+
+    if (snapshot.exists) {
+      // ignoredPets 필드가 있는지 확인
+      List<dynamic> ignoredPets = snapshot.data()?['ignoredPets'] ?? [];
+
+      // 이미 존재하지 않는 경우에만 petId를 추가
+      if (!ignoredPets.contains(petId)) {
+        ignoredPets.add(petId);
+        await userDoc.update({
+          'ignoredPets': ignoredPets,
+        });
+        talker.info("DB 업데이트 성공: $ignoredPets");
+      } else {
+        talker.info("DB 업데이트 실패: 이미 존재하는 petId");
+      }
+    } else {
+      talker.info("DB 업데이트 실패: ignoredPets 필드가 없습니다.");
+    }
+  } catch (e) {
+    talker.error('DB 업데이트 중 오류 발생: $e');
   }
 }

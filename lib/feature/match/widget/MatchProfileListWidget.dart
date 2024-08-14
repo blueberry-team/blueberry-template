@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/model/DogProfileModel.dart';
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +40,6 @@ Widget _buildCardView(
           onSwipe: (previousIndex, newIndex, direction) {
             // 스와이프 할 때마다 인덱스를 업데이트
             currentIndex = newIndex ?? currentIndex;
-            talker.info("currentIndex: $currentIndex");
 
             if (direction == CardSwiperDirection.right) {
               Navigator.of(context).push(
@@ -66,7 +64,7 @@ Widget _buildCardView(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SwipeButtonWidget(
-            onPressed: () => cardSwiperController.swipe(CardSwiperDirection.left), // pass
+            onPressed: () => cardSwiperController.swipe(CardSwiperDirection.left),
             icon: Icons.close,
             color: Colors.greenAccent,
           ),
@@ -74,8 +72,6 @@ Widget _buildCardView(
             onPressed: () async {
               const userId = "eztqDqrvEXDc8nqnnrB8"; // userId 임시로 하드 코딩
               final petId = data[currentIndex].petID; // 현재 표시된 pet의 ID를 취득
-              talker.info("petId: $petId");
-
               await addPetToFavorites(userId, petId);
               cardSwiperController.swipe(CardSwiperDirection.right);
             },
@@ -83,7 +79,7 @@ Widget _buildCardView(
             color: Colors.blueAccent,
           ),
           SwipeButtonWidget(
-            onPressed: () => cardSwiperController.swipe(CardSwiperDirection.right), // 좋아요
+            onPressed: () => cardSwiperController.swipe(CardSwiperDirection.right),
             icon: Icons.favorite,
             color: Colors.redAccent,
           ),
