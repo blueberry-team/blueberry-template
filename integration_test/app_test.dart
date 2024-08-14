@@ -7,20 +7,21 @@ import 'package:integration_test/integration_test.dart';
 
 import 'base_test.dart';
 
-class ModelTestCase extends BaseTestCase {}
-
-void main() async {
+void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  late FirebaseFirestore firestore;
 
-  final firestore = FirebaseFirestore.instance;
+  setUpAll(() async {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    firestore = FirebaseFirestore.instance;
+  });
 
   group('Firestore에서 데이터를 가져와 fromJson 메서드 실행', () {
-    final testCase = ModelTestCase();
-
+    final testCase = BaseTestCase();
     late String collectionName;
 
-    test('[pet 컬렉션이 있을 때], [첫 번째 문서를 가져와 fromJson 메서드로 매핑하면], [오류 없이 매핑된다]',
+    test('pet 컬렉션이 있을 때, 첫 번째 문서를 가져와 fromJson 메서드로 매핑하면, 오류 없이 매핑된다',
         () async {
       DogProfileModel? fetchedData;
 
