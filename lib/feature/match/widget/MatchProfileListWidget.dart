@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../utils/AppStrings.dart';
 import '../provider/MatchScreenProvider.dart';
 import '../ProfileScreen.dart';
 import 'SwipeButtonWidget.dart';
@@ -14,93 +15,86 @@ class MatchProfileListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(matchScreenProvider);
-
-    return list.when(
-      data: (List<PetProfileModel> data) => _buildCardView(context, ref, data),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Center(child: Text('Error: $error')),
-    );
-  }
-}
-
-Widget _buildCardView(
-    BuildContext context, WidgetRef ref, List<PetProfileModel> data) {
-  final cardSwiperController = CardSwiperController();
-  int currentIndex = 0;
-
-  // 카드 리스트를 생성
-  final cards = data.map(SwipeCardWidget.new).toList();
-
-  // 카드가 존재하는지 확인
-  if (cards.isEmpty) {
-    return const Center(
-      child: Text('추천할 펫이 없습니다.'),
-    );
+    // 스와이퍼 numberOfCardsDisplayed 설정으로 인해 데이터가 1일 떄도 에러 메세지 출력
+    return list.isEmpty || list.length == 1
+        ? const Center(child: Text(AppStrings.noPetsMessage))
+        : _buildCardView(context, ref, list);
   }
 
-  return Column(
-    children: [
-      Flexible(
-        child: CardSwiper(
-          controller: cardSwiperController,
-          cardsCount: cards.length,
-          numberOfCardsDisplayed: 1, // 한 번에 보여지는 카드 수
-          onSwipe: (previousIndex, newIndex, direction) {
-            currentIndex = newIndex ?? currentIndex;
+  Widget _buildCardView(
+      BuildContext context, WidgetRef ref, List<PetProfileModel> data) {
+    final cardSwiperController = CardSwiperController();
+    int currentIndex = 0;
+    final cards = data.map(SwipeCardWidget.new).toList();
 
-            if (direction == CardSwiperDirection.right) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ProfileScreen(petProfile: data[previousIndex]),
-                ),
-              );
-            }
-            return true;
-          },
-          cardBuilder: (
+    return Column(
+      children: [
+        Flexible(
+          child: CardSwiper(
+            controller: cardSwiperController,
+            cardsCount: cards.length,
+            numberOfCardsDisplayed: 2, // 한 번에 보여지는 최소 카드 설정(1로 설정시 디자인적으로 좋지 않음)
+            onSwipe: (previousIndex, newIndex, direction) {
+              currentIndex = newIndex ?? currentIndex;
+
+              if (direction == CardSwiperDirection.right) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProfileScreen(petProfile: data[previousIndex]),
+                  ),
+                );
+              }
+              return true;
+            },
+            cardBuilder: (
               context,
               index,
               horizontalThresholdPercentage,
               verticalThresholdPercentage,
-              ) =>
-          cards[index],
+            ) =>
+                cards[index],
+          ),
         ),
-      ),
-      Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SwipeButtonWidget(
-              onPressed: () =>
-                  cardSwiperController.swipe(CardSwiperDirection.left),
-              icon: Icons.close,
-              color: Colors.greenAccent,
-            ),
-            const SizedBox(width: 30),
-            SwipeButtonWidget(
-              onPressed: () async {
-                const userId = "eztqDqrvEXDc8nqnnrB8";
-                final petId = data[currentIndex].petID;
-                await addPetToFavorites(userId, petId);
-                cardSwiperController.swipe(CardSwiperDirection.right);
-              },
-              icon: Icons.star,
-              color: Colors.blueAccent,
-            ),
-            const SizedBox(width: 30),
-            SwipeButtonWidget(
-              onPressed: () =>
-                  cardSwiperController.swipe(CardSwiperDirection.right),
-              icon: Icons.favorite,
-              color: Colors.redAccent,
-            ),
-          ],
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // 패스 버튼
+              SwipeButtonWidget(
+                onPressed: () =>
+                    cardSwiperController.swipe(CardSwiperDirection.left),
+                icon: Icons.close,
+                color: Colors.greenAccent,
+              ),
+              const SizedBox(width: 30),
+              // 좋아요 버튼
+              SwipeButtonWidget(
+                onPressed: () async {
+                  const userId = "eztqDqrvEXDc8nqnnrB8";
+                  final petId = data[currentIndex].petID;
+                  await ref
+                      .read(matchScreenProvider.notifier)
+                      .addPetToIgnored(userId, petId);
+                  cardSwiperController.swipe(CardSwiperDirection.right);
+                },
+                icon: Icons.star,
+                color: Colors.blueAccent,
+              ),
+              const SizedBox(width: 30),
+              // 좋아요 버튼
+              SwipeButtonWidget(
+                onPressed: () =>
+                    cardSwiperController.swipe(CardSwiperDirection.right),
+                icon: Icons.favorite,
+                color: Colors.redAccent,
+              ),
+            ],
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
-

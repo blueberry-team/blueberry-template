@@ -1,6 +1,16 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  //MatchScreenProvider.dart
+  static const String docNotExistError = 'DB 업데이트 실패: 문서가 존재하지 않습니다.';
+  static const String dbUpdateSuccess = "DB 업데이트 성공";
+  static const String dbUpdateFail = "DB 업데이트 실패 : 이미 존재하는 petId";
+  static const String dbUpdateError = 'DB 업데이트 중 오류 발생: ';
+  static const String dbLoadError = '펫 데이터를 로드하는 중 오류 발생: ';
+
+  // MatchProfileListWidget.dart
+  static const String noPetsMessage = '추천할 펫이 1마리이거나 없습니다.';
+
   //ProfileScreen.dart
   static const String profileGender = '성별';
   static const String profileBreed = '종';
