@@ -2,16 +2,17 @@ import 'package:blueberry_flutter_template/feature/match/widget/OptionMenuWidget
 import 'package:blueberry_flutter_template/feature/match/widget/ProfileInfoRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:blueberry_flutter_template/feature/match/provider/MatchScreenProvider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/PetProfileModel.dart';
 import '../../utils/AppStrings.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   final PetProfileModel petProfile;
 
   const ProfileScreen({super.key, required this.petProfile});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -58,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                       OptionMenuWidget(
                         onOptionSelected: (String result) {
                           if (result == 'ignore') {
-                            _handleIgnoreProfile(context);
+                            _handleIgnoreProfile(context, ref);
                           }
                         },
                       ),
@@ -148,9 +149,11 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  void _handleIgnoreProfile(BuildContext context) async {
+  void _handleIgnoreProfile(BuildContext context, WidgetRef ref) async {
     const userId = "eztqDqrvEXDc8nqnnrB8"; // 유저 ID 임시 데이터
-    await addPetToIgnored(userId, petProfile.petID);
+    await ref
+        .read(matchScreenProvider.notifier)
+        .addPetToIgnored(userId, petProfile.petID);
     if (context.mounted) {
       Navigator.of(context).pop();
     }
