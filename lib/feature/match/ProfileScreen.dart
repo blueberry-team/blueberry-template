@@ -1,121 +1,146 @@
-import 'package:blueberry_flutter_template/feature/match/provider/MatchScreenProvider.dart';
+import 'package:blueberry_flutter_template/feature/match/widget/OptionMenuWidget.dart';
+import 'package:blueberry_flutter_template/feature/match/widget/ProfileInfoRowWidget.dart';
 import 'package:flutter/material.dart';
-import '../../model/DogProfileModel.dart';
-import '../../utils/AppTextStyle.dart';
+import 'package:blueberry_flutter_template/feature/match/provider/MatchScreenProvider.dart';
+import '../../model/PetProfileModel.dart';
+import '../../utils/AppStrings.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final DogProfileModel dogProfile;
+  final PetProfileModel petProfile;
 
-  const ProfileScreen({super.key, required this.dogProfile});
+  const ProfileScreen({super.key, required this.petProfile});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          // 프로필 이미지
-          Positioned.fill(
+          // 펫 이미지
+          Hero(
+            tag: 'pet_image_${petProfile.petID}',
             child: Image.network(
-              dogProfile.imageUrl,
+              petProfile.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.5), // 프로필 사진 블러 효과
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        dogProfile.name,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        Icons.verified,
-                        color: Colors.blue,
-                        size: 24,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '성별: ${dogProfile.gender}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  Text(
-                    '종: ${dogProfile.breed}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  Text(
-                    '지역: ${dogProfile.location}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    '소개',
-                    style: black16BoldTextStyle,
-                  ),
-                  Text(
-                    dogProfile.bio,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
+          // 펫 이미지 블러 처리
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.7),
                 ],
               ),
             ),
           ),
-          // 뒤로 가기 버튼
-          Positioned(
-            top: 40,
-            left: 16,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-          // 추천 안함 버튼
-          Positioned(
-            top: 40,
-            right: 16,
-            child: IconButton(
-              icon: const Icon(Icons.more_horiz, color: Colors.white),
-              onPressed: () {
-                _handleIgnoreProfile(context);
-              },
+          // 프로필 정보
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 상단 바
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back_ios,
+                            color: Colors.white),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      // 더보기 버튼(현재는 '다시 추천 안함' 기능만 있음)
+                      OptionMenuWidget(
+                        onOptionSelected: (String result) {
+                          if (result == 'ignore') {
+                            _handleIgnoreProfile(context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                // 프로필 정보 카드
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            petProfile.name,
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.verified,
+                            color: Colors.blue,
+                            size: 24,
+                          ),
+                        ],
+                      ),
+                      // 펫 정보
+                      const SizedBox(height: 8),
+                      ProfileInfoRowWidget(
+                        icon: Icons.pets,
+                        label: AppStrings.profileBreed,
+                        value: petProfile.breed,
+                      ),
+                      ProfileInfoRowWidget(
+                        icon: Icons.location_on,
+                        label: AppStrings.profileLocation,
+                        value: petProfile.location,
+                      ),
+                      ProfileInfoRowWidget(
+                        icon: Icons.cake,
+                        label: AppStrings.profileBio,
+                        value: petProfile.bio,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        AppStrings.profileBio,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        petProfile.bio,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
             ),
           ),
         ],
@@ -124,10 +149,10 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _handleIgnoreProfile(BuildContext context) async {
-    const userId = "eztqDqrvEXDc8nqnnrB8"; // userId 임시로 하드 코딩
-    await addPetToIgnored(userId, dogProfile.petID);
+    const userId = "eztqDqrvEXDc8nqnnrB8"; // 유저 ID 임시 데이터
+    await addPetToIgnored(userId, petProfile.petID);
     if (context.mounted) {
-      Navigator.of(context).pop(); // 화면을 닫음
+      Navigator.of(context).pop();
     }
   }
 }

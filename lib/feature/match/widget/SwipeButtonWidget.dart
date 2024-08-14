@@ -16,13 +16,12 @@ class SwipeButtonWidget extends StatelessWidget {
     this.color = Colors.white,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       heroTag: UniqueKey(),
       onPressed: onPressed,
-      backgroundColor: color, // 버튼 색상 추가
+      backgroundColor: color,
       child: Icon(icon),
       // 여기에 커스텀 스타일 추가
     );

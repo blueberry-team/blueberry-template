@@ -1,6 +1,13 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  //ProfileScreen.dart
+  static const String profileGender = '성별';
+  static const String profileBreed = '종';
+  static const String profileLocation = '지역';
+  static const String profileBio = '소개';
+  static const String ignoreProfile = '해당 유저를 추천 안함';
+
   //ReportModalSheet.dart
   static const String reportReasonSpamAccount = '광고용 계정';
   static const String reportReasonFakeAccount = '가짜로 의심되는 계정';
@@ -37,9 +44,6 @@ class AppStrings {
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
   static const String chatRoomScreenTitle = '채팅방 목록';
-
-  //MatchScreen.dart
-  static const String matchScreenTitle = '매칭';
 
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = '쇼핑 페이지';

@@ -1,13 +1,13 @@
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../model/DogProfileModel.dart';
+import '../../../model/PetProfileModel.dart';
 
 final matchScreenProvider = FutureProvider((ref) async {
   final firestore = FirebaseFirestore.instance;
   final snapshot = await firestore.collection('pet').get();
   return snapshot.docs
-      .map((doc) => DogProfileModel.fromJson(doc.data()))
+      .map((doc) => PetProfileModel.fromJson(doc.data()))
       .toList();
 });
 

@@ -1,16 +1,6 @@
 class AppStringEnglish {
   static const String appTitle = 'Community App';
 
-  //TopScreen.dart
-  static const String chatScreenLabel = 'Chat';
-  static const String friendsScreenLabel = 'Friends';
-  static const String matchScreenLabel = 'Match';
-  static const String mbtiScreenLabel = 'MBTI';
-  static const String myPageScreenLabel = 'My Page';
-  static const String profileDetailScreenLabel = 'Profile';
-  static const String rankingScreenLabel = 'Rank';
-  static const String postScreenLabel = 'Post';
-
   //ChatPage.dart
   static const String chatPageTitle = 'Chat Page';
   static const String chatHint = 'Type your message here...';
@@ -53,7 +43,7 @@ class AppStringEnglish {
   static const String uploadEventButtonLabel = 'Upload an event';
   static const String makeChatButtonLabel = 'Make a tmp chat';
 
-//Error Handling
+  //Error Handling
   static const String errorMessage_emptyPassword =
       'Please enter your password.';
   static const String errorMessage_invalidPassword =
@@ -68,7 +58,7 @@ class AppStringEnglish {
   static const String errorMessage_userNotFound =
       'There is no user record corresponding to this identifier. The user may have been deleted.';
 
-// Company Info
+  // Company Info
   static const String companyInfoTitle = 'Company Information';
   static const String companyInfoName = 'Community App';
   static const String companyInfoAddress = '1234 Main Street, Anytown, USA';
