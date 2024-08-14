@@ -3,12 +3,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../model/PetProfileModel.dart';
 
-final matchScreenProvider = FutureProvider((ref) async {
+//지금 유저가 ignoredPets에 추가한 펫을 제외한 모든 펫을 가져오는 Provider
+final matchScreenProvider = FutureProvider<List<PetProfileModel>>((ref) async {
+  const userId = "eztqDqrvEXDc8nqnnrB8"; // 사용자의 userId (임시로 하드코딩)
   final firestore = FirebaseFirestore.instance;
+  final userDoc = await firestore.collection('users_test').doc(userId).get();
+
+  // 사용자의 ignoredPets 목록 가져오기
+  List<dynamic> ignoredPets = [];
+  if (userDoc.exists) {
+    ignoredPets = userDoc.data()?['ignoredPets'] ?? [];
+  }
+  talker.info("ignoredPets 목록: $ignoredPets");
+
+  // 모든 펫 목록 가져오기
   final snapshot = await firestore.collection('pet').get();
-  return snapshot.docs
-      .map((doc) => PetProfileModel.fromJson(doc.data()))
-      .toList();
+  final pets = snapshot.docs.map((doc) => PetProfileModel.fromJson(doc.data())).toList();
+  talker.info("모든 펫 목록: $pets");
+
+  // ignoredPets에 포함되지 않은 펫만 반환
+  final filteredPets = pets.where((pet) => !ignoredPets.contains(pet.petID)).toList();
+  talker.info("ignoredPets에 포함되지 않은 펫 목록: $filteredPets");
+  return filteredPets;
 });
 
 Future<void> addPetToFavorites(String userId, String petId) async {

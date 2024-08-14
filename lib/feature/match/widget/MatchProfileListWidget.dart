@@ -16,7 +16,7 @@ class MatchProfileListWidget extends ConsumerWidget {
     final list = ref.watch(matchScreenProvider);
 
     return list.when(
-      data: (data) => _buildCardView(context, ref, data),
+      data: (List<PetProfileModel> data) => _buildCardView(context, ref, data),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Center(child: Text('Error: $error')),
     );
@@ -27,7 +27,16 @@ Widget _buildCardView(
     BuildContext context, WidgetRef ref, List<PetProfileModel> data) {
   final cardSwiperController = CardSwiperController();
   int currentIndex = 0;
+
+  // 카드 리스트를 생성
   final cards = data.map(SwipeCardWidget.new).toList();
+
+  // 카드가 존재하는지 확인
+  if (cards.isEmpty) {
+    return const Center(
+      child: Text('추천할 펫이 없습니다.'),
+    );
+  }
 
   return Column(
     children: [
@@ -35,6 +44,7 @@ Widget _buildCardView(
         child: CardSwiper(
           controller: cardSwiperController,
           cardsCount: cards.length,
+          numberOfCardsDisplayed: 1, // 한 번에 보여지는 카드 수
           onSwipe: (previousIndex, newIndex, direction) {
             currentIndex = newIndex ?? currentIndex;
 
@@ -49,12 +59,12 @@ Widget _buildCardView(
             return true;
           },
           cardBuilder: (
-            context,
-            index,
-            horizontalThresholdPercentage,
-            verticalThresholdPercentage,
-          ) =>
-              cards[index],
+              context,
+              index,
+              horizontalThresholdPercentage,
+              verticalThresholdPercentage,
+              ) =>
+          cards[index],
         ),
       ),
       Container(
@@ -63,7 +73,6 @@ Widget _buildCardView(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 패스 버튼
             SwipeButtonWidget(
               onPressed: () =>
                   cardSwiperController.swipe(CardSwiperDirection.left),
@@ -71,10 +80,9 @@ Widget _buildCardView(
               color: Colors.greenAccent,
             ),
             const SizedBox(width: 30),
-            // 좋아요 버튼
             SwipeButtonWidget(
               onPressed: () async {
-                const userId = "eztqDqrvEXDc8nqnnrB8"; // 유저 ID 임시 데이터(로그인 상황 가정)
+                const userId = "eztqDqrvEXDc8nqnnrB8";
                 final petId = data[currentIndex].petID;
                 await addPetToFavorites(userId, petId);
                 cardSwiperController.swipe(CardSwiperDirection.right);
@@ -83,7 +91,6 @@ Widget _buildCardView(
               color: Colors.blueAccent,
             ),
             const SizedBox(width: 30),
-            // 좋아요 버튼
             SwipeButtonWidget(
               onPressed: () =>
                   cardSwiperController.swipe(CardSwiperDirection.right),
@@ -96,3 +103,4 @@ Widget _buildCardView(
     ],
   );
 }
+
