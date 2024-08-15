@@ -20,7 +20,7 @@ class OptionMenuWidget extends StatelessWidget {
             children: [
               Icon(Icons.block, color: Colors.red[400], size: 14),
               const SizedBox(width: 8),
-              Text(AppStrings.ignoreProfile,
+              Text(AppStrings.ignoreThisPet,
                   style: TextStyle(color: Colors.red[400])),
             ],
           ),

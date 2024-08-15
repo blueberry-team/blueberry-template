@@ -1,7 +1,29 @@
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../utils/AppStrings.dart';
 import '../../friend/widget/FilterMenuWidget.dart';
 import '../provider/MatchScreenProvider.dart';
+
+enum Location { seoul, la, hawaii, japan }
+enum Gender { male, female }
+
+String getLocationDisplayName(Location location) {
+  switch (location) {
+    case Location.seoul:
+      return 'Seoul';
+    case Location.la:
+      return 'LA';
+    case Location.hawaii:
+      return 'Hawaii';
+    case Location.japan:
+      return 'Japan';
+  }
+}
+
+String getGenderDisplayName(Gender gender) {
+  return gender.toString().split('.').last.toLowerCase();
+}
 
 class MatchFilterWidget extends ConsumerStatefulWidget {
   const MatchFilterWidget({super.key});
@@ -11,13 +33,13 @@ class MatchFilterWidget extends ConsumerStatefulWidget {
 }
 
 class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
-  String? selectedLocation;
-  String? selectedGender;
+  Location? selectedLocation;
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 260, // 바텀 시트 높이 수정 부분
+      height: 260,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: const BorderRadius.vertical(
@@ -34,7 +56,7 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
               children: [
                 const Expanded(
                   child: Text(
-                    '어떤 친구를 만날까요?',
+                    AppStrings.filterTitle,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -50,28 +72,34 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
           ),
           const SizedBox(height: 16),
           FilterMenuWidget(
-            label: '지역',
-            selectedValue: selectedLocation,
+            label: AppStrings.petLocation,
+            selectedValue: selectedLocation != null ? getLocationDisplayName(selectedLocation!) : null,
             onChanged: (newValue) => setState(() {
-              selectedLocation = newValue;
+              selectedLocation = Location.values.firstWhere(
+                    (location) => getLocationDisplayName(location) == newValue,
+                orElse: () => Location.seoul,
+              );
             }),
-            items: ['Seoul', 'LA', 'Hawaii', 'Japan'],
+            items: Location.values.map((location) => getLocationDisplayName(location)).toList(),
           ),
           const SizedBox(height: 16),
           FilterMenuWidget(
-            label: '성별',
-            selectedValue: selectedGender,
+            label: AppStrings.petGender,
+            selectedValue: selectedGender != null ? getGenderDisplayName(selectedGender!) : null,
             onChanged: (newValue) => setState(() {
-              selectedGender = newValue;
+              selectedGender = Gender.values.firstWhere(
+                    (gender) => getGenderDisplayName(gender) == newValue,
+                orElse: () => Gender.male,
+              );
             }),
-            items: ['male', 'female'],
+            items: Gender.values.map((gender) => getGenderDisplayName(gender)).toList(),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
               ref.read(matchScreenProvider.notifier).loadPets(
-                location: selectedLocation,
-                gender: selectedGender,
+                location: selectedLocation != null ? getLocationDisplayName(selectedLocation!) : null,
+                gender: selectedGender != null ? getGenderDisplayName(selectedGender!) : null,
               );
               Navigator.of(context).pop();
             },
@@ -83,7 +111,7 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
               ),
             ),
             child: const Text(
-              '만나기',
+              AppStrings.filterSubmitButtonText,
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
@@ -92,4 +120,3 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
     );
   }
 }
-
