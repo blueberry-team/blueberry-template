@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
 import '../provider/MatchScreenProvider.dart';
 import '../ProfileScreen.dart';
+import 'MatchFilterWidget.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 
@@ -15,7 +16,8 @@ class MatchProfileListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(matchScreenProvider);
-    // 스와이퍼 numberOfCardsDisplayed 설정으로 인해 데이터가 1일 떄도 에러 메세지 출력
+
+    // 스와이퍼 numberOfCardsDisplayed 설정으로 인해 데이터가 1일 때도 에러 메시지 출력
     return list.isEmpty || list.length == 1
         ? const Center(child: Text(AppStrings.noPetsMessage))
         : _buildCardView(context, ref, list);
@@ -33,7 +35,7 @@ class MatchProfileListWidget extends ConsumerWidget {
           child: CardSwiper(
             controller: cardSwiperController,
             cardsCount: cards.length,
-            numberOfCardsDisplayed: 2, // 한 번에 보여지는 최소 카드 설정(1로 설정시 디자인적으로 좋지 않음)
+            numberOfCardsDisplayed: 2,
             onSwipe: (previousIndex, newIndex, direction) {
               currentIndex = newIndex ?? currentIndex;
 
@@ -48,12 +50,12 @@ class MatchProfileListWidget extends ConsumerWidget {
               return true;
             },
             cardBuilder: (
-              context,
-              index,
-              horizontalThresholdPercentage,
-              verticalThresholdPercentage,
-            ) =>
-                cards[index],
+                context,
+                index,
+                horizontalThresholdPercentage,
+                verticalThresholdPercentage,
+                ) =>
+            cards[index],
           ),
         ),
         Container(
@@ -62,7 +64,6 @@ class MatchProfileListWidget extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // 패스 버튼
               SwipeButtonWidget(
                 onPressed: () =>
                     cardSwiperController.swipe(CardSwiperDirection.left),
@@ -70,7 +71,6 @@ class MatchProfileListWidget extends ConsumerWidget {
                 color: Colors.greenAccent,
               ),
               const SizedBox(width: 30),
-              // 좋아요 버튼
               SwipeButtonWidget(
                 onPressed: () async {
                   const userId = "eztqDqrvEXDc8nqnnrB8";
@@ -84,7 +84,6 @@ class MatchProfileListWidget extends ConsumerWidget {
                 color: Colors.blueAccent,
               ),
               const SizedBox(width: 30),
-              // 좋아요 버튼
               SwipeButtonWidget(
                 onPressed: () =>
                     cardSwiperController.swipe(CardSwiperDirection.right),
