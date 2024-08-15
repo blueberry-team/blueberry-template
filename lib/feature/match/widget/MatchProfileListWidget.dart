@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
 import '../provider/MatchScreenProvider.dart';
 import '../ProfileScreen.dart';
-import 'MatchFilterWidget.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 
@@ -50,12 +49,12 @@ class MatchProfileListWidget extends ConsumerWidget {
               return true;
             },
             cardBuilder: (
-                context,
-                index,
-                horizontalThresholdPercentage,
-                verticalThresholdPercentage,
-                ) =>
-            cards[index],
+              context,
+              index,
+              horizontalThresholdPercentage,
+              verticalThresholdPercentage,
+            ) =>
+                cards[index],
           ),
         ),
         Container(

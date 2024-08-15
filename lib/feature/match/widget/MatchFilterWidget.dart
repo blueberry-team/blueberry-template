@@ -1,4 +1,3 @@
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
@@ -6,6 +5,7 @@ import '../../friend/widget/FilterMenuWidget.dart';
 import '../provider/MatchScreenProvider.dart';
 
 enum Location { seoul, la, hawaii, japan }
+
 enum Gender { male, female }
 
 String getLocationDisplayName(Location location) {
@@ -73,39 +73,52 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
           const SizedBox(height: 16),
           FilterMenuWidget(
             label: AppStrings.petLocation,
-            selectedValue: selectedLocation != null ? getLocationDisplayName(selectedLocation!) : null,
+            selectedValue: selectedLocation != null
+                ? getLocationDisplayName(selectedLocation!)
+                : null,
             onChanged: (newValue) => setState(() {
               selectedLocation = Location.values.firstWhere(
-                    (location) => getLocationDisplayName(location) == newValue,
+                (location) => getLocationDisplayName(location) == newValue,
                 orElse: () => Location.seoul,
               );
             }),
-            items: Location.values.map((location) => getLocationDisplayName(location)).toList(),
+            items: Location.values
+                .map((location) => getLocationDisplayName(location))
+                .toList(),
           ),
           const SizedBox(height: 16),
           FilterMenuWidget(
             label: AppStrings.petGender,
-            selectedValue: selectedGender != null ? getGenderDisplayName(selectedGender!) : null,
+            selectedValue: selectedGender != null
+                ? getGenderDisplayName(selectedGender!)
+                : null,
             onChanged: (newValue) => setState(() {
               selectedGender = Gender.values.firstWhere(
-                    (gender) => getGenderDisplayName(gender) == newValue,
+                (gender) => getGenderDisplayName(gender) == newValue,
                 orElse: () => Gender.male,
               );
             }),
-            items: Gender.values.map((gender) => getGenderDisplayName(gender)).toList(),
+            items: Gender.values
+                .map((gender) => getGenderDisplayName(gender))
+                .toList(),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
               ref.read(matchScreenProvider.notifier).loadPets(
-                location: selectedLocation != null ? getLocationDisplayName(selectedLocation!) : null,
-                gender: selectedGender != null ? getGenderDisplayName(selectedGender!) : null,
-              );
+                    location: selectedLocation != null
+                        ? getLocationDisplayName(selectedLocation!)
+                        : null,
+                    gender: selectedGender != null
+                        ? getGenderDisplayName(selectedGender!)
+                        : null,
+                  );
               Navigator.of(context).pop();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blueAccent,
-              padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),

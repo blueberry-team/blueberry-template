@@ -28,7 +28,9 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
     try {
       final snapshot = await firestore.collection('pet').get();
-      final pets = snapshot.docs.map((doc) => PetProfileModel.fromJson(doc.data())).toList();
+      final pets = snapshot.docs
+          .map((doc) => PetProfileModel.fromJson(doc.data()))
+          .toList();
 
       // 매칭 조건 필터 적용
       List<PetProfileModel> filteredPets = pets.where((pet) {
@@ -108,6 +110,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
-      (ref) => MatchScreenNotifier(),
+final matchScreenProvider =
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+  (ref) => MatchScreenNotifier(),
 );
