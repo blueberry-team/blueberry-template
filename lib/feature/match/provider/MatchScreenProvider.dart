@@ -9,7 +9,14 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     loadPets();
   }
 
+  bool isLoading = false;
+  String? errorMessage;
+
   Future<void> loadPets({String? location, String? gender}) async {
+    // 상태 초기화
+    state = [];
+    isLoading = true;
+
     const userId = "eztqDqrvEXDc8nqnnrB8"; // 사용자의 userId (임시로 하드코딩)
     final firestore = FirebaseFirestore.instance;
     final userDoc = await firestore.collection('users_test').doc(userId).get();
@@ -23,7 +30,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
       final snapshot = await firestore.collection('pet').get();
       final pets = snapshot.docs.map((doc) => PetProfileModel.fromJson(doc.data())).toList();
 
-      // Apply filters
+      // 매칭 조건 필터 적용
       List<PetProfileModel> filteredPets = pets.where((pet) {
         final matchesLocation = location == null || pet.location == location;
         final matchesGender = gender == null || pet.gender == gender;
@@ -31,9 +38,16 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
         return matchesLocation && matchesGender && notIgnored;
       }).toList();
 
-      state = filteredPets;
+      // 필터링된 결과가 있을 경우 상태를 업데이트
+      if (filteredPets.isNotEmpty) {
+        state = filteredPets;
+      } else {
+        talker.info(AppStrings.noFilteredResult);
+      }
     } catch (e) {
       talker.error('${AppStrings.dbLoadError}$e');
+    } finally {
+      isLoading = false;
     }
   }
 

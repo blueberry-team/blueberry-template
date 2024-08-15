@@ -107,22 +107,22 @@ class ProfileScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       ProfileInfoRowWidget(
                         icon: Icons.pets,
-                        label: AppStrings.profileBreed,
+                        label: AppStrings.petBreed,
                         value: petProfile.breed,
                       ),
                       ProfileInfoRowWidget(
                         icon: Icons.location_on,
-                        label: AppStrings.profileLocation,
+                        label: AppStrings.petLocation,
                         value: petProfile.location,
                       ),
                       ProfileInfoRowWidget(
-                        icon: Icons.cake,
-                        label: AppStrings.profileBio,
+                        icon: Icons.info,
+                        label: AppStrings.petBio,
                         value: petProfile.bio,
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        AppStrings.profileBio,
+                        AppStrings.petBio,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
