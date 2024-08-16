@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/VoiceOutputProvider.dart';
 
-class VoiceOutputWidget extends ConsumerWidget {
-  const VoiceOutputWidget({super.key});
+class VoiceOutputListWidget extends ConsumerWidget {
+  const VoiceOutputListWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,3 +64,5 @@ class VoiceOutputRow extends StatelessWidget {
     );
   }
 }
+
+

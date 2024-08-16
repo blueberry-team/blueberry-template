@@ -1,4 +1,4 @@
-import './widget/VoiceOutputWidget.dart';
+import './widget/VoiceOutputListWidget.dart';
 import 'package:flutter/material.dart';
 
 class VoiceOutputScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class VoiceOutputScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: VoiceOutputWidget()),
+            Expanded(child: VoiceOutputListWidget()),
           ],
         ),
       ),
