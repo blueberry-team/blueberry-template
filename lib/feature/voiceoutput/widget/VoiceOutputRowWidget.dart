@@ -21,7 +21,7 @@ class VoiceOutputRowWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {},
-            child: const Text("button"),
+            child: const Icon(Icons.play_arrow_rounded),
           ),
         ],
       ),
