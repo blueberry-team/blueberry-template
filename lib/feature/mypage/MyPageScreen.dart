@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:blueberry_flutter_template/feature/mypage/provider/ProfileImageProvider.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:easy_engine/easy_engine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +111,7 @@ class MyPageScreen extends ConsumerWidget {
             ),
             const CustomDividerWidget(),
             GestureDetector(
-              onTap: ()  {},
+              onTap: () {},
               child: const ListTile(
                 leading: Icon(Icons.chat_bubble_outline),
                 title: Text(

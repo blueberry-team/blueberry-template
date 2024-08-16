@@ -8,7 +8,8 @@ class UserDeletionRequestDateTextWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userDeletionRequestDate = ref.watch(getUserDeletionRequestDateProvider);
+    final userDeletionRequestDate =
+        ref.watch(getUserDeletionRequestDateProvider);
     return userDeletionRequestDate.when(
       data: (date) => Text(
         date,

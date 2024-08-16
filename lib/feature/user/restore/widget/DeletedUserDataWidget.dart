@@ -2,7 +2,6 @@ import 'package:blueberry_flutter_template/feature/user/restore/widget/DeletionR
 import 'package:blueberry_flutter_template/feature/user/restore/widget/RestoreDeletionUserBottomButtonWidget.dart';
 import 'package:flutter/material.dart';
 
-
 class DeletedUserDataWidget extends StatelessWidget {
   const DeletedUserDataWidget({super.key});
 
@@ -17,9 +16,7 @@ class DeletedUserDataWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: DeletionRequestUserInfoListWidget()
-          ),
+          Expanded(child: DeletionRequestUserInfoListWidget()),
           RestoreDeletionUserBottomButtonWidget(),
         ],
       ),

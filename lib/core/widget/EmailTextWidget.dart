@@ -10,7 +10,7 @@ class EmailTextWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userEmail = ref.watch(getUserEmailProvider);
     return userEmail.when(
-      data: (email) => Text( 
+      data: (email) => Text(
         email,
       ),
       loading: () => const Text(''),

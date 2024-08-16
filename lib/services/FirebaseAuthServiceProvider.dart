@@ -1,5 +1,4 @@
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
-import 'package:blueberry_flutter_template/services/FirebaseStoreServiceProvider.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,16 +42,16 @@ class FirebaseAuthService {
     }
   }
 
-
-
-  Future<User?> signInWithEmailPassword(BuildContext context, String email, String password) async {
+  Future<User?> signInWithEmailPassword(
+      BuildContext context, String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
 
       if (user != null) {
-        bool hasDeletionRequest = await FirebaseService().checkDeletionRequest(user.uid);
+        bool hasDeletionRequest =
+            await FirebaseService().checkDeletionRequest(user.uid);
         if (hasDeletionRequest) {
           talker.log("계정 삭제 진행중 입니다.");
           if (context.mounted) {

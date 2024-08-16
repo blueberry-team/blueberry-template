@@ -143,8 +143,8 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: 'restoredeleteduser',
             name: RestoreDeletedUserScreen.name,
-            builder: (context, state) =>
-                ResponsiveLayoutBuilder(context, const RestoreDeletedUserScreen()),
+            builder: (context, state) => ResponsiveLayoutBuilder(
+                context, const RestoreDeletedUserScreen()),
           )
         ],
       ),

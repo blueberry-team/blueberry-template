@@ -26,19 +26,19 @@ class RestoreDeletionUserBottomButtonWidget extends ConsumerWidget {
 
   ElevatedButton cancelBtn(WidgetRef ref) {
     return ElevatedButton(
-            onPressed: () async {
-              ref.read(firebaseAuthServiceProvider).signOut();
-            },
-            child: const Text('나가기'),
-          );
+      onPressed: () async {
+        ref.read(firebaseAuthServiceProvider).signOut();
+      },
+      child: const Text('나가기'),
+    );
   }
 
   ElevatedButton RestoreBtn() {
     return ElevatedButton(
-            onPressed: () async {
-              await FirebaseService().cancelAccountDeletion();
-            },
-            child: const Text('복원 하기'),
-          );
+      onPressed: () async {
+        await FirebaseService().cancelAccountDeletion();
+      },
+      child: const Text('복원 하기'),
+    );
   }
 }
