@@ -7,11 +7,11 @@ import '../../../utils/AppStrings.dart';
 import '../../user_report/provider/ReportModalSheet.dart';
 import 'BottomSheetButtonWidget.dart';
 
-class FriendBottomSheet extends StatelessWidget {
+class FriendBottomSheetWidget extends StatelessWidget {
   final FriendModel friend;
   final String imageUrl;
 
-  const FriendBottomSheet(
+  const FriendBottomSheetWidget(
       {super.key, required this.friend, required this.imageUrl});
 
   @override

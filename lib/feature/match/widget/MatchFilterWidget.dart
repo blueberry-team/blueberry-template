@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
-import '../../friend/widget/FilterMenuWidget.dart';
+import 'FilterMenuWidget.dart';
 import '../provider/MatchScreenProvider.dart';
 
 enum Location { seoul, la, hawaii, japan }
@@ -39,7 +39,7 @@ class _MatchFilterWidgetState extends ConsumerState<MatchFilterWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 260,
+      height: 282,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: const BorderRadius.vertical(

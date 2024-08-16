@@ -27,15 +27,14 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   });
 });
 
-// // 친구목록 이미지 URL을 제공하는 Provider
-// final friendsListImageProvider = FutureProvider.family<String, String>((ref, imageName) async {
-//   final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
-//   return await ref.getDownloadURL();
-// });
-
-/// 이미지 URL을 제공하는 공용 Provider
-final imageProvider =
-    FutureProvider.family<String, String>((ref, imagePath) async {
-  final ref = FirebaseStorage.instance.ref(imagePath);
+// 친구목록 이미지 URL을 제공하는 Provider
+final friendsListImageProvider = FutureProvider.family<String, String>((ref, imageName) async {
+  final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
   return await ref.getDownloadURL();
 });
+
+// /// 이미지 URL을 제공하는 공용 Provider
+// final imageProvider = FutureProvider.family<String, String>((ref, imagePath) async {
+//   final ref = FirebaseStorage.instance.ref(imagePath);
+//   return await ref.getDownloadURL();
+// });
