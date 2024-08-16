@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widget/FriendsListWidget.dart';
+import 'widget/FriendsListViewWidget.dart';
 
 class FriendsListScreen extends StatelessWidget {
   static const String name = 'FriendsListScreen';
@@ -15,7 +15,7 @@ class FriendsListScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: FriendsListWidget()),
+            Expanded(child: FriendsListViewWidget()),
           ],
         ),
       ),
