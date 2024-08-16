@@ -15,6 +15,7 @@ import '../core/TopScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
 import '../feature/mypage/MyPageScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
+import '../feature/voiceoutput/VoiceOutputScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -101,6 +102,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
           ),
+          GoRoute(
+            path: 'voiceoutput',
+            name: VoiceOutputScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const VoiceOutputScreen()),
+          )
         ],
       ),
     ],
