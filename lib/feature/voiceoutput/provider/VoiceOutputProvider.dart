@@ -5,7 +5,7 @@ final voiceOutputProvider = StreamProvider<List<String>>((ref) {
   final firestore = FirebaseFirestore.instance;
   return firestore.collection('textInputs').snapshots().map((snapshot) {
     final textInputs =
-        snapshot.docs.map((doc) => doc['textInput'] as String).toList();
+    snapshot.docs.map((doc) => doc['textInput'] as String).toList();
     return textInputs;
   });
 });

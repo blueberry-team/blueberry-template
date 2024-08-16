@@ -26,9 +26,9 @@ class VoiceOutputWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: data
             .map((text) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: VoiceOutputRow(text: text),
-                ))
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: VoiceOutputRow(text: text),
+        ))
             .toList(),
       ),
     );
