@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class VoiceOutputRow extends StatelessWidget {
-  final String text;
+class VoiceOutputRowWidget extends StatelessWidget {
+  final String voiceOutput;
 
-  const VoiceOutputRow({super.key, required this.text});
+  const VoiceOutputRowWidget({super.key, required this.voiceOutput});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: Text(
-              text,
+              voiceOutput,
               style: const TextStyle(fontSize: 18),
               textAlign: TextAlign.left,
             ),
