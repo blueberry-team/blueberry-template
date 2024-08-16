@@ -95,10 +95,11 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
               if (value == null || value.isEmpty) {
                 return AppStrings.errorMessage_emptyPassword;
               }
-              if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$')
-                  .hasMatch(value)) {
-                return AppStrings.errorMessage_invalidPassword;
-              }
+              // if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!#$%^&*()_+\-=\[\]{};:"\\|,.<>/?])[\w@!#$%^&*()_+\-=\[\]{};:"\\|,.<>/?]*$')
+              //     .hasMatch(value)) {
+              //   return AppStrings.errorMessage_invalidPassword;
+              // }
+              // 회원가입 시 비밀번호 정규식이 걸려 있기 때문에 여기서 걸 필요 없는거 같아서 우선 주석처리 해둘께요. 추후 삭제 하거나 사용 할지 결정 해야함.
               return null;
             },
           ),
@@ -129,7 +130,7 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
                     try {
                       await ref
                           .read(firebaseAuthServiceProvider)
-                          .signInWithEmailPassword(email, password);
+                          .signInWithEmailPassword(context, email, password);
                     } catch (e) {
                       showDialog(
                         context: context,

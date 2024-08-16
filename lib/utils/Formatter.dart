@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 String formatWonNumber(int number) {
@@ -19,4 +20,9 @@ String timeAgo(DateTime dateTime) {
   } else {
     return 'Just now';
   }
+}
+
+String formatTimestamp(Timestamp timestamp) {
+  final DateTime dateTime = timestamp.toDate();
+  return DateFormat('yyyy년 MM시 dd일').format(dateTime);
 }

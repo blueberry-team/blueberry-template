@@ -17,6 +17,8 @@ class AppStrings {
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
+  static const String emailTextWidgetError = '이메일 정보를 가져오지 못했습니다.';
+  static const String dateTextWidgetError = '날짜 정보를 가져오지 못했습니다.';
 
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';

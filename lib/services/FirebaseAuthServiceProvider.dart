@@ -1,5 +1,10 @@
+import 'package:blueberry_flutter_template/services/FirebaseService.dart';
+import 'package:blueberry_flutter_template/services/FirebaseStoreServiceProvider.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 /// FirebaseAuthServiceProvider.dart
 ///
@@ -38,12 +43,26 @@ class FirebaseAuthService {
     }
   }
 
-  // 이메일/비밀번호 로그인
-  Future<User?> signInWithEmailPassword(String email, String password) async {
+
+
+  Future<User?> signInWithEmailPassword(BuildContext context, String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return result.user;
+      User? user = result.user;
+
+      if (user != null) {
+        bool hasDeletionRequest = await FirebaseService().checkDeletionRequest(user.uid);
+        if (hasDeletionRequest) {
+          talker.log("계정 삭제 진행중 입니다.");
+          if (context.mounted) {
+            context.goNamed('/RestoreDeletedUserScreen');
+          }
+          throw Exception('계정 삭제가 진행 중입니다. 고객 센터에 문의하세요.');
+        }
+      }
+
+      return user;
     } catch (e) {
       throw Exception('로그인 실패: $e');
     }
