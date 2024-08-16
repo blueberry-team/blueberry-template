@@ -8,7 +8,7 @@ class VoiceOutputRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -19,7 +19,6 @@ class VoiceOutputRowWidget extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
-          const SizedBox(width: 8),
           ElevatedButton(
             onPressed: () {},
             child: const Text("button"),

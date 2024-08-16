@@ -9,14 +9,20 @@ class VoiceOutputListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final voiceOutputList = ref.watch(voiceOutputProvider);
+
     return voiceOutputList.when(
       data: (voiceOutputs) {
-        return ListView.builder(
-          itemCount: voiceOutputs.length,
-          itemBuilder: (context, index) {
-            final voiceOutput = voiceOutputs[index];
-            return VoiceOutputRowWidget(voiceOutput: voiceOutput);
-          }
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30.0),
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: voiceOutputs.length,
+                itemBuilder: (context, index) {
+                  final voiceOutput = voiceOutputs[index];
+                  return VoiceOutputRowWidget(voiceOutput: voiceOutput);
+                }),
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -26,7 +32,3 @@ class VoiceOutputListWidget extends ConsumerWidget {
     );
   }
 }
-
-
-
-
