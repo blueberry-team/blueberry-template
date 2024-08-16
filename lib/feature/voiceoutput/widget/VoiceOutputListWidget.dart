@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/VoiceOutputProvider.dart';
-import './VoiceOutputRowWidget.dart';
+import './VoiceOutputItemWidget.dart';
 
 class VoiceOutputListWidget extends ConsumerWidget {
   const VoiceOutputListWidget({super.key});
@@ -19,8 +19,7 @@ class VoiceOutputListWidget extends ConsumerWidget {
                 shrinkWrap: true,
                 itemCount: voiceOutputs.length,
                 itemBuilder: (context, index) {
-                  final voiceOutput = voiceOutputs[index];
-                  return VoiceOutputRowWidget(voiceOutput: voiceOutput);
+                  return VoiceOutputItemWidget(voiceOutput: voiceOutputs[index]);
                 }),
           ),
         );

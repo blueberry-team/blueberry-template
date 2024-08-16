@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class VoiceOutputRowWidget extends StatelessWidget {
+class VoiceOutputItemWidget extends StatelessWidget {
   final String voiceOutput;
 
-  const VoiceOutputRowWidget({super.key, required this.voiceOutput});
+  const VoiceOutputItemWidget({super.key, required this.voiceOutput});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class VoiceOutputRowWidget extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
+          const SizedBox(width: 16),
           ElevatedButton(
             onPressed: () {},
             child: const Icon(Icons.play_arrow_rounded),
