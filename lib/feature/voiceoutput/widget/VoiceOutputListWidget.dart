@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/VoiceOutputProvider.dart';
+import './VoiceOutputRowWidget.dart';
 
 class VoiceOutputListWidget extends ConsumerWidget {
   const VoiceOutputListWidget({super.key});
@@ -35,34 +36,6 @@ class VoiceOutputListWidget extends ConsumerWidget {
   }
 }
 
-class VoiceOutputRow extends StatelessWidget {
-  final String text;
 
-  const VoiceOutputRow({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("button"),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 
