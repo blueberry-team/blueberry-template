@@ -19,7 +19,8 @@ class VoiceOutputListWidget extends ConsumerWidget {
                 shrinkWrap: true,
                 itemCount: voiceOutputs.length,
                 itemBuilder: (context, index) {
-                  return VoiceOutputItemWidget(voiceOutput: voiceOutputs[index]);
+                  return VoiceOutputItemWidget(
+                      voiceOutput: voiceOutputs[index]);
                 }),
           ),
         );

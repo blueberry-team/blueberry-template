@@ -4,7 +4,6 @@
 * 8월 16일 미란
 * */
 
-
 import './widget/VoiceOutputListWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ class VoiceOutputScreen extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: VoiceOutputListWidget(),
-        ),
-      );
+      ),
+    );
   }
 }
