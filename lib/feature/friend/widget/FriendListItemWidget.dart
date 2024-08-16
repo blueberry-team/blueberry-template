@@ -18,6 +18,8 @@ class FriendListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lastConnect = timeAgo(friend.lastConnect);
+    // 친구 모델 데이터 로깅
+    print('friend list item widget: $friend');
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
