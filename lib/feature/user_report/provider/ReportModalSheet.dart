@@ -8,6 +8,7 @@ import '../../../utils/AppStrings.dart';
 
 class ReportModalSheet extends ConsumerWidget {
   final FriendModel friend;
+  final String loginUserId = 'loginUserId'; // 로그인한 사용자의 ID로 대체
 
   const ReportModalSheet({super.key, required this.friend});
 
@@ -49,8 +50,8 @@ class ReportModalSheet extends ConsumerWidget {
 
   void reportUser(BuildContext context, WidgetRef ref, String reason) async {
     final report = UserReportModel(
-      reportedUserId: friend.userId,
-      reporterUserId: 'currentUserId', // 현재 로그인한 사용자의 ID로 대체
+      reportedUserId: friend.friendId,
+      reporterUserId: loginUserId,
       reason: reason,
       timestamp: DateTime.now(),
     );

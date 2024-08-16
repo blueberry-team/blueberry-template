@@ -8,16 +8,18 @@ import '../../../model/FriendModel.dart';
 final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
 
-  const userId = '4D22soWrX1aoGcuQ0GpAtNYDiYN2'; // 임시 유저 UUID
+  const userId = 'eztqDqrvEXDc8nqnnrB8'; // 로그인을 가정한 임시 유저 ID
 
   return firestore
-      .collection('users')
+      .collection('users_test')
       .doc(userId)
       .collection('friends')
       .snapshots()
       .map((snapshot) {
     return snapshot.docs.map((doc) {
       final data = doc.data();
+      // 로깅
+      print('provider data: $data');
       return FriendModel.fromJson({
         ...data,
         'lastConnect':

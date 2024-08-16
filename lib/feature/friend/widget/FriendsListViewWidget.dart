@@ -1,8 +1,8 @@
-import 'package:blueberry_flutter_template/feature/friend/widget/FriendBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../../model/FriendModel.dart';
 import '../provider/FriendsListProvider.dart';
+import 'FriendBottomSheet.dart';
 import 'FriendListItemWidget.dart';
 
 class FriendsListViewWidget extends ConsumerWidget {
@@ -14,12 +14,6 @@ class FriendsListViewWidget extends ConsumerWidget {
 
     return friendList.when(
       data: (friends) {
-        // 친구 목록이 로드되었을 때 로그 출력
-        print('친구 목록이 로드되었습니다: ${friends.length}명의 친구가 있습니다.');
-        for (var friend in friends) {
-          print('친구 이름: ${friend.name}, ID: ${friend.friendId}, 이미지 이름: ${friend.imageName}');
-        }
-
         return RefreshIndicator(
           onRefresh: () async {
             ref.invalidate(friendsListProvider);
@@ -32,32 +26,20 @@ class FriendsListViewWidget extends ConsumerWidget {
 
               return friendListImageUrl.when(
                 data: (imageUrl) {
-                  // 이미지 URL이 로드되었을 때 로그 출력
-                  print('이미지 URL 로드됨: $imageUrl');
                   return FriendListItemWidget(
                     friend: friend,
                     imageUrl: imageUrl,
                     onTap: () {
-                      showModalBottomSheet(
+                      FriendBottomSheetLauncher.show(
                         context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(25.0),
-                          ),
-                        ),
-                        builder: (context) => FriendBottomSheetWidget(
-                          friend: friend,
-                          imageUrl: imageUrl,
-                        ),
+                        friend: friend,
+                        imageUrl: imageUrl,
                       );
                     },
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (error, stack) {
-                  // 이미지 로드 중 에러가 발생했을 때 로그 출력
-                  print('이미지 로드 오류: $error');
                   return const Center(child: Text('Error loading image'));
                 },
               );
@@ -66,11 +48,29 @@ class FriendsListViewWidget extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) {
-        // 친구 목록 로드 중 에러가 발생했을 때 로그 출력
-        print('친구 목록 로드 오류: $error');
-        return Center(child: Text('Error: $error'));
-      },
+      error: (error, stack) => Center(child: Text('Error: $error')),
+    );
+  }
+}
+
+class FriendBottomSheetLauncher {
+  static void show({
+    required BuildContext context,
+    required FriendModel friend,
+    required String imageUrl,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (context) => FriendBottomSheetWidget(
+        friend: friend,
+        imageUrl: imageUrl,
+      ),
     );
   }
 }
