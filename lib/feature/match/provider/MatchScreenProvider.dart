@@ -1,8 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../model/PetProfileModel.dart';
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import '../../../utils/AppStrings.dart';
+import '../../../utils/Talker.dart';
 
 class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   MatchScreenNotifier() : super([]) {
@@ -53,72 +54,40 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     }
   }
 
-  Future<void> addPetToLikes(String userId, String petId) async {
+  // Firebase DB field 명을 받아서 해당 필드에 petId를 추가하는 함수
+  Future<void> _updatePetList(String userId, String petId, String fieldName) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
 
     try {
       final snapshot = await userDoc.get();
-      List<dynamic> likedPets = snapshot.data()!['likedPets'];
+      List<dynamic> petList = snapshot.data()![fieldName];
 
-      if (!likedPets.contains(petId)) {
-        likedPets.add(petId);
+      if (!petList.contains(petId)) {
+        petList.add(petId);
         await userDoc.update({
-          'likedPets': likedPets,
+          fieldName: petList,
         });
-        talker.info("${AppStrings.dbUpdateSuccess}: $likedPets");
+        talker.info("${AppStrings.dbUpdateSuccess}: $petList");
       } else {
         talker.info(AppStrings.dbUpdateFail);
       }
     } catch (e) {
       talker.error('${AppStrings.dbUpdateError}$e');
     }
+  }
+
+  Future<void> addPetToLikes(String userId, String petId) async {
+    await _updatePetList(userId, petId, 'likedPets');
   }
 
   Future<void> addPetToSuperLikes(String userId, String petId) async {
-    final firestore = FirebaseFirestore.instance;
-    final userDoc = firestore.collection('users_test').doc(userId);
-
-    try {
-      final snapshot = await userDoc.get();
-      List<dynamic> superLikedPets = snapshot.data()!['superLikedPets'];
-
-      if (!superLikedPets.contains(petId)) {
-        superLikedPets.add(petId);
-        await userDoc.update({
-          'superLikedPets': superLikedPets,
-        });
-        talker.info("${AppStrings.dbUpdateSuccess}: $superLikedPets");
-      } else {
-        talker.info(AppStrings.dbUpdateFail);
-      }
-    } catch (e) {
-      talker.error('${AppStrings.dbUpdateError}$e');
-    }
+    await _updatePetList(userId, petId, 'superLikedPets');
   }
 
   Future<void> addPetToIgnored(String userId, String petId) async {
-    final firestore = FirebaseFirestore.instance;
-    final userDoc = firestore.collection('users_test').doc(userId);
-
-    try {
-      final snapshot = await userDoc.get();
-      List<dynamic> ignoredPets = snapshot.data()!['ignoredPets'];
-
-      if (!ignoredPets.contains(petId)) {
-        ignoredPets.add(petId);
-        await userDoc.update({
-          'ignoredPets': ignoredPets,
-        });
-        talker.info("${AppStrings.dbUpdateSuccess}: $ignoredPets");
-
-        loadPets(); // 무시한 후에는 다시 데이터를 로드
-      } else {
-        talker.info(AppStrings.dbUpdateFail);
-      }
-    } catch (e) {
-      talker.error('${AppStrings.dbUpdateError}$e');
-    }
+    await _updatePetList(userId, petId, 'ignoredPets');
+    loadPets(); // 무시한 후에는 다시 데이터를 로드
   }
 }
 
