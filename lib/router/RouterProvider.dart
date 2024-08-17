@@ -3,8 +3,6 @@ import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
-import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
-import 'package:blueberry_flutter_template/feature/camera/widget/CameraPageWidget.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';

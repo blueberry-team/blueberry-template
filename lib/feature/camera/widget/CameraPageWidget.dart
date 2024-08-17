@@ -4,8 +4,6 @@ import 'package:blueberry_flutter_template/feature/camera/service/CameraService.
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 
-
-
 class CameraPageWidget extends StatefulWidget {
   const CameraPageWidget({super.key});
 
@@ -52,4 +50,3 @@ class _ProfileCameraPageState extends State<CameraPageWidget> {
     );
   }
 }
-

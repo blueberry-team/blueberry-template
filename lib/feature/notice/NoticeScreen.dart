@@ -14,7 +14,6 @@ class _NoticeScreen extends ConsumerState<NoticeScreen> {
   bool _isWebViewVisible2 = false;
   late WebViewController _webViewController;
 
-
   @override
   void initState() {
     // TODO: implement initState

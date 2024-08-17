@@ -1,4 +1,3 @@
-import 'package:blueberry_flutter_template/feature/camera/widget/CameraPreviewPageWidget.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,11 @@ class CameraService {
   CameraController? controller;
   List<CameraDescription> cameras = [];
   bool readyTakePhoto = false;
-  final ValueNotifier<CameraController?> controllerNotifier = ValueNotifier(null);
+  final ValueNotifier<CameraController?> controllerNotifier =
+      ValueNotifier(null);
   final ValueNotifier<bool> readyTakePhotoNotifier = ValueNotifier(false);
-  final ValueNotifier<CameraLensDirection> cameraDirectionNotifier = ValueNotifier(CameraLensDirection.back);
+  final ValueNotifier<CameraLensDirection> cameraDirectionNotifier =
+      ValueNotifier(CameraLensDirection.back);
 
   Future<void> initializeCameras() async {
     cameras = await availableCameras();
@@ -30,11 +31,11 @@ class CameraService {
     CameraDescription newCamera;
     if (lensDirection == CameraLensDirection.back) {
       newCamera = cameras.firstWhere(
-            (camera) => camera.lensDirection == CameraLensDirection.front,
+        (camera) => camera.lensDirection == CameraLensDirection.front,
       );
     } else {
       newCamera = cameras.firstWhere(
-            (camera) => camera.lensDirection == CameraLensDirection.back,
+        (camera) => camera.lensDirection == CameraLensDirection.back,
       );
     }
 
@@ -67,7 +68,8 @@ class CameraService {
   void attemptTakePhoto(BuildContext context) async {
     final String timeInMilli = DateTime.now().millisecondsSinceEpoch.toString();
     try {
-      final path = join((await getTemporaryDirectory()).path, '$timeInMilli.png');
+      final path =
+          join((await getTemporaryDirectory()).path, '$timeInMilli.png');
       final XFile file = await controller!.takePicture();
       await file.saveTo(path);
       final File imageFile = File(path);

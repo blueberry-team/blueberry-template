@@ -3,10 +3,7 @@ import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.da
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';
-
-import 'CameraPreviewPageWidget.dart';
 
 class CameraGalleryPageWidget extends StatefulWidget {
   const CameraGalleryPageWidget({super.key});

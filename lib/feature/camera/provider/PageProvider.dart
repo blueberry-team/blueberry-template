@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final pageProvider =
-StateNotifierProvider.autoDispose<PageProviderNotifier, PageState>((ref) {
+    StateNotifierProvider.autoDispose<PageProviderNotifier, PageState>((ref) {
   return PageProviderNotifier();
 });
 

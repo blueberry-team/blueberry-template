@@ -36,24 +36,25 @@ class CameraPreviewPageWidget extends ConsumerWidget {
     );
   }
 
-  TextButton makeProfileImageBtn(FirebaseStorageService storage, String userId, FirestoreService fireStorage, BuildContext context) {
+  TextButton makeProfileImageBtn(FirebaseStorageService storage, String userId,
+      FirestoreService fireStorage, BuildContext context) {
     return TextButton(
-            onPressed: () async {
-              try {
-                final imageUrl = await storage.uploadImageFromApp(
-                    imageFile, ImageType.profileimage,
-                    fixedFileName: userId);
+      onPressed: () async {
+        try {
+          final imageUrl = await storage.uploadImageFromApp(
+              imageFile, ImageType.profileimage,
+              fixedFileName: userId);
 
-                // 프로필 이미지 생성
-                fireStorage.createProfileIamge(userId, imageUrl);
+          // 프로필 이미지 생성
+          fireStorage.createProfileIamge(userId, imageUrl);
 
-                // 페이지 이동
-                context.goNamed(MyPageScreen.name);
-              } catch (e) {
-                talker.error('이미지 저장에 실패했습니다. 다시 시도해주세요.');
-              }
-            },
-            child: const Text(AppStrings.savePhoto),
-          );
+          // 페이지 이동
+          context.goNamed(MyPageScreen.name);
+        } catch (e) {
+          talker.error('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+        }
+      },
+      child: const Text(AppStrings.savePhoto),
+    );
   }
 }

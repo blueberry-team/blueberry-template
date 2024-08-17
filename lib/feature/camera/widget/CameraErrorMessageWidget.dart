@@ -1,4 +1,3 @@
-
 import 'package:blueberry_flutter_template/feature/camera/service/CameraService.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:camera/camera.dart';

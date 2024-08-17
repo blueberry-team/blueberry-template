@@ -9,9 +9,11 @@ class CameraPreviewWidget extends StatelessWidget {
   final CameraService cameraService;
   final Size size;
 
-
-  const CameraPreviewWidget({super.key, required this.cameraService,
-    required this.size,});
+  const CameraPreviewWidget({
+    super.key,
+    required this.cameraService,
+    required this.size,
+  });
 
   @override
   Widget build(BuildContext context) {

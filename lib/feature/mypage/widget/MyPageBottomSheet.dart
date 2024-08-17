@@ -1,6 +1,5 @@
 import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
-import 'package:blueberry_flutter_template/feature/camera/provider/PageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,8 +9,7 @@ class MyPageBottomSheet extends ConsumerStatefulWidget {
   const MyPageBottomSheet({super.key});
 
   @override
-  ConsumerState<MyPageBottomSheet> createState() =>
-      _MyPageBottomSheet();
+  ConsumerState<MyPageBottomSheet> createState() => _MyPageBottomSheet();
 }
 
 class _MyPageBottomSheet extends ConsumerState<MyPageBottomSheet> {
