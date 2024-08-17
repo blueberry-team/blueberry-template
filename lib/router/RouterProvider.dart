@@ -8,6 +8,7 @@ import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
+import 'package:blueberry_flutter_template/feature/user/RestoreDeletedUserScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -141,7 +142,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminLoadingPage()),
           ),
-
           GoRoute(
             path: 'profiledetail',
             name: ProfileDetailScreen.name,
@@ -160,6 +160,11 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const CameraGalleryScreen()),
           ),
+            path: 'restoredeleteduser',
+            name: RestoreDeletedUserScreen.name,
+            builder: (context, state) => ResponsiveLayoutBuilder(
+                context, const RestoreDeletedUserScreen()),
+          )
         ],
       ),
     ],

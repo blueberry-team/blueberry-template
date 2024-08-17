@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:blueberry_flutter_template/core/widget/SocialCompanyText.dart';
 import 'package:blueberry_flutter_template/feature/mypage/provider/ProfileImageProvider.dart';
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:easy_engine/easy_engine.dart';
+import 'package:blueberry_flutter_template/services/FirebaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -153,35 +152,7 @@ class MyPageScreen extends ConsumerWidget {
             //Logout button
             GestureDetector(
               onTap: () async {
-                try {
-                  final re = await engine.deleteAccount();
-                  debugPrint(re.toString());
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('회원탈퇴가 완료되었습니다.'),
-                      ),
-                    );
-                  }
-                  ref.read(firebaseAuthServiceProvider).signOut();
-                } on FirebaseFunctionsException catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Error: ${e.code}/${e.message}'),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            'Error: $e'), // e.code: internal, e.message: INTERNAL
-                      ),
-                    );
-                  }
-                }
+                FirebaseService().requestAccountDeletion(context, ref);
               },
               child: const ListTile(
                 leading: Icon(Icons.person_off),
