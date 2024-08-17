@@ -15,8 +15,6 @@ import 'package:go_router/go_router.dart';
 
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
-import '../feature/chat/ChatRoomScreen.dart';
-import '../feature/camera/SettingInsideAccountManagerWidget.dart';
 import '../feature/friend/FriendsListScreen.dart';
 import '../feature/match/MatchScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
@@ -63,6 +61,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             name: WebPaymentWidget.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const WebPaymentWidget()),
+          ),
+          GoRoute(
             path: '/match',
             name: MatchScreen.name,
             builder: (context, state) => const MatchScreen(),
@@ -104,12 +104,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/setting',
         name: SettingScreen.name,
         builder: (context, state) => const SettingScreen(),
-      ),
-      GoRoute(
-        path: '/settingaccount',
-        name: SettingAccountManagerWidget.name,
-        builder: (context, state) => ResponsiveLayoutBuilder(
-            context, const SettingAccountManagerWidget()),
       ),
       GoRoute(
         path: '/webpayment',

@@ -56,7 +56,6 @@ class FirebaseService {
         mbti: 'NULL',
         socialLogin: false,
         socialCompany: AppStrings.usingEmailLogin,
-        createdAt: DateTime.timestamp(),
         userClass: 'user',
         likeGivens: [""],
       );
