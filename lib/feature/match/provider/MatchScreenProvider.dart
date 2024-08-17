@@ -29,9 +29,16 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
     try {
       final snapshot = await firestore.collection('pet').get();
-      final pets = snapshot.docs
-          .map((doc) => PetProfileModel.fromJson(doc.data()))
-          .toList();
+      final pets = snapshot.docs.map((doc) {
+        final data = doc.data();
+
+        // 필드가 누락되었을 가능성을 검사하고 로깅
+        if (data['petID'] == null || data['name'] == null || data['location'] == null) {
+          talker.error("Missing required fields in pet data: $data");
+        }
+
+        return PetProfileModel.fromJson(data);
+      }).toList();
 
       // 매칭 조건 필터 적용
       List<PetProfileModel> filteredPets = pets.where((pet) {
@@ -79,20 +86,67 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   Future<void> addPetToLikes(String userId, String petId) async {
+    talker.info("match provider petId: $petId");
     await _updatePetList(userId, petId, 'likedPets');
+    await _checkForMatch(userId, petId);
   }
 
   Future<void> addPetToSuperLikes(String userId, String petId) async {
     await _updatePetList(userId, petId, 'superLikedPets');
+    await _checkForMatch(userId, petId);
   }
 
   Future<void> addPetToIgnored(String userId, String petId) async {
     await _updatePetList(userId, petId, 'ignoredPets');
     loadPets(); // 무시한 후에는 다시 데이터를 로드
   }
+
+  Future<void> _checkForMatch(String userId, String petId) async {
+    talker.info("checkFroMatch fonc : $userId, $petId");
+    final firestore = FirebaseFirestore.instance;
+    // 상대방의 petOwnerId를 가져옴
+    final petDoc = await firestore.collection('pet').doc(petId).get();
+    final petOwnerId = petDoc.data()!['ownerUserID'];
+    talker.info("petOwnerId: $petOwnerId");
+
+    // 상대방이 좋아요한 펫 목록을 가져옴
+    final userDoc = await firestore.collection('users_test').doc(petOwnerId).get();
+    List<dynamic> likedPetsByOwner = userDoc.data()!['likedPets'] ?? [];
+    talker.info("likedPetsByOwner: $likedPetsByOwner");
+
+    // 내 펫 가져오기 (로그인 가능해진 후에는 내 펫 정보를 가져오는 방법을 변경해야 함)
+    final myUserDoc = await firestore.collection('users_test').doc(userId).get();
+    List<dynamic> myPets = myUserDoc.data()!['pets'] ?? [];
+    talker.info("myPets: $myPets");
+
+    // likedPetsByOwner 에 내 petID가 있을 경우 서로 좋아요한 것으로 간주 (코드 정리 필요)
+    if (likedPetsByOwner.contains(myPets[0])) {
+      talker.info("Match found between $likedPetsByOwner and $myPets[0]");
+      await _addFriend(userId, petOwnerId);
+      await _addFriend(petOwnerId, userId);
+    } else {
+      talker.info("No match found between $likedPetsByOwner and $myPets[0]");
+    }
+  }
+
+  Future<void> _addFriend(String userId, String friendId) async {
+    talker.info("addFriend fonc : $userId, $friendId");
+    final firestore = FirebaseFirestore.instance;
+    final userDoc = firestore.collection('users_test').doc(userId);
+
+    try {
+      await userDoc.collection('friends').doc(friendId).set({
+        'userId': friendId,
+        'addedDate': Timestamp.now(),
+      });
+      talker.info("Friend added between $userId and $friendId");
+    } catch (e) {
+      talker.error("Error adding friend: $e");
+    }
+  }
 }
 
 final matchScreenProvider =
-    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
-  (ref) => MatchScreenNotifier(),
+StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+      (ref) => MatchScreenNotifier(),
 );

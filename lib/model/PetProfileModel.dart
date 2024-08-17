@@ -13,7 +13,7 @@ class PetProfileModel with _$PetProfileModel {
     required String imageUrl,
     required String location,
     required String petID,
-    required String userID,
+    required String ownerUserID,
   }) = _PetProfileModel;
 
   factory PetProfileModel.fromJson(Map<String, dynamic> json) =>
