@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
+import 'package:blueberry_flutter_template/feature/camera/ProfilePreviewScreen.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,7 +63,7 @@ class _CameraGalleryPage extends State<CameraGalleryScreen> {
 
   void _navigateToSharePostScreen(File imageFile) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => CameraPreviewScreen(imageFile),
+      builder: (context) => ProfilePreviewScreen(imageFile),
     ));
   }
 

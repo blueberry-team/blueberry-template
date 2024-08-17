@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:blueberry_flutter_template/feature/camera/provider/fireStorageServiceProvider.dart';
-import 'package:blueberry_flutter_template/feature/camera/widget/CircularImagePreviewWidget.dart';
+import 'package:blueberry_flutter_template/feature/camera/widget/CircularProfileImagePreviewWidget.dart';
 import 'package:blueberry_flutter_template/feature/mypage/MyPageScreen.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
@@ -8,12 +8,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../services/FirebaseStoreServiceProvider.dart';
+import '../../services/FirebaseStoreServiceProvider.dart';
 
-class CameraPreviewPageWidget extends ConsumerWidget {
+class ProfilePreviewScreen extends ConsumerWidget {
   final File imageFile;
 
-  const CameraPreviewPageWidget({super.key, required this.imageFile});
+  const ProfilePreviewScreen(this.imageFile, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +28,7 @@ class CameraPreviewPageWidget extends ConsumerWidget {
       body: Center(
         child: Column(
           children: [
-            CircularImagePreview(imageFile: imageFile),
+            CircularProfileImagePreviewWidget(imageFile: imageFile),
             makeProfileImageBtn(storage, userId, fireStorage, context),
           ],
         ),

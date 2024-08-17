@@ -1,4 +1,5 @@
-import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
+
+import 'package:blueberry_flutter_template/feature/camera/ProfilePreviewScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class CameraService {
 
       if (context.mounted) {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => CameraPreviewScreen(imageFile)),
+          MaterialPageRoute(builder: (_) => ProfilePreviewScreen(imageFile)),
         );
       }
     } catch (e) {

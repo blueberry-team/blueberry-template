@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class CircularImagePreview extends StatelessWidget {
+class CircularProfileImagePreviewWidget extends StatelessWidget {
   final File imageFile;
-  const CircularImagePreview({super.key, required this.imageFile});
+  const CircularProfileImagePreviewWidget({super.key, required this.imageFile});
 
   @override
   Widget build(BuildContext context) {
