@@ -59,6 +59,10 @@ class AppStrings {
   static const String checkVerifyCode = '인증하기';
   static const String checkDuplicateEmail = '중복확인';
   static const String requiredYourEmail = '이메일 인증을 위해 사용 중인 이메일을 입력해주세요.';
+  static const String usingEmailLogin = '이메일 로그인을 사용 중 입니다.';
+  static const String usingGithubLogin = 'github 로그인을 사용 중 입니다.';
+  static const String usingGoogleLogin = 'google 로그인을 사용 중 입니다.';
+  static const String usingAppleLogin = 'apple 로그인을 사용 중 입니다.';
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';

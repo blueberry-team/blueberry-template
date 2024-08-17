@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/widget/SquareTitleWidget.dart';
 import '../../services/FirebaseAuthServiceProvider.dart';
-import '../../services/SocialAuthService.dart';
+import '../../services/socialauth/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
 import '../camera/ProfileGalleryPage.dart';
 import '../camera/provider/PageProvider.dart';
