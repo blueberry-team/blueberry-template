@@ -2,8 +2,9 @@ import 'package:blueberry_flutter_template/feature/user/restore/widget/DeletionR
 import 'package:blueberry_flutter_template/feature/user/restore/widget/RestoreDeletionUserBottomButtonWidget.dart';
 import 'package:flutter/material.dart';
 
-class DeletedUserDataWidget extends StatelessWidget {
-  const DeletedUserDataWidget({super.key});
+class RestoreDeletedUserScreen extends StatelessWidget {
+  static const String name = '/RestoreDeletedUserScreen';
+  const RestoreDeletedUserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart'
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
-import 'package:blueberry_flutter_template/feature/user/restore/RestoreDeletedUserScreen.dart';
+import 'package:blueberry_flutter_template/feature/user/RestoreDeletedUserScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
