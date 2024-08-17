@@ -1,9 +1,13 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
+import 'package:blueberry_flutter_template/services/FirebaseAuthServiceProvider.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/ChatMessageModel.dart';
 
 class FirebaseService {
@@ -48,6 +52,7 @@ class FirebaseService {
         age: 1,
         isMemberShip: false,
         profileImageUrl: '',
+        createdAt: DateTime.timestamp(),
         mbti: 'NULL',
         socialLogin: false,
         socialCompany: AppStrings.usingEmailLogin,
@@ -81,6 +86,52 @@ class FirebaseService {
     }
   }
 
+  Future<void> requestAccountDeletion(
+      BuildContext context, WidgetRef ref) async {
+    try {
+      var user = FirebaseAuth.instance.currentUser!.uid;
+      final callable =
+          FirebaseFunctions.instance.httpsCallable('requestAccountDeletion');
+      talker.log('Calling Firebase Function: requestAccountDeletion');
+      final result = await callable.call();
+
+      talker.log('Firebase Function response: ${result.data}');
+
+      if (result.data['success'] == true) {
+        talker.log('탈퇴 요청을 성공적으로 보냈습니다');
+        await ref.read(firebaseAuthServiceProvider).signOut();
+      } else {
+        talker.error('탈퇴 요청 실패: ${result.data['message']}');
+        throw Exception('탈퇴 요청 실패: ${result.data['message']}');
+      }
+    } on FirebaseFunctionsException catch (e) {
+      talker.error('Firebase Function 오류: ${e.code} - ${e.message}');
+      throw Exception('Firebase Function 오류: ${e.message}');
+    } catch (e) {
+      talker.error('계정 삭제 요청 중 오류 발생: $e');
+      throw Exception('계정 삭제 요청 중 오류 발생: $e');
+    }
+  }
+
+  Future<void> cancelAccountDeletion() async {
+    try {
+      var user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        throw Exception('No current user found');
+      }
+
+      await _firestore.collection('users').doc(user.uid).update({
+        'deletionRequestedAt': FieldValue.delete(),
+        'status': FieldValue.delete(),
+        'scheduledDeletionTime': FieldValue.delete(),
+      });
+    } catch (e) {
+      talker.error('Error canceling account deletion: $e');
+      throw Exception('Failed to cancel account deletion');
+    }
+  }
+
   // 채팅방 생성 함수
   Future<void> createChatRoom(String roomName) async {
     try {
@@ -91,6 +142,23 @@ class FirebaseService {
     } catch (e) {
       talker.error('Error creating chat room: $e');
       throw Exception('Failed to create chat room');
+    }
+  }
+
+  Future<bool> checkDeletionRequest(String uid) async {
+    try {
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc(uid).get();
+
+      if (userDoc.exists) {
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        return userData['deletionRequestedAt'] != null;
+      }
+
+      return false; // 문서가 존재하지 않으면 삭제 요청이 없는 것으로 간주
+    } catch (e) {
+      talker.error('삭제 요청 확인 중 오류 발생: $e');
+      throw Exception('사용자 상태 확인 실패: $e');
     }
   }
 }
