@@ -2,6 +2,8 @@ import 'package:blueberry_flutter_template/feature/admin/AdminLoadingPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
@@ -13,6 +15,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
+import '../feature/chat/ChatRoomScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
 import '../feature/friend/FriendsListScreen.dart';
 import '../feature/match/MatchScreen.dart';
@@ -56,6 +59,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const FriendsListScreen(),
           ),
           GoRoute(
+            path: 'webpayment',
+            name: WebPaymentWidget.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const WebPaymentWidget()),
             path: '/match',
             name: MatchScreen.name,
             builder: (context, state) => const MatchScreen(),
@@ -142,11 +149,23 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ResponsiveLayoutBuilder(context, const ProfileDetailScreen()),
           ),
           GoRoute(
+            path: 'profilecamera',
+            name: CameraScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const CameraScreen()),
+          ),
+          GoRoute(
+            path: 'profilecameragallery',
+            name: CameraGalleryScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const CameraGalleryScreen()),
+          ),
+          GoRoute(
             path: 'restoredeleteduser',
             name: RestoreDeletedUserScreen.name,
             builder: (context, state) => ResponsiveLayoutBuilder(
                 context, const RestoreDeletedUserScreen()),
-          )
+          ),
         ],
       ),
     ],
