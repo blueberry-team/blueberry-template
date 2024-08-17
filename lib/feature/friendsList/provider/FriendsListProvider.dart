@@ -18,8 +18,6 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       .map((snapshot) {
     return snapshot.docs.map((doc) {
       final data = doc.data();
-      // 로깅
-      print('provider data: $data');
       return FriendModel.fromJson({
         ...data,
         'lastConnect':

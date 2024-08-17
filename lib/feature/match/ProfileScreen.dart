@@ -1,7 +1,7 @@
-import 'package:blueberry_flutter_template/feature/match/widget/OptionMenuWidget.dart';
+import 'package:blueberry_flutter_template/feature/match/provider/ProfileScreenProvider.dart';
+import 'package:blueberry_flutter_template/feature/match/widget/MatchFilterOptionWidget.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/ProfileInfoRowWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:blueberry_flutter_template/feature/match/provider/MatchScreenProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/PetProfileModel.dart';
 import '../../utils/AppStrings.dart';
@@ -46,21 +46,23 @@ class ProfileScreen extends ConsumerWidget {
                 // 상단 바
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back_ios,
-                            color: Colors.white),
+                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                      // 더보기 버튼(현재는 '다시 추천 안함' 기능만 있음)
-                      OptionMenuWidget(
-                        onOptionSelected: (String result) {
-                          if (result == 'ignore') {
-                            _handleIgnoreProfile(context, ref);
-                          }
+                      Consumer(
+                        builder: (context, ref, _) {
+                          return MatchFilterOptionWidget(
+                            onOptionSelected: (String result) {
+                              if (result == 'ignore') {
+                                ref.read(profileScreenProvider.notifier).handleIgnoreProfile(context: context, petProfile: petProfile);
+                              }
+                            },
+                          );
                         },
                       ),
                     ],
@@ -147,15 +149,5 @@ class ProfileScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  void _handleIgnoreProfile(BuildContext context, WidgetRef ref) async {
-    const userId = "eztqDqrvEXDc8nqnnrB8"; // 유저 ID 임시 데이터
-    await ref
-        .read(matchScreenProvider.notifier)
-        .addPetToIgnored(userId, petProfile.petID);
-    if (context.mounted) {
-      Navigator.of(context).pop();
-    }
   }
 }

@@ -29,7 +29,7 @@ class AppStrings {
   static const String petBio = '소개';
   static const String ignoreThisPet = '해당 펫을 추천 안함';
 
-  //ReportModalSheet.dart
+  //UserReportBottomSheetWidget.dart
   static const String reportReasonSpamAccount = '광고용 계정';
   static const String reportReasonFakeAccount = '가짜로 의심되는 계정';
   static const String reportReasonInappropriateNamePhoto = '이름&사진이 부적절';

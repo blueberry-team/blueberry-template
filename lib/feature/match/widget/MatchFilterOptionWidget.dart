@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/AppStrings.dart';
 
-class OptionMenuWidget extends StatelessWidget {
+class MatchFilterOptionWidget extends StatelessWidget {
   final Function(String) onOptionSelected;
 
-  const OptionMenuWidget({super.key, required this.onOptionSelected});
+  const MatchFilterOptionWidget({super.key, required this.onOptionSelected});
 
   @override
   Widget build(BuildContext context) {

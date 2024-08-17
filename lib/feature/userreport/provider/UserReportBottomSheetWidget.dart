@@ -3,14 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/FriendModel.dart';
 import '../../../model/UserReportModel.dart';
-import '../../user_report/provider/userReportProvider.dart';
 import '../../../utils/AppStrings.dart';
+import '../../userreport/provider/userReportProvider.dart';
 
-class ReportModalSheet extends ConsumerWidget {
+/// UserReportBottomSheetWidget - 완성 되었습니다
+/// 8월 15일 상현
+
+class UserReportBottomSheetWidget extends ConsumerWidget {
   final FriendModel friend;
   final String loginUserId = 'loginUserId'; // 로그인한 사용자의 ID로 대체
 
-  const ReportModalSheet({super.key, required this.friend});
+  const UserReportBottomSheetWidget({super.key, required this.friend});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
