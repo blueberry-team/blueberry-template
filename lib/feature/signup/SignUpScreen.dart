@@ -28,8 +28,6 @@ class SignUpScreen extends ConsumerStatefulWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    ref.watch(emailProvider);
-    ref.watch(passwordConfirmProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
