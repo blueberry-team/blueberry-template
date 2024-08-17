@@ -1,5 +1,6 @@
 import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -56,7 +57,7 @@ class _MyPageBottomSheet extends ConsumerState<MyPageBottomSheet> {
             Navigator.pop(context);
             context.goNamed(CameraScreen.name);
           },
-          child: const Text("직접 촬영 하기"),
+          child: const Text(AppStrings.takePhotoDirectly),
         ),
         TextButton(
           onPressed: () async {
@@ -68,7 +69,7 @@ class _MyPageBottomSheet extends ConsumerState<MyPageBottomSheet> {
               Navigator.pop(context);
             }
           },
-          child: const Text("앨범에서 선택 하기"),
+          child: const Text(AppStrings.chooseFromGallery),
         )
       ],
     );

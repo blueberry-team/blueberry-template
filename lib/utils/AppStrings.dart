@@ -33,6 +33,8 @@ class AppStrings {
   static const String takeProfilePhoto = 'Take a profile photo';
   static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
   static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String takePhotoDirectly = '직접 촬영 하기';
+  static const String chooseFromGallery = '앨범에서 선택하기';
 
   //Save Photo
   static const String savePhoto = '이미지 저장 하기';
