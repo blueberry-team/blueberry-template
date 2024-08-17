@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/model/PetProfileModel.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,6 +91,7 @@ class MatchProfileListWidget extends ConsumerWidget {
                 onPressed: () async {
                   const userId = "eztqDqrvEXDc8nqnnrB8";
                   final petId = data[currentIndex].petID;
+                  talker.info("match profile widget petId: $petId");
                   await ref
                       .read(matchScreenProvider.notifier)
                       .addPetToLikes(userId, petId);
