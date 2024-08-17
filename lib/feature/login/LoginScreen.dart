@@ -1,4 +1,4 @@
-import 'package:blueberry_flutter_template/feature/camera/widget/CameraPageWidget.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +7,7 @@ import '../../core/widget/SquareTitleWidget.dart';
 import '../../services/FirebaseAuthServiceProvider.dart';
 import '../../services/SocialAuthService.dart';
 import '../../utils/AppStrings.dart';
-import '../camera/widget/CameraGalleryPageWidget.dart';
+import '../camera/CameraGalleryScreen.dart';
 import '../camera/provider/PageProvider.dart';
 import '../mypage/MyPageScreen.dart';
 import '../signup/SignUpScreen.dart';
@@ -44,8 +44,8 @@ class LoginScreen extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
                     MyPageScreen(),
-                    CameraPageWidget(),
-                    CameraGalleryPageWidget(),
+                    CameraScreen(),
+                    CameraGalleryScreen(),
                   ])
             : _buildLogin(context, ref),
         orElse: () => const Center(child: CircularProgressIndicator()),
