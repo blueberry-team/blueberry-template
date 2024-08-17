@@ -160,11 +160,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const CameraGalleryScreen()),
           ),
+          GoRoute(
             path: 'restoredeleteduser',
             name: RestoreDeletedUserScreen.name,
             builder: (context, state) => ResponsiveLayoutBuilder(
                 context, const RestoreDeletedUserScreen()),
-          )
+          ),
         ],
       ),
     ],
