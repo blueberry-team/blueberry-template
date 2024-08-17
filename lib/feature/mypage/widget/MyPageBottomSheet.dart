@@ -1,17 +1,20 @@
+import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/camera/provider/PageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class SettingsBottomSheet extends ConsumerStatefulWidget {
-  const SettingsBottomSheet({super.key});
+class MyPageBottomSheet extends ConsumerStatefulWidget {
+  const MyPageBottomSheet({super.key});
 
   @override
-  ConsumerState<SettingsBottomSheet> createState() =>
-      _SettingsBottomSheetState();
+  ConsumerState<MyPageBottomSheet> createState() =>
+      _MyPageBottomSheet();
 }
 
-class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
+class _MyPageBottomSheet extends ConsumerState<MyPageBottomSheet> {
   Future<bool> _requestAlbumPermission() async {
     // 앨범 권한 요청
     PermissionStatus photoStatus = await Permission.photos.request();
@@ -45,7 +48,6 @@ class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final pageNotifier = ref.watch(pageProvider.notifier);
     return Column(
       children: [
         const SizedBox(
@@ -53,8 +55,8 @@ class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
         ),
         TextButton(
           onPressed: () async {
-            pageNotifier.moveToPage(1);
             Navigator.pop(context);
+            context.goNamed(CameraScreen.name);
           },
           child: const Text("직접 촬영 하기"),
         ),
@@ -62,10 +64,9 @@ class _SettingsBottomSheetState extends ConsumerState<SettingsBottomSheet> {
           onPressed: () async {
             bool hasPermission = await _requestAlbumPermission();
             if (hasPermission) {
-              pageNotifier.moveToPage(2);
               Navigator.pop(context);
+              context.goNamed(CameraGalleryScreen.name);
             } else {
-              pageNotifier.moveToPage(0);
               Navigator.pop(context);
             }
           },

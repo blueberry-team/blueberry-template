@@ -8,14 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../core/widget/CustomDividerWidget.dart';
 import '../../core/widget/NickNameTextWidget.dart';
 import '../../services/FirebaseAuthServiceProvider.dart';
 import '../../services/FirebaseStoreServiceProvider.dart';
 import '../../utils/AppStrings.dart';
-import '../camera/SettingInsideAccountManagerWidget.dart';
-import '../camera/SettingsBottomSheet.dart';
+import 'widget/MyPageBottomSheet.dart';
 import '../camera/provider/fireStorageServiceProvider.dart';
 import '../setting/SettingScreen.dart';
 
@@ -56,7 +54,6 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                context.goNamed(SettingAccountManagerWidget.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.person),
@@ -256,7 +253,7 @@ class MyPageScreen extends ConsumerWidget {
                             padding: MediaQuery.of(context).viewInsets,
                             child: const SizedBox(
                               height: 150,
-                              child: SettingsBottomSheet(),
+                              child: MyPageBottomSheet(),
                             ),
                           );
                         });

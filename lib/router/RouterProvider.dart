@@ -2,6 +2,10 @@ import 'package:blueberry_flutter_template/feature/admin/AdminLoadingPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
+import 'package:blueberry_flutter_template/feature/camera/widget/CameraPageWidget.dart';
+import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
@@ -12,7 +16,6 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
-import '../feature/camera/SettingInsideAccountManagerWidget.dart';
 import '../feature/chat/ChatRoomScreen.dart';
 import '../feature/friend/FriendsListScreen.dart';
 import '../feature/mbti/MBTIScreen.dart';
@@ -66,12 +69,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             name: MyPageScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const MyPageScreen()),
-          ),
-          GoRoute(
-            path: 'settingaccount',
-            name: SettingAccountManagerWidget.name,
-            builder: (context, state) => ResponsiveLayoutBuilder(
-                context, const SettingAccountManagerWidget()),
           ),
           GoRoute(
             path: 'webpayment',
@@ -138,7 +135,19 @@ final routerProvider = Provider<GoRouter>((ref) {
             name: ProfileDetailScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const ProfileDetailScreen()),
-          )
+          ),
+          GoRoute(
+            path: 'profilecamera',
+            name: CameraScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const CameraScreen()),
+          ),
+          GoRoute(
+            path: 'profilecameragallery',
+            name: CameraGalleryScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const CameraGalleryScreen()),
+          ),
         ],
       ),
     ],

@@ -34,6 +34,10 @@ class AppStrings {
   static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
   static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
 
+  //Save Photo
+  static const String savePhoto = '이미지 저장 하기';
+  static const String previewProfilePhoto = '프로필 사진 미리보기';
+
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
   static const String chatRoomScreenTitle = '채팅방 목록';
@@ -166,13 +170,17 @@ class AppStrings {
   static const String appbar_Text_Logo = 'Petting';
   static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+  // Location Service
+  static const String errorMessage_sendFailed = '문자 발송 실패';
+  static const String button_openConfigMenu = '설정 열기';
+  static const String button_sendMessage = '112 문자보내기';
+  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
+
+  //Permission Error
+  static const String errorMessage_permissionGallery = '앨범 접근 권한을 허용 해주세요';
   static const String errorMessage_locationPermissionForeverDenied =
       '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
   static const String errorMessage_locationPermissionDisabled =
       '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
   static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
-  static const String errorMessage_sendFailed = '문자 발송 실패';
-  static const String button_openConfigMenu = '설정 열기';
-  static const String button_sendMessage = '112 문자보내기';
-  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
 }

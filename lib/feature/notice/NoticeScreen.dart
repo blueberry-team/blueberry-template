@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class FixSettingNotice extends ConsumerStatefulWidget {
-  const FixSettingNotice({super.key});
+class NoticeScreen extends ConsumerStatefulWidget {
+  const NoticeScreen({super.key});
 
   @override
-  ConsumerState<FixSettingNotice> createState() => _FixSettingNoticeState();
+  ConsumerState<NoticeScreen> createState() => _NoticeScreen();
 }
 
-class _FixSettingNoticeState extends ConsumerState<FixSettingNotice> {
+class _NoticeScreen extends ConsumerState<NoticeScreen> {
   bool _isWebViewVisible = false;
   bool _isWebViewVisible2 = false;
   late WebViewController _webViewController;
-  late WebViewController _webViewController2;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _webViewController = WebViewController();
-    _webViewController2 = WebViewController();
   }
 
   void _toggleWebView() {

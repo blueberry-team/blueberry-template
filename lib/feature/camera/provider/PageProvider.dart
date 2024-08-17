@@ -1,17 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PageState {
-  final PageController pageController;
-  final int pageNumber;
-
-  PageState({required this.pageController, required this.pageNumber});
-  PageState copyWith({PageController? pageController, int? pageNumber}) {
-    return PageState(
-        pageController: pageController ?? this.pageController,
-        pageNumber: pageNumber ?? this.pageNumber);
-  }
-}
+final pageProvider =
+StateNotifierProvider.autoDispose<PageProviderNotifier, PageState>((ref) {
+  return PageProviderNotifier();
+});
 
 class PageProviderNotifier extends StateNotifier<PageState> {
   PageProviderNotifier()
@@ -24,7 +17,14 @@ class PageProviderNotifier extends StateNotifier<PageState> {
   }
 }
 
-final pageProvider =
-    StateNotifierProvider.autoDispose<PageProviderNotifier, PageState>((ref) {
-  return PageProviderNotifier();
-});
+class PageState {
+  final PageController pageController;
+  final int pageNumber;
+
+  PageState({required this.pageController, required this.pageNumber});
+  PageState copyWith({PageController? pageController, int? pageNumber}) {
+    return PageState(
+        pageController: pageController ?? this.pageController,
+        pageNumber: pageNumber ?? this.pageNumber);
+  }
+}
