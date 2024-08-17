@@ -22,7 +22,8 @@ class FriendsListViewWidget extends ConsumerWidget {
             itemCount: friends.length,
             itemBuilder: (context, index) {
               final friend = friends[index];
-              final friendListImageUrl = ref.watch(friendsListImageProvider(friend.imageName));
+              final friendListImageUrl =
+                  ref.watch(friendsListImageProvider(friend.imageName));
 
               return friendListImageUrl.when(
                 data: (imageUrl) {

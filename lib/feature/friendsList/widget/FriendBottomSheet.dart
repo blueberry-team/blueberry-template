@@ -89,7 +89,8 @@ class FriendBottomSheetWidget extends StatelessWidget {
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(25.0)),
                     ),
-                    builder: (context) => UserReportBottomSheetWidget(friend: friend),
+                    builder: (context) =>
+                        UserReportBottomSheetWidget(friend: friend),
                   );
                 },
                 text: AppStrings.reportButton,

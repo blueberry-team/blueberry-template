@@ -55,7 +55,8 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   // Firebase DB field 명을 받아서 해당 필드에 petId를 추가하는 함수
-  Future<void> _updatePetList(String userId, String petId, String fieldName) async {
+  Future<void> _updatePetList(
+      String userId, String petId, String fieldName) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
 
@@ -91,6 +92,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
-      (ref) => MatchScreenNotifier(),
+final matchScreenProvider =
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+  (ref) => MatchScreenNotifier(),
 );

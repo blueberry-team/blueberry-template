@@ -41,18 +41,20 @@ class MatchProfileListWidget extends ConsumerWidget {
               if (direction == CardSwiperDirection.right) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(petProfile: data[previousIndex]),
+                    builder: (context) =>
+                        ProfileScreen(petProfile: data[previousIndex]),
                   ),
                 );
               }
               return true;
             },
             cardBuilder: (
-                context,
-                index,
-                horizontalThresholdPercentage,
-                verticalThresholdPercentage,
-                ) => cards[index],
+              context,
+              index,
+              horizontalThresholdPercentage,
+              verticalThresholdPercentage,
+            ) =>
+                cards[index],
           ),
         ),
         Container(
