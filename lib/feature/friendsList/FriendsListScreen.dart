@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'widget/FriendsListViewWidget.dart';
 
+/// FriendsListScreen - 완성 되었습니다
+/// 8월 15일 상현
+
 class FriendsListScreen extends StatelessWidget {
   static const String name = 'FriendsListScreen';
 

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../model/FriendModel.dart';
 import '../../../utils/AppStrings.dart';
-import '../../user_report/provider/ReportModalSheet.dart';
+import '../../userreport/provider/UserReportBottomSheetWidget.dart';
 import 'BottomSheetButtonWidget.dart';
 
 class FriendBottomSheetWidget extends StatelessWidget {
@@ -89,7 +89,7 @@ class FriendBottomSheetWidget extends StatelessWidget {
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(25.0)),
                     ),
-                    builder: (context) => ReportModalSheet(friend: friend),
+                    builder: (context) => UserReportBottomSheetWidget(friend: friend),
                   );
                 },
                 text: AppStrings.reportButton,

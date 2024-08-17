@@ -4,8 +4,8 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../utils/AppStrings.dart';
-import '../provider/MatchScreenProvider.dart';
 import '../ProfileScreen.dart';
+import '../provider/MatchScreenProvider.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 
@@ -41,20 +41,18 @@ class MatchProfileListWidget extends ConsumerWidget {
               if (direction == CardSwiperDirection.right) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        ProfileScreen(petProfile: data[previousIndex]),
+                    builder: (context) => ProfileScreen(petProfile: data[previousIndex]),
                   ),
                 );
               }
               return true;
             },
             cardBuilder: (
-              context,
-              index,
-              horizontalThresholdPercentage,
-              verticalThresholdPercentage,
-            ) =>
-                cards[index],
+                context,
+                index,
+                horizontalThresholdPercentage,
+                verticalThresholdPercentage,
+                ) => cards[index],
           ),
         ),
         Container(
@@ -63,6 +61,7 @@ class MatchProfileListWidget extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // 패스 버튼
               SwipeButtonWidget(
                 onPressed: () =>
                     cardSwiperController.swipe(CardSwiperDirection.left),
@@ -70,22 +69,30 @@ class MatchProfileListWidget extends ConsumerWidget {
                 color: Colors.greenAccent,
               ),
               const SizedBox(width: 30),
+              // 즐겨찾기(super like) 버튼
               SwipeButtonWidget(
                 onPressed: () async {
                   const userId = "eztqDqrvEXDc8nqnnrB8";
                   final petId = data[currentIndex].petID;
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToIgnored(userId, petId);
+                      .addPetToSuperLikes(userId, petId);
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.star,
                 color: Colors.blueAccent,
               ),
               const SizedBox(width: 30),
+              // 좋아요(like) 버튼
               SwipeButtonWidget(
-                onPressed: () =>
-                    cardSwiperController.swipe(CardSwiperDirection.right),
+                onPressed: () async {
+                  const userId = "eztqDqrvEXDc8nqnnrB8";
+                  final petId = data[currentIndex].petID;
+                  await ref
+                      .read(matchScreenProvider.notifier)
+                      .addPetToLikes(userId, petId);
+                  cardSwiperController.swipe(CardSwiperDirection.right);
+                },
                 icon: Icons.favorite,
                 color: Colors.redAccent,
               ),
