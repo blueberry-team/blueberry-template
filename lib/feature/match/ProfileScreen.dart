@@ -46,12 +46,13 @@ class ProfileScreen extends ConsumerWidget {
                 // 상단 바
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                        icon: const Icon(Icons.arrow_back_ios,
+                            color: Colors.white),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
                       Consumer(
@@ -59,7 +60,11 @@ class ProfileScreen extends ConsumerWidget {
                           return MatchFilterOptionWidget(
                             onOptionSelected: (String result) {
                               if (result == 'ignore') {
-                                ref.read(profileScreenProvider.notifier).handleIgnoreProfile(context: context, petProfile: petProfile);
+                                ref
+                                    .read(profileScreenProvider.notifier)
+                                    .handleIgnoreProfile(
+                                        context: context,
+                                        petProfile: petProfile);
                               }
                             },
                           );

@@ -12,13 +12,16 @@ class ProfileScreenNotifier extends StateNotifier<void> {
     required BuildContext context,
     required PetProfileModel petProfile,
   }) async {
-    await ref.read(matchScreenProvider.notifier).addPetToIgnored(MatchScreenNotifier.userId, petProfile.petID);
+    await ref
+        .read(matchScreenProvider.notifier)
+        .addPetToIgnored(MatchScreenNotifier.userId, petProfile.petID);
     if (context.mounted) {
       Navigator.of(context).pop(); // 프로필 화면 닫기
     }
   }
 }
 
-final profileScreenProvider = StateNotifierProvider<ProfileScreenNotifier, void>((ref) {
+final profileScreenProvider =
+    StateNotifierProvider<ProfileScreenNotifier, void>((ref) {
   return ProfileScreenNotifier(ref);
 });

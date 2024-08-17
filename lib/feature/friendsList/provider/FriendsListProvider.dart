@@ -28,7 +28,8 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
 });
 
 // 친구목록 이미지 URL을 제공하는 Provider
-final friendsListImageProvider = FutureProvider.family<String, String>((ref, imageName) async {
+final friendsListImageProvider =
+    FutureProvider.family<String, String>((ref, imageName) async {
   final ref = FirebaseStorage.instance.ref('friends-profile/$imageName');
   return await ref.getDownloadURL();
 });
