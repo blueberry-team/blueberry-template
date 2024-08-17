@@ -1,4 +1,6 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -46,15 +48,17 @@ class FirebaseService {
         age: 1,
         isMemberShip: false,
         profileImageUrl: '',
-        createdAt: DateTime.now(),
         mbti: 'NULL',
+        socialLogin: false,
+        socialCompany: AppStrings.usingEmailLogin,
+        createdAt: DateTime.timestamp(),
         userClass: 'user',
         likeGivens: [""],
       );
       // 멤버쉽 모델은 추후에 인앱 결제시 유저가 구독하고 있거나 유저 상태에 대한 변경을 주기 위해 추가했음
       await _firestore.collection('users').doc(user.uid).set(newUser.toJson());
     } catch (e) {
-      print('Error updating user: $e');
+      talker.error('Error updating user: $e');
       throw Exception('Failed to update user');
     }
   }
@@ -72,7 +76,7 @@ class FirebaseService {
         'isMemberShip': true,
       });
     } catch (e) {
-      print('Error updating user membership: $e');
+      talker.error('Error updating user membership: $e');
       throw Exception('Failed to update user membership');
     }
   }
@@ -85,7 +89,7 @@ class FirebaseService {
         'timestamp': DateTime.now(),
       });
     } catch (e) {
-      print('Error creating chat room: $e');
+      talker.error('Error creating chat room: $e');
       throw Exception('Failed to create chat room');
     }
   }

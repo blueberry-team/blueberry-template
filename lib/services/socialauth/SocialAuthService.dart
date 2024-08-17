@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:blueberry_flutter_template/services/socialauth/RandomUserNickNameGenerator.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -11,7 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import '../utils/Talker.dart';
+import '../../utils/Talker.dart';
 
 class SocialAuthService {
   get context => null;
@@ -29,7 +31,7 @@ class SocialAuthService {
       );
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(gCredential);
-      getAuthenticateWithFirebase(userCredential);
+      getAuthenticateWithFirebase(userCredential, AppStrings.usingGoogleLogin);
     }
   }
 
@@ -55,7 +57,7 @@ class SocialAuthService {
 
       final result =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      getAuthenticateWithFirebase(result);
+      getAuthenticateWithFirebase(result, AppStrings.usingAppleLogin);
     } on SignInWithAppleAuthorizationException catch (e) {
       // Apple 로그인 관련 오류 처리
       talker.error('Apple 로그인 오류: ${e.code}');
@@ -84,11 +86,12 @@ class SocialAuthService {
     GithubAuthProvider githubAuthProvider = GithubAuthProvider();
     final userCredential =
         await FirebaseAuth.instance.signInWithProvider(githubAuthProvider);
-    getAuthenticateWithFirebase(userCredential);
+    getAuthenticateWithFirebase(userCredential, AppStrings.usingGithubLogin);
   }
 
   ///* 인증정보를 바탕으로 firestore에 저장하는 함수
-  void getAuthenticateWithFirebase(UserCredential? credential) async {
+  void getAuthenticateWithFirebase(
+      UserCredential? credential, String socialCompany) async {
     if (credential?.user == null) {
       return null;
     }
@@ -97,6 +100,8 @@ class SocialAuthService {
         .doc(FirebaseAuth.instance.currentUser!.uid);
     var snapshot = await ref.get();
     if (!snapshot.exists) {
+      String randomNickname = RandomUserNickNameGenerator.generate();
+
       return await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -105,7 +110,10 @@ class SocialAuthService {
         //account_level이 0이되면 Delete timestamp확인하여 14일 뒤 삭제
         'email': FirebaseAuth.instance.currentUser!.email,
         'name': FirebaseAuth.instance.currentUser!.displayName,
+        'nickName': randomNickname,
         'age': 0,
+        'socialLogin': true,
+        'socialCompany': socialCompany,
         'createdAt': DateTime.timestamp(),
         'profilePicture': "",
       });

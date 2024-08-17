@@ -132,8 +132,13 @@ class $AssetsLogoGen {
   /// File path: assets/logo/logo_5.png
   AssetGenImage get logo5 => const AssetGenImage('assets/logo/logo_5.png');
 
+  /// File path: assets/logo/mbti_logo.webp
+  AssetGenImage get mbtiLogo =>
+      const AssetGenImage('assets/logo/mbti_logo.webp');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo1, logo2, logo3, logo4, logo5];
+  List<AssetGenImage> get values =>
+      [logo1, logo2, logo3, logo4, logo5, mbtiLogo];
 }
 
 class Assets {

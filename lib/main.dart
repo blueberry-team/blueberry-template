@@ -14,6 +14,7 @@ import 'core/provider/ThemeProvider.dart';
 import 'firebase_options.dart';
 import 'utils/AppTheme.dart';
 import 'utils/Talker.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {
@@ -33,6 +34,8 @@ Future<void> main() async {
     if (!kIsWeb) {
       FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
+
+    setPathUrlStrategy(); // Hash URL(#)을 제거하고 Path URL을 사용하도록 설정
 
     runApp(const ProviderScope(
       child: MyApp(),

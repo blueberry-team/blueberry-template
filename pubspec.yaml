@@ -94,6 +94,7 @@ dependencies:
 
   # In App Purchase
   in_app_purchase: ^3.2.0
+  url_strategy: ^0.3.0
 
 
   # Lint
@@ -108,6 +109,7 @@ dependencies:
   # map
   google_maps_flutter: ^2.9.0
   geolocator: ^12.0.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
