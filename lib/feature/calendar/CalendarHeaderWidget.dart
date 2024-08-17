@@ -23,10 +23,11 @@ class CalendarHeaderWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            Assets.icon.icLeftArrow,
+          _changeMonth(
+            addMonth: false,
+            changeMonth: setMonth,
           ),
-          //TODO: 하드코딩 변경
+          //월, 년 상태 및 변경
           Expanded(
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               _changeDate(
@@ -39,10 +40,26 @@ class CalendarHeaderWidget extends StatelessWidget {
               ),
             ]),
           ),
-          SvgPicture.asset(Assets.icon.icRightArrow),
+          _changeMonth(
+            addMonth: true,
+            changeMonth: setMonth,
+          ),
         ],
       ),
     );
+  }
+
+  Widget _changeMonth(
+      {required bool addMonth, required VoidCallback changeMonth}) {
+    return GestureDetector(
+        onTap: () => changeMonth,
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: SvgPicture.asset(
+            addMonth ? Assets.icon.icRightArrow : Assets.icon.icLeftArrow,
+            height: 20.w,
+          ),
+        ));
   }
 
   Widget _changeDate({required int date, required VoidCallback changeDate}) {

@@ -111,7 +111,7 @@ class MyPageScreen extends ConsumerWidget {
             const CustomDividerWidget(),
             GestureDetector(
               onTap: () {
-                context.goNamed(CalendarScreen.name);
+                context.pushNamed(CalendarScreen.name);
               },
               child: const ListTile(
                 leading: Icon(Icons.date_range_rounded),
