@@ -1,5 +1,6 @@
 import 'package:blueberry_flutter_template/model/UserModel.dart';
 import 'package:blueberry_flutter_template/services/FirebaseAuthServiceProvider.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -53,6 +54,9 @@ class FirebaseService {
         profileImageUrl: '',
         createdAt: DateTime.timestamp(),
         mbti: 'NULL',
+        socialLogin: false,
+        socialCompany: AppStrings.usingEmailLogin,
+        createdAt: DateTime.timestamp(),
         userClass: 'user',
         likeGivens: [""],
       );

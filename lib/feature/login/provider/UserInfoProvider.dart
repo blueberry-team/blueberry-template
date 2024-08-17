@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/model/UserDataModel.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,6 +65,8 @@ final userInfoNotifierProvider =
           mbti: 'NULL',
           profileImageUrl: '',
           isMemberShip: false,
+          socialLogin: false,
+          socialCompany: AppStrings.usingEmailLogin,
           createdAt: DateTime.now(),
           userClass: 'user',
           likeGivens: [""])));

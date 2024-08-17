@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:blueberry_flutter_template/core/widget/SocialCompanyText.dart';
 import 'package:blueberry_flutter_template/feature/mypage/provider/ProfileImageProvider.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,7 +44,7 @@ class MyPageScreen extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       NickNameTextWidget(),
-                      Text("Google 로그인을 사용 중 입니다.")
+                      SocialCompanyTextWidget(),
                     ],
                   ),
                 )
