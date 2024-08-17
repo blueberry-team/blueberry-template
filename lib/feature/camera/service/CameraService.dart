@@ -1,4 +1,3 @@
-
 import 'package:blueberry_flutter_template/feature/camera/ProfilePreviewScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:camera/camera.dart';

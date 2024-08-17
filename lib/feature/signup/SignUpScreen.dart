@@ -1,4 +1,3 @@
-import 'package:blueberry_flutter_template/feature/signup/provider/SignUpDataProviders.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/EmailDuplicateWidget.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/EmailVerifyWidget.dart';
 import 'package:blueberry_flutter_template/feature/signup/widget/NameInputWidget.dart';
