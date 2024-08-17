@@ -1,4 +1,5 @@
 import 'package:blueberry_flutter_template/feature/camera/CameraPreviewScreen.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -58,7 +59,7 @@ class CameraService {
         final XFile file = await controller!.takePicture();
         return file;
       } catch (e) {
-        print("Error taking photo: $e");
+        talker.error("Error taking photo: $e");
         return null;
       }
     }
@@ -80,7 +81,7 @@ class CameraService {
         );
       }
     } catch (e) {
-      print('Error: $e');
+      talker.error('Error: $e');
     }
   }
 
