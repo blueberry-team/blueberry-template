@@ -9,6 +9,7 @@ import 'widget/MatchProfileListWidget.dart';
 ///  - SwipeButtonWidget: 수동으로 좌/우 스와이프를 할 수 있는 버튼
 
 class MatchScreen extends StatelessWidget {
+  static const String name = 'MatchScreen';
   const MatchScreen({super.key});
 
   @override

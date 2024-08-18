@@ -1,9 +1,24 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  //ReportModalSheet.dart
+  static const String reportReasonSpamAccount = '광고용 계정';
+  static const String reportReasonFakeAccount = '가짜로 의심되는 계정';
+  static const String reportReasonInappropriateNamePhoto = '이름&사진이 부적절';
+  static const String reportConfirmationMessage = '%s님을 신고하시겠습니까?';
+  static const String reportSuccessMessage = '신고가 접수되었습니다.';
+  static const String reportErrorMessage = '신고 접수 중 오류가 발생했습니다.';
+
+  //FriendBottomSheet.dart
+  static const String chatButton = '채팅';
+  static const String profileButton = '프로필';
+  static const String reportButton = '신고하기';
+
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
+  static const String emailTextWidgetError = '이메일 정보를 가져오지 못했습니다.';
+  static const String dateTextWidgetError = '날짜 정보를 가져오지 못했습니다.';
 
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
@@ -15,6 +30,17 @@ class AppStrings {
   static const String okButtonText = '확인';
   static const String loggedInMessage = '로그인 되었습니다.';
   static const String passwordForgot = '비밀번호를 잊어버렸나요?';
+
+  //Take Photo
+  static const String takeProfilePhoto = 'Take a profile photo';
+  static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String takePhotoDirectly = '직접 촬영 하기';
+  static const String chooseFromGallery = '앨범에서 선택하기';
+
+  //Save Photo
+  static const String savePhoto = '이미지 저장 하기';
+  static const String previewProfilePhoto = '프로필 사진 미리보기';
 
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
@@ -37,13 +63,28 @@ class AppStrings {
   static const String cancelButtonText = '취소';
   static const String signUpSuccessMessage = '회원가입 성공!';
   static const String signUpFailedMessage = '회원가입 실패. 다시 시도해 주세요.';
+  static const String verifyCode = '인증번호';
+  static const String checkVerifyCode = '인증하기';
+  static const String checkDuplicateEmail = '중복확인';
+  static const String requiredYourEmail = '이메일 인증을 위해 사용 중인 이메일을 입력해주세요.';
+  static const String usingEmailLogin = '이메일 로그인을 사용 중 입니다.';
+  static const String usingGithubLogin = 'github 로그인을 사용 중 입니다.';
+  static const String usingGoogleLogin = 'google 로그인을 사용 중 입니다.';
+  static const String usingAppleLogin = 'apple 로그인을 사용 중 입니다.';
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
-  static const String yourMBTIIs = '당신의 MBTI는';
+  static const String titleMBTITest = 'MBTI Test';
+  static const String yourMBTI = '의 MBTI는';
+  static const String petMBTI = '반려동물의 MBTI는';
   static const String pleaseCheckMBTI = 'MBTI를 검사해주세요';
+  static const String pleaseLogin = '로그인하시면 MBTI를 등록할 수 있어요';
   static const String reCheckMBTI = '재검사하기';
   static const String checkMBTI = '검사하기';
+  static const String setMBTI = '등록하기';
+  static const String setCompleteMBTI = '새로운 MBTI를 등록했어요';
+  static const String setErrorMBTI = '등록에 실패했어요 다시 시도해주세요';
+  static const String shareMBTI = '공유하기';
   static const String stronglyAgree = '매우 그렇다';
   static const String agree = '그렇다';
   static const String neutral = '보통이다';
@@ -93,6 +134,9 @@ class AppStrings {
   static const String errorMessage_wrongNickName =
       '특수 문자를 제외 한 4자 이상의 닉네임을 입력해주세요.';
   static const String errorMessage_forbiddenNickName = '금지된 닉네임입니다. 다시 입력해주세요.';
+  static const String errorMessage_emptyVerifyCode = '인증번호를 입력 해 주세요';
+  static const String errorMessage_wrongVerifyCode =
+      '인증번호를 확인 해 주세요, 5자리의 숫자로 구성되어 있습니다';
 
   // Company Info
   static const String companyInfoTitle = '회사 정보';
@@ -132,4 +176,19 @@ class AppStrings {
 
   //Appbar Logo
   static const String appbar_Text_Logo = 'Petting';
+  static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+  // Location Service
+  static const String errorMessage_sendFailed = '문자 발송 실패';
+  static const String button_openConfigMenu = '설정 열기';
+  static const String button_sendMessage = '112 문자보내기';
+  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
+
+  //Permission Error
+  static const String errorMessage_permissionGallery = '앨범 접근 권한을 허용 해주세요';
+  static const String errorMessage_locationPermissionForeverDenied =
+      '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
+  static const String errorMessage_locationPermissionDisabled =
+      '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
+  static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
 }

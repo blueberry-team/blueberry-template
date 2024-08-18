@@ -1,6 +1,12 @@
 class AppStringEnglish {
   static const String appTitle = 'Community App';
 
+  //TopScreen.dart
+  static const String postScreenLabel = 'Post';
+  static const String matchScreenLabel = 'Match';
+  static const String myPageScreenLabel = 'MyPage';
+  static const String adminScreenLabel = 'Admin';
+
   //ChatPage.dart
   static const String chatPageTitle = 'Chat Page';
   static const String chatHint = 'Type your message here...';
