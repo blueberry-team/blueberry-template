@@ -2,6 +2,7 @@ import 'package:blueberry_flutter_template/feature/admin/AdminLoadingPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
+import 'package:blueberry_flutter_template/feature/calendar/CalendarScreen.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.dart';
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
@@ -99,6 +100,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/signup',
         name: SignUpScreen.name,
         builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: '/calendar',
+        name: CalendarScreen.name,
+        builder: (context, state) => CalendarScreen(),
       ),
       GoRoute(
         path: '/setting',

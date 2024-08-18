@@ -3,8 +3,8 @@ part of 'CalendarScreen.dart';
 class CalendarHeaderWidget extends StatelessWidget {
   final int selectYear;
   final int selectMonth;
-  final VoidCallback setYear;
-  final VoidCallback setMonth;
+  final Function(int) setYear;
+  final Function(int) setMonth;
 
   const CalendarHeaderWidget(
       {super.key,
@@ -16,16 +16,20 @@ class CalendarHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 14.w,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            Assets.icon.icLeftArrow,
+          _changeMonth(
+            addMonth: false,
+            changeMonth: setMonth,
           ),
-          //TODO: 하드코딩 변경
+          //월, 년 상태 및 변경
           Expanded(
-            child: Row(children: [
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               _changeDate(
                 date: selectMonth,
                 changeDate: setMonth,
@@ -36,13 +40,33 @@ class CalendarHeaderWidget extends StatelessWidget {
               ),
             ]),
           ),
-          SvgPicture.asset(Assets.icon.icRightArrow),
+          _changeMonth(
+            addMonth: true,
+            changeMonth: setMonth,
+          ),
         ],
       ),
     );
   }
 
-  Widget _changeDate({required int date, required VoidCallback changeDate}) {
+  Widget _changeMonth(
+      {required bool addMonth, required Function(int) changeMonth}) {
+    return GestureDetector(
+        onTap: () {
+          addMonth
+              ? changeMonth(selectMonth + 1)
+              : changeMonth(selectMonth - 1);
+        },
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: SvgPicture.asset(
+            addMonth ? Assets.icon.icRightArrow : Assets.icon.icLeftArrow,
+            height: 20.w,
+          ),
+        ));
+  }
+
+  Widget _changeDate({required int date, required Function(int) changeDate}) {
     const color = Color(0xFF000000);
     final textStyle = TextStyle(
       fontSize: 16.sp,
@@ -52,7 +76,7 @@ class CalendarHeaderWidget extends StatelessWidget {
       //fontFamily: 'Urbanist',
     );
     return GestureDetector(
-      onTap: changeDate,
+      onTap: () => changeDate,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(children: [
