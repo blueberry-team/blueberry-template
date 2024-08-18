@@ -4,6 +4,7 @@ import 'ImageImporter.dart';
 
 class ProfilePicVerificationScreen extends ConsumerWidget {
   const ProfilePicVerificationScreen({super.key});
+  static const name = 'ProfilePicverificationScreen';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,44 +41,44 @@ class ProfilePicVerificationScreen extends ConsumerWidget {
                   ),
                   child: imageFile != null
                       ? ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Stack(
-                      children: [
-                        Image.file(
-                          imageFile,
-                          fit: BoxFit.cover,
-                          width: squareSize,
-                          height: squareSize,
-                          color: isAuthorized
-                              ? null
-                              : Colors.black.withOpacity(0.6),
-                          colorBlendMode:
-                          isAuthorized ? null : BlendMode.darken,
-                        ),
-                        if (!isAuthorized)
-                          Center(
-                            child: Text(
-                              '승인 대기 중입니다 \n조금만 기다려주세요',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                backgroundColor:
-                                Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Stack(
+                            children: [
+                              Image.file(
+                                imageFile,
+                                fit: BoxFit.cover,
+                                width: squareSize,
+                                height: squareSize,
+                                color: isAuthorized
+                                    ? null
+                                    : Colors.black.withOpacity(0.6),
+                                colorBlendMode:
+                                    isAuthorized ? null : BlendMode.darken,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
+                              if (!isAuthorized)
+                                Center(
+                                  child: Text(
+                                    '승인 대기 중입니다 \n조금만 기다려주세요',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.5),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                            ],
                           ),
-                      ],
-                    ),
-                  )
+                        )
                       : const Center(
-                    child: Icon(
-                      Icons.pets,
-                      size: 200,
-                      color: Colors.white,
-                    ),
-                  ),
+                          child: Icon(
+                            Icons.pets,
+                            size: 200,
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(

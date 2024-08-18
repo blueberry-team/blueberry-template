@@ -6,7 +6,7 @@ import 'dart:io';
 final imagePickerServiceProvider = Provider((ref) => ImagePickerService());
 
 final imageFileProvider =
-StateNotifierProvider<ImageFileNotifier, File?>((ref) {
+    StateNotifierProvider<ImageFileNotifier, File?>((ref) {
   final imagePickerService = ref.watch(imagePickerServiceProvider);
   return ImageFileNotifier(imagePickerService);
 });
@@ -17,7 +17,7 @@ class ImagePickerService {
   Future<File?> pickImageFromGallery(BuildContext context) async {
     try {
       final XFile? pickedFile =
-      await _picker.pickImage(source: ImageSource.gallery);
+          await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         return File(pickedFile.path);
       } else {
@@ -33,7 +33,7 @@ class ImagePickerService {
   Future<File?> pickImageFromCamera(BuildContext context) async {
     try {
       final XFile? pickedFile =
-      await _picker.pickImage(source: ImageSource.camera);
+          await _picker.pickImage(source: ImageSource.camera);
       if (pickedFile != null) {
         return File(pickedFile.path);
       } else {
