@@ -25,7 +25,7 @@ import '../feature/profile/ProfileDetailScreen.dart';
 import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
-
+import '../feature/voiceoutput/VoiceOutputScreen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -141,8 +141,15 @@ final routerProvider = Provider<GoRouter>((ref) {
               path: 'match',
               name: MatchScreen.name,
               builder: (context, state) => const MatchScreen()),
+          GoRoute(
+            path: 'voiceoutput',
+            name: VoiceOutputScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const VoiceOutputScreen()),
+          )
         ],
       ),
+
     ],
   );
 });
