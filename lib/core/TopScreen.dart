@@ -1,3 +1,7 @@
+import 'package:blueberry_flutter_template/feature/admin/AdminUserListPage.dart';
+import 'package:blueberry_flutter_template/feature/login/LoginScreen.dart';
+import 'package:blueberry_flutter_template/feature/match/MatchScreen.dart';
+import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,25 +17,27 @@ import '../utils/AppStringEnglish.dart';
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
-final List<String> routes = [
-  '/post',
-  '/match',
-  '/mypage',
-  '/admin',
+
+final List<Widget> pages = [
+  const PostScreen(),
+  const MatchScreen(),
+  const LoginScreen(),
+  const AdminUserListPage()
 ];
 
 class TopScreen extends ConsumerWidget {
   static const String name = 'TopScreen';
-  final Widget child;
 
-  const TopScreen({super.key, required this.child});
+  const TopScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
     return Scaffold(
-      body: child,
+      body: Center(
+        child: pages[selectedIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedIconTheme: const IconThemeData(color: Colors.black),
@@ -57,10 +63,8 @@ class TopScreen extends ConsumerWidget {
           ),
         ],
         currentIndex: selectedIndex,
-        onTap: (index) {
-          ref.read(selectedIndexProvider.notifier).state = index;
-          context.go(routes[index]);
-        },
+        onTap: (index) =>
+        ref.read(selectedIndexProvider.notifier).state = index,
       ),
     );
   }
