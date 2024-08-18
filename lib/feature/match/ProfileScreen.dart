@@ -8,59 +8,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/PetProfileModel.dart';
 import '../../utils/AppStrings.dart';
 
-class ProfileScreen extends ConsumerWidget {
+class ProfileScreen extends StatelessWidget {
   final PetProfileModel petProfile;
 
   const ProfileScreen({super.key, required this.petProfile});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          PetBackgroundImage(
-            imageUrl: petProfile.imageUrl,
-            petId: petProfile.petID,
-          ),
-          const ImageBlurEffect(),
-          SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTopBar(context, ref),
-                const Spacer(),
-                _buildProfileInfoCard(),
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBackgroundImage() {
-    return Hero(
-      tag: 'pet_image_${petProfile.petID}',
-      child: Image.network(
-        petProfile.imageUrl,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Widget _buildGradientOverlay() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.transparent,
-            Colors.black.withOpacity(0.7),
-          ],
-        ),
+      body: Consumer(
+        builder: (context, ref, _) {
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              PetBackgroundImage(
+                imageUrl: petProfile.imageUrl,
+                petId: petProfile.petID,
+              ),
+              const ImageBlurEffect(),
+              SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildTopBar(context, ref),
+                    const Spacer(),
+                    _buildProfileInfoCard(),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -75,17 +54,13 @@ class ProfileScreen extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          Consumer(
-            builder: (context, ref, _) {
-              return MatchFilterOptionWidget(
-                onOptionSelected: (String result) {
-                  if (result == 'ignore') {
-                    ref
-                        .read(profileScreenProvider.notifier)
-                        .handleIgnoreProfile(context: context, petProfile: petProfile);
-                  }
-                },
-              );
+          MatchFilterOptionWidget(
+            onOptionSelected: (String result) {
+              if (result == 'ignore') {
+                ref
+                    .read(profileScreenProvider.notifier)
+                    .handleIgnoreProfile(context: context, petProfile: petProfile);
+              }
             },
           ),
         ],
