@@ -1,3 +1,4 @@
+import 'package:blueberry_flutter_template/feature/ProfilePicVerificationScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminLoadingPage.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminScreen.dart';
 import 'package:blueberry_flutter_template/feature/admin/AdminUserDetailPage.dart';
@@ -6,7 +7,6 @@ import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.da
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
-import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:blueberry_flutter_template/feature/user/RestoreDeletedUserScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
@@ -25,7 +25,6 @@ import '../feature/profile/ProfileDetailScreen.dart';
 import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
-
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -141,6 +140,10 @@ final routerProvider = Provider<GoRouter>((ref) {
               path: 'match',
               name: MatchScreen.name,
               builder: (context, state) => const MatchScreen()),
+          GoRoute(
+              path: 'profile-pic-verification',
+              name: ProfilePicVerificationScreen.name,
+              builder: (context, state) => const ProfilePicVerificationScreen()),
         ],
       ),
     ],

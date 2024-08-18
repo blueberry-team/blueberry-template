@@ -1,5 +1,6 @@
 // 게시물 화면!
 //
+import 'package:blueberry_flutter_template/feature/ProfilePicVerificationScreen.dart';
 import 'package:blueberry_flutter_template/feature/friend/FriendsListScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/feature/post/widget/PostListViewWidget.dart';
@@ -82,6 +83,12 @@ CustomFab _buildCustomFAB(BuildContext context) {
         label: 'Settings',
         onPressed: () => context.goNamed(SettingScreen.name),
         color: Colors.red,
+      ),
+      FabButton(
+        icon: Icons.pets,
+        label: 'ProfilePic',
+        onPressed: () => context.goNamed(ProfilePicVerificationScreen.name),
+        color: Colors.purple,
       ),
     ],
   );
