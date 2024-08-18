@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebPaymentWidget extends ConsumerStatefulWidget {
-  static const String name = 'WebPaymentWidget';
   const WebPaymentWidget({super.key});
 
   @override
