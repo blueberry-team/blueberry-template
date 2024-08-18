@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../utils/AppStrings.dart';
 import '../ProfileScreen.dart';
-import '../provider/MatchScreenProvider.dart';
+import '../provider/MatchProvider.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 

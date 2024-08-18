@@ -11,7 +11,7 @@ class AppStrings {
   static const String locationHawaii = 'Hawaii';
   static const String locationJapan = 'Japan';
 
-  //MatchScreenProvider.dart
+  //MatchProvider.dart
   static const String docNotExistError = 'DB 업데이트 실패: 문서가 존재하지 않습니다.';
   static const String dbUpdateSuccess = "DB 업데이트 성공";
   static const String dbUpdateFail = "DB 업데이트 실패 : 이미 존재하는 petId";

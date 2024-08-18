@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils/AppStrings.dart';
 import 'FilterMenuWidget.dart';
-import '../provider/MatchScreenProvider.dart';
+import '../provider/MatchProvider.dart';
 
 enum Location { seoul, la, hawaii, japan }
 
