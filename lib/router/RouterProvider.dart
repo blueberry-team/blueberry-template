@@ -104,7 +104,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/calendar',
         name: CalendarScreen.name,
-        builder: (context, state) => const CalendarScreen(),
+        builder: (context, state) => CalendarScreen(),
       ),
       GoRoute(
         path: '/setting',

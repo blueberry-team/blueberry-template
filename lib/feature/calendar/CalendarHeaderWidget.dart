@@ -3,8 +3,8 @@ part of 'CalendarScreen.dart';
 class CalendarHeaderWidget extends StatelessWidget {
   final int selectYear;
   final int selectMonth;
-  final VoidCallback setYear;
-  final VoidCallback setMonth;
+  final Function(int) setYear;
+  final Function(int) setMonth;
 
   const CalendarHeaderWidget(
       {super.key,
@@ -50,9 +50,13 @@ class CalendarHeaderWidget extends StatelessWidget {
   }
 
   Widget _changeMonth(
-      {required bool addMonth, required VoidCallback changeMonth}) {
+      {required bool addMonth, required Function(int) changeMonth}) {
     return GestureDetector(
-        onTap: () => changeMonth,
+        onTap: () {
+          addMonth
+              ? changeMonth(selectMonth + 1)
+              : changeMonth(selectMonth - 1);
+        },
         child: Padding(
           padding: EdgeInsets.all(10.w),
           child: SvgPicture.asset(
@@ -62,7 +66,7 @@ class CalendarHeaderWidget extends StatelessWidget {
         ));
   }
 
-  Widget _changeDate({required int date, required VoidCallback changeDate}) {
+  Widget _changeDate({required int date, required Function(int) changeDate}) {
     const color = Color(0xFF000000);
     final textStyle = TextStyle(
       fontSize: 16.sp,
