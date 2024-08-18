@@ -6,7 +6,6 @@ import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.da
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
-import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:blueberry_flutter_template/feature/user/RestoreDeletedUserScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
@@ -149,7 +148,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           )
         ],
       ),
-
     ],
   );
 });
