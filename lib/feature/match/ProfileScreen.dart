@@ -1,11 +1,9 @@
-import 'package:blueberry_flutter_template/feature/match/provider/MatchProvider.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/ImageBlurEffect.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/MatchFilterOptionWidget.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/PetBackgroundImage.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/ProfileInfoRowWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../model/PetProfileModel.dart';
+import 'package:blueberry_flutter_template/model/PetProfileModel.dart';
 import '../../utils/AppStrings.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,35 +14,31 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer(
-        builder: (context, ref, _) {
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              PetBackgroundImage(
-                imageUrl: petProfile.imageUrl,
-                petId: petProfile.petID,
-              ),
-              const ImageBlurEffect(),
-              SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildTopBar(context, ref),
-                    const Spacer(),
-                    _buildProfileInfoCard(),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          PetBackgroundImage(
+            imageUrl: petProfile.imageUrl,
+            petId: petProfile.petID,
+          ),
+          const ImageBlurEffect(),
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTopBar(context),
+                const Spacer(),
+                _buildProfileInfoCard(),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildTopBar(BuildContext context, WidgetRef ref) {
+  Widget _buildTopBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -54,14 +48,7 @@ class ProfileScreen extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          MatchFilterOptionWidget(
-            onOptionSelected: (String result) {
-              if (result == 'ignore') {
-                ref.read(matchScreenProvider.notifier).handleIgnoreProfile(
-                    context: context, petProfile: petProfile);
-              }
-            },
-          ),
+          MatchFilterOptionWidget(petProfile: petProfile),
         ],
       ),
     );
