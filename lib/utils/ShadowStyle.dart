@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CameraShadow extends CustomPainter {
+class ShadowStyle extends CustomPainter {
   final double radius;
 
-  CameraShadow({required this.radius});
+  ShadowStyle({required this.radius});
 
   @override
   void paint(Canvas canvas, Size size) {

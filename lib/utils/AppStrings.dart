@@ -45,6 +45,8 @@ class AppStrings {
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
+  static const String emailTextWidgetError = '이메일 정보를 가져오지 못했습니다.';
+  static const String dateTextWidgetError = '날짜 정보를 가져오지 못했습니다.';
 
   //MyPageScreen.dart
   static const String myPageTitle = '내 페이지';
@@ -61,6 +63,12 @@ class AppStrings {
   static const String takeProfilePhoto = 'Take a profile photo';
   static const String setBackCamera = '후면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
   static const String setFrontCamera = '전면 카메라를 불러오는 중 입니다. 잠시만 기다려 주세요';
+  static const String takePhotoDirectly = '직접 촬영 하기';
+  static const String chooseFromGallery = '앨범에서 선택하기';
+
+  //Save Photo
+  static const String savePhoto = '이미지 저장 하기';
+  static const String previewProfilePhoto = '프로필 사진 미리보기';
 
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
@@ -84,6 +92,10 @@ class AppStrings {
   static const String checkVerifyCode = '인증하기';
   static const String checkDuplicateEmail = '중복확인';
   static const String requiredYourEmail = '이메일 인증을 위해 사용 중인 이메일을 입력해주세요.';
+  static const String usingEmailLogin = '이메일 로그인을 사용 중 입니다.';
+  static const String usingGithubLogin = 'github 로그인을 사용 중 입니다.';
+  static const String usingGoogleLogin = 'google 로그인을 사용 중 입니다.';
+  static const String usingAppleLogin = 'apple 로그인을 사용 중 입니다.';
 
   //MBTIScreen.dart
   static const String titleMBTI = 'MBTI';
@@ -191,13 +203,17 @@ class AppStrings {
   static const String appbar_Text_Logo = 'Petting';
   static final List<String> date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+  // Location Service
+  static const String errorMessage_sendFailed = '문자 발송 실패';
+  static const String button_openConfigMenu = '설정 열기';
+  static const String button_sendMessage = '112 문자보내기';
+  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
+
+  //Permission Error
+  static const String errorMessage_permissionGallery = '앨범 접근 권한을 허용 해주세요';
   static const String errorMessage_locationPermissionForeverDenied =
       '위치 권한이 거부되었습니다. 설정에서 권한을 허용해주세요.';
   static const String errorMessage_locationPermissionDisabled =
       '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
   static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
-  static const String errorMessage_sendFailed = '문자 발송 실패';
-  static const String button_openConfigMenu = '설정 열기';
-  static const String button_sendMessage = '112 문자보내기';
-  static const String errorMessage_unknownError = '알 수 없는 오류가 발생했습니다.';
 }
