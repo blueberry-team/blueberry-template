@@ -119,43 +119,43 @@ final routerProvider = Provider<GoRouter>((ref) {
             ResponsiveLayoutBuilder(context, const AdminScreen()),
         routes: [
           GoRoute(
-            path: 'userlist',
+            path: '/userlist',
             name: AdminUserListPage.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminUserListPage()),
           ),
           GoRoute(
-            path: 'userdetail',
+            path: '/userdetail',
             name: AdminUserDetailPage.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminUserDetailPage()),
           ),
           GoRoute(
-            path: 'loading',
+            path: '/loading',
             name: AdminLoadingPage.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const AdminLoadingPage()),
           ),
           GoRoute(
-            path: 'profiledetail',
+            path: '/profiledetail',
             name: ProfileDetailScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const ProfileDetailScreen()),
           ),
           GoRoute(
-            path: 'profilecamera',
+            path: '/profilecamera',
             name: CameraScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const CameraScreen()),
           ),
           GoRoute(
-            path: 'profilecameragallery',
+            path: '/profilecameragallery',
             name: CameraGalleryScreen.name,
             builder: (context, state) =>
                 ResponsiveLayoutBuilder(context, const CameraGalleryScreen()),
           ),
           GoRoute(
-            path: 'restoredeleteduser',
+            path: '/restoredeleteduser',
             name: RestoreDeletedUserScreen.name,
             builder: (context, state) => ResponsiveLayoutBuilder(
                 context, const RestoreDeletedUserScreen()),
