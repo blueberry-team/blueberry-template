@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../model/PetProfileModel.dart';
 import '../../../utils/AppStrings.dart';
+import '../provider/MatchProvider.dart';
 
-class OptionMenuWidget extends StatelessWidget {
-  final Function(String) onOptionSelected;
+class MatchFilterOptionWidget extends ConsumerWidget {
+  final PetProfileModel petProfile;
 
-  const OptionMenuWidget({super.key, required this.onOptionSelected});
+  const MatchFilterOptionWidget({super.key, required this.petProfile});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return PopupMenuButton<String>(
       icon: const Icon(Icons.more_vert, color: Colors.white),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      onSelected: onOptionSelected,
+      onSelected: (String result) {
+        if (result == 'ignore') {
+          ref
+              .read(matchScreenProvider.notifier)
+              .handleIgnoreProfile(context: context, petProfile: petProfile);
+        }
+      },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
           value: 'ignore',
@@ -20,7 +28,7 @@ class OptionMenuWidget extends StatelessWidget {
             children: [
               Icon(Icons.block, color: Colors.red[400], size: 14),
               const SizedBox(width: 8),
-              Text(AppStrings.ignoreProfile,
+              Text(AppStrings.ignoreThisPet,
                   style: TextStyle(color: Colors.red[400])),
             ],
           ),

@@ -1,11 +1,12 @@
 import 'package:blueberry_flutter_template/model/PetProfileModel.dart';
+import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../utils/AppStrings.dart';
-import '../provider/MatchScreenProvider.dart';
 import '../ProfileScreen.dart';
+import '../provider/MatchProvider.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 
@@ -15,7 +16,8 @@ class MatchProfileListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(matchScreenProvider);
-    // 스와이퍼 numberOfCardsDisplayed 설정으로 인해 데이터가 1일 떄도 에러 메세지 출력
+
+    // 스와이퍼 numberOfCardsDisplayed 설정으로 인해 데이터가 1일 때도 에러 메시지 출력
     return list.isEmpty || list.length == 1
         ? const Center(child: Text(AppStrings.noPetsMessage))
         : _buildCardView(context, ref, list);
@@ -33,7 +35,7 @@ class MatchProfileListWidget extends ConsumerWidget {
           child: CardSwiper(
             controller: cardSwiperController,
             cardsCount: cards.length,
-            numberOfCardsDisplayed: 2, // 한 번에 보여지는 최소 카드 설정(1로 설정시 디자인적으로 좋지 않음)
+            numberOfCardsDisplayed: 2,
             onSwipe: (previousIndex, newIndex, direction) {
               currentIndex = newIndex ?? currentIndex;
 
@@ -70,24 +72,31 @@ class MatchProfileListWidget extends ConsumerWidget {
                 color: Colors.greenAccent,
               ),
               const SizedBox(width: 30),
-              // 좋아요 버튼
+              // 즐겨찾기(super like) 버튼
               SwipeButtonWidget(
                 onPressed: () async {
                   const userId = "eztqDqrvEXDc8nqnnrB8";
                   final petId = data[currentIndex].petID;
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToIgnored(userId, petId);
+                      .addPetToSuperLikes(userId, petId);
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.star,
                 color: Colors.blueAccent,
               ),
               const SizedBox(width: 30),
-              // 좋아요 버튼
+              // 좋아요(like) 버튼
               SwipeButtonWidget(
-                onPressed: () =>
-                    cardSwiperController.swipe(CardSwiperDirection.right),
+                onPressed: () async {
+                  const userId = "eztqDqrvEXDc8nqnnrB8";
+                  final petId = data[currentIndex].petID;
+                  talker.info("match profile widget petId: $petId");
+                  await ref
+                      .read(matchScreenProvider.notifier)
+                      .addPetToLikes(userId, petId);
+                  cardSwiperController.swipe(CardSwiperDirection.right);
+                },
                 icon: Icons.favorite,
                 color: Colors.redAccent,
               ),

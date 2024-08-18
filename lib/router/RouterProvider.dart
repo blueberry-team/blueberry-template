@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
 import '../feature/camera/SettingInsideAccountManagerWidget.dart';
-import '../feature/friend/FriendsListScreen.dart';
+import '../feature/friendsList/FriendsListScreen.dart';
 import '../feature/match/MatchScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
 import '../feature/post/PostScreen.dart';
