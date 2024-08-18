@@ -191,4 +191,7 @@ class AppStrings {
   static const String errorMessage_locationPermissionDisabled =
       '위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 활성화해주세요.';
   static const String errorMessage_locationPermissionDenied = '위치 권한이 필요합니다.';
+
+  ///*[CalendarScreen]
+  static const String calendarScreenTitle = '캘린더';
 }

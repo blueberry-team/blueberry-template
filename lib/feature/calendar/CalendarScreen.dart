@@ -9,22 +9,33 @@ part 'CalendarHeaderWidget.dart';
 
 part 'CalendarBodyWidget.dart';
 
-class CalendarScreen extends StatelessWidget {
+class CalendarScreen extends StatefulWidget {
+  static const String name = 'CalendarScreen';
+
   const CalendarScreen({super.key});
 
   @override
+  State<CalendarScreen> createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //TODO: 하드 코딩 변경
-        CalendarHeaderWidget(
-          selectYear: DateTime.now().year,
-          selectMonth: DateTime.now().month,
-          setYear: () {},
-          setMonth: () {},
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            //TODO: 하드 코딩 변경
+            CalendarHeaderWidget(
+              selectYear: DateTime.now().year,
+              selectMonth: DateTime.now().month,
+              setYear: () {},
+              setMonth: () {},
+            ),
+            CalendarBodyWidget(),
+          ],
         ),
-        CalendarBodyWidget(),
-      ],
+      ),
     );
   }
 }

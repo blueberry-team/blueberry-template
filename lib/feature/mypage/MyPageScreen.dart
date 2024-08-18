@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:blueberry_flutter_template/core/widget/SocialCompanyText.dart';
+import 'package:blueberry_flutter_template/feature/calendar/CalendarScreen.dart';
 import 'package:blueberry_flutter_template/feature/mypage/provider/ProfileImageProvider.dart';
 import 'package:blueberry_flutter_template/services/FirebaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,7 @@ import '../setting/SettingScreen.dart';
 
 class MyPageScreen extends ConsumerWidget {
   static const String name = 'MyPageScreen';
+
   const MyPageScreen({super.key});
 
   @override
@@ -31,8 +33,8 @@ class MyPageScreen extends ConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -108,6 +110,19 @@ class MyPageScreen extends ConsumerWidget {
             ),
             const CustomDividerWidget(),
             GestureDetector(
+              onTap: () {
+                context.goNamed(CalendarScreen.name);
+              },
+              child: const ListTile(
+                leading: Icon(Icons.date_range_rounded),
+                title: Text(
+                  AppStrings.calendarScreenTitle,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            const CustomDividerWidget(),
+            GestureDetector(
               onTap: () {},
               child: const ListTile(
                 leading: Icon(Icons.chat_bubble_outline),
@@ -133,7 +148,6 @@ class MyPageScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const CustomDividerWidget(),
 
             //Logout button
             GestureDetector(

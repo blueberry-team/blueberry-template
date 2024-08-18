@@ -1,7 +1,7 @@
 part of 'CalendarScreen.dart';
 
 class CalendarBodyWidget extends StatefulWidget {
-  CalendarBodyWidget({super.key});
+  const CalendarBodyWidget({super.key});
 
   @override
   State<CalendarBodyWidget> createState() => _CalendarBodyWidgetState();

@@ -16,7 +16,10 @@ class CalendarHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 14.w,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -25,7 +28,7 @@ class CalendarHeaderWidget extends StatelessWidget {
           ),
           //TODO: 하드코딩 변경
           Expanded(
-            child: Row(children: [
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               _changeDate(
                 date: selectMonth,
                 changeDate: setMonth,
@@ -52,7 +55,7 @@ class CalendarHeaderWidget extends StatelessWidget {
       //fontFamily: 'Urbanist',
     );
     return GestureDetector(
-      onTap: changeDate,
+      onTap: () => changeDate,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(children: [
