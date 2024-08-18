@@ -29,19 +29,11 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     }
 
     try {
+      // 모든 펫 정보를 가져오기
       final snapshot = await firestore.collection('pet').get();
-      final pets = snapshot.docs.map((doc) {
-        final data = doc.data();
-
-        // 필드가 누락되었을 가능성을 검사하고 로깅
-        if (data['petID'] == null ||
-            data['name'] == null ||
-            data['location'] == null) {
-          talker.error("Missing required fields in pet data: $data");
-        }
-
-        return PetProfileModel.fromJson(data);
-      }).toList();
+      final pets = snapshot.docs
+          .map((doc) => PetProfileModel.fromJson(doc.data()))
+          .toList();
 
       // 매칭 조건 필터 적용
       List<PetProfileModel> filteredPets = pets.where((pet) {
