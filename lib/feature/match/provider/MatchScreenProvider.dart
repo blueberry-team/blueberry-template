@@ -98,39 +98,34 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
   Future<void> addPetToIgnored(String userId, String petId) async {
     await _updatePetList(userId, petId, 'ignoredPets');
-    loadPets(); // 무시한 후에는 다시 데이터를 로드
+    loadPets(); // 무시한 펫이 카드에 안나오도록 데이터를 리로드
   }
 
   Future<void> _checkForMatch(String userId, String petId) async {
-    talker.info("checkFroMatch fonc : $userId, $petId");
+    // 하트를 누른 펫의 petOwnerId 가져오기
     final firestore = FirebaseFirestore.instance;
-    // 상대방의 petOwnerId를 가져옴
     final petDoc = await firestore.collection('pet').doc(petId).get();
     final petOwnerId = petDoc.data()!['ownerUserID'];
-    talker.info("petOwnerId: $petOwnerId");
 
-    // 상대방이 좋아요한 펫 목록을 가져옴
+    // 상대방의 likedPets 목록 가져오기
     final userDoc = await firestore.collection('users_test').doc(petOwnerId).get();
     List<dynamic> likedPetsByOwner = userDoc.data()!['likedPets'] ?? [];
-    talker.info("likedPetsByOwner: $likedPetsByOwner");
 
-    // 내 펫 가져오기 (로그인 가능해진 후에는 내 펫 정보를 가져오는 방법을 변경해야 함)
+    // 내 Pets 목록 가져오기 (로그인 가능해진 후에는 내 펫 정보를 가져오는 방법을 변경해야 함)
     final myUserDoc = await firestore.collection('users_test').doc(userId).get();
     List<dynamic> myPets = myUserDoc.data()!['pets'] ?? [];
-    talker.info("myPets: $myPets");
 
-    // likedPetsByOwner 에 내 petID가 있을 경우 서로 좋아요한 것으로 간주 (코드 정리 필요)
+    // likedPetsByOwner 에 내 petID 가 있을 경우 서로 좋아요한 것으로 간주하여 friends 서브 컬렉션 서로의 정보를 등록
     if (likedPetsByOwner.contains(myPets[0])) {
-      talker.info("Match found between $likedPetsByOwner and $myPets[0]");
-      await _addFriend(userId, petOwnerId);
-      await _addFriend(petOwnerId, userId);
+      talker.info("Match found between $likedPetsByOwner and $myPets");
+      await _addFriend(userId, petOwnerId); // 내 친구 목록에 상대방을 친구로 추가
+      await _addFriend(petOwnerId, userId); // 상대방 친구 목록에 나를 친구로 추가
     } else {
-      talker.info("No match found between $likedPetsByOwner and $myPets[0]");
+      talker.info("No match found between $likedPetsByOwner and $myPets");
     }
   }
 
   Future<void> _addFriend(String userId, String friendId) async {
-    talker.info("addFriend fonc : $userId, $friendId");
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
 
