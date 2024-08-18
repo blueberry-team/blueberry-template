@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class SwipeButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData icon;
+  final Color color;
 
   const SwipeButtonWidget({
     super.key,
     required this.onPressed,
     required this.icon,
+    this.color = Colors.white,
   });
 
   @override
@@ -19,6 +21,7 @@ class SwipeButtonWidget extends StatelessWidget {
     return FloatingActionButton(
       heroTag: UniqueKey(),
       onPressed: onPressed,
+      backgroundColor: color,
       child: Icon(icon),
       // 여기에 커스텀 스타일 추가
     );
