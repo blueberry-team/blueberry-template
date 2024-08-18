@@ -4,7 +4,6 @@ import 'package:blueberry_flutter_template/feature/match/MatchScreen.dart';
 import 'package:blueberry_flutter_template/feature/post/PostScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../utils/AppStringEnglish.dart';
 
@@ -16,7 +15,6 @@ import '../utils/AppStringEnglish.dart';
 /// @jwson-automation
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
-
 
 final List<Widget> pages = [
   const PostScreen(),
@@ -64,7 +62,7 @@ class TopScreen extends ConsumerWidget {
         ],
         currentIndex: selectedIndex,
         onTap: (index) =>
-        ref.read(selectedIndexProvider.notifier).state = index,
+            ref.read(selectedIndexProvider.notifier).state = index,
       ),
     );
   }

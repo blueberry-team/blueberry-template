@@ -6,7 +6,6 @@ import 'package:blueberry_flutter_template/feature/camera/CameraGalleryScreen.da
 import 'package:blueberry_flutter_template/feature/camera/CameraScreen.dart';
 import 'package:blueberry_flutter_template/feature/chat/ChatScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTITestScreen.dart';
-import 'package:blueberry_flutter_template/feature/payment/widget/WebPaymentWidget.dart';
 import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:blueberry_flutter_template/feature/user/RestoreDeletedUserScreen.dart';
 import 'package:blueberry_flutter_template/utils/Talker.dart';
@@ -17,7 +16,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 import '../core/SplashScreen.dart';
 import '../core/TopScreen.dart';
-import '../feature/friend/FriendsListScreen.dart';
+import '../feature/friendsList/FriendsListScreen.dart';
 import '../feature/match/MatchScreen.dart';
 import '../feature/mypage/MyPageScreen.dart';
 import '../feature/post/PostScreen.dart';
@@ -25,7 +24,7 @@ import '../feature/profile/ProfileDetailScreen.dart';
 import '../feature/rank/RankScreen.dart';
 import '../feature/signup/SignUpScreen.dart';
 import '../utils/ResponsiveLayoutBuilder.dart';
-
+import '../feature/voiceoutput/VoiceOutputScreen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -141,6 +140,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               path: 'match',
               name: MatchScreen.name,
               builder: (context, state) => const MatchScreen()),
+          GoRoute(
+            path: 'voiceoutput',
+            name: VoiceOutputScreen.name,
+            builder: (context, state) =>
+                ResponsiveLayoutBuilder(context, const VoiceOutputScreen()),
+          )
         ],
       ),
     ],

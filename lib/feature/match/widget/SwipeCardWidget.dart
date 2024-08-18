@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/DogProfileModel.dart';
+import '../../../model/PetProfileModel.dart';
 import '../../../utils/AppColors.dart';
 import '../../../utils/AppTextStyle.dart';
 
 /// SwipeCardWidget - 프로필 카드를 스와이프할 수 있는 위젯
 
 class SwipeCardWidget extends StatelessWidget {
-  final DogProfileModel dogProfiles;
+  final PetProfileModel petProfiles;
 
   const SwipeCardWidget(
-    this.dogProfiles, {
+    this.petProfiles, {
     super.key,
   });
 
@@ -28,7 +28,7 @@ class SwipeCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: NetworkImage(dogProfiles.imageUrl),
+            image: NetworkImage(petProfiles.imageUrl),
             fit: BoxFit.cover,
           ),
         ),
@@ -51,19 +51,19 @@ class SwipeCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      dogProfiles.name,
+                      petProfiles.name,
                       style: white24BoldTextStyle,
                     ),
                     SizedBox(width: width * 0.02),
                     Text(
-                      '${dogProfiles.gender} • ${dogProfiles.breed} • ${dogProfiles.location}',
+                      '${petProfiles.gender} • ${petProfiles.breed} • ${petProfiles.location}',
                       style: white16TextStyle,
                     ),
                   ],
                 ),
                 SizedBox(height: height * 0.005),
                 Text(
-                  dogProfiles.bio,
+                  petProfiles.bio,
                   style: white16TextStyle,
                 ),
               ],

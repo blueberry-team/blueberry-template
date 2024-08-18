@@ -1,7 +1,35 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
-  //ReportModalSheet.dart
+  //MatchFilterWidget.dart
+  static const String filterTitle = '어떤 친구를 만날까요?';
+  static const String filterSubmitButtonText = '만나기';
+  static const String petGenderMale = '수컷';
+  static const String petGenderFemale = '암컷';
+  static const String locationSeoul = 'Seoul';
+  static const String locationLA = 'LA';
+  static const String locationHawaii = 'Hawaii';
+  static const String locationJapan = 'Japan';
+
+  //MatchProvider.dart
+  static const String docNotExistError = 'DB 업데이트 실패: 문서가 존재하지 않습니다.';
+  static const String dbUpdateSuccess = "DB 업데이트 성공";
+  static const String dbUpdateFail = "DB 업데이트 실패 : 이미 존재하는 petId";
+  static const String dbUpdateError = 'DB 업데이트 중 오류 발생: ';
+  static const String dbLoadError = '펫 데이터를 로드하는 중 오류 발생: ';
+  static const String noFilteredResult = '필터링된 결과가 없습니다';
+
+  // MatchProfileListWidget.dart
+  static const String noPetsMessage = '추천할 펫이 1마리이거나 없습니다.';
+
+  //ProfileScreen.dart
+  static const String petGender = '성별';
+  static const String petBreed = '종';
+  static const String petLocation = '지역';
+  static const String petBio = '소개';
+  static const String ignoreThisPet = '해당 펫을 추천 안함';
+
+  //UserReportBottomSheetWidget.dart
   static const String reportReasonSpamAccount = '광고용 계정';
   static const String reportReasonFakeAccount = '가짜로 의심되는 계정';
   static const String reportReasonInappropriateNamePhoto = '이름&사진이 부적절';
@@ -45,9 +73,6 @@ class AppStrings {
   //ChatPage.dart
   static const String lessonChatScreenTitle = '채팅';
   static const String chatRoomScreenTitle = '채팅방 목록';
-
-  //MatchScreen.dart
-  static const String matchScreenTitle = '매칭';
 
   //ShoppingPageSample.dart
   static const String shoppingPageTitle = '쇼핑 페이지';

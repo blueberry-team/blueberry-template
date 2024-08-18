@@ -1,6 +1,5 @@
 // 게시물 화면!
 //
-import 'package:blueberry_flutter_template/feature/friend/FriendsListScreen.dart';
 import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/feature/post/widget/PostListViewWidget.dart';
 import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
@@ -12,6 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/widget/CustomFab.dart';
 import '../chat/ChatRoomScreen.dart';
+import '../friendsList/FriendsListScreen.dart';
 import 'PostingScreen.dart';
 
 class PostScreen extends StatelessWidget {

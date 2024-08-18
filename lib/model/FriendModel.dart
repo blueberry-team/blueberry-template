@@ -6,7 +6,6 @@ part 'generated/FriendModel.g.dart';
 @freezed
 class FriendModel with _$FriendModel {
   const factory FriendModel({
-    required String userId,
     required String friendId,
     required String name,
     required String status,

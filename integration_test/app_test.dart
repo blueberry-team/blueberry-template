@@ -1,5 +1,5 @@
 import 'package:blueberry_flutter_template/firebase_options.dart';
-import 'package:blueberry_flutter_template/model/DogProfileModel.dart';
+import 'package:blueberry_flutter_template/model/PetProfileModel.dart';
 import 'package:blueberry_flutter_template/model/PostModel.dart';
 import 'package:blueberry_flutter_template/model/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +22,7 @@ void main() {
 
     test('pet 컬렉션이 있을 때, 첫 번째 문서를 가져와 fromJson 메서드로 매핑하면, 오류 없이 매핑된다',
         () async {
-      DogProfileModel? fetchedData;
+      PetProfileModel? fetchedData;
 
       // Given: 컬렉션 이름 설정
       collectionName = 'pet';
@@ -33,7 +33,7 @@ void main() {
 
       if (querySnapshot.docs.isNotEmpty) {
         final data = querySnapshot.docs.first.data();
-        fetchedData = DogProfileModel.fromJson(data);
+        fetchedData = PetProfileModel.fromJson(data);
       } else {
         throw Exception('$collectionName 컬렉션 안에 다큐먼트가 존재하지 않습니다');
       }
