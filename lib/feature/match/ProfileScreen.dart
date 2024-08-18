@@ -1,4 +1,4 @@
-import 'package:blueberry_flutter_template/feature/match/provider/ProfileScreenProvider.dart';
+import 'package:blueberry_flutter_template/feature/match/provider/MatchProvider.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/ImageBlurEffect.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/MatchFilterOptionWidget.dart';
 import 'package:blueberry_flutter_template/feature/match/widget/PetBackgroundImage.dart';
@@ -57,9 +57,8 @@ class ProfileScreen extends StatelessWidget {
           MatchFilterOptionWidget(
             onOptionSelected: (String result) {
               if (result == 'ignore') {
-                ref
-                    .read(profileScreenProvider.notifier)
-                    .handleIgnoreProfile(context: context, petProfile: petProfile);
+                ref.read(matchScreenProvider.notifier).handleIgnoreProfile(
+                    context: context, petProfile: petProfile);
               }
             },
           ),

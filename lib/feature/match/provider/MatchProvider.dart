@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/PetProfileModel.dart';
@@ -33,7 +34,9 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
         final data = doc.data();
 
         // 필드가 누락되었을 가능성을 검사하고 로깅
-        if (data['petID'] == null || data['name'] == null || data['location'] == null) {
+        if (data['petID'] == null ||
+            data['name'] == null ||
+            data['location'] == null) {
           talker.error("Missing required fields in pet data: $data");
         }
 
@@ -108,11 +111,13 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     final petOwnerId = petDoc.data()!['ownerUserID'];
 
     // 상대방의 likedPets 목록 가져오기
-    final userDoc = await firestore.collection('users_test').doc(petOwnerId).get();
+    final userDoc =
+        await firestore.collection('users_test').doc(petOwnerId).get();
     List<dynamic> likedPetsByOwner = userDoc.data()!['likedPets'] ?? [];
 
     // 내 Pets 목록 가져오기 (로그인 가능해진 후에는 내 펫 정보를 가져오는 방법을 변경해야 함)
-    final myUserDoc = await firestore.collection('users_test').doc(userId).get();
+    final myUserDoc =
+        await firestore.collection('users_test').doc(userId).get();
     List<dynamic> myPets = myUserDoc.data()!['pets'] ?? [];
 
     // likedPetsByOwner 에 내 petID 가 있을 경우 서로 좋아요한 것으로 간주하여 friends 서브 컬렉션 서로의 정보를 등록
@@ -139,9 +144,20 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
       talker.error("Error adding friend: $e");
     }
   }
+
+  // 해당 유저를 추천 안함 기능 (ProfileScreen 에서 호출)
+  Future<void> handleIgnoreProfile({
+    required BuildContext context,
+    required PetProfileModel petProfile,
+  }) async {
+    await addPetToIgnored(userId, petProfile.petID);
+    if (context.mounted) {
+      Navigator.of(context).pop(); // 프로필 화면 닫기
+    }
+  }
 }
 
 final matchScreenProvider =
-StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
-      (ref) => MatchScreenNotifier(),
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+  (ref) => MatchScreenNotifier(),
 );
