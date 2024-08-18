@@ -1,19 +1,19 @@
 import 'dart:io';
+import 'package:blueberry_flutter_template/feature/camera/ProfilePreviewScreen.dart';
+import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'MyPageProfileImagePreview.dart';
-
-class ProfileGalleryPage extends ConsumerStatefulWidget {
-  const ProfileGalleryPage({super.key});
+class CameraGalleryScreen extends StatefulWidget {
+  static const String name = 'CameraGalleryScreen';
+  const CameraGalleryScreen({super.key});
 
   @override
-  _ImageGalleryState createState() => _ImageGalleryState();
+  State<CameraGalleryScreen> createState() => _CameraGalleryPage();
 }
 
-class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
+class _CameraGalleryPage extends State<CameraGalleryScreen> {
   final List<AssetEntity> _imageList = [];
 
   int _currentPage = 0;
@@ -49,7 +49,7 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
       });
     } else {
       SnackBar snackBar = SnackBar(
-        content: const Text("앨범 접근 권한을 허용 해주세요"),
+        content: const Text(AppStrings.errorMessage_permissionGallery),
         action: SnackBarAction(
           label: 'OK',
           onPressed: () {
@@ -63,7 +63,7 @@ class _ImageGalleryState extends ConsumerState<ProfileGalleryPage> {
 
   void _navigateToSharePostScreen(File imageFile) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SharePostScreen(imageFile),
+      builder: (context) => ProfilePreviewScreen(imageFile),
     ));
   }
 

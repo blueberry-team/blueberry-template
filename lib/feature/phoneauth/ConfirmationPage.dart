@@ -64,6 +64,8 @@ class ConfirmationPage extends ConsumerWidget {
                 // 오류 뱉어내는거 하나 만들어야함 ex ) ID or Password 형식에 문제가 있다라고 쏴야할듯 ?
                 await firebaseService.upDateUserDB(email, name);
                 FirebaseAnalytics.instance.logSignUp(signUpMethod: 'email');
+                ref.invalidate(emailProvider);
+                ref.invalidate(passwordConfirmProvider);
                 if (context.mounted) {
                   context.goNamed(TopScreen.name);
                 }
