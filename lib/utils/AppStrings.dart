@@ -21,6 +21,7 @@ class AppStrings {
   static const String dbUpdateSuccessMessage = '좋아요 목록에 추가 했어요. 상대방도 좋아요를 누르면 매칭이 성립돼요.';
   static const String dbUpdateSuperLikesMessage = '즐겨찾기 목록에 추가 했어요. 언제든지 볼 수 있어요.';
   static const String dbUpdateIgnoredMessage = '이제 다시 매칭 되지 않아요.';
+  static const String dbUpdateFailMessage = '이미 추가된 펫이에요.';
 
   // MatchProfileListWidget.dart
   static const String noPetsMessage = '추천할 펫이 1마리이거나 없습니다.';

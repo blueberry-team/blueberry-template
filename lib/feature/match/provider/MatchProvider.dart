@@ -57,7 +57,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   Future<void> _updatePetList(
-      BuildContext context, String userId, String petId, String fieldName, String snackbarMessage) async {
+      BuildContext context, String userId, String petId, String fieldName, String successMessage, String failMessage) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
 
@@ -71,9 +71,15 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
           fieldName: petList,
         });
         talker.info("${AppStrings.dbUpdateSuccess}: $petList");
-        _showSnackbar(context, snackbarMessage);
+
+        if (context.mounted) {
+          _showSnackbar(context, successMessage);
+        }
       } else {
         talker.info(AppStrings.dbUpdateFail);
+        if (context.mounted) {
+          _showSnackbar(context, failMessage);
+        }
       }
     } catch (e) {
       talker.error('${AppStrings.dbUpdateError}$e');
@@ -81,17 +87,18 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   Future<void> addPetToLikes(BuildContext context, String userId, String petId) async {
-    await _updatePetList(context, userId, petId, 'likedPets', AppStrings.dbUpdateSuccessMessage);
+    await _updatePetList(context, userId, petId, 'likedPets', AppStrings.dbUpdateSuccessMessage, AppStrings.dbUpdateFailMessage);
   }
 
   Future<void> addPetToSuperLikes(BuildContext context, String userId, String petId) async {
-    await _updatePetList(context, userId, petId, 'superLikedPets', AppStrings.dbUpdateSuperLikesMessage);
+    await _updatePetList(context, userId, petId, 'superLikedPets', AppStrings.dbUpdateSuperLikesMessage, AppStrings.dbUpdateFailMessage);
   }
 
   Future<void> addPetToIgnored(BuildContext context, String userId, String petId) async {
-    await _updatePetList(context, userId, petId, 'ignoredPets',  AppStrings.dbUpdateIgnoredMessage);
+    await _updatePetList(context, userId, petId, 'ignoredPets', AppStrings.dbUpdateIgnoredMessage, AppStrings.dbUpdateFailMessage);
     loadPets();
   }
+
 
   Future<void> _checkForMatch(String userId, String petId) async {
     // 하트를 누른 펫의 petOwnerId 가져오기
