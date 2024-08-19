@@ -66,8 +66,7 @@ class MatchProfileListWidget extends ConsumerWidget {
             children: [
               // 패스 버튼
               SwipeButtonWidget(
-                onPressed: () =>
-                    cardSwiperController.swipe(CardSwiperDirection.left),
+                onPressed: () => cardSwiperController.swipe(CardSwiperDirection.left),
                 icon: Icons.close,
                 color: Colors.greenAccent,
               ),
@@ -79,14 +78,14 @@ class MatchProfileListWidget extends ConsumerWidget {
                   final petId = data[currentIndex].petID;
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToSuperLikes(userId, petId);
+                      .addPetToSuperLikes(context, userId, petId); // context 추가
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.star,
                 color: Colors.blueAccent,
               ),
               const SizedBox(width: 30),
-              // 좋아요(like) 버튼
+// 좋아요(like) 버튼
               SwipeButtonWidget(
                 onPressed: () async {
                   const userId = "eztqDqrvEXDc8nqnnrB8";
@@ -94,7 +93,7 @@ class MatchProfileListWidget extends ConsumerWidget {
                   talker.info("match profile widget petId: $petId");
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToLikes(userId, petId);
+                      .addPetToLikes(context, userId, petId); // context 추가
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.favorite,
@@ -104,6 +103,15 @@ class MatchProfileListWidget extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 }
