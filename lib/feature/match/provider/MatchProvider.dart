@@ -91,55 +91,71 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
   // 펫 좋아요 후 매칭 여부 확인
   Future<bool> _isMatchFound(String userId, String petId) async {
-    final firestore = FirebaseFirestore.instance;
-
-    // 하트를 누른 펫의 주인 ID 가져오기
-    final petDoc = await firestore.collection('pet').doc(petId).get();
-    final petOwnerId = petDoc.data()!['ownerUserID'];
-
-    // 상대방의 좋아요 목록 가져오기
-    final userDoc = await firestore.collection('users_test').doc(petOwnerId).get();
-    List<dynamic> likedPetsByOwner = userDoc.data()!['likedPets'] ?? [];
-
-    // 내 펫 목록 가져오기
-    final myUserDoc = await firestore.collection('users_test').doc(userId).get();
-    List<dynamic> myPets = myUserDoc.data()!['pets'] ?? [];
+    final petOwnerId = await _getPetOwnerId(petId);
+    final likedPetsByOwner = await _getLikedPets(petOwnerId);
+    final myPets = await _getMyPets(userId);
 
     // 매칭된 경우 반환
     return likedPetsByOwner.contains(myPets[0]);
   }
 
-  // 매칭 여부 확인 후 친구 추가 및 메세지 출력
+// 펫 소유자의 ID 가져오기
+  Future<String> _getPetOwnerId(String petId) async {
+    final firestore = FirebaseFirestore.instance;
+    final petDoc = await firestore.collection('pet').doc(petId).get();
+    return petDoc.data()!['ownerUserID'];
+  }
+
+// 특정 사용자의 좋아요 목록 가져오기
+  Future<List<dynamic>> _getLikedPets(String userId) async {
+    final firestore = FirebaseFirestore.instance;
+    final userDoc = await firestore.collection('users_test').doc(userId).get();
+    return userDoc.data()!['likedPets'] ?? [];
+  }
+
+// 특정 사용자의 펫 목록 가져오기
+  Future<List<dynamic>> _getMyPets(String userId) async {
+    final firestore = FirebaseFirestore.instance;
+    final userDoc = await firestore.collection('users_test').doc(userId).get();
+    return userDoc.data()!['pets'] ?? [];
+  }
+
+// 매칭 여부 확인 후 친구 추가 및 메세지 출력
   Future<void> _checkForMatchAndAddFriend(BuildContext context, String userId, String petId, String matchType) async {
     if (await _isMatchFound(userId, petId)) {
-      final firestore = FirebaseFirestore.instance;
-      final petDoc = await firestore.collection('pet').doc(petId).get();
-      final petOwnerId = petDoc.data()!['ownerUserID'];
-
-      await _addFriend(userId, petOwnerId); // 내 친구 목록에 상대방을 추가
-      await _addFriend(petOwnerId, userId); // 상대방 친구 목록에 나를 추가
-
-      // 매칭 성공 메세지 전달
-      if (context.mounted) {
-        if (matchType == 'like') {
-          _showSnackbar(context, AppStrings.matchSuccessMessageLike);
-        } else if (matchType == 'superlike') {
-          _showSnackbar(context, AppStrings.matchSuccessMessageSuperLike);
-        }
-      }
+      await _handleSuccessfulMatch(context, userId, petId, matchType);
     } else {
-      // 매칭 실패 메세지 전달
-      if (context.mounted) {
-        if (matchType == 'like') {
-          _showSnackbar(context, AppStrings.matchFailMessageLike);
-        } else if (matchType == 'superlike') {
-          _showSnackbar(context, AppStrings.matchFailMessageSuperLike);
-        }
-      }
+      _handleFailedMatch(context, matchType);
     }
   }
 
-  // 친구 추가 기능
+// 매칭 성공 시 처리
+  Future<void> _handleSuccessfulMatch(BuildContext context, String userId, String petId, String matchType) async {
+    final petOwnerId = await _getPetOwnerId(petId);
+
+    await _addFriend(userId, petOwnerId); // 내 친구 목록에 상대방을 추가
+    await _addFriend(petOwnerId, userId); // 상대방 친구 목록에 나를 추가
+
+    // 매칭 성공 메세지 전달
+    if (context.mounted) {
+      final message = (matchType == 'like')
+          ? AppStrings.matchSuccessMessageLike
+          : AppStrings.matchSuccessMessageSuperLike;
+      _showSnackbar(context, message);
+    }
+  }
+
+// 매칭 실패 시 처리
+  void _handleFailedMatch(BuildContext context, String matchType) {
+    if (context.mounted) {
+      final message = (matchType == 'like')
+          ? AppStrings.matchFailMessageLike
+          : AppStrings.matchFailMessageSuperLike;
+      _showSnackbar(context, message);
+    }
+  }
+
+// 친구 추가 기능
   Future<void> _addFriend(String userId, String friendId) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
@@ -149,7 +165,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     });
   }
 
-  // 안내메세지 출력
+// 안내 메세지 출력
   void _showSnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -158,6 +174,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
       ),
     );
   }
+
 
   // ProfileScreen 에서 호출하는 함수
   Future<void> handleIgnoreProfile({
