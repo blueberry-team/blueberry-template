@@ -70,15 +70,14 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
         await userDoc.update({
           fieldName: petList,
         });
-        talker.info("${AppStrings.dbUpdateSuccess}: $petList");
-
         if (context.mounted) {
           _showSnackbar(context, successMessage);
+          talker.info("${AppStrings.dbUpdateSuccess}: $petList");
         }
       } else {
-        talker.info(AppStrings.dbUpdateFail);
         if (context.mounted) {
           _showSnackbar(context, failMessage);
+          talker.info(AppStrings.dbUpdateFail);
         }
       }
     } catch (e) {
@@ -86,23 +85,29 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     }
   }
 
+  // 펫 좋아요 기능
   Future<void> addPetToLikes(BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'likedPets', AppStrings.dbUpdateSuccessMessage, AppStrings.dbUpdateFailMessage);
+    _checkForMatchAndAddFriend(userId, petId);
   }
 
+  // 펫 즐겨찾기 기능
   Future<void> addPetToSuperLikes(BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'superLikedPets', AppStrings.dbUpdateSuperLikesMessage, AppStrings.dbUpdateFailMessage);
+    _checkForMatchAndAddFriend(userId, petId);
   }
 
+  // 펫 추천 안함 기능
   Future<void> addPetToIgnored(BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'ignoredPets', AppStrings.dbUpdateIgnoredMessage, AppStrings.dbUpdateFailMessage);
     loadPets();
   }
 
-
-  Future<void> _checkForMatch(String userId, String petId) async {
-    // 하트를 누른 펫의 petOwnerId 가져오기
+  // 펫 좋아요 후 매칭 여부 확인
+  Future<bool> _isMatchFound(String userId, String petId) async {
     final firestore = FirebaseFirestore.instance;
+
+    // 하트를 누른 펫의 petOwnerId 가져오기
     final petDoc = await firestore.collection('pet').doc(petId).get();
     final petOwnerId = petDoc.data()!['ownerUserID'];
 
@@ -114,16 +119,29 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     final myUserDoc = await firestore.collection('users_test').doc(userId).get();
     List<dynamic> myPets = myUserDoc.data()!['pets'] ?? [];
 
-    // likedPetsByOwner 에 내 petID 가 있을 경우 서로 좋아요한 것으로 간주하여 friends 서브 컬렉션 서로의 정보를 등록
-    if (likedPetsByOwner.contains(myPets[0])) {
-      talker.info("Match found between $likedPetsByOwner and $myPets");
+    // likedPetsByOwner 에 내 petID 가 있을 경우 매칭된 것으로 간주
+    return likedPetsByOwner.contains(myPets[0]);
+  }
+
+  // 매칭 여부 확인 후 친구 추가
+  Future<void> _checkForMatchAndAddFriend(String userId, String petId) async {
+    if (await _isMatchFound(userId, petId)) {
+      talker.info(AppStrings.matchFound);
+      final firestore = FirebaseFirestore.instance;
+      final petDoc = await firestore.collection('pet').doc(petId).get();
+      final petOwnerId = petDoc.data()!['ownerUserID'];
+
       await _addFriend(userId, petOwnerId); // 내 친구 목록에 상대방을 친구로 추가
       await _addFriend(petOwnerId, userId); // 상대방 친구 목록에 나를 친구로 추가
+
+      //유저에게 snakcbar 로 알리는 코드
+
     } else {
-      talker.info("No match found between $likedPetsByOwner and $myPets");
+      talker.info(AppStrings.noMatch);
     }
   }
 
+  // 친구 추가
   Future<void> _addFriend(String userId, String friendId) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
@@ -133,12 +151,13 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
         'userId': friendId,
         'addedDate': Timestamp.now(),
       });
-      talker.info("Friend added between $userId and $friendId");
+      talker.info('${AppStrings.addedFriendSuccess}: $friendId $userId');
     } catch (e) {
-      talker.error("Error adding friend: $e");
+      talker.error('${AppStrings.addedFriendError}$e');
     }
   }
 
+  // 안내메세지 출력
   void _showSnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -148,7 +167,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     );
   }
 
-  // 해당 유저를 추천 안함 기능 (ProfileScreen 에서 호출)
+  // ProfileScreen 에서 호출하는 함수
   Future<void> handleIgnoreProfile({
     required BuildContext context,
     required PetProfileModel petProfile,
@@ -160,7 +179,6 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider =
-    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
   (ref) => MatchScreenNotifier(),
 );
