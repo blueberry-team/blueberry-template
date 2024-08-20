@@ -65,7 +65,8 @@ class MatchProfileListWidget extends ConsumerWidget {
             children: [
               // 패스 버튼
               SwipeButtonWidget(
-                onPressed: () => cardSwiperController.swipe(CardSwiperDirection.left),
+                onPressed: () =>
+                    cardSwiperController.swipe(CardSwiperDirection.left),
                 icon: Icons.close,
                 color: Colors.greenAccent,
               ),

@@ -45,7 +45,10 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
   // firestore에서 사용자가 ignore한 펫 데이터 가져오기
   Future<List<dynamic>> _getIgnoredPets() async {
-    final userDoc = await FirebaseFirestore.instance.collection('users_test').doc(userId).get();
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users_test')
+        .doc(userId)
+        .get();
     final data = userDoc.data();
 
     if (data != null && data.containsKey('ignoredPets')) {
@@ -58,11 +61,14 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   // firestore에서 모든 pet 데이터 가져오기
   Future<List<PetProfileModel>> _getPetsFromFirestore() async {
     final snapshot = await FirebaseFirestore.instance.collection('pet').get();
-    return snapshot.docs.map((doc) => PetProfileModel.fromJson(doc.data())).toList();
+    return snapshot.docs
+        .map((doc) => PetProfileModel.fromJson(doc.data()))
+        .toList();
   }
 
   // 조건에 따라 펫 데이터 필터링
-  bool _matchesFilter(PetProfileModel pet, List<dynamic> ignoredPets, String? location, String? gender) {
+  bool _matchesFilter(PetProfileModel pet, List<dynamic> ignoredPets,
+      String? location, String? gender) {
     final matchesLocation = location == null || pet.location == location;
     final matchesGender = gender == null || pet.gender == gender;
     final notIgnored = !ignoredPets.contains(pet.petID);
@@ -71,26 +77,30 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   // 펫 좋아요 기능
-  Future<void> addPetToLikes(BuildContext context, String userId, String petId) async {
+  Future<void> addPetToLikes(
+      BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'likedPets');
     _checkForMatchAndAddFriend(context, userId, petId, 'like');
   }
 
   // 펫 즐겨찾기 기능
-  Future<void> addPetToSuperLikes(BuildContext context, String userId, String petId) async {
+  Future<void> addPetToSuperLikes(
+      BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'superLikedPets');
     _checkForMatchAndAddFriend(context, userId, petId, 'superlike');
   }
 
   // 펫 추천 안함 기능
-  Future<void> addPetToIgnored(BuildContext context, String userId, String petId) async {
+  Future<void> addPetToIgnored(
+      BuildContext context, String userId, String petId) async {
     await _updatePetList(context, userId, petId, 'ignoredPets');
     loadPets();
     _showSnackbar(context, AppStrings.ignoreSuccessMessage);
   }
 
   // 특정 필드에 펫 ID 추가 기능
-  Future<void> _updatePetList(BuildContext context, String userId, String petId, String fieldName) async {
+  Future<void> _updatePetList(BuildContext context, String userId, String petId,
+      String fieldName) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
     final snapshot = await userDoc.get();
@@ -134,7 +144,8 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
 // 매칭 여부 확인 후 친구 추가 및 메세지 출력
-  Future<void> _checkForMatchAndAddFriend(BuildContext context, String userId, String petId, String matchType) async {
+  Future<void> _checkForMatchAndAddFriend(BuildContext context, String userId,
+      String petId, String matchType) async {
     if (await _isMatchFound(userId, petId)) {
       await _handleSuccessfulMatch(context, userId, petId, matchType);
     } else {
@@ -143,7 +154,8 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
 // 매칭 성공 시 처리
-  Future<void> _handleSuccessfulMatch(BuildContext context, String userId, String petId, String matchType) async {
+  Future<void> _handleSuccessfulMatch(BuildContext context, String userId,
+      String petId, String matchType) async {
     final petOwnerId = await _getPetOwnerId(petId);
 
     await _addFriend(userId, petOwnerId); // 내 친구 목록에 상대방을 추가
@@ -188,7 +200,6 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     );
   }
 
-
   // ProfileScreen 에서 호출하는 함수
   Future<void> handleIgnoreProfile({
     required BuildContext context,
@@ -199,9 +210,9 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
       Navigator.of(context).pop(); // 프로필 화면 닫기
     }
   }
-
 }
 
-final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
-      (ref) => MatchScreenNotifier(),
+final matchScreenProvider =
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+  (ref) => MatchScreenNotifier(),
 );
