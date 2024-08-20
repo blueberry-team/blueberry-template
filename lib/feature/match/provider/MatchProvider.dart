@@ -13,48 +13,61 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
   bool isLoading = false;
   String? errorMessage;
-  static const userId = "eztqDqrvEXDc8nqnnrB8"; // 로그인 상황을 가정한 userId
+  static const userId = "eztqDqrvEXDc8nqnnrB8"; // 로그인 상황을 가정
 
   // 펫 데이터를 Firestore에서 로드하고 필터링하는 함수
   Future<void> loadPets({String? location, String? gender}) async {
-    // 상태 초기화
-    state = [];
-    isLoading = true;
-
-    final firestore = FirebaseFirestore.instance;
-    final userDoc = await firestore.collection('users_test').doc(userId).get();
-
-    List<dynamic> ignoredPets = [];
-    if (userDoc.exists) {
-      ignoredPets = userDoc.data()?['ignoredPets'] ?? [];
-    }
+    _setLoading(true);
 
     try {
-      // 모든 펫 정보를 Firestore에서 가져오기
-      final snapshot = await firestore.collection('pet').get();
-      final pets = snapshot.docs
-          .map((doc) => PetProfileModel.fromJson(doc.data()))
-          .toList();
+      final ignoredPets = await _getIgnoredPets();
+      final pets = await _getPetsFromFirestore();
 
       // 매칭 조건 필터 적용
-      List<PetProfileModel> filteredPets = pets.where((pet) {
-        final matchesLocation = location == null || pet.location == location;
-        final matchesGender = gender == null || pet.gender == gender;
-        final notIgnored = !ignoredPets.contains(pet.petID);
-        return matchesLocation && matchesGender && notIgnored;
+      final filteredPets = pets.where((pet) {
+        return _matchesFilter(pet, ignoredPets, location, gender);
       }).toList();
 
-      // 필터링된 결과가 있을 경우 상태를 업데이트
-      if (filteredPets.isNotEmpty) {
-        state = filteredPets;
-      } else {
+      state = filteredPets.isNotEmpty ? filteredPets : [];
+      if (filteredPets.isEmpty) {
         talker.info(AppStrings.noFilteredResult);
       }
     } catch (e) {
       talker.error('${AppStrings.dbLoadError}$e');
     } finally {
-      isLoading = false;
+      _setLoading(false);
     }
+  }
+
+  void _setLoading(bool value) {
+    isLoading = value;
+  }
+
+  // firestore에서 사용자가 ignore한 펫 데이터 가져오기
+  Future<List<dynamic>> _getIgnoredPets() async {
+    final userDoc = await FirebaseFirestore.instance.collection('users_test').doc(userId).get();
+    final data = userDoc.data();
+
+    if (data != null && data.containsKey('ignoredPets')) {
+      return data['ignoredPets'] ?? [];
+    } else {
+      return [];
+    }
+  }
+
+  // firestore에서 모든 pet 데이터 가져오기
+  Future<List<PetProfileModel>> _getPetsFromFirestore() async {
+    final snapshot = await FirebaseFirestore.instance.collection('pet').get();
+    return snapshot.docs.map((doc) => PetProfileModel.fromJson(doc.data())).toList();
+  }
+
+  // 조건에 따라 펫 데이터 필터링
+  bool _matchesFilter(PetProfileModel pet, List<dynamic> ignoredPets, String? location, String? gender) {
+    final matchesLocation = location == null || pet.location == location;
+    final matchesGender = gender == null || pet.gender == gender;
+    final notIgnored = !ignoredPets.contains(pet.petID);
+    final notMyPet = pet.ownerUserID != userId;
+    return matchesLocation && matchesGender && notIgnored && notMyPet;
   }
 
   // 펫 좋아요 기능
