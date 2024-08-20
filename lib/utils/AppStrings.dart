@@ -22,9 +22,11 @@ class AppStrings {
   static const String addedFriendSuccess = '친구 추가 확인 : ';
   static const String addedFriendError = '친구 추가 중 오류 발생: ';
   //MatchProvider.dart snackbar
-  static const String dbUpdateSuccessMessage = '좋아요 목록에 추가 했어요.';
-  static const String dbUpdateSuperLikesMessage = '즐겨찾기 목록에 추가 했어요. 언제든지 볼 수 있어요.';
-  static const String dbUpdateIgnoredMessage = '이제 다시 매칭 되지 않아요.';
+  static const String matchSuccessMessageLike = '좋아요 목록에 추가 했어요. 친구가 되었어요.';
+  static const String matchSuccessMessageSuperLike = '즐겨찾기 목록에 추가 했어요. 친구가 되었어요.';
+  static const String matchFailMessageLike = '좋아요 목록에 추가 했어요. 상대도 좋아요를 누르면 친구가 됩니다.';
+  static const String matchFailMessageSuperLike = '즐겨찾기 목록에 추가 했어요. 상대도 좋아요를 누르면 친구가 됩니다.';
+  static const String ignoreSuccessMessage = '이제 다시 매칭 되지 않아요.';
   static const String dbUpdateFailMessage = '이미 추가된 펫이에요.';
 
   // MatchProfileListWidget.dart
