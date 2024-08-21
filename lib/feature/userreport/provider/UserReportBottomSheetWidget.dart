@@ -53,7 +53,7 @@ class UserReportBottomSheetWidget extends ConsumerWidget {
 
   void reportUser(BuildContext context, WidgetRef ref, String reason) async {
     final report = UserReportModel(
-      reportedUserId: friend.friendId,
+      reportedUserId: friend.userID,
       reporterUserId: loginUserId,
       reason: reason,
       timestamp: DateTime.now(),

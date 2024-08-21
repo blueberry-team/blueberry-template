@@ -128,7 +128,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
 
     try {
       await userDoc.collection('friends').doc(friendId).set({
-        'userId': friendId,
+        'userID': friendId,
         'addedDate': Timestamp.now(),
       });
       talker.info("Friend added between $userId and $friendId");
