@@ -15,24 +15,25 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       .collection('friends')
       .snapshots()
       .asyncMap((snapshot) => Future.wait(snapshot.docs.map((doc) async {
-    final userID = doc['userID'] as String;
-    talker.info('Fetching data for userID: $userID');
+            final userID = doc['userID'] as String;
+            talker.info('Fetching data for userID: $userID');
 
-    final userDoc = await firestore.collection('users_test').doc(userID).get();
+            final userDoc =
+                await firestore.collection('users_test').doc(userID).get();
 
-    if (userDoc.exists) {
-      talker.info('User data found: ${userDoc.data()}');
-      return FriendModel.fromJson(userDoc.data()!);
-    } else {
-      talker.warning('User data not found for userID: $userID');
-      throw Exception('User data not found for userID: $userID');
-    }
-  }).toList()));
+            if (userDoc.exists) {
+              talker.info('User data found: ${userDoc.data()}');
+              return FriendModel.fromJson(userDoc.data()!);
+            } else {
+              talker.warning('User data not found for userID: $userID');
+              throw Exception('User data not found for userID: $userID');
+            }
+          }).toList()));
 });
 
 // 친구목록 이미지 URL을 제공하는 Provider
 final friendsListImageProvider =
-FutureProvider.family<String, String>((ref, imageName) async {
+    FutureProvider.family<String, String>((ref, imageName) async {
   try {
     final storageRef = FirebaseStorage.instance.ref('profileimage/$imageName');
     final downloadUrl = await storageRef.getDownloadURL();
@@ -40,7 +41,8 @@ FutureProvider.family<String, String>((ref, imageName) async {
     talker.info('Download URL for image $imageName: $downloadUrl');
     return downloadUrl;
   } catch (e, stacktrace) {
-    talker.error('Failed to fetch download URL for image $imageName', e, stacktrace);
+    talker.error(
+        'Failed to fetch download URL for image $imageName', e, stacktrace);
     rethrow;
   }
 });

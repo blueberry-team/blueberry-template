@@ -12,10 +12,12 @@ class FriendModel with _$FriendModel {
     required String status,
     required String imageName,
     required int likes,
-    @JsonKey(fromJson: fromJsonTimestamp, toJson: toJsonTimestamp) required DateTime lastConnect,
+    @JsonKey(fromJson: fromJsonTimestamp, toJson: toJsonTimestamp)
+    required DateTime lastConnect,
   }) = _FriendModel;
 
-  factory FriendModel.fromJson(Map<String, dynamic> json) => _$FriendModelFromJson(json);
+  factory FriendModel.fromJson(Map<String, dynamic> json) =>
+      _$FriendModelFromJson(json);
 }
 
 // 최상위 함수로 Timestamp 변환 함수 정의
