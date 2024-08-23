@@ -6,35 +6,16 @@ import 'package:go_router/go_router.dart';
 import '../../../model/FriendModel.dart';
 import '../provider/FriendsListProvider.dart';
 import 'BottomSheetButtonWidget.dart';
+import 'PopupMenuItem.dart'; // PopupMenuItem.dart import
 
-class FriendBottomSheetLauncher {
-  static void show({
-    required BuildContext context,
-    required FriendModel friend,
-    required String imageUrl,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-      ),
-      builder: (context) => FriendBottomSheetWidget(
-        friend: friend,
-        imageUrl: imageUrl,
-      ),
-    );
-  }
-}
-
-class FriendBottomSheetWidget extends ConsumerWidget {
+class FriendBottomSheetWidget extends StatelessWidget {
   final FriendModel friend;
   final String imageUrl;
 
   const FriendBottomSheetWidget({super.key, required this.friend, required this.imageUrl});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       height: 260,
       decoration: BoxDecoration(
@@ -72,9 +53,17 @@ class FriendBottomSheetWidget extends ConsumerWidget {
                     ],
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () => _showSettingsMenu(context, ref),
+                Consumer(
+                  builder: (context, ref, child) {
+                    return PopupMenuButton<int>(
+                      onSelected: (value) => handleMenuSelection(context, ref, value, friend),
+                      itemBuilder: (context) => [
+                        buildPopupMenuItem(icon: Icons.report, text: "신고하기", value: 1),
+                        buildPopupMenuItem(icon: Icons.delete, text: "삭제하기", value: 2),
+                        buildPopupMenuItem(icon: Icons.block, text: "차단하기", value: 3),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
@@ -115,58 +104,6 @@ class FriendBottomSheetWidget extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-
-  void _showSettingsMenu(BuildContext context, WidgetRef ref) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-      ),
-      builder: (context) => _SettingsMenu(friend: friend, ref: ref),
-    );
-  }
-}
-
-class _SettingsMenu extends StatelessWidget {
-  final FriendModel friend;
-  final WidgetRef ref;
-
-  const _SettingsMenu({required this.friend, required this.ref});
-
-  @override
-  Widget build(BuildContext context) {
-    final deleteFriend = ref.read(deleteFriendProvider);
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListTile(
-          leading: const Icon(Icons.report),
-          title: const Text('신고하기'),
-          onTap: () {
-            Navigator.of(context).pop();
-            // 신고하기 처리 로직
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.delete),
-          title: const Text('삭제하기'),
-          onTap: () async {
-            Navigator.of(context).pop();
-            await deleteFriend(context, friend);
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.block),
-          title: const Text('차단하기'),
-          onTap: () {
-            Navigator.of(context).pop();
-            // 차단하기 처리 로직
-          },
-        ),
-      ],
     );
   }
 }
