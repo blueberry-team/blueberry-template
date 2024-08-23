@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../model/FriendModel.dart';
 import '../provider/FriendsListProvider.dart';
-import 'FriendBottomSheet.dart';
+import 'FriendBottomSheetLauncher.dart';
 import 'FriendListItemWidget.dart';
+import 'ShimmerSkeletonLoader.dart';
 
 class FriendsListViewWidget extends ConsumerWidget {
   const FriendsListViewWidget({super.key});
@@ -39,39 +39,17 @@ class FriendsListViewWidget extends ConsumerWidget {
                     },
                   );
                 },
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stack) {
-                  return const Center(child: Text('Error loading image'));
-                },
+                loading: () => const ShimmerSkeletonLoader(),
+                error: (error, stack) => const Icon(Icons.error),
               );
             },
           ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
       error: (error, stack) => Center(child: Text('Error: $error')),
-    );
-  }
-}
-
-class FriendBottomSheetLauncher {
-  static void show({
-    required BuildContext context,
-    required FriendModel friend,
-    required String imageUrl,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
-        ),
-      ),
-      builder: (context) => FriendBottomSheetWidget(
-        friend: friend,
-        imageUrl: imageUrl,
-      ),
     );
   }
 }

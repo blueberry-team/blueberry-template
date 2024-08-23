@@ -41,6 +41,8 @@ class AppStrings {
   static const String chatButton = '채팅';
   static const String profileButton = '프로필';
   static const String reportButton = '신고하기';
+  static const String deleteButton = '삭제하기';
+  static const String blockButton = '차단하기';
 
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
