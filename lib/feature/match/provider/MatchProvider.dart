@@ -12,12 +12,11 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 
   bool isLoading = false;
-  String? errorMessage;
   static const userId = "eztqDqrvEXDc8nqnnrB8"; // 로그인 상황을 가정
 
   // 펫 데이터를 Firestore에서 로드하고 필터링하는 함수
   Future<void> loadPets({String? location, String? gender}) async {
-    _setLoading(true);
+    _setLoading(true); // 로딩 상태를 true로 설정
 
     try {
       final ignoredPets = await _getIgnoredPets();
@@ -28,14 +27,16 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
         return _matchesFilter(pet, ignoredPets, location, gender);
       }).toList();
 
+      // 상태를 업데이트하여 필터된 펫 데이터를 설정
       state = filteredPets.isNotEmpty ? filteredPets : [];
+
       if (filteredPets.isEmpty) {
-        talker.info(AppStrings.noFilteredResult);
+        talker.info(AppStrings.noFilteredResult); // 필터된 결과가 없을 때 정보 로그 기록
       }
     } catch (e) {
-      talker.error('${AppStrings.dbLoadError}$e');
+      talker.error('${AppStrings.dbLoadError}$e'); // 에러 발생 시 로그 기록
     } finally {
-      _setLoading(false);
+      _setLoading(false); // 로딩 상태를 false로 설정
     }
   }
 
