@@ -33,7 +33,7 @@ class AppStrings {
   static const String dbUpdateFailMessage = '이미 추가된 펫이에요.';
 
   // MatchProfileListWidget.dart
-  static const String noPetsMessage = '추천할 펫이 1마리이거나 없습니다.';
+  static const String noPetsMessage = '추천해 줄 펫이 없어요. 조건을 다시 한번 확인해 주세요.';
 
   //ProfileScreen.dart
   static const String petGender = '성별';

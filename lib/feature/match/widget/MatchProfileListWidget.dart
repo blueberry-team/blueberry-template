@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/AppStrings.dart';
+import '../../../utils/Talker.dart';
 import '../ProfileScreen.dart';
 import '../provider/MatchProvider.dart';
+import '../provider/PetImageProvider.dart';
 import 'SwipeButtonWidget.dart';
 import 'SwipeCardWidget.dart';
 
@@ -19,17 +21,17 @@ class MatchProfileListWidget extends ConsumerWidget {
     final isLoading = ref.watch(matchScreenProvider.notifier).isLoading;
 
     if (isLoading) {
-      return _buildLoadingView(); // 로딩 중일 때 Shimmer UI를 표시
+      return _buildLoadingView(); // 데이터 로딩 중일 때 Shimmer UI를 표시
     } else if (listState.isEmpty) {
-      return const Center(child: Text(AppStrings.noPetsMessage)); // 데이터가 비었을 때 표시
+      return const Center(child: Text(AppStrings.noPetsMessage));
     } else {
-      return _buildCardView(context, ref, listState); // 데이터가 있을 때 카드 뷰 표시
+      return _buildCardView(context, ref, listState);
     }
   }
 
   Widget _buildLoadingView() {
     return ListView.builder(
-      itemCount: 1, // 표시할 카드 수
+      itemCount: 1,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -37,7 +39,7 @@ class MatchProfileListWidget extends ConsumerWidget {
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,
             child: Container(
-              height: 470,
+              height: 430,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -54,11 +56,24 @@ class MatchProfileListWidget extends ConsumerWidget {
     final cardSwiperController = CardSwiperController();
     int currentIndex = 0;
     final cards = data.map((petProfile) {
-      return GestureDetector(
-        onTap: () {
-          cardSwiperController.swipe(CardSwiperDirection.right);
+      final imageUrl = ref.watch(petImageProvider(petProfile.imageName));
+      return imageUrl.when(
+        loading: () => _buildLoadingView(), // 카드 이미지가 로딩중일 때 Shimmer UI를 표시
+        error: (err, stack) {
+          talker.error(petProfile.imageName, err, stack);
+          return _buildLoadingView();
         },
-        child: SwipeCardWidget(petProfile),
+        data: (imageUrl) {
+          return GestureDetector(
+            onTap: () {
+              cardSwiperController.swipe(CardSwiperDirection.right);
+            },
+            child: SwipeCardWidget(
+              petProfiles: petProfile,
+              imageUrl: imageUrl,
+            ),
+          );
+        },
       );
     }).toList();
 

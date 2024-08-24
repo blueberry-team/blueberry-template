@@ -14,9 +14,9 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   bool isLoading = false;
   static const userId = "eztqDqrvEXDc8nqnnrB8"; // 로그인 상황을 가정
 
-  // 펫 데이터를 Firestore에서 로드하고 필터링하는 함수
+  // 펫 데이터를 로드하고 필터링하는 함수
   Future<void> loadPets({String? location, String? gender}) async {
-    _setLoading(true); //
+    _setLoading(true);
 
     try {
       final ignoredPets = await _getIgnoredPets();
@@ -36,7 +36,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     } catch (e) {
       talker.error('${AppStrings.dbLoadError}$e');
     } finally {
-      _setLoading(false); // 로딩 상태를 false로 설정
+      _setLoading(false);
     }
   }
 
@@ -44,7 +44,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     isLoading = value;
   }
 
-  // firestore에서 사용자가 ignore한 펫 데이터 가져오기
+  // ignore한 펫 데이터 가져오기
   Future<List<dynamic>> _getIgnoredPets() async {
     final userDoc = await FirebaseFirestore.instance
         .collection('users_test')
@@ -59,7 +59,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
     }
   }
 
-  // firestore에서 모든 pet 데이터 가져오기
+  // 모든 pet 데이터 가져오기
   Future<List<PetProfileModel>> _getPetsFromFirestore() async {
     final snapshot = await FirebaseFirestore.instance.collection('pet').get();
     return snapshot.docs
@@ -213,7 +213,8 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider =
-    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
   (ref) => MatchScreenNotifier(),
 );
+
+
