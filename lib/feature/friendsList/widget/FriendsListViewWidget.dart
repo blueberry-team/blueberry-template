@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../provider/FriendsListImageProvider.dart';
 import '../provider/FriendsListProvider.dart';
 import 'FriendBottomSheetLauncher.dart';
 import 'FriendListItemWidget.dart';

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/FriendModel.dart';
+import '../../../utils/AppStrings.dart';
 import '../../../utils/Talker.dart';
 import '../../userreport/provider/UserReportBottomSheetWidget.dart';
 
@@ -17,19 +18,20 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       .doc(userId)
       .collection('friends')
       .snapshots()
-      .asyncMap((snapshot) => Future.wait(snapshot.docs.map((doc) async {
-            final userID = doc['userID'] as String;
+      .asyncMap((snapshot) async {
+    final friendModels = await Future.wait(snapshot.docs.map((doc) async {
+      final userID = doc['userID'] as String;
+      final userDoc = await firestore.collection('users_test').doc(userID).get();
 
-            final userDoc =
-                await firestore.collection('users_test').doc(userID).get();
+      if (userDoc.exists) {
+        return FriendModel.fromJson(userDoc.data()!);
+      } else {
+        throw Exception(AppStrings.userNotFoundErrorMessage);
+      }
+    }).toList());
 
-            if (userDoc.exists) {
-              return FriendModel.fromJson(userDoc.data()!);
-            } else {
-              talker.warning('User data not found for userID: $userID');
-              throw Exception('User data not found for userID: $userID');
-            }
-          }).toList()));
+    return friendModels;
+  });
 });
 
 final deleteFriendProvider =
@@ -49,21 +51,15 @@ final deleteFriendProvider =
 
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('친구가 삭제되었습니다.')),
+        const SnackBar(content: Text(AppStrings.friendDeleteSuccessMessage)),
       );
     }
   };
 });
 
-// 친구목록 이미지 URL을 제공하는 Provider
-final friendsListImageProvider =
-    FutureProvider.family<String, String>((ref, imageName) async {
-  final storageRef = FirebaseStorage.instance.ref('profileimage/$imageName');
-  final downloadUrl = await storageRef.getDownloadURL();
-  return downloadUrl;
-});
 
-// ui 팝업 메뉴 선택시 처리하는 함수 (서비스 로직 분리 예정)
+
+// ui 팝업 메뉴 선택시 처리하는 함수
 void handleMenuSelection(
     BuildContext context, WidgetRef ref, int value, FriendModel friend) async {
   switch (value) {
@@ -74,8 +70,12 @@ void handleMenuSelection(
       await deleteFriend(context, friend);
       break;
     case 2:
-      // 차단
       Navigator.of(context).pop();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('차단 기능이 아직 구현되지 않았습니다.')),
+        );
+      }
       break;
     case 3:
       // 신고

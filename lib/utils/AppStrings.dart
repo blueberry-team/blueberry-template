@@ -44,6 +44,10 @@ class AppStrings {
   static const String deleteButton = '삭제하기';
   static const String blockButton = '차단하기';
 
+  //FriendsListProvider.dart
+  static const String userNotFoundErrorMessage = '유저 데이터를 찾을 수 없습니다.';
+  static const String friendDeleteSuccessMessage = '친구가 삭제되었습니다.';
+
   //NickNameTextWidget.dart
   static const String nickNameTextWidgetdefaultNickName = '닉네임';
   static const String nickNameTextWidgetError = '오류';
