@@ -19,11 +19,11 @@ class MatchProfileListWidget extends ConsumerWidget {
     final isLoading = ref.watch(matchScreenProvider.notifier).isLoading;
 
     if (isLoading) {
-      return _buildLoadingView();  // 로딩 중일 때 Shimmer UI를 표시
+      return _buildLoadingView(); // 로딩 중일 때 Shimmer UI를 표시
     } else if (listState.isEmpty) {
-      return const Center(child: Text(AppStrings.noPetsMessage));  // 데이터가 비었을 때 표시
+      return const Center(child: Text(AppStrings.noPetsMessage)); // 데이터가 비었을 때 표시
     } else {
-      return _buildCardView(context, ref, listState);  // 데이터가 있을 때 카드 뷰 표시
+      return _buildCardView(context, ref, listState); // 데이터가 있을 때 카드 뷰 표시
     }
   }
 
@@ -53,7 +53,14 @@ class MatchProfileListWidget extends ConsumerWidget {
       BuildContext context, WidgetRef ref, List<PetProfileModel> data) {
     final cardSwiperController = CardSwiperController();
     int currentIndex = 0;
-    final cards = data.map(SwipeCardWidget.new).toList();
+    final cards = data.map((petProfile) {
+      return GestureDetector(
+        onTap: () {
+          cardSwiperController.swipe(CardSwiperDirection.right);
+        },
+        child: SwipeCardWidget(petProfile),
+      );
+    }).toList();
 
     return Column(
       children: [
@@ -105,7 +112,7 @@ class MatchProfileListWidget extends ConsumerWidget {
                   final petId = data[currentIndex].petID;
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToSuperLikes(context, userId, petId); // context 추가
+                      .addPetToSuperLikes(context, userId, petId);
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.star,
@@ -120,7 +127,7 @@ class MatchProfileListWidget extends ConsumerWidget {
 
                   await ref
                       .read(matchScreenProvider.notifier)
-                      .addPetToLikes(context, userId, petId); // context 추가
+                      .addPetToLikes(context, userId, petId);
                   cardSwiperController.swipe(CardSwiperDirection.right);
                 },
                 icon: Icons.favorite,
