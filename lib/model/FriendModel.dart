@@ -20,7 +20,7 @@ class FriendModel with _$FriendModel {
       _$FriendModelFromJson(json);
 }
 
-// 최상위 함수로 Timestamp 변환 함수 정의
+// Timestamp 변환 함수 서비스에 두고 임포트해서 사용 예정(해당 방식 리뷰 필요)
 DateTime fromJsonTimestamp(Timestamp timestamp) => timestamp.toDate();
 
 Timestamp toJsonTimestamp(DateTime date) => Timestamp.fromDate(date);

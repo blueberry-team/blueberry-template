@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PostListViewItemWidget extends StatefulWidget {
-  final String title;
-  final String uploadTime;
+  final DateTime createdAt;
   final String content;
   final String imageUrl;
 
   const PostListViewItemWidget({
     super.key,
-    required this.title,
-    required this.uploadTime,
+    required this.createdAt,
     required this.content,
     required this.imageUrl,
   });

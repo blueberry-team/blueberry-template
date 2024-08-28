@@ -19,8 +19,7 @@ class PostListViewWidget extends ConsumerWidget {
           itemBuilder: (context, index) {
             final post = posts[index];
             return PostListViewItemWidget(
-              title: post.title,
-              uploadTime: post.uploadTime,
+              createdAt: post.createdAt,
               content: post.content,
               imageUrl: post.imageUrl,
             );
