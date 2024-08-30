@@ -1,26 +1,35 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-class PostListViewItemWidget extends StatefulWidget {
+class PostListViewItemWidget extends StatelessWidget {
   final DateTime createdAt;
   final String content;
   final String imageUrl;
+  final bool isLiked;
+  final bool isDisliked;
+  final num likesCount;
+  final num dislikesCount;
+  final VoidCallback onLikeToggle;
+  final VoidCallback onDislikeToggle;
 
   const PostListViewItemWidget({
     super.key,
     required this.createdAt,
     required this.content,
     required this.imageUrl,
+    required this.isLiked,
+    required this.isDisliked,
+    required this.likesCount,
+    required this.dislikesCount,
+    required this.onLikeToggle,
+    required this.onDislikeToggle,
   });
 
   @override
-  _PostListViewItemWidgetState createState() => _PostListViewItemWidgetState();
-}
-
-class _PostListViewItemWidgetState extends State<PostListViewItemWidget> {
-  bool isLiked = false;
-
-  @override
   Widget build(BuildContext context) {
+    // DateTime을 String으로 변환
+    String formattedDate = DateFormat.yMMMd().format(createdAt);
+
     return Container(
       color: Colors.grey[200],
       child: Card(
@@ -66,12 +75,16 @@ class _PostListViewItemWidgetState extends State<PostListViewItemWidget> {
                 child: AspectRatio(
                   aspectRatio: 1.0, // 이미지 1:1 비율 설정
                   child: Image.network(
-                    widget.imageUrl,
+                    imageUrl,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
+              Text(formattedDate),
+              const SizedBox(height: 10),
+              Text(content),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,18 +96,20 @@ class _PostListViewItemWidgetState extends State<PostListViewItemWidget> {
                           isLiked ? Icons.favorite : Icons.favorite_border,
                           color: isLiked ? Colors.red : Colors.grey,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isLiked = !isLiked;
-                          });
-                        },
+                        onPressed: onLikeToggle,
                       ),
                       const SizedBox(width: 5),
-                      const Text('1,242'),
+                      Text('$likesCount'),
                       const SizedBox(width: 20),
-                      const Icon(Icons.chat_bubble_outline),
+                      IconButton(
+                        icon: Icon(
+                          isDisliked ? Icons.thumb_down : Icons.thumb_down_alt_outlined,
+                          color: isDisliked ? Colors.blue : Colors.grey,
+                        ),
+                        onPressed: onDislikeToggle,
+                      ),
                       const SizedBox(width: 5),
-                      const Text('24'),
+                      Text('$dislikesCount'),
                     ],
                   ),
                   const Icon(Icons.bookmark_border),
