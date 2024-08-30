@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final dislikeProvider = StateNotifierProvider<DislikeNotifier, Map<String, bool>>((ref) {
+final dislikeProvider =
+    StateNotifierProvider<DislikeNotifier, Map<String, bool>>((ref) {
   return DislikeNotifier();
 });
 
@@ -63,7 +64,8 @@ class DislikeNotifier extends StateNotifier<Map<String, bool>> {
   }
 
   // 싫어요 카운트 업데이트 기능
-  Future<void> _updateDislikesCount(DocumentReference postRef, int dislikeChange) async {
+  Future<void> _updateDislikesCount(
+      DocumentReference postRef, int dislikeChange) async {
     await postRef.update({
       'dislikesCount': FieldValue.increment(dislikeChange),
     });

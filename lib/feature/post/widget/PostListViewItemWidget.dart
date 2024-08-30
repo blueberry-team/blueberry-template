@@ -87,23 +87,36 @@ class PostListViewItemWidget extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(
-                          isLiked ? Icons.thumb_up : Icons.thumb_up_alt_outlined,
-                          color: isLiked ? Colors.red : Colors.grey,
+                          isLiked
+                              ? Icons.thumb_up
+                              : Icons.thumb_up_alt_outlined,
+                          color: isLiked ? Colors.blue : Colors.grey,
                         ),
                         onPressed: onLikeToggle,
                       ),
                       const SizedBox(width: 5),
                       Text('${post.likesCount}'),
-                      const SizedBox(width: 20),
+                      const SizedBox(width: 10),
                       IconButton(
                         icon: Icon(
-                          isDisliked ? Icons.thumb_down : Icons.thumb_down_alt_outlined,
+                          isDisliked
+                              ? Icons.thumb_down
+                              : Icons.thumb_down_alt_outlined,
                           color: isDisliked ? Colors.blue : Colors.grey,
                         ),
                         onPressed: onDislikeToggle,
                       ),
                       const SizedBox(width: 5),
                       Text('${post.dislikesCount}'),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        icon: const Icon(Icons.chat_bubble_outline),
+                        onPressed: () {
+                          // 댓글 기능 구현
+                        },
+                      ),
+                      const SizedBox(width: 5),
+                      Text('${post.commentsCount}'),
                     ],
                   ),
                   const Icon(Icons.bookmark_border),

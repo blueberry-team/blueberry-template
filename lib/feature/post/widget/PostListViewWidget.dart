@@ -41,15 +41,23 @@ class PostListViewWidget extends ConsumerWidget {
                     userInfo: userInfo,
                     onLikeToggle: () {
                       if (isDisliked) {
-                        ref.read(dislikeProvider.notifier).toggleDislike(post.postID, userID); // Dislike 해제
+                        ref
+                            .read(dislikeProvider.notifier)
+                            .toggleDislike(post.postID, userID); // Dislike 해제
                       }
-                      ref.read(likeProvider.notifier).toggleLike(post.postID, userID); // Like 토글
+                      ref
+                          .read(likeProvider.notifier)
+                          .toggleLike(post.postID, userID); // Like 토글
                     },
                     onDislikeToggle: () {
                       if (isLiked) {
-                        ref.read(likeProvider.notifier).toggleLike(post.postID, userID); // Like 해제
+                        ref
+                            .read(likeProvider.notifier)
+                            .toggleLike(post.postID, userID); // Like 해제
                       }
-                      ref.read(dislikeProvider.notifier).toggleDislike(post.postID, userID); // Dislike 토글
+                      ref
+                          .read(dislikeProvider.notifier)
+                          .toggleDislike(post.postID, userID); // Dislike 토글
                     },
                   );
                 },

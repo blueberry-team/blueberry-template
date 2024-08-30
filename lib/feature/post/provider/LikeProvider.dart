@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final likeProvider = StateNotifierProvider<LikeNotifier, Map<String, bool>>((ref) {
+final likeProvider =
+    StateNotifierProvider<LikeNotifier, Map<String, bool>>((ref) {
   return LikeNotifier();
 });
 
@@ -10,7 +11,6 @@ class LikeNotifier extends StateNotifier<Map<String, bool>> {
 
   // 좋아요 상태를 가져오기
   Future<void> fetchLikeStatus(String postID, String userID) async {
-
     final likeDoc = await FirebaseFirestore.instance
         .collection('posts')
         .doc(postID)
@@ -33,7 +33,6 @@ class LikeNotifier extends StateNotifier<Map<String, bool>> {
 
   // 좋아요 토글 기능
   Future<void> toggleLike(String postID, String userID) async {
-
     final postRef = FirebaseFirestore.instance.collection('posts').doc(postID);
     final likeRef = postRef.collection('likes').doc(userID);
 
@@ -65,7 +64,8 @@ class LikeNotifier extends StateNotifier<Map<String, bool>> {
   }
 
   // 좋아요 카운트 업데이트 기능
-  Future<void> _updateLikesCount(DocumentReference postRef, int likeChange) async {
+  Future<void> _updateLikesCount(
+      DocumentReference postRef, int likeChange) async {
     await postRef.update({
       'likesCount': FieldValue.increment(likeChange),
     });

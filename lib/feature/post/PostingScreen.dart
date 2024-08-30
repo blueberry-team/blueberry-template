@@ -1,8 +1,4 @@
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import '../../model/PostModel.dart';
 
 class PostingScreen extends StatefulWidget {
   static const name = 'CreatePostPage';

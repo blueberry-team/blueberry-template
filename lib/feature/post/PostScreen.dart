@@ -39,13 +39,11 @@ class PostScreen extends StatelessWidget {
 AppBar _buildAppBar(BuildContext context) {
   return AppBar(
     centerTitle: true,
-    title: Text(
-        AppStrings.appbar_Text_Logo,
+    title: Text(AppStrings.appbar_Text_Logo,
         style: GoogleFonts.lobster(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-        )
-    ),
+        )),
     actions: [
       IconButton(
         icon: const Icon(Icons.message),
