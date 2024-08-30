@@ -200,7 +200,7 @@ Widget _buildLogin(BuildContext context, WidgetRef ref) {
                 width: 10,
               ),
               SquareTileWidget(
-                  onTap: () => SocialAuthService().signInWithGithub(),
+                  onTap: () => SocialAuthService().signInWithNaver(),
                   imagePath: 'assets/login_page_images/naver.png'),
             ],
           ),

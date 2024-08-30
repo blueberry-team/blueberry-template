@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/Talker.dart';
 
@@ -87,6 +88,15 @@ class SocialAuthService {
     final userCredential =
         await FirebaseAuth.instance.signInWithProvider(githubAuthProvider);
     getAuthenticateWithFirebase(userCredential, AppStrings.usingGithubLogin);
+  }
+
+  ///Naver Sign In
+  Future<void> signInWithNaver() async {
+    final String clientId = 'Q_XaNrrZRENiDAmzchib'; //TODO: 값 다른 곳에 저장
+    final String redirectUri = 'https://us-central1-blueberrytemplate-2024-summer.cloudfunctions.net/naverLoginCallback'; //TODO: 값 다른 곳에 저장
+    final String state = base64Url.encode(List<int>.generate(16, (_) => Random().nextInt(255))); // 사이트 간 요청 위조 공격을 방지하기 위한 상태 토큰
+    final Uri url = Uri.parse('https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=$clientId&redirect_uri=$redirectUri&state=$state');
+    await launchUrl(url);
   }
 
   ///* 인증정보를 바탕으로 firestore에 저장하는 함수
