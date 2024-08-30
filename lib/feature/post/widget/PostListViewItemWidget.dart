@@ -1,26 +1,22 @@
+import 'package:blueberry_flutter_template/model/PostModel.dart';
+import 'package:blueberry_flutter_template/model/PostUserInfoModel.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class PostListViewItemWidget extends StatelessWidget {
-  final DateTime createdAt;
-  final String content;
-  final String imageUrl;
+  final PostModel post;
   final bool isLiked;
   final bool isDisliked;
-  final num likesCount;
-  final num dislikesCount;
+  final PostUserInfoModel userInfo;
   final VoidCallback onLikeToggle;
   final VoidCallback onDislikeToggle;
 
   const PostListViewItemWidget({
     super.key,
-    required this.createdAt,
-    required this.content,
-    required this.imageUrl,
+    required this.post,
     required this.isLiked,
     required this.isDisliked,
-    required this.likesCount,
-    required this.dislikesCount,
+    required this.userInfo,
     required this.onLikeToggle,
     required this.onDislikeToggle,
   });
@@ -28,7 +24,7 @@ class PostListViewItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // DateTime을 String으로 변환
-    String formattedDate = DateFormat.yMMMd().format(createdAt);
+    String formattedDate = DateFormat.yMMMd().format(post.createdAt);
 
     return Container(
       color: Colors.grey[200],
@@ -46,16 +42,14 @@ class PostListViewItemWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(
-                      'https://via.placeholder.com/150', // 프로필 이미지 URL
-                    ),
+                    backgroundImage: NetworkImage(userInfo.profileImageUrl),
                   ),
                   const SizedBox(width: 10),
-                  const Text(
-                    'Jennifer_Cole', // 사용자 이름
-                    style: TextStyle(
+                  Text(
+                    userInfo.name,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -75,7 +69,7 @@ class PostListViewItemWidget extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 1.0, // 이미지 1:1 비율 설정
                   child: Image.network(
-                    imageUrl,
+                    post.imageUrl,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -84,7 +78,7 @@ class PostListViewItemWidget extends StatelessWidget {
               const SizedBox(height: 10),
               Text(formattedDate),
               const SizedBox(height: 10),
-              Text(content),
+              Text(post.content),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +93,7 @@ class PostListViewItemWidget extends StatelessWidget {
                         onPressed: onLikeToggle,
                       ),
                       const SizedBox(width: 5),
-                      Text('$likesCount'),
+                      Text('${post.likesCount}'),
                       const SizedBox(width: 20),
                       IconButton(
                         icon: Icon(
@@ -109,7 +103,7 @@ class PostListViewItemWidget extends StatelessWidget {
                         onPressed: onDislikeToggle,
                       ),
                       const SizedBox(width: 5),
-                      Text('$dislikesCount'),
+                      Text('${post.dislikesCount}'),
                     ],
                   ),
                   const Icon(Icons.bookmark_border),
