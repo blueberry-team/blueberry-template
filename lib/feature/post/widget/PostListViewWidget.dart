@@ -5,8 +5,8 @@ import 'package:blueberry_flutter_template/feature/post/widget/PostListViewItemW
 import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../provider/UserInfoProvider.dart';
+import 'ShimmerSkeleton.dart';
 
 class PostListViewWidget extends ConsumerWidget {
   const PostListViewWidget({super.key});
@@ -16,7 +16,7 @@ class PostListViewWidget extends ConsumerWidget {
     final postList = ref.watch(postProvider);
     final likeState = ref.watch(likeProvider);
     final dislikeState = ref.watch(dislikeProvider);
-    const userID = 'eztqDqrvEXDc8nqnnrB8'; // 임시로 사용자 ID를 지정
+    const userID = 'eztqDqrvEXDc8nqnnrB8'; // 로그인을 가정한 임시 사용자 ID
 
     return SafeArea(
       child: postList.when(
@@ -53,7 +53,7 @@ class PostListViewWidget extends ConsumerWidget {
                     },
                   );
                 },
-                loading: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const ShimmerSkeleton(),
                 error: (error, stackTrace) {
                   talker.error('Error loading user info: $error');
                   return Center(child: Text('Error: $error'));
@@ -62,9 +62,7 @@ class PostListViewWidget extends ConsumerWidget {
             },
           );
         },
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
+        loading: () => const ShimmerSkeleton(),
         error: (error, stackTrace) {
           talker.error('Error loading posts: $error');
           return Center(child: Text('Error: $error'));

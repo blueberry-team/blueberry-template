@@ -87,7 +87,7 @@ class PostListViewItemWidget extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(
-                          isLiked ? Icons.favorite : Icons.favorite_border,
+                          isLiked ? Icons.thumb_up : Icons.thumb_up_alt_outlined,
                           color: isLiked ? Colors.red : Colors.grey,
                         ),
                         onPressed: onLikeToggle,
