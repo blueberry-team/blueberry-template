@@ -28,7 +28,7 @@ final class CacheService {
         return _readFile(fileInfo);
       } else {
         // 파일이 오래된 경우 캐시에서 파일을 제거
-        await _cacheManager.removeFile(config.cacheKey);
+        await deleteCachedData(config.cacheKey);
       }
     }
     return null;
@@ -47,6 +47,18 @@ final class CacheService {
       bytes,
       fileExtension: config.fileExtension, // 파일 확장자
     );
+  }
+
+  /// 특정 캐시를 삭제하는 메서드
+  ///
+  /// [cacheKey] : 캐시 키를 기반으로 캐시 데이터를 삭제
+  Future<void> deleteCachedData(String cacheKey) async {
+    await _cacheManager.removeFile(cacheKey);
+  }
+
+  /// 전체 캐시 데이터를 삭제하는 메서드
+  Future<void> clearAllCache() async {
+    await _cacheManager.emptyCache();
   }
 
   /// 파일 정보를 가져오는 유틸리티 메서드
