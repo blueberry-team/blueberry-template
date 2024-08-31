@@ -6,7 +6,7 @@ import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/UserInfoProvider.dart';
-import 'ShimmerSkeleton.dart';
+import 'ShimmerSkeletonWidget.dart';
 
 class PostListViewWidget extends ConsumerWidget {
   const PostListViewWidget({super.key});
@@ -61,7 +61,7 @@ class PostListViewWidget extends ConsumerWidget {
                     },
                   );
                 },
-                loading: () => const ShimmerSkeleton(),
+                loading: () => const ShimmerSkeletonWidget(),
                 error: (error, stackTrace) {
                   talker.error('Error loading user info: $error');
                   return Center(child: Text('Error: $error'));
@@ -70,7 +70,7 @@ class PostListViewWidget extends ConsumerWidget {
             },
           );
         },
-        loading: () => const ShimmerSkeleton(),
+        loading: () => const ShimmerSkeletonWidget(),
         error: (error, stackTrace) {
           talker.error('Error loading posts: $error');
           return Center(child: Text('Error: $error'));

@@ -1,6 +1,18 @@
 class AppStrings {
   static const String appTitle = '블루베리 플러터 템플릿';
 
+  // EditCommentDialogWidget.dart
+  static const String editCommentTitle = '댓글 수정';
+  static const String editCommentHint = '댓글을 수정하세요';
+  static const String editCommentCancel = '취소';
+  static const String editCommentConfirm = '수정';
+
+  // DeleteConfirmationDialogWidget.dart
+  static const String deleteCommentTitle = '댓글 삭제';
+  static const String deleteCommentConfirmation = '이 댓글을 삭제하시겠습니까?';
+  static const String deleteCommentCancel = '취소';
+  static const String deleteCommentConfirm = '삭제';
+
   //MatchFilterWidget.dart
   static const String filterTitle = '어떤 친구를 만날까요?';
   static const String filterSubmitButtonText = '만나기';
