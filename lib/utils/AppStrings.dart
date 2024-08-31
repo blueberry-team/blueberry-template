@@ -12,15 +12,28 @@ class AppStrings {
   static const String locationJapan = 'Japan';
 
   //MatchProvider.dart
-  static const String docNotExistError = 'DB 업데이트 실패: 문서가 존재하지 않습니다.';
   static const String dbUpdateSuccess = "DB 업데이트 성공";
-  static const String dbUpdateFail = "DB 업데이트 실패 : 이미 존재하는 petId";
+  static const String dbUpdateFail = "DB 업데이트 실패 : 이미 등록된 petId 입니다.";
   static const String dbUpdateError = 'DB 업데이트 중 오류 발생: ';
   static const String dbLoadError = '펫 데이터를 로드하는 중 오류 발생: ';
   static const String noFilteredResult = '필터링된 결과가 없습니다';
+  static const String matchFound = '서로 좋아요한 상태입니다.';
+  static const String noMatch = '서로 좋아요한 상태가 아닙니다. 친구로 추가하지 않습니다.';
+  static const String addedFriendSuccess = '친구 추가 확인 : ';
+  static const String addedFriendError = '친구 추가 중 오류 발생: ';
+  //MatchProvider.dart snackbar
+  static const String matchSuccessMessageLike = '좋아요 목록에 추가 했어요. 친구가 되었어요.';
+  static const String matchSuccessMessageSuperLike =
+      '즐겨찾기 목록에 추가 했어요. 친구가 되었어요.';
+  static const String matchFailMessageLike =
+      '좋아요 목록에 추가 했어요. 상대도 좋아요를 누르면 친구가 됩니다.';
+  static const String matchFailMessageSuperLike =
+      '즐겨찾기 목록에 추가 했어요. 상대도 좋아요를 누르면 친구가 됩니다.';
+  static const String ignoreSuccessMessage = '이제 다시 매칭 되지 않아요.';
+  static const String dbUpdateFailMessage = '이미 추가된 펫이에요.';
 
   // MatchProfileListWidget.dart
-  static const String noPetsMessage = '추천할 펫이 1마리이거나 없습니다.';
+  static const String noPetsMessage = '추천해 줄 펫이 없어요. 조건을 다시 한번 확인해 주세요.';
 
   //ProfileScreen.dart
   static const String petGender = '성별';
