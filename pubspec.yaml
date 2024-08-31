@@ -43,6 +43,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   pinput: ^4.0.0
   google_fonts: ^6.2.1
+  shimmer: ^3.0.0
 
   # Calender
   flutter_svg: ^2.0.10+1

@@ -26,10 +26,15 @@ class MatchFilterOptionWidget extends ConsumerWidget {
           value: 'ignore',
           child: Row(
             children: [
-              Icon(Icons.block, color: Colors.red[400], size: 14),
+              Icon(Icons.block, color: Colors.red[400], size: 16),
               const SizedBox(width: 8),
-              Text(AppStrings.ignoreThisPet,
-                  style: TextStyle(color: Colors.red[400])),
+              const Text(
+                AppStrings.ignoreThisPet,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14, // 글자 크기 줄이기
+                ),
+              ),
             ],
           ),
         ),

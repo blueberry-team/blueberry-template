@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:blueberry_flutter_template/model/PetProfileModel.dart';
 import '../../utils/AppStrings.dart';
 
+///  ProfileScreen - ProfileDetail 스크린으로 대체할 임시 화면
+///  완성 8월 18일 상현
+
 class ProfileScreen extends StatelessWidget {
   final PetProfileModel petProfile;
 
