@@ -218,8 +218,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+final matchScreenProvider =
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
   (ref) => MatchScreenNotifier(),
 );
-
-
