@@ -15,6 +15,7 @@ import 'firebase_options.dart';
 import 'utils/AppTheme.dart';
 import 'utils/Talker.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {
@@ -24,6 +25,10 @@ Future<void> main() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    SystemChrome.setPreferredOrientations([
+     DeviceOrientation.portraitDown,
+     DeviceOrientation.portraitUp,
+    ]);
 
     FirebaseCloudMessagingManager.initialize(onTokenRefresh: (token) {
       talker.info('FCM Token: $token');
