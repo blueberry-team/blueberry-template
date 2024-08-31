@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/FriendModel.dart';
 import '../../../utils/AppStrings.dart';
-import '../../../utils/Talker.dart';
 import '../../userreport/provider/UserReportBottomSheetWidget.dart';
 
 // 친구목록을 제공하는 Provider
@@ -21,7 +19,8 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       .asyncMap((snapshot) async {
     final friendModels = await Future.wait(snapshot.docs.map((doc) async {
       final userID = doc['userID'] as String;
-      final userDoc = await firestore.collection('users_test').doc(userID).get();
+      final userDoc =
+          await firestore.collection('users_test').doc(userID).get();
 
       if (userDoc.exists) {
         return FriendModel.fromJson(userDoc.data()!);
@@ -56,8 +55,6 @@ final deleteFriendProvider =
     }
   };
 });
-
-
 
 // ui 팝업 메뉴 선택시 처리하는 함수
 void handleMenuSelection(

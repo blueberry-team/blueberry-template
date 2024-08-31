@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../utils/AppStrings.dart';
 import 'widget/MatchProfileListWidget.dart';
 import 'widget/MatchFilterWidget.dart';
 
@@ -23,8 +24,9 @@ class MatchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          'Petting',
+          AppStrings.appbar_Text_Logo,
           style: GoogleFonts.lobster(
             textStyle: const TextStyle(
               fontSize: 24,

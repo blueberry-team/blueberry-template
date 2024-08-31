@@ -185,7 +185,6 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   Future<void> _addFriend(String userId, String friendId) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
-
     try {
       await userDoc.collection('friends').doc(friendId).set({
         'userID': friendId,

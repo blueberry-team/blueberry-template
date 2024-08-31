@@ -6,10 +6,14 @@ part 'generated/PostModel.g.dart';
 @freezed
 class PostModel with _$PostModel {
   const factory PostModel({
-    required String title,
     required String content,
     required String imageUrl,
-    required String uploadTime,
+    required DateTime createdAt,
+    required num likesCount,
+    required num dislikesCount,
+    required num commentsCount,
+    required String userID,
+    required String postID,
   }) = _PostModel;
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>
