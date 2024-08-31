@@ -14,11 +14,15 @@ class BottomSheetButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
-        minimumSize: const Size(120, 40), // 버튼 크기
+        minimumSize: const Size(140, 50),
+        textStyle: const TextStyle(
+          fontSize: 16, // 더 큰 텍스트 크기
+          fontWeight: FontWeight.bold,
+        ),
       ),
       onPressed: onPressed,
       child: Text(text),

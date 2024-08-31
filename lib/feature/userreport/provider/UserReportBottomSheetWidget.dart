@@ -6,9 +6,6 @@ import '../../../model/UserReportModel.dart';
 import '../../../utils/AppStrings.dart';
 import '../../userreport/provider/userReportProvider.dart';
 
-/// UserReportBottomSheetWidget - 완성 되었습니다
-/// 8월 15일 상현
-
 class UserReportBottomSheetWidget extends ConsumerWidget {
   final FriendModel friend;
   final String loginUserId = 'loginUserId'; // 로그인한 사용자의 ID로 대체
@@ -17,8 +14,18 @@ class UserReportBottomSheetWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
+
     return Container(
+      height: screenHeight * 0.3,
       padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.grey[200], // 배경색 지정
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -28,7 +35,7 @@ class UserReportBottomSheetWidget extends ConsumerWidget {
                 .replaceFirst('%s', friend.name),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           ElevatedButton(
             child: const Text(AppStrings.reportReasonSpamAccount),
             onPressed: () =>

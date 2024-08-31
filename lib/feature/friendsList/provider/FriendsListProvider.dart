@@ -1,10 +1,14 @@
-import 'package:blueberry_flutter_template/utils/Talker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../model/FriendModel.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// 친구 목록을 제공하는 Provider
+import '../../../model/FriendModel.dart';
+import '../../../utils/AppStrings.dart';
+import '../../../utils/Talker.dart';
+import '../../userreport/provider/UserReportBottomSheetWidget.dart';
+
+// 친구목록을 제공하는 Provider
 final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
   const userId = 'eztqDqrvEXDc8nqnnrB8'; // 로그인을 가정한 임시 유저 ID
@@ -14,35 +18,76 @@ final friendsListProvider = StreamProvider<List<FriendModel>>((ref) {
       .doc(userId)
       .collection('friends')
       .snapshots()
-      .asyncMap((snapshot) => Future.wait(snapshot.docs.map((doc) async {
-            final userID = doc['userID'] as String;
-            talker.info('Fetching data for userID: $userID');
+      .asyncMap((snapshot) async {
+    final friendModels = await Future.wait(snapshot.docs.map((doc) async {
+      final userID = doc['userID'] as String;
+      final userDoc = await firestore.collection('users_test').doc(userID).get();
 
-            final userDoc =
-                await firestore.collection('users_test').doc(userID).get();
+      if (userDoc.exists) {
+        return FriendModel.fromJson(userDoc.data()!);
+      } else {
+        throw Exception(AppStrings.userNotFoundErrorMessage);
+      }
+    }).toList());
 
-            if (userDoc.exists) {
-              talker.info('User data found: ${userDoc.data()}');
-              return FriendModel.fromJson(userDoc.data()!);
-            } else {
-              talker.warning('User data not found for userID: $userID');
-              throw Exception('User data not found for userID: $userID');
-            }
-          }).toList()));
+    return friendModels;
+  });
 });
 
-// 친구목록 이미지 URL을 제공하는 Provider
-final friendsListImageProvider =
-    FutureProvider.family<String, String>((ref, imageName) async {
-  try {
-    final storageRef = FirebaseStorage.instance.ref('profileimage/$imageName');
-    final downloadUrl = await storageRef.getDownloadURL();
+final deleteFriendProvider =
+    Provider<Future<void> Function(BuildContext, FriendModel)>((ref) {
+  return (BuildContext context, FriendModel friend) async {
+    final firestore = FirebaseFirestore.instance;
+    const userId = 'eztqDqrvEXDc8nqnnrB8'; // 로그인을 가정한 임시 유저 ID
 
-    talker.info('Download URL for image $imageName: $downloadUrl');
-    return downloadUrl;
-  } catch (e, stacktrace) {
-    talker.error(
-        'Failed to fetch download URL for image $imageName', e, stacktrace);
-    rethrow;
+    await firestore
+        .collection('users_test')
+        .doc(userId)
+        .collection('friends')
+        .doc(friend.userID)
+        .delete();
+
+    ref.invalidate(friendsListProvider);
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(AppStrings.friendDeleteSuccessMessage)),
+      );
+    }
+  };
+});
+
+
+
+// ui 팝업 메뉴 선택시 처리하는 함수
+void handleMenuSelection(
+    BuildContext context, WidgetRef ref, int value, FriendModel friend) async {
+  switch (value) {
+    case 1:
+      // 삭제
+      final deleteFriend = ref.read(deleteFriendProvider);
+      Navigator.of(context).pop();
+      await deleteFriend(context, friend);
+      break;
+    case 2:
+      Navigator.of(context).pop();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('차단 기능이 아직 구현되지 않았습니다.')),
+        );
+      }
+      break;
+    case 3:
+      // 신고
+      Navigator.of(context).pop();
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        ),
+        builder: (context) => UserReportBottomSheetWidget(friend: friend),
+      );
+      break;
   }
-});
+}
