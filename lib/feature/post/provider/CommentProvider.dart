@@ -42,5 +42,10 @@ class CommentNotifier {
         .collection('comments')
         .doc(newComment.commentID)
         .set(newComment.toJson());
+
+    // commentsCount 필드 증가
+    await firestore.collection('posts').doc(postID).update({
+      'commentsCount': FieldValue.increment(1),
+    });
   }
 }
