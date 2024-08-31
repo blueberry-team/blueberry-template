@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:blueberry_flutter_template/model/PostModel.dart';
 
+import '../../../model/CommentModel.dart';
+
 final postProvider = StreamProvider<List<PostModel>>((ref) {
   final firestore = FirebaseFirestore.instance;
 
@@ -23,3 +25,4 @@ final postProvider = StreamProvider<List<PostModel>>((ref) {
     }).toList();
   });
 });
+

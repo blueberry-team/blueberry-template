@@ -3,6 +3,8 @@ import 'package:blueberry_flutter_template/model/PostUserInfoModel.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
+import 'CommentBottomSheetWidget.dart';
+
 class PostListViewItemWidget extends StatelessWidget {
   final PostModel post;
   final bool isLiked;
@@ -113,6 +115,7 @@ class PostListViewItemWidget extends StatelessWidget {
                         icon: const Icon(Icons.chat_bubble_outline),
                         onPressed: () {
                           // 댓글 기능 구현
+                          showCommentBottomSheet(context, post.postID);
                         },
                       ),
                       const SizedBox(width: 5),
