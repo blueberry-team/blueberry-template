@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 
 import '../../../model/CommentModel.dart';
 import '../provider/UserInfoProvider.dart';
+import 'DeleteConfirmationDialog.dart';
+import 'EditCommentDialog.dart';
 
 class CommentItemWidget extends ConsumerWidget {
   final CommentModel comment;
@@ -13,6 +15,7 @@ class CommentItemWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postUserInfo = ref.watch(postUserInfoProvider(comment.userID));
+    final TextEditingController editController = TextEditingController(text: comment.content);
 
     return postUserInfo.when(
       data: (userInfo) {
@@ -23,9 +26,9 @@ class CommentItemWidget extends ConsumerWidget {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(userInfo.profileImageUrl),
-                radius: 20, // 아바타 크기 설정
+                radius: 20,
               ),
-              const SizedBox(width: 12), // 아바타와 텍스트 사이의 간격
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,13 +42,49 @@ class CommentItemWidget extends ConsumerWidget {
                             fontSize: 16,
                           ),
                         ),
-                        const SizedBox(width: 8), // 이름과 시간 사이의 간격
+                        const SizedBox(width: 8),
                         Text(
                           DateFormat.yMMMd().format(comment.createdAt),
                           style: const TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
                           ),
+                        ),
+                        const Spacer(),
+                        PopupMenuButton<String>(
+                          icon: const Icon(Icons.more_vert),
+                          onSelected: (value) {
+                            if (value == 'edit') {
+                              showDialog(
+                                context: context,
+                                builder: (context) => EditCommentDialog(
+                                  commentID: comment.commentID,
+                                  postID: comment.postID,
+                                  ref: ref,
+                                  editController: editController,
+                                ),
+                              );
+                            } else if (value == 'delete') {
+                              showDialog(
+                                context: context,
+                                builder: (context) => DeleteConfirmationDialog(
+                                  commentID: comment.commentID,
+                                  postID: comment.postID,
+                                  ref: ref,
+                                ),
+                              );
+                            }
+                          },
+                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(
+                              value: 'edit',
+                              child: Text('수정'),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'delete',
+                              child: Text('삭제'),
+                            ),
+                          ],
                         ),
                       ],
                     ),

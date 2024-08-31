@@ -43,9 +43,32 @@ class CommentNotifier {
         .doc(newComment.commentID)
         .set(newComment.toJson());
 
-    // commentsCount 필드 증가
     await firestore.collection('posts').doc(postID).update({
       'commentsCount': FieldValue.increment(1),
+    });
+  }
+
+  Future<void> deleteComment(String commentID) async {
+    final firestore = FirebaseFirestore.instance;
+
+    await firestore.collection('posts').doc(postID)
+        .collection('comments')
+        .doc(commentID)
+        .delete();
+
+    await firestore.collection('posts').doc(postID).update({
+      'commentsCount': FieldValue.increment(-1),
+    });
+  }
+
+  Future<void> updateComment(String commentID, String newContent) async {
+    final firestore = FirebaseFirestore.instance;
+
+    await firestore.collection('posts').doc(postID)
+        .collection('comments')
+        .doc(commentID)
+        .update({
+      'content': newContent,
     });
   }
 }

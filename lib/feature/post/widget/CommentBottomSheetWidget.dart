@@ -1,8 +1,8 @@
+import 'package:blueberry_flutter_template/feature/post/widget/CommentItemWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider/CommentProvider.dart';
-import 'CommentItemWidget.dart';
 
 class CommentBottomSheetWidget extends ConsumerWidget {
   final String postID;
