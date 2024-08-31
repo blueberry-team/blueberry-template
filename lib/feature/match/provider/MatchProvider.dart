@@ -185,10 +185,16 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   Future<void> _addFriend(String userId, String friendId) async {
     final firestore = FirebaseFirestore.instance;
     final userDoc = firestore.collection('users_test').doc(userId);
-    await userDoc.collection('friends').doc(friendId).set({
-      'userId': friendId,
-      'addedDate': Timestamp.now(),
-    });
+
+    try {
+      await userDoc.collection('friends').doc(friendId).set({
+        'userID': friendId,
+        'addedDate': Timestamp.now(),
+      });
+      talker.info("Friend added between $userId and $friendId");
+    } catch (e) {
+      talker.error("Error adding friend: $e");
+    }
   }
 
 // 안내 메세지 출력
@@ -213,8 +219,7 @@ class MatchScreenNotifier extends StateNotifier<List<PetProfileModel>> {
   }
 }
 
-final matchScreenProvider = StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
+final matchScreenProvider =
+    StateNotifierProvider<MatchScreenNotifier, List<PetProfileModel>>(
   (ref) => MatchScreenNotifier(),
 );
-
-
