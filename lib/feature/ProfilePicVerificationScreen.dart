@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ImageImporter.dart';
+import 'ImageConfirmationDialog.dart'; // Import the new widget
 
 class ProfilePicVerificationScreen extends ConsumerWidget {
   const ProfilePicVerificationScreen({super.key});
@@ -157,49 +158,7 @@ class ProfilePicVerificationScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.file(
-                imageFile,
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  '이 사진을 사용하시겠습니까?',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      ref.read(imageFileProvider.notifier).clearImage();
-                    },
-                    child: Text('다시 선택'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      ref.read(imageFileProvider.notifier).state = imageFile;
-                    },
-                    child: Text('사용'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
+        return ImageConfirmationDialog(imageFile: imageFile, ref: ref); // Use the new widget
       },
     );
   }
