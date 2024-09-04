@@ -11,6 +11,7 @@ class PetProfileModel with _$PetProfileModel {
     required String breed,
     required String bio,
     required String imageUrl,
+    required String imageName,
     required String location,
     required String petID,
     required String ownerUserID,

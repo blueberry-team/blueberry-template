@@ -1,5 +1,4 @@
 // 게시물 화면!
-//
 import 'package:blueberry_flutter_template/feature/mbti/MBTIScreen.dart';
 import 'package:blueberry_flutter_template/feature/post/widget/PostListViewWidget.dart';
 import 'package:blueberry_flutter_template/feature/profile/ProfileDetailScreen.dart';
@@ -8,6 +7,7 @@ import 'package:blueberry_flutter_template/feature/setting/SettingScreen.dart';
 import 'package:blueberry_flutter_template/utils/AppStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/widget/CustomFab.dart';
 import '../chat/ChatRoomScreen.dart';
@@ -38,8 +38,12 @@ class PostScreen extends StatelessWidget {
 
 AppBar _buildAppBar(BuildContext context) {
   return AppBar(
-    centerTitle: false,
-    title: const Text(AppStrings.appbar_Text_Logo),
+    centerTitle: true,
+    title: Text(AppStrings.appbar_Text_Logo,
+        style: GoogleFonts.lobster(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        )),
     actions: [
       IconButton(
         icon: const Icon(Icons.message),

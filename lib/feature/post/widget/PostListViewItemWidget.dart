@@ -1,164 +1,129 @@
+import 'package:blueberry_flutter_template/model/PostModel.dart';
+import 'package:blueberry_flutter_template/model/PostUserInfoModel.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-class PostListViewItemWidget extends StatefulWidget {
-  final String title;
-  final String uploadTime;
-  final String content;
-  final String imageUrl;
+class PostListViewItemWidget extends StatelessWidget {
+  final PostModel post;
+  final bool isLiked;
+  final bool isDisliked;
+  final PostUserInfoModel userInfo;
+  final VoidCallback onLikeToggle;
+  final VoidCallback onDislikeToggle;
 
   const PostListViewItemWidget({
     super.key,
-    required this.title,
-    required this.uploadTime,
-    required this.content,
-    required this.imageUrl,
+    required this.post,
+    required this.isLiked,
+    required this.isDisliked,
+    required this.userInfo,
+    required this.onLikeToggle,
+    required this.onDislikeToggle,
   });
 
   @override
-  _PostListViewItemWidgetState createState() => _PostListViewItemWidgetState();
-}
-
-// 카드 스타일을 위한 변수
-final cardDecoration = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(15.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      spreadRadius: 3,
-      blurRadius: 5,
-      offset: const Offset(0, 3), // 그림자 위치
-    ),
-  ],
-);
-
-class _PostListViewItemWidgetState extends State<PostListViewItemWidget> {
-  bool isLiked = false; // 좋아요 상태를 저장하는 변수
-  bool showComment = false; // 댓글 표시 여부를 저장하는 변수
-
-  @override
   Widget build(BuildContext context) {
+    // DateTime을 String으로 변환
+    String formattedDate = DateFormat.yMMMd().format(post.createdAt);
+
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      decoration: cardDecoration,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Stack(
-              children: [
-                // 이미지
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+      color: Colors.grey[200],
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        elevation: 3,
+        color: Colors.white,
+        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(userInfo.profileImageUrl),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    userInfo.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.more_horiz),
+                    onPressed: () {
+                      // 추가 옵션 클릭 시 동작
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: AspectRatio(
+                  aspectRatio: 1.0, // 이미지 1:1 비율 설정
                   child: Image.network(
-                    widget.imageUrl,
+                    post.imageUrl,
                     width: double.infinity,
-                    height: 200,
                     fit: BoxFit.cover,
                   ),
                 ),
-                // 제목과 날짜를 이미지 위에 오버레이
-                Positioned(
-                  bottom: 10,
-                  left: 10,
-                  right: 10,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(0, 1),
-                              blurRadius: 3.0,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        widget.uploadTime,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(0, 1),
-                              blurRadius: 3.0,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            // 본문 내용
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                widget.content,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
+              const SizedBox(height: 10),
+              Text(formattedDate),
+              const SizedBox(height: 10),
+              Text(post.content),
+              const SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // 좋아요 버튼
-                  IconButton(
-                    icon: Icon(
-                      isLiked ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                      color: isLiked ? Colors.blue : Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isLiked = !isLiked; // 좋아요 상태 토글
-                      });
-                    },
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          isLiked
+                              ? Icons.thumb_up
+                              : Icons.thumb_up_alt_outlined,
+                          color: isLiked ? Colors.blue : Colors.grey,
+                        ),
+                        onPressed: onLikeToggle,
+                      ),
+                      const SizedBox(width: 5),
+                      Text('${post.likesCount}'),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        icon: Icon(
+                          isDisliked
+                              ? Icons.thumb_down
+                              : Icons.thumb_down_alt_outlined,
+                          color: isDisliked ? Colors.blue : Colors.grey,
+                        ),
+                        onPressed: onDislikeToggle,
+                      ),
+                      const SizedBox(width: 5),
+                      Text('${post.dislikesCount}'),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        icon: const Icon(Icons.chat_bubble_outline),
+                        onPressed: () {
+                          // 댓글 기능 구현
+                        },
+                      ),
+                      const SizedBox(width: 5),
+                      Text('${post.commentsCount}'),
+                    ],
                   ),
-                  // 댓글 달기 버튼
-                  IconButton(
-                      onPressed: () => setState(() {
-                            showComment = !showComment; // 댓글 표시 여부 토글
-                          }),
-                      icon: const Icon(Icons.comment))
+                  const Icon(Icons.bookmark_border),
                 ],
               ),
-            ),
-            // 임시 댓글 표시
-            if (showComment)
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Divider(), // 구분선 추가
-                    Text(
-                      '정우님 항상 감사합니다',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

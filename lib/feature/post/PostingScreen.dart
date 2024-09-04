@@ -1,8 +1,4 @@
-import 'package:blueberry_flutter_template/utils/Talker.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import '../../model/PostModel.dart';
 
 class PostingScreen extends StatefulWidget {
   static const name = 'CreatePostPage';
@@ -63,27 +59,27 @@ class _PostingScreenState extends State<PostingScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _formKey.currentState?.save();
-                      final String uploadTime =
-                          DateFormat('yyyy-MM-dd HH:mm:ss')
-                              .format(DateTime.now());
-                      final post = PostModel(
-                        title: title!,
-                        content: content!,
-                        imageUrl: imageUrl!,
-                        uploadTime: uploadTime,
-                      );
-                      // 포스트 생성 후 처리
-                      talker.info('포스트 생성: ${post.toJson()}');
-                    }
-                  },
-                  child: const Text('포스트 생성'),
-                ),
-              ),
+              // Center(
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       if (_formKey.currentState?.validate() ?? false) {
+              //         _formKey.currentState?.save();
+              //         final String uploadTime =
+              //             DateFormat('yyyy-MM-dd HH:mm:ss')
+              //                 .format(DateTime.now());
+              //         final post = PostModel(
+              //           title: title!,
+              //           content: content!,
+              //           imageUrl: imageUrl!,
+              //           uploadTime: uploadTime,
+              //         );
+              //         // 포스트 생성 후 처리
+              //         talker.info('포스트 생성: ${post.toJson()}');
+              //       }
+              //     },
+              //     child: const Text('포스트 생성'),
+              //   ),
+              // ),
             ],
           ),
         ),

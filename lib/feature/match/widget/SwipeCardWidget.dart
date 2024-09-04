@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/PetProfileModel.dart';
@@ -8,11 +9,9 @@ import '../../../utils/AppTextStyle.dart';
 
 class SwipeCardWidget extends StatelessWidget {
   final PetProfileModel petProfiles;
+  final String imageUrl;
 
-  const SwipeCardWidget(
-    this.petProfiles, {
-    super.key,
-  });
+  const SwipeCardWidget({super.key, required this.petProfiles, required this.imageUrl,});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class SwipeCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: NetworkImage(petProfiles.imageUrl),
+            image: CachedNetworkImageProvider(imageUrl),
             fit: BoxFit.cover,
           ),
         ),

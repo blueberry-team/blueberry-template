@@ -41,7 +41,7 @@ class TopScreen extends ConsumerWidget {
         selectedIconTheme: const IconThemeData(color: Colors.black),
         selectedItemColor: Colors.black,
         unselectedIconTheme: const IconThemeData(color: Colors.grey),
-        backgroundColor: Colors.blueGrey[100],
+        backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.podcasts),
