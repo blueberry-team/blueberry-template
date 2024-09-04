@@ -93,9 +93,11 @@ class SocialAuthService {
   ///Naver Sign In
   Future<void> signInWithNaver() async {
     final String clientId = 'Q_XaNrrZRENiDAmzchib'; //TODO: 값 다른 곳에 저장
-    final String redirectUri = 'https://us-central1-blueberrytemplate-2024-summer.cloudfunctions.net/naverLoginCallback'; //TODO: 값 다른 곳에 저장
-    final String state = base64Url.encode(List<int>.generate(16, (_) => Random().nextInt(255))); // 사이트 간 요청 위조 공격을 방지하기 위한 상태 토큰
-    final Uri url = Uri.parse('https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=$clientId&redirect_uri=$redirectUri&state=$state');
+    final String redirectUri =
+        'https://us-central1-blueberrytemplate-2024-summer.cloudfunctions.net/naverLogin'; //TODO: 값 다른 곳에 저장
+    final String state = generateNonce();
+    final Uri url = Uri.parse(
+        'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=$clientId&redirect_uri=$redirectUri&state=$state');
     await launchUrl(url);
   }
 
