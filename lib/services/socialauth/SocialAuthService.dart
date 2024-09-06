@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 import '../../utils/Talker.dart';
 
@@ -92,10 +93,13 @@ class SocialAuthService {
 
   ///Naver Sign In
   Future<void> signInWithNaver() async {
-    final String clientId = 'Q_XaNrrZRENiDAmzchib'; //TODO: 값 다른 곳에 저장
-    final String redirectUri =
-        'https://us-central1-blueberrytemplate-2024-summer.cloudfunctions.net/naverLogin'; //TODO: 값 다른 곳에 저장
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.fetchAndActivate();
+
+    final String clientId = remoteConfig.getString('naver_client_id');
+    final String redirectUri = remoteConfig.getString('naver_redirect_uri');
     final String state = generateNonce();
+
     final Uri url = Uri.parse(
         'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=$clientId&redirect_uri=$redirectUri&state=$state');
     await launchUrl(url);
