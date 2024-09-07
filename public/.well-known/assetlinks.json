@@ -5,7 +5,7 @@
         ],
         "target": {
             "namespace": "android_app",
-            "package_name": "com.blueberry.template",
+            "package_name": "com.example.blueberry_template",
             "sha256_cert_fingerprints": [
                 "29:0D:D6:14:65:15:32:D6:D6:3A:D6:C3:1D:EB:66:8F:2F:93:EB:91:E2:53:06:9A:22:EC:3A:C7:9A:32:80:66"
             ]
