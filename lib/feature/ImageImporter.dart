@@ -1,55 +1,25 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'dart:io';
 
 final imagePickerServiceProvider = Provider((ref) => ImagePickerService());
 
-final imageFileProvider =
-StateNotifierProvider<ImageFileNotifier, File?>((ref) {
+final imageFileProvider = StateNotifierProvider<ImageFileNotifier, File?>((ref) {
   final imagePickerService = ref.watch(imagePickerServiceProvider);
   return ImageFileNotifier(imagePickerService);
 });
 
 class ImagePickerService {
-  final ImagePicker _picker = ImagePicker();
-
-  Future<File?> pickImageFromGallery(BuildContext context) async {
-    try {
-      final XFile? pickedFile =
-      await _picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        return File(pickedFile.path);
-      } else {
-        _showErrorSnackbar(context, '선택된 사진이 없습니다.');
-        return null;
+  Future<List<AssetEntity>> fetchImages({int page = 0, int limit = 50}) async {
+    final PermissionState permission = await PhotoManager.requestPermissionExtend();
+    if (permission.isAuth) {
+      List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(type: RequestType.image);
+      if (albums.isNotEmpty) {
+        final AssetPathEntity album = albums.first;
+        return await album.getAssetListPaged(page: page, size: limit);
       }
-    } catch (e) {
-      _showErrorSnackbar(context, '사진 불러오기에 실패했습니다: $e');
-      return null;
     }
-  }
-
-  Future<File?> pickImageFromCamera(BuildContext context) async {
-    try {
-      final XFile? pickedFile =
-      await _picker.pickImage(source: ImageSource.camera);
-      if (pickedFile != null) {
-        return File(pickedFile.path);
-      } else {
-        _showErrorSnackbar(context, '찍은 사진이 없습니다.');
-        return null;
-      }
-    } catch (e) {
-      _showErrorSnackbar(context, '사진 찍기에 실패했습니다: $e');
-      return null;
-    }
-  }
-
-  void _showErrorSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    return [];
   }
 }
 
@@ -57,18 +27,6 @@ class ImageFileNotifier extends StateNotifier<File?> {
   final ImagePickerService _imagePickerService;
 
   ImageFileNotifier(this._imagePickerService) : super(null);
-
-  Future<File?> pickImageFromGallery(BuildContext context) async {
-    final file = await _imagePickerService.pickImageFromGallery(context);
-    state = file;
-    return file;  // 선택된 파일 return
-  }
-
-  Future<File?> pickImageFromCamera(BuildContext context) async {
-    final file = await _imagePickerService.pickImageFromCamera(context);
-    state = file;
-    return file;  // 선택된 파일 return
-  }
 
   void clearImage() {
     state = null;

@@ -30,7 +30,7 @@ class ImageConfirmationDialog extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               '이 사진을 사용하시겠습니까?',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -41,17 +41,17 @@ class ImageConfirmationDialog extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  ref.read(imageFileProvider.notifier).clearImage();
+                  Navigator.of(context).pop(); // 프리뷰 닫고 갤러리에 남기
                 },
-                child: Text('다시 선택'),
+                child: const Text('다시 선택'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  ref.read(imageFileProvider.notifier).state = imageFile;
+                  Navigator.of(context).pop(); // 프리뷰 닫기
+                  ref.read(imageFileProvider.notifier).state = imageFile; // 선택된 이미지 프로필 사진으로 지정하기
+                  Navigator.of(context).pop(); // 갤러리에서 나가기
                 },
-                child: Text('사용'),
+                child: const Text('사용'),
               ),
             ],
           ),
