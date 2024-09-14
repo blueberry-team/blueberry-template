@@ -1,4 +1,4 @@
-import 'package:blueberry_flutter_template/feature/mypage/provider/MyPageSocialLoginCompany,dart.dart';
+import 'package:blueberry_flutter_template/feature/mypage/provider/MyPageSocialLoginCompany.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
