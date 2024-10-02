@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -12,6 +13,8 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 import '../../utils/Talker.dart';
 
@@ -87,6 +90,31 @@ class SocialAuthService {
     final userCredential =
         await FirebaseAuth.instance.signInWithProvider(githubAuthProvider);
     getAuthenticateWithFirebase(userCredential, AppStrings.usingGithubLogin);
+  }
+
+  ///Naver Sign In
+  Future<void> signInWithNaver() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.fetchAndActivate();
+
+    final String clientId = remoteConfig.getString('naver_client_id');
+    final String redirectUri = remoteConfig.getString('naver_redirect_uri');
+    final String state = generateNonce();
+
+    final Uri url = Uri.parse(
+        'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=$clientId&redirect_uri=$redirectUri&state=$state');
+
+    try {
+      final bool launched =
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        talker.error('네이버 로그인 URL 런칭 실패: $url');
+        throw Exception('네이버 로그인 URL 런칭 실패');
+      }
+    } catch (e) {
+      talker.error('네이버 로그인 URL 런칭 중 오류 발생: $e');
+      throw Exception('네이버 로그인 중 오류 발생: $e');
+    }
   }
 
   ///* 인증정보를 바탕으로 firestore에 저장하는 함수
